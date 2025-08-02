@@ -24,78 +24,81 @@ const Style = () => {
       body {
         background: var(--primary-gradient);
         background-attachment: fixed;
+        color: #333;
       }
 
       .dark body {
         background: var(--dark-gradient);
         background-attachment: fixed;
+        color: #e5e7eb;
       }
 
       /* 主容器样式 */
-      #theme-gitbook {
+      .dark .notion-page {
+        background: rgba(0, 0, 0, 0.3);
+        backdrop-filter: blur(10px);
+      }
+
+      .notion-page {
         backdrop-filter: blur(10px);
         background: rgba(255, 255, 255, 0.05);
       }
 
-      .dark #theme-gitbook {
-        background: rgba(0, 0, 0, 0.3);
-      }
-
       /* 顶部导航栏 */
-      #top-nav {
-        background: rgba(255, 255, 255, 0.1);
+      .top-nav, .gitbook-header {
+        background: rgba(255, 255, 255, 0.1) !important;
         backdrop-filter: blur(20px);
         border-bottom: 1px solid rgba(102, 126, 234, 0.3);
         box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
       }
 
-      .dark #top-nav {
-        background: rgba(0, 0, 0, 0.4);
+      .dark .top-nav, .dark .gitbook-header {
+        background: rgba(0, 0, 0, 0.4) !important;
         border-bottom: 1px solid rgba(139, 92, 246, 0.3);
       }
 
       /* 左侧导航栏 */
-      .w-80 {
-        background: rgba(255, 255, 255, 0.08);
+      .gitbook-sidebar, .w-80 {
+        background: rgba(255, 255, 255, 0.08) !important;
         backdrop-filter: blur(15px);
         border-right: 1px solid rgba(102, 126, 234, 0.2);
       }
 
-      .dark .w-80 {
-        background: rgba(0, 0, 0, 0.3);
+      .dark .gitbook-sidebar, .dark .w-80 {
+        background: rgba(0, 0, 0, 0.3) !important;
         border-right: 1px solid rgba(139, 92, 246, 0.2);
       }
 
       /* 文章内容区域 */
-      #container-inner {
+      .notion-page-content, .gitbook-content {
         background: rgba(255, 255, 255, 0.9);
         backdrop-filter: blur(10px);
         border-radius: 16px;
         box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
         border: 1px solid rgba(102, 126, 234, 0.2);
-        margin-top: 20px;
+        margin: 20px;
         padding: 2rem;
       }
 
-      .dark #container-inner {
+      .dark .notion-page-content, .dark .gitbook-content {
         background: rgba(0, 0, 0, 0.6);
         border: 1px solid rgba(139, 92, 246, 0.3);
         color: #e5e7eb;
       }
 
       /* 按钮样式 */
-      button, .btn {
+      button, .btn, .cursor-pointer {
         background: var(--secondary-gradient);
         border: none;
         border-radius: 8px;
         padding: 10px 20px;
-        color: white;
+        color: white !important;
         font-weight: 600;
         transition: all 0.3s ease;
         box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
       }
 
-      button:hover, .btn:hover {
+      button:hover, .btn:hover, .cursor-pointer:hover {
         transform: translateY(-2px);
         box-shadow: 0 8px 25px rgba(79, 172, 254, 0.4);
       }
@@ -122,7 +125,7 @@ const Style = () => {
       }
 
       /* 导航菜单项 */
-      .nav-item {
+      .nav-item, .menu-item {
         background: rgba(255, 255, 255, 0.1);
         margin: 4px 0;
         border-radius: 8px;
@@ -130,18 +133,18 @@ const Style = () => {
         border: 1px solid transparent;
       }
 
-      .nav-item:hover {
+      .nav-item:hover, .menu-item:hover {
         background: var(--secondary-gradient);
         transform: translateX(8px);
         border: 1px solid rgba(79, 172, 254, 0.5);
         box-shadow: 0 4px 20px rgba(79, 172, 254, 0.3);
       }
 
-      .dark .nav-item {
+      .dark .nav-item, .dark .menu-item {
         background: rgba(0, 0, 0, 0.2);
       }
 
-      .dark .nav-item:hover {
+      .dark .nav-item:hover, .dark .menu-item:hover {
         background: var(--primary-gradient);
         border: 1px solid rgba(139, 92, 246, 0.5);
       }
@@ -177,6 +180,7 @@ const Style = () => {
         border-radius: 8px;
         backdrop-filter: blur(10px);
         transition: all 0.3s ease;
+        color: inherit;
       }
 
       input[type="search"]:focus, input[type="text"]:focus {
@@ -211,34 +215,34 @@ const Style = () => {
       }
 
       /* 卡片样式 */
-      .card, .shadow-card {
-        background: rgba(255, 255, 255, 0.1);
+      .card, .shadow-card, .bg-white, .bg-gray-50 {
+        background: rgba(255, 255, 255, 0.1) !important;
         backdrop-filter: blur(15px);
         border: 1px solid rgba(102, 126, 234, 0.2);
         border-radius: 12px;
         transition: all 0.3s ease;
       }
 
-      .card:hover, .shadow-card:hover {
+      .card:hover, .shadow-card:hover, .bg-white:hover, .bg-gray-50:hover {
         transform: translateY(-4px);
         box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
         border-color: var(--cyber-blue);
       }
 
-      .dark .card, .dark .shadow-card {
-        background: rgba(0, 0, 0, 0.3);
+      .dark .card, .dark .shadow-card, .dark .bg-white, .dark .bg-gray-50 {
+        background: rgba(0, 0, 0, 0.3) !important;
         border: 1px solid rgba(139, 92, 246, 0.2);
       }
 
       /* 底部菜单栏 */
-      .bottom-button-group {
+      .bottom-button-group, .gitbook-footer {
         background: rgba(255, 255, 255, 0.1);
         backdrop-filter: blur(20px);
         border-top: 1px solid rgba(102, 126, 234, 0.3);
         box-shadow: 0px -3px 10px 0px rgba(0, 0, 0, 0.1);
       }
 
-      .dark .bottom-button-group {
+      .dark .bottom-button-group, .dark .gitbook-footer {
         background: rgba(0, 0, 0, 0.4);
         border-top: 1px solid rgba(139, 92, 246, 0.3);
       }
@@ -321,9 +325,24 @@ const Style = () => {
         }
       }
 
+      /* GitBook 特有样式 */
+      .gitbook-navigation .menu-item-active {
+        background: var(--primary-gradient);
+        color: white;
+      }
+
+      .gitbook-navigation ul li {
+        border-radius: 8px;
+        margin: 2px 0;
+      }
+
+      .gitbook-navigation ul li:hover {
+        background: rgba(79, 172, 254, 0.2);
+      }
+
       /* 响应式调整 */
       @media (max-width: 768px) {
-        #container-inner {
+        .notion-page-content, .gitbook-content {
           margin: 10px;
           padding: 1rem;
           border-radius: 12px;
