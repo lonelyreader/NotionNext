@@ -1,4 +1,3 @@
-
 import React from 'react'
 
 // Utility function for class names
@@ -25,14 +24,14 @@ const GitbookTableOfContents = ({ toc, className, slug }) => {
   const renderTocItem = (item, index) => {
     const id = uuidToId(item.id)
     const isActive = activeSection === id
-    
+
     return (
       <li key={index} className={cn('my-1', item.indentLevel > 0 && 'ml-4')}>
         <a
           href={`#${id}`}
           className={cn(
             'block py-1 px-2 text-sm rounded transition-colors',
-            isActive 
+            isActive
               ? 'text-blue-600 bg-blue-50 dark:text-blue-400 dark:bg-blue-900/30'
               : 'text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200'
           )}
@@ -41,7 +40,7 @@ const GitbookTableOfContents = ({ toc, className, slug }) => {
         </a>
         {item.children && item.children.length > 0 && (
           <ul className="ml-2">
-            {item.children.map((child, childIndex) => 
+            {item.children.map((child, childIndex) =>
               renderTocItem(child, `${index}-${childIndex}`)
             )}
           </ul>
