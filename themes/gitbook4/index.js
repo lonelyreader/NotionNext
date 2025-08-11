@@ -1,12 +1,16 @@
+
 import React, { useState, useEffect } from 'react';
-import ThemeGlobalGitbook, { Style } from '@/themes/gitbook4/components/ThemeGlobalGitbook';
-import { useDocsSearch, useFilteredNavPages } from '@/hooks';
+import ThemeGlobalGitbook, { Style } from './components/ThemeGlobalGitbook';
+import { useDocsSearch } from '../../hooks';
 
 function GitbookLayout({ children }) {
-  const { searchModal, filteredNavPages, allNavPages, pageNavVisible, changePageNavVisible } =
-    useDocsSearch();
+  const { searchModal, allNavPages, pageNavVisible, changePageNavVisible } = useDocsSearch();
   const [tocVisible, changeTocVisible] = useState(true);
-  const [filteredNavPages, setFilteredNavPages] = useFilteredNavPages(allNavPages);
+  const [filteredNavPages, setFilteredNavPages] = useState([]);
+
+  useEffect(() => {
+    setFilteredNavPages(allNavPages || []);
+  }, [allNavPages]);
 
   return (
     <ThemeGlobalGitbook.Provider

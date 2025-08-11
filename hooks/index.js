@@ -1,11 +1,11 @@
 
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 
 export const useDocsSearch = () => {
-  const [searchModal, setSearchModal] = useState(false)
   const [filteredNavPages, setFilteredNavPages] = useState([])
   const [allNavPages, setAllNavPages] = useState([])
   const [pageNavVisible, setPageNavVisible] = useState(true)
+  const searchModal = useRef(null)
   
   const changePageNavVisible = (visible) => {
     setPageNavVisible(visible)
@@ -13,7 +13,6 @@ export const useDocsSearch = () => {
 
   return {
     searchModal,
-    setSearchModal,
     filteredNavPages,
     setFilteredNavPages,
     allNavPages,
@@ -21,10 +20,4 @@ export const useDocsSearch = () => {
     pageNavVisible,
     changePageNavVisible
   }
-}
-
-export const useFilteredNavPages = (allNavPages) => {
-  const [filteredNavPages, setFilteredNavPages] = useState(allNavPages || [])
-  
-  return [filteredNavPages, setFilteredNavPages]
 }
