@@ -1,0 +1,274 @@
+背景
+
+项目：Next.js + Tailwind + NotionNext（使用 themes/gitbook 主题）。
+
+目标：保留信息架构与功能，仅升级视觉与交互风格为“主流 AI 网站风格”的蓝紫渐变背景与**磨砂玻璃（glassmorphism）**按钮/卡片风格，并兼顾暗色模式与移动端体验。
+
+作用范围（仅前端样式与主题）
+
+首选：复制主题 themes/gitbook → themes/gitbook_custom，并在 blog.config.js 中将 THEME 改为 gitbook_custom，避免未来升级冲突。
+
+本次改动主要集中在：
+
+themes/gitbook_custom/index.js 与 themes/gitbook_custom/components/*
+
+全局样式：styles/globals.css, styles/notion.css, styles/prism-theme.css
+
+Tailwind 配置：tailwind.config.js（仅扩展，不破坏默认）
+
+一、设计语言（Design Tokens）
+
+任务：在全局样式与 Tailwind 中定义可复用的蓝紫渐变与玻璃化样式。
+
+修改 styles/globals.css，在 :root 和 .dark 中加入变量与工具类：
+
+/* globals.css: 设计变量 */
+:root {
+  --brand-1: 79 70 229;  /* indigo-600 #4f46e5 */
+  --brand-2: 124 58 237; /* violet-600 #7c3aed */
+  --brand-3: 168 85 247; /* fuchsia-500 #a855f7 */
+  --surface-opaque: 255 255 255; /* light glass base */
+  --surface-opaque-dark: 255 255 255; /* dark glass base (still white glass) */
+}
+
+.dark {
+  /* 可按需调整对比度，暗色下玻璃更低不透明度 */
+}
+
+/* 渐变与玻璃工具类（Tailwind 中也可直接类组合，这里提供快捷类） */
+.bg-brand-gradient {
+  background-image: linear-gradient(135deg,
+    rgb(var(--brand-1)) 0%,
+    rgb(var(--brand-2)) 52%,
+    rgb(var(--brand-3)) 100%);
+}
+
+.text-brand-gradient {
+  background-image: linear-gradient(90deg,
+    rgb(var(--brand-1)) 0%,
+    rgb(var(--brand-3)) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* 玻璃化容器：iOS 风格 */
+.glass {
+  background-color: rgba(255, 255, 255, .08);
+  border: 1px solid rgba(255, 255, 255, .18);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.dark .glass {
+  background-color: rgba(255, 255, 255, .06);
+  border-color: rgba(255, 255, 255, .16);
+}
+
+/* 页面级背景：深蓝紫 AI 感（可放到主题根容器而非 body） */
+.ai-bg {
+  background:
+    radial-gradient(1200px 600px at 10% -20%, rgba(124,58,237,.25), transparent 60%),
+    radial-gradient(900px 500px at 90% 0%, rgba(79,70,229,.20), transparent 55%),
+    linear-gradient(180deg, #0a0a12 0%, #0b0f26 60%, #0a0818 100%);
+}
+
+修改 tailwind.config.js，只做扩展（不要删原有配置）：
+
+// tailwind.config.js
+module.exports = {
+  // ...保持现有 content 配置
+  theme: {
+    extend: {
+      colors: {
+        brand: {
+          500: 'rgb(var(--brand-1) / <alpha-value>)',
+          600: 'rgb(var(--brand-2) / <alpha-value>)',
+          700: 'rgb(var(--brand-3) / <alpha-value>)'
+        }
+      },
+      backgroundImage: {
+        'brand-gradient': 'linear-gradient(135deg, rgb(var(--brand-1)) 0%, rgb(var(--brand-2)) 52%, rgb(var(--brand-3)) 100%)'
+      },
+      boxShadow: {
+        'glass': '0 10px 30px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.06)'
+      },
+      borderRadius: {
+        'xl2': '1.25rem'
+      },
+      backdropBlur: {
+        xs: '6px'
+      },
+      transitionProperty: {
+        'colors-transform': 'color, background-color, border-color, transform, box-shadow'
+      }
+    }
+  },
+  // plugins: [...可保持]
+}
+
+二、页面背景与布局骨架
+
+任务：在主题入口设置页面级背景与容器层级，不影响其它主题。
+
+修改 themes/gitbook_custom/index.js：在顶层容器增加 AI 背景与内容最大宽度，示例：
+
+// 在顶层 return 包裹层加入：
+<div className="min-h-screen ai-bg text-[var(--fg)]">
+  <div className="mx-auto max-w-screen-2xl px-4 md:px-6 lg:px-8">
+    {/* 原有 Header、主列、侧栏等保持，只调整外层容器与间距 */}
+  </div>
+</div>
+
+主列/侧栏比例：主列更宽（可读性优先），侧栏固定宽。例如主列 flex-1 + 侧栏 w-80，并在 2xl 才显示侧栏：hidden 2xl:block（项目已有类似行为，可微调间距与 py- 值）。
+
+三、按钮体系（iOS 磨砂玻璃风）
+
+任务：新建通用 ``，并在 Header、卡片操作、移动底栏等位置替换使用。
+
+新建 components/ui/GlassButton.js：
+
+export default function GlassButton({ as:Tag='button', className='', children, ...props }) {
+  return (
+    <Tag
+      className={[
+        'glass rounded-xl px-4 py-2',
+        'shadow-glass',
+        'transition-colors-transform duration-200',
+        'hover:bg-white/12 active:scale-[0.99]',
+        'text-white/90 hover:text-white',
+        className
+      ].join(' ')}
+      {...props}
+    >
+      {children}
+    </Tag>
+  )
+}
+
+在以下组件中替换常用按钮：
+
+themes/gitbook_custom/components/Header.js（搜索、登录/注册、主题切换等）
+
+themes/gitbook_custom/components/BottomMenuBar.js（移动端操作条）
+
+themes/gitbook_custom/components/BlogPostCard.js（卡片上的“阅读更多”或 Tag 交互）
+
+如有 SearchInput.js 的触发按钮，也可替换为 GlassButton
+
+示例（Header 某处）：
+
+import GlassButton from '@/components/ui/GlassButton'
+// ...
+<GlassButton className="flex items-center gap-2">
+  <svg /* icon */ className="w-4 h-4 opacity-80" />
+  <span className="text-sm">Search</span>
+</GlassButton>
+
+四、卡片与导航的 AI 风格
+
+任务：卡片边框使用渐变描边 + 玻璃底，提高层次；目录与顶部导航做轻量玻璃条。
+
+文章卡片（BlogPostCard.js）外层加“渐变边 + 玻璃内层” ：
+
+<div className="group relative rounded-2xl p-[1px] bg-brand-gradient">
+  <div className="rounded-2xl glass p-5 md:p-6 h-full">
+    {/* 原有卡片内容 */}
+  </div>
+</div>
+
+标题：加渐变字或悬停高亮className="text-lg md:text-xl font-semibold bg-clip-text text-transparent bg-brand-gradient group-hover:opacity-90"
+
+封面图：加微弱放大悬停className="rounded-xl transition-transform duration-300 group-hover:scale-[1.02]"
+
+顶部导航（Header.js）做“玻璃条”：将导航容器包在 glass rounded-xl px-4 py-2 内，固定到页面上方时加阴影：shadow-glass sticky top-4。
+
+移动底部菜单（BottomMenuBar.js）：为整个条加 glass rounded-2xl mx-3 mb-3 p-2 shadow-glass，单个按钮使用 GlassButton。
+
+目录/抽屉（Catalog.js, CatalogDrawerWrapper.js）：
+
+当前标题高亮使用品牌色描边：border-l-2 border-brand-600/60 pl-3
+
+容器加 glass rounded-xl p-3，保证暗色下对比度。
+
+五、正文排版（Notion 块）
+
+任务：提升可读性与“AI 风格”细节，但不改变语义结构。
+
+styles/notion.css：
+
+标题层级：h1/h2 加更舒适的比例与间距（如 text-4xl md:text-5xl / mt-10 / leading-tight）。
+
+引用块：添加左侧渐变线 border-l-2 + 微玻璃底 bg-white/5。
+
+代码块：保留 prism-theme.css，额外加内边距与圆角 rounded-xl，外层加细微玻璃底 bg-white/5.
+
+链接悬停：使用渐变下划线（在 a:hover 下用 background-size trick 或直接 border-b + border-brand-600）。
+
+六、移动端与暗色模式
+
+任务：确保在 360–430px 宽度与暗色下依然易读易点。
+
+断点策略：
+
+文章页目录：lg:hidden 抽屉；2xl:block 固定侧栏。
+
+卡片间距：gap-3 md:gap-4；内边距 p-4 md:p-6。
+
+对比度：玻璃底色在 .dark 下改为更低不透明度（已在 .dark .glass 中定义）。
+
+七、可访问性与性能
+
+任务：保证对比度 ≥ 4.5:1，交互可见；不增加阻塞渲染。
+
+所有玻璃按钮加 :focus-visible 样式（Tailwind：focus-visible:ring-2 ring-brand-600/60）。
+
+图片懒加载保持开启；不要在首屏引入大体积字体/库。
+
+渐变与玻璃为 CSS 实现，不新增运行时代码。
+
+八、主题级开关（无需代码的调整）
+
+任务：用 `` 尽量控制 UI 行为。
+
+打开/关闭：GITBOOK_MENU_SEARCH, GITBOOK_MENU_ARCHIVE, GITBOOK_BOOK_MENU_TAG
+
+折叠行为：GITBOOK_EXCLUSIVE_COLLAPSE: true
+
+最新文章红点：GITBOOK_LATEST_POST_RED_BADGE: true
+
+交付文件清单
+
+themes/gitbook_custom/（从 themes/gitbook 复制并改动若干组件）
+
+index.js（新增页面背景容器与间距）
+
+components/Header.js, BottomMenuBar.js, BlogPostCard.js, Catalog.js, PageNavDrawer.js, ArticleInfo.js（按上述风格替换类名/结构）
+
+config.js（按需调整菜单与折叠开关）
+
+components/ui/GlassButton.js（新建通用玻璃按钮）
+
+styles/globals.css（加入 tokens/工具类与 .ai-bg）
+
+styles/notion.css（标题/引用/代码块微调）
+
+tailwind.config.js（extend 配置）
+
+验收标准（Definition of Done）
+
+背景：全站（gitbook 主题）页面拥有蓝紫渐变的 AI 风格背景；卡片/导航与背景对比充足。
+
+按钮：Header、移动底栏、卡片操作位采用玻璃按钮（有 backdrop-blur、轻边框、阴影、悬停/按下态）。
+
+卡片：文章卡片具备“渐变描边 + 玻璃底”，悬停有轻放大或阴影变化。
+
+目录/导航：目录容器为玻璃卡片；当前条目有品牌色高亮线；移动端抽屉美观可用。
+
+正文：H1/H2 层级明显、段落行高舒适；引用与代码块视觉统一；链接悬停可见。
+
+响应式：≥360px 宽度良好；2xl 宽度显示右侧信息栏，不遮挡正文。
+
+暗色模式：所有玻璃与文本对比度在暗色下仍 >= 4.5:1；无难以辨认的文字。
+
+性能：未引入大额新依赖；首屏无明显 FOUC；交互流畅。
