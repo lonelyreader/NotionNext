@@ -1,162 +1,114 @@
 
 /* eslint-disable react/no-unknown-property */
-/**
- * 此处样式只对当前主题生效
- * 此处不支持tailwindCSS的 @apply 语法
- * @returns
- */
 const Style = () => {
   return (
     <style jsx global>{`
-      /* AI 风格主题样式 */
+      /* AI风格背景 */
       .ai-bg {
-        background: 
-          radial-gradient(1200px 600px at 10% -20%, rgba(124,58,237,.25), transparent 60%),
-          radial-gradient(900px 500px at 90% 0%, rgba(79,70,229,.20), transparent 55%),
-          linear-gradient(180deg, #0a0a12 0%, #0b0f26 60%, #0a0818 100%);
-        min-height: 100vh;
+        background: linear-gradient(135deg, #0a0a0a 0%, #1a0033 25%, #000033 50%, #001a33 75%, #0a0a0a 100%);
+        background-size: 400% 400%;
+        animation: aiGradient 15s ease infinite;
       }
-
-      /* 玻璃效果 */
-      .glass {
-        background-color: rgba(255, 255, 255, 0.08);
-        border: 1px solid rgba(255, 255, 255, 0.18);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
+      
+      @keyframes aiGradient {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+      
+      /* 玻璃态按钮样式 */
+      .glass-button {
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
         transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
       }
-
-      .dark .glass {
-        background-color: rgba(255, 255, 255, 0.06);
-        border-color: rgba(255, 255, 255, 0.16);
+      
+      .glass-button::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+        transition: left 0.5s;
       }
-
-      .glass:hover {
-        background-color: rgba(255, 255, 255, 0.12);
-        border-color: rgba(255, 255, 255, 0.24);
+      
+      .glass-button:hover::before {
+        left: 100%;
       }
-
-      /* 阴影效果 */
-      .shadow-glass {
-        box-shadow: 0 10px 30px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.06);
+      
+      .glass-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 32px rgba(0,0,0,0.3);
       }
-
-      /* 品牌渐变 */
-      .bg-brand-gradient {
-        background-image: linear-gradient(135deg,
-          rgb(79, 70, 229) 0%,
-          rgb(124, 58, 237) 52%,
-          rgb(168, 85, 247) 100%);
-      }
-
-      /* 文字渐变 */
-      .text-brand-gradient {
-        background-image: linear-gradient(90deg,
-          rgb(79, 70, 229) 0%,
-          rgb(168, 85, 247) 100%);
+      
+      /* 文字渐变效果 */
+      .gradient-text {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
         background-clip: text;
-        color: transparent;
       }
-
-      /* 侧边栏样式 */
-      .sidebar-glass {
+      
+      /* 卡片玻璃态效果 */
+      .glass-card {
         background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      }
+      
+      /* 自定义滚动条 */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      
+      ::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 4px;
+      }
+      
+      ::-webkit-scrollbar-thumb {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        border-radius: 4px;
+      }
+      
+      ::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(135deg, #764ba2, #667eea);
+      }
+      
+      /* 深色模式优化 */
+      .dark .glass-button {
+        background: rgba(255, 255, 255, 0.03);
+        border-color: rgba(255, 255, 255, 0.08);
+      }
+      
+      .dark .glass-card {
+        background: rgba(255, 255, 255, 0.03);
+        border-color: rgba(255, 255, 255, 0.08);
+      }
+      
+      /* 底部菜单栏优化 */
+      .bottom-button-group {
+        background: rgba(0, 0, 0, 0.8);
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
-        border-right: 1px solid rgba(255, 255, 255, 0.1);
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 -4px 32px rgba(0, 0, 0, 0.3);
       }
-
-      /* 导航项悬停 */
-      .nav-item {
-        transition: all 0.2s ease;
-        border-radius: 0.75rem;
+      
+      /* 加载动画 */
+      @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.5; }
       }
-
-      .nav-item:hover {
-        background: rgba(255, 255, 255, 0.12);
-        transform: translateX(4px);
-      }
-
-      /* 内容区域 */
-      .content-glass {
-        background: rgba(255, 255, 255, 0.08);
-        backdrop-filter: blur(15px);
-        -webkit-backdrop-filter: blur(15px);
-        border-radius: 1.5rem;
-        border: 1px solid rgba(255, 255, 255, 0.12);
-      }
-
-      /* 底部菜单 */
-      .bottom-button-group {
-        box-shadow: 0px -6px 25px rgba(0, 0, 0, 0.15);
-      }
-
-      /* 搜索框样式 */
-      .search-input {
-        background: rgba(255, 255, 255, 0.08);
-        border: 1px solid rgba(255, 255, 255, 0.18);
-        backdrop-filter: blur(12px);
-        border-radius: 0.75rem;
-        color: rgba(255, 255, 255, 0.9);
-        transition: all 0.3s ease;
-      }
-
-      .search-input:focus {
-        border-color: rgb(124, 58, 237);
-        box-shadow: 0 0 20px rgba(124, 58, 237, 0.3);
-        outline: none;
-      }
-
-      /* 确保文本在 AI 背景下可读 */
-      .ai-bg {
-        color: rgba(255, 255, 255, 0.9);
-      }
-
-      .ai-bg .dark {
-        color: rgba(255, 255, 255, 0.95);
-      }
-
-      /* 响应式调整 */
-      @media (max-width: 768px) {
-        .content-glass {
-          margin: 1rem;
-          padding: 1.5rem;
-          border-radius: 1rem;
-        }
-      }
-
-      /* 动画效果 */
-      @keyframes ai-glow {
-        from {
-          box-shadow: 0 0 20px rgba(79, 70, 229, 0.4);
-        }
-        to {
-          box-shadow: 0 0 35px rgba(168, 85, 247, 0.7);
-        }
-      }
-
-      .ai-glow {
-        animation: ai-glow 3s ease-in-out infinite alternate;
-      }
-
-      /* 滚动条样式 */
-      .scroll-hidden::-webkit-scrollbar {
-        width: 4px;
-      }
-
-      .scroll-hidden::-webkit-scrollbar-track {
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 2px;
-      }
-
-      .scroll-hidden::-webkit-scrollbar-thumb {
-        background: rgba(124, 58, 237, 0.6);
-        border-radius: 2px;
-      }
-
-      .scroll-hidden::-webkit-scrollbar-thumb:hover {
-        background: rgba(124, 58, 237, 0.8);
+      
+      .animate-pulse {
+        animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
       }
     `}</style>
   )

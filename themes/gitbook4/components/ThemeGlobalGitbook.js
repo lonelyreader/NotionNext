@@ -1,124 +1,57 @@
 
 import React, { createContext, useContext } from 'react'
 
-const ThemeGlobalGitbook = createContext()
+// 创建主题上下文
+const ThemeGlobalGitbookContext = createContext({})
 
-const useGlobal = () => useContext(ThemeGlobalGitbook)
+// Provider组件
+const ThemeGlobalGitbook = {
+  Provider: ({ children, value }) => (
+    <ThemeGlobalGitbookContext.Provider value={value}>
+      {children}
+    </ThemeGlobalGitbookContext.Provider>
+  )
+}
 
-export { useGlobal }
+// Hook for using context
+export const useGitbookGlobal = () => {
+  const context = useContext(ThemeGlobalGitbookContext)
+  if (!context) {
+    throw new Error('useGitbookGlobal must be used within ThemeGlobalGitbook.Provider')
+  }
+  return context
+}
 
-export default ThemeGlobalGitbook
-
-// Style component for theme-specific styles
+// Style component
 export const Style = () => {
   return (
     <style jsx global>{`
       .ai-bg {
-        background: linear-gradient(135deg,
-          rgb(79, 70, 229) 0%,
-          rgb(124, 58, 237) 52%,
-          rgb(168, 85, 247) 100%);
-        min-height: 100vh;
+        background: linear-gradient(135deg, #0a0a0a 0%, #1a0033 25%, #000033 50%, #001a33 75%, #0a0a0a 100%);
+        background-size: 400% 400%;
+        animation: aiGradient 15s ease infinite;
+      }
+      
+      @keyframes aiGradient {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+      
+      .glass-button {
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        transition: all 0.3s ease;
         position: relative;
+        overflow: hidden;
       }
-
-      .ai-bg::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: url('data:image/svg+xml,<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grain" patternUnits="userSpaceOnUse" width="100" height="100"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="white" opacity="0.15"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grain)"/></svg>');
-        pointer-events: none;
-      }
-
-      .glass {
-        background: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        border-radius: 16px;
-      }
-
-      .glass-hover {
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      }
-
-      .glass-hover:hover {
-        background: rgba(255, 255, 255, 0.15);
+      
+      .glass-button:hover {
         transform: translateY(-2px);
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-      }
-
-      /* AI风格按钮 */
-      .ai-button {
-        background: linear-gradient(145deg, rgba(124, 58, 237, 0.8), rgba(168, 85, 247, 0.8));
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        backdrop-filter: blur(10px);
-        color: white;
-        border-radius: 12px;
-        padding: 0.75rem 1.5rem;
-        transition: all 0.3s ease;
-      }
-
-      .ai-button:hover {
-        background: linear-gradient(145deg, rgba(124, 58, 237, 0.9), rgba(168, 85, 247, 0.9));
-        transform: translateY(-2px);
-        box-shadow: 0 8px 25px rgba(124, 58, 237, 0.4);
-      }
-
-      /* 卡片样式 */
-      .ai-card {
-        background: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(15px);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        border-radius: 16px;
-        padding: 1.5rem;
-        transition: all 0.3s ease;
-      }
-
-      .ai-card:hover {
-        background: rgba(255, 255, 255, 0.15);
-        transform: translateY(-4px);
-        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
-      }
-
-      /* 输入框样式 */
-      .ai-input {
-        background: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        border-radius: 12px;
-        color: white;
-        padding: 0.75rem 1rem;
-        transition: all 0.3s ease;
-      }
-
-      .ai-input:focus {
-        outline: none;
-        border-color: rgba(168, 85, 247, 0.6);
-        box-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
-      }
-
-      .ai-input::placeholder {
-        color: rgba(255, 255, 255, 0.6);
-      }
-
-      /* 导航项样式 */
-      .ai-nav-item {
-        background: rgba(255, 255, 255, 0.08);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 12px;
-        margin: 0.25rem 0;
-        transition: all 0.3s ease;
-      }
-
-      .ai-nav-item:hover {
-        background: rgba(255, 255, 255, 0.15);
-        transform: translateX(8px);
-        border-color: rgba(255, 255, 255, 0.2);
+        box-shadow: 0 8px 32px rgba(0,0,0,0.3);
       }
     `}</style>
   )
 }
+
+export default ThemeGlobalGitbook
