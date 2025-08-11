@@ -2,6 +2,57 @@
 @tailwind components;
 @tailwind utilities;
 
+/* AI风格设计变量 */
+:root {
+  --brand-1: 79 70 229;  /* indigo-600 #4f46e5 */
+  --brand-2: 124 58 237; /* violet-600 #7c3aed */
+  --brand-3: 168 85 247; /* fuchsia-500 #a855f7 */
+  --surface-opaque: 255 255 255; /* light glass base */
+  --surface-opaque-dark: 255 255 255; /* dark glass base */
+}
+
+.dark {
+  /* 暗色模式下玻璃更低不透明度 */
+}
+
+/* 渐变与玻璃工具类 */
+.bg-brand-gradient {
+  background-image: linear-gradient(135deg,
+    rgb(var(--brand-1)) 0%,
+    rgb(var(--brand-2)) 52%,
+    rgb(var(--brand-3)) 100%);
+}
+
+.text-brand-gradient {
+  background-image: linear-gradient(90deg,
+    rgb(var(--brand-1)) 0%,
+    rgb(var(--brand-3)) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* 玻璃化容器：iOS 风格 */
+.glass {
+  background-color: rgba(255, 255, 255, .08);
+  border: 1px solid rgba(255, 255, 255, .18);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.dark .glass {
+  background-color: rgba(255, 255, 255, .06);
+  border-color: rgba(255, 255, 255, .16);
+}
+
+/* 页面级背景：深蓝紫 AI 感 */
+.ai-bg {
+  background:
+    radial-gradient(1200px 600px at 10% -20%, rgba(124,58,237,.25), transparent 60%),
+    radial-gradient(900px 500px at 90% 0%, rgba(79,70,229,.20), transparent 55%),
+    linear-gradient(180deg, #0a0a12 0%, #0b0f26 60%, #0a0818 100%);
+}
+
 html {
   overflow-x: hidden;
 }

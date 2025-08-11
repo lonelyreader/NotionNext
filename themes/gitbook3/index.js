@@ -32,12 +32,15 @@ import Footer from './components/Footer'
 import Header from './components/Header'
 import InfoCard from './components/InfoCard'
 import JumpToTopButton from './components/JumpToTopButton'
+import LeftMenuBar from './components/LeftMenuBar'
 import NavPostList from './components/NavPostList'
 import PageNavDrawer from './components/PageNavDrawer'
 import RevolverMaps from './components/RevolverMaps'
 import TagItemMini from './components/TagItemMini'
 import CONFIG from './config'
 import { Style } from './style'
+import LoadingProgress from './components/LoadingProgress'
+import SEO from './components/SEO'
 
 const AlgoliaSearchModal = dynamic(
   () => import('@/components/AlgoliaSearchModal'),
@@ -105,7 +108,7 @@ const LayoutBase = props => {
     slotRight,
     slotTop
   } = props
-  const { fullWidth } = useGlobal()
+  const { fullWidth, onLoading } = useGlobal()
   const router = useRouter()
   const [tocVisible, changeTocVisible] = useState(false)
   const [pageNavVisible, changePageNavVisible] = useState(false)
@@ -122,6 +125,13 @@ const LayoutBase = props => {
     true,
     CONFIG
   )
+  const GITBOOK_WIDGET_TO_TOP = siteConfig('GITBOOK_WIDGET_TO_TOP', true, CONFIG)
+
+  // 页面主体内容区域的class
+  const containerSlot = `w-full ${
+    fullWidth ? 'px-5' : 'max-w-3xl px-3 lg:px-0'
+  } justify-center mx-auto`
+
   return (
     <ThemeGlobalGitbook.Provider
       value={{
@@ -136,103 +146,56 @@ const LayoutBase = props => {
       }}>
       <Style />
 
-      <div
-        id='theme-gitbook'
-        className={`${siteConfig('FONT_STYLE')} pb-16 md:pb-0 scroll-smooth bg-white dark:bg-black w-full h-full min-h-screen justify-center dark:text-gray-300`}>
-        <AlgoliaSearchModal cRef={searchModal} {...props} />
-
-        {/* 顶部导航栏 */}
-        <Header {...props} />
-
-        <main
-          id='wrapper'
-          className={`${siteConfig('LAYOUT_SIDEBAR_REVERSE') ? 'flex-row-reverse' : ''} relative flex justify-between w-full gap-x-6 h-full mx-auto max-w-screen-4xl`}>
-          {/* 左侧推拉抽屉 */}
-          {fullWidth ? null : (
-            <div className={'hidden md:block relative z-10 '}>
-              <div className='w-80 pt-14 pb-4 sticky top-0 h-screen flex justify-between flex-col'>
-                {/* 导航 */}
-                <div className='overflow-y-scroll scroll-hidden pt-10 pl-5'>
-                  {/* 嵌入 */}
-                  {slotLeft}
-
-                  {/* 所有文章列表 */}
-                  <NavPostList filteredNavPages={filteredNavPages} {...props} />
-                </div>
-                {/* 页脚 */}
-                <Footer {...props} />
-              </div>
-            </div>
-          )}
-
-          {/* 中间内容区域 */}
+      <div className="min-h-screen ai-bg text-[var(--fg)]">
+        <div className="mx-auto max-w-screen-2xl px-4 md:px-6 lg:px-8">
           <div
-            id='center-wrapper'
-            className='flex flex-col justify-between w-full relative z-10 pt-14 min-h-screen'>
-            <div
-              id='container-inner'
-              className={`w-full ${fullWidth ? 'px-5' : 'max-w-3xl px-3 lg:px-0'} justify-center mx-auto`}>
-              {slotTop}
-              <WWAds className='w-full' orientation='horizontal' />
+            className={`${siteConfig.FONT_STYLE} min-h-screen flex flex-col`}
+            id='theme-gitbook'>
+            <SEO {...props} />
+            <LoadingProgress />
 
-              {children}
+            {/* 顶部导航栏 */}
+            <Header {...props} />
 
-              {/* Google广告 */}
-              <AdSlot type='in-article' />
-              <WWAds className='w-full' orientation='horizontal' />
-            </div>
-
-            {/* 底部 */}
-            <div className='md:hidden'>
-              <Footer {...props} />
-            </div>
-          </div>
-
-          {/*  右侧 */}
-          {fullWidth ? null : (
-            <div
-              className={
-                'w-72 hidden 2xl:block dark:border-transparent flex-shrink-0 relative z-10 '
-              }>
-              <div className='py-14 sticky top-0'>
-                <ArticleInfo post={props?.post ? props?.post : props.notice} />
-
-                <div>
-                  {/* 桌面端目录 */}
-                  <Catalog {...props} />
-                  {slotRight}
-                  {router.route === '/' && (
-                    <>
-                      <InfoCard {...props} />
-                      {siteConfig(
-                        'GITBOOK_WIDGET_REVOLVER_MAPS',
-                        null,
-                        CONFIG
-                      ) === 'true' && <RevolverMaps />}
-                      <Live2D />
-                    </>
-                  )}
-                  {/* gitbook主题首页只显示公告 */}
-                  <Announcement {...props} />
+            <main
+              id='wrapper-outer'
+              className='relative flex-grow'>
+              <div id='wrapper' className='relative flex justify-between w-full h-full mx-auto'>
+                {/* 左侧推拉侧边抽屉 */}
+                <div className={'hidden 2xl:block relative z-10'}>
+                  <LeftMenuBar {...props} />
                 </div>
 
-                <AdSlot type='in-article' />
-                <Live2D />
+                <div className='w-full relative z-20 pt-10 min-h-screen'>
+                  <div
+                    id='center-wrapper'
+                    className='flex flex-col justify-between w-full relative z-10 pt-2 min-h-screen'>
+                    <div id='container-inner' className={containerSlot}>
+                      {onLoading ? (
+                        <LoadingCover />
+                      ) : (
+                        children
+                      )}
+                    </div>
+                    <Footer {...props} />
+                  </div>
+                </div>
               </div>
-            </div>
-          )}
-        </main>
 
-        {GITBOOK_LOADING_COVER && <LoadingCover />}
+              <div className={'block 2xl:hidden'}>
+                <BottomMenuBar {...props} />
+              </div>
 
-        {/* 回顶按钮 */}
-        <JumpToTopButton />
+              {GITBOOK_WIDGET_TO_TOP && (
+                <div className='flex space-x-1 items-end justify-end fixed right-4 bottom-4 z-20'>
+                  <JumpToTopButton />
+                </div>
+              )}
+            </main>
 
-        {/* 移动端导航抽屉 */}
-        <PageNavDrawer {...props} filteredNavPages={filteredNavPages} />
-
-        {/* 移动端底部导航栏 */}
-        <BottomMenuBar {...props} />
+            {GITBOOK_LOADING_COVER && <LoadingCover />}
+          </div>
+        </div>
       </div>
     </ThemeGlobalGitbook.Provider>
   )

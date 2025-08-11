@@ -82,8 +82,8 @@ const Catalog = ({ post }) => {
                 key={id}
                 href={`#${id}`}
                 //  notion-table-of-contents-item
-                className={`${activeSection === id && 'border-green-500 text-green-500 font-bold'} border-l pl-4 block hover:text-green-500 border-lduration-300 transform font-light dark:text-gray-300
-              notion-table-of-contents-item-indent-level-${tocItem.indentLevel} catalog-item `}>
+                className={`${activeSection === id && 'border-brand-600/60 text-white bg-brand-600/20'} border-l pl-4 block hover:text-white border-lduration-300 transform font-light dark:text-gray-300
+              notion-table-of-contents-item-indent-level-${tocItem.indentLevel} catalog-item glass rounded-xl p-3 border-transparent hover:border-white/30 hover:bg-white/5 duration-300`}>
                 <span
                   style={{
                     display: 'inline-block',

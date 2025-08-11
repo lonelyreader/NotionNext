@@ -1,4 +1,3 @@
-
 /* eslint-disable react/no-unknown-property */
 /**
  * 此处样式只对当前主题生效
@@ -43,7 +42,158 @@ const Style = () => {
         color: #f3f4f6;
       }
 
-      /* 玻璃磨砂效果容器 */
+      /* AI风格变量定义 */
+      :root {
+        --ai-primary: #667eea;
+        --ai-secondary: #764ba2;
+        --ai-accent: #4facfe;
+        --ai-purple: #8b5cf6;
+        --ai-blue: #3b82f6;
+        --ai-cyan: #06b6d4;
+        --ai-gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        --ai-gradient-secondary: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        --ai-gradient-accent: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 100%);
+        --ai-gradient-dark: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #1e40af 100%);
+        --glass-bg: rgba(255, 255, 255, 0.08);
+        --glass-bg-dark: rgba(0, 0, 0, 0.25);
+        --glass-border: rgba(255, 255, 255, 0.18);
+        --glass-border-dark: rgba(139, 92, 246, 0.3);
+        --glass-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+        --ios-blur: blur(20px);
+        --ios-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      }
+
+      /* 底色 */
+      .dark body {
+        background-color: transparent;
+      }
+
+      .bottom-button-group, .gitbook-footer {
+        background: var(--glass-bg);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-top: 1px solid var(--glass-border);
+        box-shadow: 0px -6px 25px rgba(0, 0, 0, 0.15);
+      }
+
+      .dark .bottom-button-group, .dark .gitbook-footer {
+        background: rgba(0, 0, 0, 0.5);
+        border-top: 1px solid rgba(139, 92, 246, 0.4);
+      }
+
+      .bottom-button-group {
+        box-shadow: 0px -3px 10px 0px rgba(0, 0, 0, 0.1);
+      }
+
+      /* 确保文本颜色在AI背景下可读 */
+      .ai-bg {
+        color: rgba(255, 255, 255, 0.9);
+      }
+
+      .ai-bg .dark {
+        color: rgba(255, 255, 255, 0.95);
+      }
+
+      /* 侧边栏优化 */
+      .gitbook-sidebar, .w-80, .sidebar {
+        background: var(--glass-bg) !important;
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        border-right: 1px solid var(--glass-border);
+        border-radius: 0 20px 20px 0;
+      }
+
+      .gitbook-sidebar {
+        background: rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(12px);
+        border-radius: 1rem;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+      }
+
+      .dark .gitbook-sidebar, .dark .w-80, .dark .sidebar {
+        background: rgba(0, 0, 0, 0.3) !important;
+        border-right: 1px solid rgba(139, 92, 246, 0.3);
+      }
+
+      /* 搜索框优化 */
+      input[type="search"], input[type="text"] {
+        background: var(--glass-bg) !important;
+        border: 1px solid var(--glass-border);
+        border-radius: 12px;
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        transition: all 0.3s ease;
+        color: inherit;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .search-input {
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        backdrop-filter: blur(12px);
+        border-radius: 0.75rem;
+        color: rgba(255, 255, 255, 0.9);
+      }
+
+      input[type="search"]:focus, input[type="text"]:focus {
+        border-color: var(--ai-cyan);
+        box-shadow: 0 0 25px rgba(6, 182, 212, 0.4);
+        outline: none;
+        transform: scale(1.02);
+      }
+
+      .search-input:focus {
+        border-color: rgb(var(--brand-2));
+        box-shadow: 0 0 20px rgba(124, 58, 237, 0.3);
+      }
+
+      .dark input[type="search"], .dark input[type="text"] {
+        background: rgba(0, 0, 0, 0.4);
+        border: 1px solid rgba(139, 92, 246, 0.4);
+        color: #f3f4f6;
+      }
+
+      /* 导航项优化 */
+      .nav-item, .menu-item, .gitbook-nav-item {
+        background: var(--glass-bg);
+        margin: 4px 0;
+        border-radius: 14px;
+        transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        backdrop-filter: var(--ios-blur);
+        -webkit-backdrop-filter: var(--ios-blur);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .nav-item {
+        transition: all 0.2s ease;
+      }
+
+      .nav-item:hover, .menu-item:hover, .gitbook-nav-item:hover {
+        background: rgba(255, 255, 255, 0.12);
+        transform: translateX(8px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 8px 25px rgba(79, 172, 254, 0.3);
+      }
+
+      .nav-item:hover {
+        background: rgba(255, 255, 255, 0.12);
+        transform: translateX(4px);
+      }
+
+      .dark .nav-item, .dark .menu-item, .dark .gitbook-nav-item {
+        background: var(--glass-bg-dark);
+        border: 1px solid rgba(139, 92, 246, 0.2);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 2px 10px rgba(0, 0, 0, 0.3);
+      }
+
+      .dark .nav-item:hover, .dark .menu-item:hover, .dark .gitbook-nav-item:hover {
+        background: rgba(139, 92, 246, 0.15);
+        border: 1px solid rgba(139, 92, 246, 0.4);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 8px 25px rgba(139, 92, 246, 0.4);
+      }
+
+      /* 文章内容区域 */
       .notion-page, .gitbook-container {
         background: var(--glass-bg) !important;
         backdrop-filter: blur(15px);
@@ -53,9 +203,23 @@ const Style = () => {
         box-shadow: var(--glass-shadow);
       }
 
+      .notion-page {
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(10px);
+        border-radius: 1rem;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        padding: 2rem;
+        margin: 1rem;
+      }
+
       .dark .notion-page, .dark .gitbook-container {
         background: rgba(0, 0, 0, 0.25) !important;
         border: 1px solid rgba(139, 92, 246, 0.3);
+      }
+
+      .dark .notion-page {
+        background: rgba(0, 0, 0, 0.6);
+        color: rgba(255, 255, 255, 0.9);
       }
 
       /* 顶部导航栏玻璃效果 */
@@ -70,20 +234,6 @@ const Style = () => {
       .dark .top-nav, .dark .gitbook-header, .dark header {
         background: rgba(0, 0, 0, 0.4) !important;
         border-bottom: 1px solid rgba(139, 92, 246, 0.4);
-      }
-
-      /* 左侧导航栏玻璃效果 */
-      .gitbook-sidebar, .w-80, .sidebar {
-        background: var(--glass-bg) !important;
-        backdrop-filter: blur(15px);
-        -webkit-backdrop-filter: blur(15px);
-        border-right: 1px solid var(--glass-border);
-        border-radius: 0 20px 20px 0;
-      }
-
-      .dark .gitbook-sidebar, .dark .w-80, .dark .sidebar {
-        background: rgba(0, 0, 0, 0.3) !important;
-        border-right: 1px solid rgba(139, 92, 246, 0.3);
       }
 
       /* 内容区域玻璃效果 */
@@ -164,230 +314,23 @@ const Style = () => {
         text-shadow: 0 0 15px rgba(139, 92, 246, 0.8);
       }
 
-      /* iOS磨砂风格导航菜单项 */
-      .nav-item, .menu-item, .gitbook-nav-item {
-        background: var(--glass-bg);
-        margin: 4px 0;
-        border-radius: 14px;
-        transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        backdrop-filter: var(--ios-blur);
-        -webkit-backdrop-filter: var(--ios-blur);
-        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 2px 10px rgba(0, 0, 0, 0.1);
-      }
-
-      .nav-item:hover, .menu-item:hover, .gitbook-nav-item:hover {
-        background: rgba(255, 255, 255, 0.12);
-        transform: translateX(8px) scale(1.01);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 8px 25px rgba(79, 172, 254, 0.3);
-      }
-
-      .dark .nav-item, .dark .menu-item, .dark .gitbook-nav-item {
-        background: var(--glass-bg-dark);
-        border: 1px solid rgba(139, 92, 246, 0.2);
-        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 2px 10px rgba(0, 0, 0, 0.3);
-      }
-
-      .dark .nav-item:hover, .dark .menu-item:hover, .dark .gitbook-nav-item:hover {
-        background: rgba(139, 92, 246, 0.15);
-        border: 1px solid rgba(139, 92, 246, 0.4);
-        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 8px 25px rgba(139, 92, 246, 0.4);
-      }
-
-      /* AI风格标题 */
-      h1, h2, h3, h4, h5, h6 {
-        background: var(--ai-gradient-primary);
-        background-clip: text;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        font-weight: 700;
-        text-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
-      }
-
-      .dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 {
+      /* AI悬浮按钮 */
+      .jump-to-top, .float-button {
         background: var(--ai-gradient-secondary);
-        background-clip: text;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-      }
-
-      /* AI代码块 */
-      pre, code {
-        background: rgba(0, 0, 0, 0.9) !important;
-        border: 1px solid var(--ai-cyan);
-        border-radius: 12px;
-        box-shadow: 0 0 25px rgba(6, 182, 212, 0.3);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-      }
-
-      /* AI搜索框 */
-      input[type="search"], input[type="text"] {
-        background: var(--glass-bg) !important;
-        border: 1px solid var(--glass-border);
-        border-radius: 12px;
-        backdrop-filter: blur(15px);
-        -webkit-backdrop-filter: blur(15px);
-        transition: all 0.3s ease;
-        color: inherit;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-      }
-
-      input[type="search"]:focus, input[type="text"]:focus {
-        border-color: var(--ai-cyan);
-        box-shadow: 0 0 25px rgba(6, 182, 212, 0.4);
-        outline: none;
-        transform: scale(1.02);
-      }
-
-      .dark input[type="search"], .dark input[type="text"] {
-        background: rgba(0, 0, 0, 0.4);
-        border: 1px solid rgba(139, 92, 246, 0.4);
-        color: #f3f4f6;
-      }
-
-      /* AI滚动条 */
-      ::-webkit-scrollbar {
-        width: 10px;
-      }
-
-      ::-webkit-scrollbar-track {
-        background: var(--glass-bg);
-        border-radius: 10px;
-      }
-
-      ::-webkit-scrollbar-thumb {
-        background: var(--ai-gradient-secondary);
-        border-radius: 10px;
-        border: 2px solid transparent;
-        background-clip: content-box;
-      }
-
-      ::-webkit-scrollbar-thumb:hover {
-        background: var(--ai-gradient-accent);
-        background-clip: content-box;
-      }
-
-      /* AI卡片效果 */
-      .card, .shadow-card, .bg-white, .bg-gray-50 {
-        background: var(--glass-bg) !important;
-        backdrop-filter: blur(15px);
-        -webkit-backdrop-filter: blur(15px);
-        border: 1px solid var(--glass-border);
-        border-radius: 16px;
+        border-radius: 50%;
+        width: 55px;
+        height: 55px;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        box-shadow: 0 6px 25px rgba(79, 172, 254, 0.4);
         transition: all 0.4s ease;
-        box-shadow: var(--glass-shadow);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
       }
 
-      .card:hover, .shadow-card:hover, .bg-white:hover, .bg-gray-50:hover {
-        transform: translateY(-8px) scale(1.02);
-        box-shadow: 0 16px 50px rgba(0, 0, 0, 0.25);
-        border-color: var(--ai-cyan);
-      }
-
-      .dark .card, .dark .shadow-card, .dark .bg-white, .dark .bg-gray-50 {
-        background: rgba(0, 0, 0, 0.4) !important;
-        border: 1px solid rgba(139, 92, 246, 0.3);
-      }
-
-      /* 底部按钮组 */
-      .bottom-button-group, .gitbook-footer {
-        background: var(--glass-bg);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        border-top: 1px solid var(--glass-border);
-        box-shadow: 0px -6px 25px rgba(0, 0, 0, 0.15);
-      }
-
-      .dark .bottom-button-group, .dark .gitbook-footer {
-        background: rgba(0, 0, 0, 0.5);
-        border-top: 1px solid rgba(139, 92, 246, 0.4);
-      }
-
-      /* 目录链接AI效果 */
-      .toc a, .catalog a {
-        color: var(--ai-blue) !important;
-        transition: all 0.3s ease;
-        position: relative;
-      }
-
-      .toc a:hover, .catalog a:hover {
-        color: var(--ai-purple) !important;
-        padding-left: 15px;
-        text-shadow: 0 0 10px rgba(139, 92, 246, 0.6);
-      }
-
-      .toc a:before, .catalog a:before {
-        content: '';
-        position: absolute;
-        left: -10px;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 4px;
-        height: 0;
+      .jump-to-top:hover, .float-button:hover {
+        transform: translateY(-6px) scale(1.15);
+        box-shadow: 0 12px 40px rgba(79, 172, 254, 0.6);
         background: var(--ai-gradient-accent);
-        transition: height 0.3s ease;
-        border-radius: 2px;
-      }
-
-      .toc a:hover:before, .catalog a:hover:before {
-        height: 100%;
-      }
-
-      /* AI标签 */
-      .tag {
-        background: var(--ai-gradient-secondary);
-        border-radius: 20px;
-        padding: 6px 16px;
-        color: white;
-        font-size: 0.875rem;
-        font-weight: 600;
-        transition: all 0.3s ease;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-      }
-
-      .tag:hover {
-        transform: scale(1.1) rotate(2deg);
-        box-shadow: 0 6px 20px rgba(79, 172, 254, 0.5);
-        background: var(--ai-gradient-accent);
-      }
-
-      /* AI分类 */
-      .category {
-        background: var(--ai-gradient-primary);
-        border-radius: 12px;
-        padding: 8px 20px;
-        color: white;
-        font-weight: 700;
-        transition: all 0.3s ease;
-        border: 1px solid rgba(255, 255, 255, 0.3);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-      }
-
-      .category:hover {
-        transform: translateY(-4px) scale(1.05);
-        box-shadow: 0 8px 30px rgba(102, 126, 234, 0.5);
-        background: var(--ai-gradient-accent);
-      }
-
-      /* AI加载动画 */
-      .animate-spin {
-        color: var(--ai-cyan);
-        filter: drop-shadow(0 0 15px var(--ai-cyan));
-        animation: ai-pulse 2s ease-in-out infinite;
-      }
-
-      @keyframes ai-pulse {
-        0%, 100% { 
-          filter: drop-shadow(0 0 15px var(--ai-cyan));
-        }
-        50% { 
-          filter: drop-shadow(0 0 25px var(--ai-purple));
-        }
       }
 
       /* AI悬浮按钮 */

@@ -65,6 +65,13 @@
 
   --notion-max-width: 720px;
   --notion-header-height: 45px;
+
+  /* AI 风格变量 */
+  --brand-1: 79, 118, 255; /* Blue */
+  --brand-2: 145, 115, 248; /* Purple */
+  --brand-3: 202, 137, 255; /* Pinkish Purple */
+  --glass-background: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.2);
 }
 
 .notion {
@@ -377,6 +384,81 @@
   font-weight: 600;
 }
 
+/* 标题样式 - AI风格 */
+.notion-h1 {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+  font-weight: 700;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  background-image: linear-gradient(90deg, rgb(var(--brand-1)) 0%, rgb(var(--brand-3)) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@media (min-width: 768px) {
+  .notion-h1 {
+    font-size: 3rem;
+    line-height: 1.1;
+  }
+}
+
+.notion-h2 {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  font-weight: 600;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  background-image: linear-gradient(90deg, rgb(var(--brand-1)) 0%, rgb(var(--brand-3)) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@media (min-width: 768px) {
+  .notion-h2 {
+    font-size: 2.25rem;
+  }
+}
+
+.notion-h3 {
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  background-image: linear-gradient(90deg, rgb(var(--brand-1)) 0%, rgb(var(--brand-3)) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* 引用块 */
+.notion-quote {
+  border-left: 2px solid;
+  border-image: linear-gradient(135deg, rgb(var(--brand-1)) 0%, rgb(var(--brand-3)) 100%) 1;
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 0.75rem;
+}
+
+/* 代码块 */
+.notion-code {
+  border-radius: 0.75rem;
+  background-color: rgba(255, 255, 255, 0.05) !important;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+
+/* 链接悬停 */
+.notion-link:hover {
+  border-bottom: 2px solid;
+  border-image: linear-gradient(90deg, rgb(var(--brand-1)) 0%, rgb(var(--brand-3)) 100%) 1;
+  transition: all 0.2s ease;
+}
+
 .notion-title {
   width: 100%;
   font-size: 2.5em;
@@ -398,31 +480,6 @@ summary > .notion-h {
   max-width: 100%;
   white-space: pre-wrap;
   word-break: break-word;
-}
-
-.notion-h1 {
-  font-size: 1.575em;
-  margin-top: 1.08em;
-  @apply w-full;
-  /* @apply border-b w-full; */
-}
-.notion-h2 {
-  @apply w-full;
-}
-.notion-h3 {
-  @apply w-full;
-}
-
-.notion-header-anchor {
-  position: absolute;
-  top: -54px;
-  left: 0;
-}
-
-.notion-title + .notion-h1,
-.notion-title + .notion-h2,
-.notion-title + .notion-h3 {
-  margin-top: 0;
 }
 
 .notion-h1:first-child {

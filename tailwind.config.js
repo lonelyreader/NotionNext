@@ -28,6 +28,11 @@ module.exports = {
     },
     extend: {
       colors: {
+        brand: {
+          500: 'rgb(var(--brand-1) / <alpha-value>)',
+          600: 'rgb(var(--brand-2) / <alpha-value>)',
+          700: 'rgb(var(--brand-3) / <alpha-value>)'
+        },
         day: {
           DEFAULT: BLOG.BACKGROUND_LIGHT || '#ffffff'
         },
@@ -62,13 +67,11 @@ module.exports = {
         'gray-2': '#F3F4F6',
         'gray-7': '#CED4DA'
       },
-      maxWidth: {
-        side: '14rem',
-        '9/10': '90%',
-        'screen-3xl': '1440px',
-        'screen-4xl': '1560px'
+      backgroundImage: {
+        'brand-gradient': 'linear-gradient(135deg, rgb(var(--brand-1)) 0%, rgb(var(--brand-2)) 52%, rgb(var(--brand-3)) 100%)'
       },
       boxShadow: {
+        'glass': '0 10px 30px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.06)',
         input: '0px 7px 20px rgba(0, 0, 0, 0.03)',
         form: '0px 1px 55px -11px rgba(0, 0, 0, 0.01)',
         pricing: '0px 0px 40px 0px rgba(0, 0, 0, 0.08)',
@@ -77,6 +80,21 @@ module.exports = {
         'testimonial-btn': '0px 8px 15px 0px rgba(72, 72, 138, 0.08)',
         1: '0px 1px 3px 0px rgba(166, 175, 195, 0.40)',
         2: '0px 5px 12px 0px rgba(0, 0, 0, 0.10)'
+      },
+      maxWidth: {
+        side: '14rem',
+        '9/10': '90%',
+        'screen-3xl': '1440px',
+        'screen-4xl': '1560px'
+      },
+      borderRadius: {
+        'xl2': '1.25rem'
+      },
+      backdropBlur: {
+        xs: '6px'
+      },
+      transitionProperty: {
+        'colors-transform': 'color, background-color, border-color, transform, box-shadow'
       }
     }
   },
