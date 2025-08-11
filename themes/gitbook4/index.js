@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import ThemeGlobalGitbook, { Style } from '@site/src/components/theme-global-gitbook';
-import { useDocsSearch, useFilteredNavPages } from '@site/src/hooks';
-import type { NavPage } from '@site/src/types';
-import { cn } from '@site/src/utils';
+import ThemeGlobalGitbook, { Style } from '@/themes/gitbook4/components/ThemeGlobalGitbook';
+import { useDocsSearch, useFilteredNavPages } from '@/hooks';
 
-function GitbookLayout({ children }: { children: React.ReactNode }) {
+function GitbookLayout({ children }) {
   const { searchModal, filteredNavPages, allNavPages, pageNavVisible, changePageNavVisible } =
     useDocsSearch();
   const [tocVisible, changeTocVisible] = useState(true);
