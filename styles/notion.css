@@ -391,10 +391,11 @@
   font-weight: 700;
   margin-top: 2.5rem;
   margin-bottom: 1rem;
-  background-image: linear-gradient(90deg, rgb(var(--brand-1)) 0%, rgb(var(--brand-3)) 100%);
+  background-image: linear-gradient(135deg, rgb(var(--brand-1)) 0%, rgb(var(--brand-2)) 52%, rgb(var(--brand-3)) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  text-shadow: 0 0 20px rgba(124, 58, 237, 0.3);
 }
 
 @media (min-width: 768px) {
@@ -417,8 +418,15 @@
 }
 
 @media (min-width: 768px) {
+  .notion-h1 {
+    font-size: 3.5rem;
+    line-height: 1.1;
+  }
   .notion-h2 {
-    font-size: 2.25rem;
+    font-size: 2.5rem;
+  }
+  .notion-h3 {
+    font-size: 2rem;
   }
 }
 
@@ -428,7 +436,7 @@
   font-weight: 600;
   margin-top: 1.5rem;
   margin-bottom: 0.5rem;
-  background-image: linear-gradient(90deg, rgb(var(--brand-1)) 0%, rgb(var(--brand-3)) 100%);
+  background-image: linear-gradient(135deg, rgb(var(--brand-1)) 0%, rgb(var(--brand-2)) 52%, rgb(var(--brand-3)) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -436,27 +444,53 @@
 
 /* 引用块 */
 .notion-quote {
-  border-left: 2px solid;
-  border-image: linear-gradient(135deg, rgb(var(--brand-1)) 0%, rgb(var(--brand-3)) 100%) 1;
-  background-color: rgba(255, 255, 255, 0.05);
-  padding: 1rem;
-  margin: 1rem 0;
-  border-radius: 0.75rem;
+  border-left: 3px solid;
+  border-image: linear-gradient(135deg, rgb(var(--brand-1)) 0%, rgb(var(--brand-2)) 52%, rgb(var(--brand-3)) 100%) 1;
+  background-color: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
 /* 代码块 */
 .notion-code {
-  border-radius: 0.75rem;
-  background-color: rgba(255, 255, 255, 0.05) !important;
-  padding: 1rem;
-  margin: 1rem 0;
+  border-radius: 1rem;
+  background-color: rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 /* 链接悬停 */
+.notion-link {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
 .notion-link:hover {
-  border-bottom: 2px solid;
-  border-image: linear-gradient(90deg, rgb(var(--brand-1)) 0%, rgb(var(--brand-3)) 100%) 1;
-  transition: all 0.2s ease;
+  color: rgb(var(--brand-2));
+  text-shadow: 0 0 10px rgba(124, 58, 237, 0.4);
+}
+
+.notion-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, rgb(var(--brand-1)) 0%, rgb(var(--brand-3)) 100%);
+  transition: width 0.3s ease;
+}
+
+.notion-link:hover::after {
+  width: 100%;
 }
 
 .notion-title {
