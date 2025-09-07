@@ -82,7 +82,7 @@ const Catalog = ({ post }) => {
                 key={id}
                 href={`#${id}`}
                 //  notion-table-of-contents-item
-                className={`${activeSection === id && 'border-blue-500 text-blue-500 dark:border-purple-400 dark:text-purple-400 font-bold'} border-l pl-4 block hover:text-blue-500 dark:hover:text-purple-400 border-lduration-300 transform font-light dark:text-gray-300
+                className={`${activeSection === id && 'border-blue-500 text-blue-400 font-bold'} border-l pl-4 block hover:text-blue-400 border-lduration-300 transform font-light text-gray-300
               notion-table-of-contents-item-indent-level-${tocItem.indentLevel} catalog-item `}>
                 <span
                   style={{

@@ -65,7 +65,7 @@ export default function Header(props) {
   return (
     <div id='top-nav' className={'fixed top-0 w-full z-20 ' + className}>
       {/* PC端菜单 */}
-      <div className='flex justify-center border-b dark:border-black items-center w-full h-16 bg-gradient-to-r from-blue-500/20 to-purple-600/20 dark:from-blue-900/30 dark:to-purple-900/30 backdrop-blur-md border-blue-400/30 dark:border-purple-400/30'>
+      <div className='flex justify-center border-b border-gray-600 items-center w-full h-16 bg-gray-800'>
         <div className='px-5 max-w-screen-4xl w-full flex gap-x-3 justify-between items-center'>
           {/* 左侧*/}
           <div className='flex'>
@@ -87,7 +87,7 @@ export default function Header(props) {
               <>
                 <SignedOut>
                   <SignInButton mode='modal'>
-                    <button className='bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white rounded-lg px-3 py-2 transition-all duration-300 shadow-lg hover:shadow-blue-500/25'>
+                    <button className='bg-green-600 hover:bg-green-700 text-white rounded px-3 py-2 transition-colors duration-200'>
                       {locale.COMMON.SIGN_IN}
                     </button>
                   </SignInButton>
@@ -120,7 +120,7 @@ export default function Header(props) {
         collapseRef={collapseRef}
         isOpen={isOpen}
         className='md:hidden'>
-        <div className='bg-gradient-to-b from-blue-500/10 to-purple-600/10 dark:from-blue-900/20 dark:to-purple-900/20 backdrop-blur-md pt-1 py-2 lg:hidden '>
+        <div className='bg-gray-800 pt-1 py-2 lg:hidden '>
           <MenuBarMobile
             {...props}
             onHeightChange={param =>
