@@ -8,7 +8,7 @@ export default function ArticleInfo({ post }) {
     return null
   }
   return (
-    <div className='pt-10 pb-6 text-yellow-400/80 text-sm card'>
+    <div className='pt-10 pb-6 text-white/80 text-sm card'>
       <i className='fa-regular fa-clock mr-1' />
       Last update:{' '}
       {post.date?.start_date || post?.publishDay || post?.lastEditedDay}
