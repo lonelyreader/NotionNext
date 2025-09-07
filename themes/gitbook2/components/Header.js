@@ -65,7 +65,7 @@ export default function Header(props) {
   return (
     <div id='top-nav' className={'fixed top-0 w-full z-20 ' + className}>
       {/* PC端菜单 */}
-      <div className='flex justify-center border-b border-yellow-400/30 items-center w-full h-16 bg-gradient-to-r from-green-900/80 via-brown-800/80 to-purple-900/80 backdrop-blur-md'>
+      <div className='flex justify-center border-b border-yellow-400/30 items-center w-full h-16 bg-gradient-to-r from-red-900/80 via-brown-800/80 to-purple-900/80 backdrop-blur-md'>
         <div className='px-5 max-w-screen-4xl w-full flex gap-x-3 justify-between items-center'>
           {/* 左侧*/}
           <div className='flex'>
@@ -120,7 +120,7 @@ export default function Header(props) {
         collapseRef={collapseRef}
         isOpen={isOpen}
         className='md:hidden'>
-        <div className='bg-gradient-to-b from-green-900/80 via-brown-800/80 to-purple-900/80 backdrop-blur-md pt-1 py-2 lg:hidden '>
+        <div className='bg-gradient-to-b from-red-900/80 via-brown-800/80 to-purple-900/80 backdrop-blur-md pt-1 py-2 lg:hidden '>
           <MenuBarMobile
             {...props}
             onHeightChange={param =>

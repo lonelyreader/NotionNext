@@ -14,7 +14,7 @@ const Footer = ({ siteInfo }) => {
     parseInt(since) < currentYear ? since + '-' + currentYear : currentYear
 
   return (
-    <footer className='z-20 border p-2 rounded-lg border-yellow-400/30 bg-gradient-to-r from-green-900/40 via-brown-800/40 to-purple-900/40 backdrop-blur-md justify-center text-center w-full text-sm relative card'>
+    <footer className='z-20 border p-2 rounded-lg border-yellow-400/30 bg-gradient-to-r from-red-900/40 via-brown-800/40 to-purple-900/40 backdrop-blur-md justify-center text-center w-full text-sm relative card'>
       <SocialButton />
 
       <div className='flex justify-center'>

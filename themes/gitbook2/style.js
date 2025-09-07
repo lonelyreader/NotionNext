@@ -11,41 +11,41 @@ const Style = () => {
       
       /* 全局背景渐变 */
       body {
-        background: linear-gradient(135deg, #003B40 0%, #372E2C 50%, #53284F 100%);
+        background: linear-gradient(135deg, #7F2629 0%, #372E2C 50%, #53284F 100%);
         background-attachment: fixed;
         color: #EFEFEF;
         min-height: 100vh;
       }
       
       .dark body {
-        background: linear-gradient(135deg, #003B40 0%, #372E2C 50%, #53284F 100%);
+        background: linear-gradient(135deg, #7F2629 0%, #372E2C 50%, #53284F 100%);
         background-attachment: fixed;
         color: #EFEFEF;
       }
 
       /* 主容器背景 */
       #theme-gitbook {
-        background: linear-gradient(135deg, rgba(0, 59, 64, 0.1) 0%, rgba(55, 46, 44, 0.1) 50%, rgba(83, 40, 79, 0.1) 100%);
+        background: linear-gradient(135deg, rgba(127, 38, 41, 0.1) 0%, rgba(55, 46, 44, 0.1) 50%, rgba(83, 40, 79, 0.1) 100%);
         backdrop-filter: blur(10px);
         color: #EFEFEF;
       }
       
       .dark #theme-gitbook {
-        background: linear-gradient(135deg, rgba(0, 59, 64, 0.1) 0%, rgba(55, 46, 44, 0.1) 50%, rgba(83, 40, 79, 0.1) 100%);
+        background: linear-gradient(135deg, rgba(127, 38, 41, 0.1) 0%, rgba(55, 46, 44, 0.1) 50%, rgba(83, 40, 79, 0.1) 100%);
         backdrop-filter: blur(10px);
         color: #EFEFEF;
       }
 
       /* 左侧导航栏样式 */
       .nav-sidebar {
-        background: linear-gradient(180deg, rgba(0, 59, 64, 0.8) 0%, rgba(55, 46, 44, 0.8) 100%);
+        background: linear-gradient(180deg, rgba(127, 38, 41, 0.8) 0%, rgba(55, 46, 44, 0.8) 100%);
         backdrop-filter: blur(15px);
         border-right: 2px solid rgba(204, 159, 83, 0.3);
         box-shadow: 4px 0 20px rgba(0, 0, 0, 0.3);
       }
       
       .dark .nav-sidebar {
-        background: linear-gradient(180deg, rgba(0, 59, 64, 0.8) 0%, rgba(55, 46, 44, 0.8) 100%);
+        background: linear-gradient(180deg, rgba(127, 38, 41, 0.8) 0%, rgba(55, 46, 44, 0.8) 100%);
         backdrop-filter: blur(15px);
         border-right: 2px solid rgba(204, 159, 83, 0.3);
         box-shadow: 4px 0 20px rgba(0, 0, 0, 0.3);
@@ -68,7 +68,7 @@ const Style = () => {
 
       /* 文章内容区域样式 */
       #center-wrapper {
-        background: linear-gradient(135deg, rgba(0, 59, 64, 0.2) 0%, rgba(55, 46, 44, 0.2) 50%, rgba(83, 40, 79, 0.2) 100%);
+        background: linear-gradient(135deg, rgba(127, 38, 41, 0.2) 0%, rgba(55, 46, 44, 0.2) 50%, rgba(83, 40, 79, 0.2) 100%);
         backdrop-filter: blur(10px);
         border: 1px solid rgba(204, 159, 83, 0.2);
         border-radius: 15px;
@@ -79,7 +79,7 @@ const Style = () => {
       }
       
       .dark #center-wrapper {
-        background: linear-gradient(135deg, rgba(0, 59, 64, 0.2) 0%, rgba(55, 46, 44, 0.2) 50%, rgba(83, 40, 79, 0.2) 100%);
+        background: linear-gradient(135deg, rgba(127, 38, 41, 0.2) 0%, rgba(55, 46, 44, 0.2) 50%, rgba(83, 40, 79, 0.2) 100%);
         backdrop-filter: blur(10px);
         border: 1px solid rgba(204, 159, 83, 0.2);
         border-radius: 15px;
@@ -167,7 +167,7 @@ const Style = () => {
 
       /* 卡片样式 */
       .card, .info-card {
-        background: linear-gradient(135deg, rgba(0, 59, 64, 0.3) 0%, rgba(55, 46, 44, 0.3) 50%, rgba(83, 40, 79, 0.3) 100%);
+        background: linear-gradient(135deg, rgba(127, 38, 41, 0.3) 0%, rgba(55, 46, 44, 0.3) 50%, rgba(83, 40, 79, 0.3) 100%);
         backdrop-filter: blur(10px);
         border: 1px solid rgba(204, 159, 83, 0.2);
         border-radius: 12px;
@@ -184,7 +184,7 @@ const Style = () => {
       }
       
       .dark .card, .dark .info-card {
-        background: linear-gradient(135deg, rgba(0, 59, 64, 0.3) 0%, rgba(55, 46, 44, 0.3) 50%, rgba(83, 40, 79, 0.3) 100%);
+        background: linear-gradient(135deg, rgba(127, 38, 41, 0.3) 0%, rgba(55, 46, 44, 0.3) 50%, rgba(83, 40, 79, 0.3) 100%);
         backdrop-filter: blur(10px);
         border: 1px solid rgba(204, 159, 83, 0.2);
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
@@ -192,7 +192,7 @@ const Style = () => {
 
       /* 输入框样式 */
       input, textarea, select {
-        background: linear-gradient(135deg, rgba(0, 59, 64, 0.4) 0%, rgba(55, 46, 44, 0.4) 100%);
+        background: linear-gradient(135deg, rgba(127, 38, 41, 0.4) 0%, rgba(55, 46, 44, 0.4) 100%);
         backdrop-filter: blur(10px);
         border: 1px solid rgba(204, 159, 83, 0.3);
         border-radius: 8px;
@@ -205,11 +205,11 @@ const Style = () => {
         outline: none;
         border-color: #CC9F53;
         box-shadow: 0 0 0 3px rgba(204, 159, 83, 0.2);
-        background: linear-gradient(135deg, rgba(0, 59, 64, 0.6) 0%, rgba(55, 46, 44, 0.6) 100%);
+        background: linear-gradient(135deg, rgba(127, 38, 41, 0.6) 0%, rgba(55, 46, 44, 0.6) 100%);
       }
       
       .dark input, .dark textarea, .dark select {
-        background: linear-gradient(135deg, rgba(0, 59, 64, 0.4) 0%, rgba(55, 46, 44, 0.4) 100%);
+        background: linear-gradient(135deg, rgba(127, 38, 41, 0.4) 0%, rgba(55, 46, 44, 0.4) 100%);
         backdrop-filter: blur(10px);
         border: 1px solid rgba(204, 159, 83, 0.3);
         color: #EFEFEF;
@@ -217,14 +217,14 @@ const Style = () => {
 
       /* 底部按钮组样式 */
       .bottom-button-group {
-        background: linear-gradient(135deg, rgba(0, 59, 64, 0.9) 0%, rgba(55, 46, 44, 0.9) 50%, rgba(83, 40, 79, 0.9) 100%);
+        background: linear-gradient(135deg, rgba(127, 38, 41, 0.9) 0%, rgba(55, 46, 44, 0.9) 50%, rgba(83, 40, 79, 0.9) 100%);
         backdrop-filter: blur(20px);
         border-top: 2px solid rgba(204, 159, 83, 0.3);
         box-shadow: 0px -8px 32px rgba(0, 0, 0, 0.3);
       }
       
       .dark .bottom-button-group {
-        background: linear-gradient(135deg, rgba(0, 59, 64, 0.9) 0%, rgba(55, 46, 44, 0.9) 50%, rgba(83, 40, 79, 0.9) 100%);
+        background: linear-gradient(135deg, rgba(127, 38, 41, 0.9) 0%, rgba(55, 46, 44, 0.9) 50%, rgba(83, 40, 79, 0.9) 100%);
         backdrop-filter: blur(20px);
         border-top: 2px solid rgba(204, 159, 83, 0.3);
         box-shadow: 0px -8px 32px rgba(0, 0, 0, 0.3);
@@ -236,7 +236,7 @@ const Style = () => {
       }
       
       ::-webkit-scrollbar-track {
-        background: rgba(0, 59, 64, 0.3);
+        background: rgba(127, 38, 41, 0.3);
         border-radius: 10px;
       }
       
@@ -262,7 +262,7 @@ const Style = () => {
 
       /* 代码块样式 */
       pre, code {
-        background: linear-gradient(135deg, rgba(0, 59, 64, 0.4) 0%, rgba(55, 46, 44, 0.4) 100%);
+        background: linear-gradient(135deg, rgba(127, 38, 41, 0.4) 0%, rgba(55, 46, 44, 0.4) 100%);
         backdrop-filter: blur(10px);
         border: 1px solid rgba(204, 159, 83, 0.2);
         color: #EFEFEF;
@@ -271,7 +271,7 @@ const Style = () => {
       }
       
       .dark pre, .dark code {
-        background: linear-gradient(135deg, rgba(0, 59, 64, 0.4) 0%, rgba(55, 46, 44, 0.4) 100%);
+        background: linear-gradient(135deg, rgba(127, 38, 41, 0.4) 0%, rgba(55, 46, 44, 0.4) 100%);
         backdrop-filter: blur(10px);
         border: 1px solid rgba(204, 159, 83, 0.2);
         color: #EFEFEF;
@@ -279,7 +279,7 @@ const Style = () => {
 
       /* 下拉菜单和导航优化 */
       .dropdown-menu, .menu-dropdown {
-        background: linear-gradient(135deg, rgba(0, 59, 64, 0.9) 0%, rgba(55, 46, 44, 0.9) 50%, rgba(83, 40, 79, 0.9) 100%);
+        background: linear-gradient(135deg, rgba(127, 38, 41, 0.9) 0%, rgba(55, 46, 44, 0.9) 50%, rgba(83, 40, 79, 0.9) 100%);
         backdrop-filter: blur(20px);
         border: 1px solid rgba(204, 159, 83, 0.3);
         border-radius: 12px;
@@ -301,7 +301,7 @@ const Style = () => {
 
       /* 正文预览优化 */
       .post-preview, .article-preview {
-        background: linear-gradient(135deg, rgba(0, 59, 64, 0.2) 0%, rgba(55, 46, 44, 0.2) 50%, rgba(83, 40, 79, 0.2) 100%);
+        background: linear-gradient(135deg, rgba(127, 38, 41, 0.2) 0%, rgba(55, 46, 44, 0.2) 50%, rgba(83, 40, 79, 0.2) 100%);
         backdrop-filter: blur(10px);
         border: 1px solid rgba(204, 159, 83, 0.2);
         border-radius: 12px;

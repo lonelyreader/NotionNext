@@ -128,7 +128,7 @@ const SearchInput = ({ currentSearch, cRef, className }) => {
       <input
         ref={searchInputRef}
         type='text'
-        className={`rounded-lg border border-yellow-400/30 pl-12 leading-10 placeholder-yellow-400/60 outline-none w-full transition focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400/20 text-white bg-gradient-to-r from-green-900/40 via-brown-800/40 to-purple-900/40 backdrop-blur-md`}
+        className={`rounded-lg border border-yellow-400/30 pl-12 leading-10 placeholder-yellow-400/60 outline-none w-full transition focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400/20 text-white bg-gradient-to-r from-red-900/40 via-brown-800/40 to-purple-900/40 backdrop-blur-md`}
         onFocus={handleFocus}
         onKeyUp={handleKeyUp}
         placeholder='Search'
