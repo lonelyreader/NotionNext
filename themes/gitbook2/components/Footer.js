@@ -14,7 +14,7 @@ const Footer = ({ siteInfo }) => {
     parseInt(since) < currentYear ? since + '-' + currentYear : currentYear
 
   return (
-    <footer className='z-20 border p-2 rounded border-gray-600 bg-gray-800 justify-center text-center w-full text-sm relative card'>
+    <footer className='z-20 border p-2 rounded-lg border-yellow-400/30 bg-gradient-to-r from-green-900/40 via-brown-800/40 to-purple-900/40 backdrop-blur-md justify-center text-center w-full text-sm relative card'>
       <SocialButton />
 
       <div className='flex justify-center'>
@@ -22,7 +22,7 @@ const Footer = ({ siteInfo }) => {
           <i className='mx-1 animate-pulse fas fa-heart' />{' '}
           <a
             href={siteConfig('LINK')}
-            className='underline font-bold text-blue-400 hover:text-blue-300 transition-colors duration-200'>
+            className='underline font-bold text-yellow-400 hover:text-yellow-300 transition-colors duration-200'>
             {siteConfig('AUTHOR')}
           </a>
           .<br />
@@ -53,7 +53,7 @@ const Footer = ({ siteInfo }) => {
         Powered By{' '}
         <a
           href='https://github.com/tangly1024/NotionNext'
-          className='underline text-blue-400 hover:text-blue-300 transition-colors duration-200'>
+          className='underline text-yellow-400 hover:text-yellow-300 transition-colors duration-200'>
           NotionNext {siteConfig('VERSION')}
         </a>
       </div>

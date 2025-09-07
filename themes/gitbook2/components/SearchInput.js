@@ -121,14 +121,14 @@ const SearchInput = ({ currentSearch, cRef, className }) => {
         onClick={handleSearch}>
         <i
           className={
-            'hover:text-white transform duration-200 text-gray-400 cursor-pointer fas fa-search'
+            'hover:text-yellow-300 transform duration-200 text-yellow-400 cursor-pointer fas fa-search'
           }
         />
       </div>
       <input
         ref={searchInputRef}
         type='text'
-        className={`rounded border border-gray-600 pl-12 leading-10 placeholder-gray-400 outline-none w-full transition focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-white bg-gray-800`}
+        className={`rounded-lg border border-yellow-400/30 pl-12 leading-10 placeholder-yellow-400/60 outline-none w-full transition focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400/20 text-white bg-gradient-to-r from-green-900/40 via-brown-800/40 to-purple-900/40 backdrop-blur-md`}
         onFocus={handleFocus}
         onKeyUp={handleKeyUp}
         placeholder='Search'
@@ -139,7 +139,7 @@ const SearchInput = ({ currentSearch, cRef, className }) => {
         defaultValue={currentSearch}
       />
       <div
-        className='absolute right-0 mr-4 items-center justify-center py-2 text-gray-400'
+        className='absolute right-0 mr-4 items-center justify-center py-2 text-yellow-400'
         onClick={handleSearch}>
         Ctrl+K
       </div>
@@ -147,7 +147,7 @@ const SearchInput = ({ currentSearch, cRef, className }) => {
       {showClean && (
         <div className='-ml-12 cursor-pointer flex float-right items-center justify-center py-2'>
           <i
-            className='fas fa-times hover:text-white transform duration-200 text-gray-400 cursor-pointer'
+            className='fas fa-times hover:text-yellow-300 transform duration-200 text-yellow-400 cursor-pointer'
             onClick={cleanSearch}
           />
         </div>
