@@ -412,13 +412,6 @@ const Style = () => {
         box-shadow: 0px -4px 20px rgba(0, 0, 0, 0.1);
       }
 
-      /* CSS变量定义 */
-      :root {
-        --sidebar-w: 280px;
-        --hotzone-w: 16px;
-        --content-radius: 1rem;
-      }
-
       /* GitBook风格设计系统 */
       
       /* 左侧边栏 - GitBook风格 */
@@ -617,28 +610,6 @@ const Style = () => {
       .gitbook-button.primary:hover {
         background: #0860ca;
         border-color: #0860ca;
-      }
-
-      /* 正文容器样式 */
-      .gb2-content-card {
-        border-radius: var(--content-radius);
-        border: 1px solid rgba(0, 0, 0, 0.05);
-        background: rgba(255, 255, 255, 0.9);
-        backdrop-filter: blur(10px);
-        padding: 2rem;
-        transition: margin 0.2s ease;
-      }
-
-      .dark .gb2-content-card {
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        background: rgba(13, 17, 23, 0.9);
-      }
-
-      /* 响应式布局 */
-      @media (min-width: 768px) {
-        .gb2-content-card {
-          margin-left: var(--sidebar-w);
-        }
       }
 
       /* Apple风格滚动条样式 */
