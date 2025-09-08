@@ -3,7 +3,7 @@
 const Style = () => {
   return (
     <style jsx global>{`
-      /* Cursor编辑器风格主题样式 */
+      /* Cursor编辑器风格主题样式 - 专注于视觉设计语言 */
       
       /* 现代响应式设计基础 */
       * {
@@ -19,7 +19,7 @@ const Style = () => {
         background: #1e1e1e;
         color: #d4d4d4;
         min-height: 100vh;
-        font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         margin: 0;
         padding: 0;
         overflow-x: hidden;
@@ -48,103 +48,52 @@ const Style = () => {
         color: #333333;
       }
 
-      /* 顶部标题栏 - Cursor风格 */
-      .cursor-titlebar {
-        height: 30px;
+      /* 顶部导航栏 - Cursor风格 */
+      .cursor-header {
+        height: 48px;
         background: #2d2d30;
         border-bottom: 1px solid #3e3e42;
         display: flex;
         align-items: center;
         justify-content: space-between;
         padding: 0 16px;
-        font-size: 12px;
+        font-size: 13px;
         color: #cccccc;
         user-select: none;
-        -webkit-app-region: drag;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
       }
       
-      .light .cursor-titlebar {
+      .light .cursor-header {
         background: #f3f3f3;
         border-bottom: 1px solid #e1e1e1;
         color: #333333;
       }
       
-      .titlebar-controls {
+      .header-left {
         display: flex;
-        gap: 8px;
-        -webkit-app-region: no-drag;
+        align-items: center;
+        gap: 16px;
       }
       
-      .titlebar-button {
-        width: 12px;
-        height: 12px;
-        border-radius: 50%;
-        border: none;
-        cursor: pointer;
+      .header-right {
+        display: flex;
+        align-items: center;
+        gap: 12px;
       }
-      
-      .titlebar-close { background: #ff5f57; }
-      .titlebar-minimize { background: #ffbd2e; }
-      .titlebar-maximize { background: #28ca42; }
 
       /* 主工作区 */
       .cursor-workspace {
         display: flex;
         flex: 1;
-        height: calc(100vh - 30px);
+        height: calc(100vh - 48px);
+        margin-top: 48px;
       }
 
-      /* 左侧活动栏 - Cursor风格 */
-      .cursor-activity-bar {
-        width: 48px;
-        background: #333333;
-        border-right: 1px solid #3e3e42;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 8px 0;
-        gap: 8px;
-      }
-      
-      .light .cursor-activity-bar {
-        background: #f3f3f3;
-        border-right: 1px solid #e1e1e1;
-      }
-      
-      .activity-item {
-        width: 32px;
-        height: 32px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 4px;
-        cursor: pointer;
-        transition: all 0.2s ease;
-        color: #cccccc;
-        font-size: 16px;
-      }
-      
-      .activity-item:hover {
-        background: #2a2d2e;
-        color: #ffffff;
-      }
-      
-      .activity-item.active {
-        background: #0e639c;
-        color: #ffffff;
-      }
-      
-      .light .activity-item:hover {
-        background: #e1e1e1;
-        color: #333333;
-      }
-      
-      .light .activity-item.active {
-        background: #007acc;
-        color: #ffffff;
-      }
-
-      /* 侧边栏 - Cursor风格 */
+      /* 左侧边栏 - Cursor风格，映射到博客分类 */
       .cursor-sidebar {
         width: 280px;
         background: #252526;
@@ -164,7 +113,8 @@ const Style = () => {
         overflow: hidden;
       }
       
-      .sidebar-header {
+      /* 侧边栏标题 - Cursor风格 */
+      .sidebar-title {
         height: 35px;
         background: #2d2d30;
         border-bottom: 1px solid #3e3e42;
@@ -176,14 +126,73 @@ const Style = () => {
         font-weight: 600;
         text-transform: uppercase;
         color: #cccccc;
+        letter-spacing: 0.5px;
       }
       
-      .light .sidebar-header {
+      .light .sidebar-title {
         background: #e1e1e1;
         border-bottom: 1px solid #d1d1d1;
         color: #333333;
       }
       
+      /* 分类按钮组 - Cursor风格 */
+      .category-buttons {
+        padding: 8px;
+        border-bottom: 1px solid #3e3e42;
+      }
+      
+      .light .category-buttons {
+        border-bottom: 1px solid #e1e1e1;
+      }
+      
+      .category-button {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        padding: 8px 12px;
+        margin-bottom: 4px;
+        background: transparent;
+        border: none;
+        border-radius: 6px;
+        color: #cccccc;
+        font-size: 13px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        text-align: left;
+      }
+      
+      .category-button:hover {
+        background: #2a2d2e;
+        color: #ffffff;
+      }
+      
+      .category-button.active {
+        background: #0e639c;
+        color: #ffffff;
+      }
+      
+      .light .category-button {
+        color: #333333;
+      }
+      
+      .light .category-button:hover {
+        background: #e1e1e1;
+        color: #333333;
+      }
+      
+      .light .category-button.active {
+        background: #007acc;
+        color: #ffffff;
+      }
+      
+      .category-icon {
+        margin-right: 8px;
+        font-size: 14px;
+        width: 16px;
+        text-align: center;
+      }
+
+      /* 文章列表区域 */
       .sidebar-content {
         flex: 1;
         overflow-y: auto;
@@ -201,6 +210,7 @@ const Style = () => {
         color: #cccccc;
         margin-bottom: 8px;
         padding: 0 8px;
+        letter-spacing: 0.5px;
       }
       
       .light .section-title {
@@ -211,11 +221,12 @@ const Style = () => {
         display: flex;
         align-items: center;
         padding: 6px 8px;
-        border-radius: 3px;
+        border-radius: 4px;
         cursor: pointer;
         transition: all 0.2s ease;
         color: #cccccc;
         font-size: 13px;
+        margin-bottom: 2px;
       }
       
       .sidebar-item:hover {
@@ -226,6 +237,10 @@ const Style = () => {
       .sidebar-item.active {
         background: #094771;
         color: #ffffff;
+      }
+      
+      .light .sidebar-item {
+        color: #333333;
       }
       
       .light .sidebar-item:hover {
@@ -286,6 +301,7 @@ const Style = () => {
         font-size: 13px;
         min-width: 120px;
         max-width: 200px;
+        position: relative;
       }
       
       .light .tab {
@@ -345,10 +361,10 @@ const Style = () => {
         flex-direction: column;
         background: #1e1e1e;
         color: #d4d4d4;
-        font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         font-size: 14px;
-        line-height: 1.5;
-        padding: 20px;
+        line-height: 1.6;
+        padding: 24px;
         overflow-y: auto;
       }
       
@@ -357,11 +373,11 @@ const Style = () => {
         color: #333333;
       }
       
-      /* 文章内容样式 */
+      /* 文章内容样式 - Cursor风格 */
       .article-content {
         max-width: 800px;
         margin: 0 auto;
-        padding: 20px;
+        padding: 0;
       }
       
       .article-content h1,
@@ -371,9 +387,10 @@ const Style = () => {
       .article-content h5,
       .article-content h6 {
         color: #d4d4d4;
-        margin-top: 24px;
+        margin-top: 32px;
         margin-bottom: 16px;
         font-weight: 600;
+        line-height: 1.3;
       }
       
       .light .article-content h1,
@@ -393,10 +410,15 @@ const Style = () => {
       .article-content a {
         color: #007acc;
         text-decoration: none;
+        border-radius: 2px;
+        padding: 1px 2px;
+        transition: all 0.2s ease;
       }
       
       .article-content a:hover {
-        text-decoration: underline;
+        background: #007acc;
+        color: #ffffff;
+        text-decoration: none;
       }
       
       .article-content code {
@@ -405,6 +427,7 @@ const Style = () => {
         padding: 2px 6px;
         border-radius: 3px;
         font-size: 13px;
+        font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
       }
       
       .light .article-content code {
@@ -419,11 +442,13 @@ const Style = () => {
         border-radius: 6px;
         overflow-x: auto;
         margin: 16px 0;
+        border: 1px solid #3e3e42;
       }
       
       .light .article-content pre {
         background: #f3f3f3;
         color: #333333;
+        border: 1px solid #e1e1e1;
       }
       
       .article-content blockquote {
@@ -431,24 +456,28 @@ const Style = () => {
         padding-left: 16px;
         margin: 16px 0;
         color: #cccccc;
+        background: #2d2d30;
+        padding: 12px 16px;
+        border-radius: 0 6px 6px 0;
       }
       
       .light .article-content blockquote {
         color: #666666;
+        background: #f8f8f8;
       }
       
-      /* 博客列表样式 */
+      /* 博客列表样式 - Cursor风格 */
       .blog-list-content {
         max-width: 800px;
         margin: 0 auto;
-        padding: 20px;
+        padding: 0;
       }
       
       .blog-list-content h1,
       .blog-list-content h2,
       .blog-list-content h3 {
         color: #d4d4d4;
-        margin-top: 24px;
+        margin-top: 32px;
         margin-bottom: 16px;
         font-weight: 600;
       }
@@ -462,8 +491,8 @@ const Style = () => {
       .blog-list-content .blog-post-item {
         background: #2d2d30;
         border: 1px solid #3e3e42;
-        border-radius: 6px;
-        padding: 16px;
+        border-radius: 8px;
+        padding: 20px;
         margin-bottom: 16px;
         transition: all 0.2s ease;
         cursor: pointer;
@@ -472,6 +501,8 @@ const Style = () => {
       .blog-list-content .blog-post-item:hover {
         background: #37373d;
         border-color: #007acc;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
       }
       
       .light .blog-list-content .blog-post-item {
@@ -483,6 +514,8 @@ const Style = () => {
       .light .blog-list-content .blog-post-item:hover {
         background: #e1e1e1;
         border-color: #007acc;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
       }
       
       .blog-list-content .blog-post-title {
@@ -499,7 +532,7 @@ const Style = () => {
       .blog-list-content .blog-post-summary {
         color: #cccccc;
         line-height: 1.5;
-        margin-bottom: 8px;
+        margin-bottom: 12px;
       }
       
       .light .blog-list-content .blog-post-summary {
@@ -517,6 +550,26 @@ const Style = () => {
         color: #999999;
       }
 
+      /* 右侧边栏 - Cursor风格 */
+      .cursor-info-sidebar {
+        width: 280px;
+        background: #252526;
+        border-left: 1px solid #3e3e42;
+        display: flex;
+        flex-direction: column;
+        transition: width 0.3s ease;
+      }
+      
+      .light .cursor-info-sidebar {
+        background: #f3f3f3;
+        border-left: 1px solid #e1e1e1;
+      }
+      
+      .cursor-info-sidebar.collapsed {
+        width: 0;
+        overflow: hidden;
+      }
+
       /* 状态栏 - Cursor风格 */
       .cursor-status-bar {
         height: 22px;
@@ -527,12 +580,7 @@ const Style = () => {
         justify-content: space-between;
         padding: 0 16px;
         font-size: 12px;
-        font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
-      }
-      
-      .light .cursor-status-bar {
-        background: #007acc;
-        color: #ffffff;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       }
       
       .status-left, .status-right {
@@ -553,96 +601,6 @@ const Style = () => {
       
       .status-item:hover {
         background: rgba(255, 255, 255, 0.1);
-      }
-
-      /* 命令面板 */
-      .cursor-command-palette {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 600px;
-        max-height: 400px;
-        background: #252526;
-        border: 1px solid #3e3e42;
-        border-radius: 6px;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-        z-index: 1000;
-        display: none;
-        flex-direction: column;
-        overflow: hidden;
-      }
-      
-      .light .cursor-command-palette {
-        background: #ffffff;
-        border: 1px solid #e1e1e1;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-      }
-      
-      .command-palette.show {
-        display: flex;
-      }
-      
-      .command-input {
-        padding: 12px 16px;
-        background: transparent;
-        border: none;
-        color: #d4d4d4;
-        font-size: 16px;
-        font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
-        outline: none;
-        border-bottom: 1px solid #3e3e42;
-      }
-      
-      .light .command-input {
-        color: #333333;
-        border-bottom: 1px solid #e1e1e1;
-      }
-      
-      .command-list {
-        max-height: 300px;
-        overflow-y: auto;
-      }
-      
-      .command-item {
-        padding: 8px 16px;
-        cursor: pointer;
-        transition: background 0.2s ease;
-        color: #d4d4d4;
-        font-size: 13px;
-        display: flex;
-        align-items: center;
-        gap: 12px;
-      }
-      
-      .light .command-item {
-        color: #333333;
-      }
-      
-      .command-item:hover,
-      .command-item.selected {
-        background: #094771;
-        color: #ffffff;
-      }
-      
-      .light .command-item:hover,
-      .light .command-item.selected {
-        background: #007acc;
-        color: #ffffff;
-      }
-      
-      .command-icon {
-        width: 16px;
-        text-align: center;
-      }
-      
-      .command-title {
-        flex: 1;
-      }
-      
-      .command-category {
-        font-size: 11px;
-        opacity: 0.7;
       }
 
       /* 滚动条样式 - Cursor风格 */
@@ -674,18 +632,18 @@ const Style = () => {
 
       /* 响应式设计 */
       @media (max-width: 768px) {
-        .cursor-activity-bar {
-          display: none;
-        }
-        
         .cursor-sidebar {
           width: 0;
           overflow: hidden;
         }
         
-        .cursor-command-palette {
-          width: 90%;
-          max-width: 500px;
+        .cursor-info-sidebar {
+          width: 0;
+          overflow: hidden;
+        }
+        
+        .cursor-editor-content {
+          padding: 16px;
         }
       }
 
