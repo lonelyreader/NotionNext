@@ -35,6 +35,7 @@ import JumpToTopButton from './components/JumpToTopButton'
 import NavPostList from './components/NavPostList'
 import PageNavDrawer from './components/PageNavDrawer'
 import RevolverMaps from './components/RevolverMaps'
+import SearchInput from './components/SearchInput'
 import TagItemMini from './components/TagItemMini'
 import SidebarToggle from './components/SidebarToggle'
 import CONFIG from './config'
@@ -152,16 +153,30 @@ const LayoutBase = props => {
           {fullWidth ? null : (
             <div className={'hidden md:block nav-sidebar'}>
               <div className='w-80 pt-14 pb-4 sticky top-0 h-screen flex justify-between flex-col'>
-                {/* 导航 */}
-                <div className='overflow-y-scroll scroll-hidden pt-10 pl-5'>
+                {/* 侧边栏头部 - 品牌和搜索 */}
+                <div className='nav-sidebar-header'>
+                  <div className='nav-brand'>
+                    <div className='nav-brand-icon'>G</div>
+                    <span>{siteConfig('TITLE')}</span>
+                  </div>
+                  <div className='nav-search'>
+                    <SearchInput className='nav-search-input' />
+                  </div>
+                </div>
+                
+                {/* 导航内容 */}
+                <div className='nav-sidebar-content'>
                   {/* 嵌入 */}
                   {slotLeft}
 
                   {/* 所有文章列表 */}
                   <NavPostList filteredNavPages={filteredNavPages} {...props} />
                 </div>
-                {/* 页脚 */}
-                <Footer {...props} />
+                
+                {/* 侧边栏底部 - 作者信息 */}
+                <div className='nav-sidebar-footer'>
+                  <InfoCard {...props} />
+                </div>
               </div>
             </div>
           )}

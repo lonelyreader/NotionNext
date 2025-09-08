@@ -59,7 +59,7 @@ const Style = () => {
         min-height: 100vh;
         background: #EFEFEF;
         border-right: 1px solid #d1d5da;
-        z-index: 10;
+        z-index: 50;
         overflow-y: auto;
         overflow-x: hidden;
         padding: 0;
@@ -68,6 +68,7 @@ const Style = () => {
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         display: flex;
         flex-direction: column;
+        box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
       }
       
       /* 左侧导航栏收起状态 */
@@ -75,7 +76,7 @@ const Style = () => {
         transform: translateX(-100%);
       }
       
-      /* 右上角方形toggle按钮 */
+      /* 右上角方形toggle按钮 - 隐藏整个侧边栏 */
       .nav-sidebar-toggle {
         position: absolute;
         top: 12px;
@@ -95,6 +96,12 @@ const Style = () => {
         z-index: 30;
         transition: all 0.2s ease;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      
+      .nav-sidebar-toggle::before {
+        content: '×';
+        font-size: 16px;
+        line-height: 1;
       }
       
       .nav-sidebar-toggle:hover {
@@ -123,12 +130,13 @@ const Style = () => {
       
       /* 侧边栏头部区域 */
       .nav-sidebar-header {
-        padding: 16px;
+        padding: 20px 16px 16px 16px;
         border-bottom: 1px solid #d1d5da;
         background: #EFEFEF;
         position: sticky;
         top: 0;
         z-index: 20;
+        flex-shrink: 0;
       }
       
       .dark .nav-sidebar-header {
@@ -231,17 +239,19 @@ const Style = () => {
       .nav-sidebar-content {
         flex: 1;
         overflow-y: auto;
-        padding: 8px 0;
+        padding: 12px 0;
+        margin: 0 8px;
       }
       
       /* 侧边栏底部区域 */
       .nav-sidebar-footer {
-        padding: 12px 16px;
+        padding: 16px;
         border-top: 1px solid #d1d5da;
         background: #EFEFEF;
         position: sticky;
         bottom: 0;
         z-index: 20;
+        flex-shrink: 0;
       }
       
       .dark .nav-sidebar-footer {
@@ -268,11 +278,11 @@ const Style = () => {
       }
       
       .nav-footer-item:hover {
-        background: rgba(255, 255, 255, 0.7);
+        background: rgba(106, 13, 173, 0.1);
         color: #6a0dad;
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 2px 8px rgba(106, 13, 173, 0.2);
         transform: translateY(-1px);
       }
       
@@ -281,10 +291,103 @@ const Style = () => {
       }
       
       .dark .nav-footer-item:hover {
-        background: rgba(255, 255, 255, 0.1);
+        background: rgba(139, 92, 246, 0.1);
         color: #8b5cf6;
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
+        box-shadow: 0 2px 8px rgba(139, 92, 246, 0.2);
+        transform: translateY(-1px);
+      }
+      
+      /* 作者卡片样式 */
+      .author-card {
+        background: transparent;
+        border: none;
+        padding: 0;
+        margin: 0;
+      }
+      
+      .author-card-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        padding: 16px;
+        background: rgba(255, 255, 255, 0.5);
+        border-radius: 12px;
+        border: 1px solid rgba(106, 13, 173, 0.1);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        transition: all 0.2s ease;
+      }
+      
+      .author-card-content:hover {
+        background: rgba(255, 255, 255, 0.7);
+        border-color: rgba(106, 13, 173, 0.2);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(106, 13, 173, 0.15);
+      }
+      
+      .author-avatar {
+        cursor: pointer;
+        transition: transform 0.2s ease;
+      }
+      
+      .author-avatar:hover {
+        transform: scale(1.05);
+      }
+      
+      .author-avatar-img {
+        border-radius: 50%;
+        border: 2px solid rgba(106, 13, 173, 0.2);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+      
+      .author-info {
+        text-align: center;
+      }
+      
+      .author-name {
+        font-size: 16px;
+        font-weight: 600;
+        color: #333333;
+        margin-bottom: 4px;
+      }
+      
+      .author-bio {
+        font-size: 13px;
+        color: #666666;
+        line-height: 1.4;
+      }
+      
+      .author-social {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+      }
+      
+      /* 深色模式作者卡片 */
+      .dark .author-card-content {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: rgba(139, 92, 246, 0.1);
+      }
+      
+      .dark .author-card-content:hover {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: rgba(139, 92, 246, 0.2);
+        box-shadow: 0 4px 12px rgba(139, 92, 246, 0.15);
+      }
+      
+      .dark .author-avatar-img {
+        border-color: rgba(139, 92, 246, 0.2);
+      }
+      
+      .dark .author-name {
+        color: #f0f6fc;
+      }
+      
+      .dark .author-bio {
+        color: #c6cbd1;
       }
       
       .nav-footer-item .nav-icon {
@@ -451,8 +554,7 @@ const Style = () => {
       
       a:hover {
         color: #7F2629;
-        text-decoration: underline;
-        text-decoration-thickness: 2px;
+        text-decoration: none;
         text-underline-offset: 4px;
       }
       
@@ -671,19 +773,21 @@ const Style = () => {
       }
       
       .gitbook-nav-item:hover {
-        background: rgba(255, 255, 255, 0.7);
+        background: rgba(106, 13, 173, 0.1);
         color: #6a0dad;
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 2px 8px rgba(106, 13, 173, 0.2);
         transform: translateY(-1px);
       }
       
       .dark .gitbook-nav-item:hover {
-        background: rgba(255, 255, 255, 0.1);
+        background: rgba(139, 92, 246, 0.1);
         color: #8b5cf6;
         backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(10px);
+        box-shadow: 0 2px 8px rgba(139, 92, 246, 0.2);
+        transform: translateY(-1px);
       }
       
       .gitbook-nav-item.active {

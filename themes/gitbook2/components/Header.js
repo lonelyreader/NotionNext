@@ -96,9 +96,6 @@ export default function Header(props) {
               </>
             )}
             <DarkModeButton className='text-sm items-center h-full hidden md:flex' />
-            <div className='hidden md:flex items-center'>
-              <SearchInput className='md:w-52 lg:w-72' />
-            </div>
             {/* 折叠按钮、仅移动端显示 */}
             <div className='mr-1 flex md:hidden justify-end items-center space-x-4  dark:text-gray-200'>
               <DarkModeButton className='flex text-md items-center h-full' />
