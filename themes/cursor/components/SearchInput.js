@@ -1,6 +1,6 @@
 import { siteConfig } from '@/lib/config'
 import { deepClone } from '@/lib/utils'
-import { useGitBookGlobal } from '@/themes/gitbook2'
+import { useGitBookGlobal } from '@/themes/cursor'
 import { useImperativeHandle, useRef, useState } from 'react'
 import { useHotkeys } from 'react-hotkeys-hook'
 let lock = false

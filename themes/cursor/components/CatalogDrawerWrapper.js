@@ -1,5 +1,5 @@
 import { useGlobal } from '@/lib/global'
-import { useGitBookGlobal } from '@/themes/gitbook2'
+import { useGitBookGlobal } from '@/themes/cursor'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import Catalog from './Catalog'

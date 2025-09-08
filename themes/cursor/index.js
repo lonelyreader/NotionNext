@@ -37,8 +37,6 @@ import PageNavDrawer from './components/PageNavDrawer'
 import RevolverMaps from './components/RevolverMaps'
 import TagItemMini from './components/TagItemMini'
 import SidebarToggle from './components/SidebarToggle'
-import BlogPostCard from './components/BlogPostCard'
-import CursorBlogList from './components/CursorBlogList'
 import CONFIG from './config'
 import { Style } from './style'
 
@@ -247,7 +245,29 @@ const LayoutBase = props => {
                   <NotionPage post={post} />
                 </div>
               ) : (
-                <CursorBlogList posts={filteredNavPages} />
+                <div className="blog-list-content">
+                  <h1>博客文章</h1>
+                  <div className="blog-posts-grid">
+                    {filteredNavPages?.filter(item => item.type === 'Post').map(post => (
+                      <div key={post.id} className="blog-post-item">
+                        <h3 className="blog-post-title">
+                          <SmartLink href={`/${post.slug}`}>
+                            {post.title}
+                          </SmartLink>
+                        </h3>
+                        {post.summary && (
+                          <p className="blog-post-summary">{post.summary}</p>
+                        )}
+                        <div className="blog-post-meta">
+                          {post.publishDay && <span>发布于 {post.publishDay}</span>}
+                          {post.tags && post.tags.length > 0 && (
+                            <span>标签: {post.tags.map(tag => tag.name).join(', ')}</span>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               )}
 
               {/* 广告位 */}
