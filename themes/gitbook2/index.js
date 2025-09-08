@@ -149,7 +149,7 @@ const LayoutBase = props => {
           className={`${siteConfig('LAYOUT_SIDEBAR_REVERSE') ? 'flex-row-reverse' : ''} relative flex justify-between w-full gap-x-6 h-full mx-auto max-w-screen-4xl`}>
           {/* 左侧推拉抽屉 */}
           {fullWidth ? null : (
-            <div className={'hidden md:block relative z-10 nav-sidebar'}>
+            <div className={'hidden md:block nav-sidebar'}>
               <div className='w-80 pt-14 pb-4 sticky top-0 h-screen flex justify-between flex-col'>
                 {/* 导航 */}
                 <div className='overflow-y-scroll scroll-hidden pt-10 pl-5'>
@@ -192,7 +192,7 @@ const LayoutBase = props => {
           {fullWidth ? null : (
             <div
               className={
-                'w-72 hidden xl:block dark:border-transparent flex-shrink-0 relative z-10 info-sidebar'
+                'w-72 hidden xl:block dark:border-transparent flex-shrink-0 info-sidebar'
               }>
               <div className='py-14 sticky top-0'>
                 <ArticleInfo post={props?.post ? props?.post : props.notice} />

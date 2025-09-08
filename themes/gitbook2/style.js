@@ -36,20 +36,12 @@ const Style = () => {
         color: #EFEFEF;
       }
 
-      /* 主容器 - 现代Grid布局 */
+      /* 主容器 - 保持原有Flexbox布局 */
       #theme-gitbook {
-        display: grid;
-        grid-template-columns: 280px 1fr 280px;
-        grid-template-rows: auto 1fr auto;
-        grid-template-areas: 
-          "nav header header"
-          "nav main aside"
-          "nav footer aside";
-        min-height: 100vh;
         background: rgba(239, 239, 239, 0.8);
         backdrop-filter: blur(20px);
         color: #372E2C;
-        gap: 0;
+        min-height: 100vh;
       }
       
       /* 深色模式主容器 */
@@ -58,31 +50,9 @@ const Style = () => {
         backdrop-filter: blur(20px);
         color: #EFEFEF;
       }
-      
-      /* 响应式布局 */
-      @media (max-width: 1280px) {
-        #theme-gitbook {
-          grid-template-columns: 280px 1fr;
-          grid-template-areas: 
-            "nav header"
-            "nav main"
-            "nav footer";
-        }
-      }
-      
-      @media (max-width: 768px) {
-        #theme-gitbook {
-          grid-template-columns: 1fr;
-          grid-template-areas: 
-            "header"
-            "main"
-            "footer";
-        }
-      }
 
       /* 左侧导航栏 - 固定宽度贴合边缘 */
       .nav-sidebar {
-        grid-area: nav;
         position: fixed;
         left: 0;
         top: 0;
@@ -116,7 +86,6 @@ const Style = () => {
 
       /* 右侧信息栏 - 固定宽度贴合边缘 */
       .info-sidebar {
-        grid-area: aside;
         position: fixed;
         right: 0;
         top: 0;
@@ -150,7 +119,6 @@ const Style = () => {
 
       /* 正文背景容器 - 延展到全屏 */
       #center-wrapper {
-        grid-area: main;
         background: rgba(239, 239, 239, 0.95);
         backdrop-filter: blur(20px);
         border: none;
@@ -162,6 +130,7 @@ const Style = () => {
         position: relative;
         margin-left: 280px;
         margin-right: 280px;
+        z-index: 1;
       }
       
       /* 深色模式正文背景容器 */
@@ -201,6 +170,16 @@ const Style = () => {
         .main-content {
           padding: 80px 20px 20px 20px;
         }
+      }
+      
+      /* 调试样式 - 确保布局可见 */
+      #theme-gitbook {
+        position: relative;
+      }
+      
+      #wrapper {
+        position: relative;
+        z-index: 2;
       }
 
       /* 标题样式 - 浅色模式 */
@@ -496,7 +475,6 @@ const Style = () => {
 
       /* 顶部导航栏 - 固定定位 */
       .top-nav {
-        grid-area: header;
         position: fixed;
         top: 0;
         left: 0;
@@ -517,7 +495,6 @@ const Style = () => {
       
       /* 底部导航栏 - 移动端 */
       .bottom-nav {
-        grid-area: footer;
         position: fixed;
         bottom: 0;
         left: 0;
