@@ -3,7 +3,7 @@
 const Style = () => {
   return (
     <style jsx global>{`
-      /* Cursor编辑器风格主题样式 - 专注于视觉设计语言 */
+      /* Cursor编辑器风格主题样式 - 基于gitbook2布局 */
       
       /* 现代响应式设计基础 */
       * {
@@ -48,7 +48,7 @@ const Style = () => {
         color: #333333;
       }
 
-      /* 顶部导航栏 - Cursor风格 */
+      /* Cursor风格顶部导航栏 */
       .cursor-header {
         height: 48px;
         background: #2d2d30;
@@ -85,15 +85,7 @@ const Style = () => {
         gap: 12px;
       }
 
-      /* 主工作区 */
-      .cursor-workspace {
-        display: flex;
-        flex: 1;
-        height: calc(100vh - 48px);
-        margin-top: 48px;
-      }
-
-      /* 左侧边栏 - Cursor风格，映射到博客分类 */
+      /* 左侧边栏 - Cursor风格 */
       .cursor-sidebar {
         width: 280px;
         background: #252526;
@@ -101,6 +93,11 @@ const Style = () => {
         display: flex;
         flex-direction: column;
         transition: width 0.3s ease;
+        position: fixed;
+        left: 0;
+        top: 48px;
+        height: calc(100vh - 48px);
+        z-index: 50;
       }
       
       .light .cursor-sidebar {
@@ -135,63 +132,6 @@ const Style = () => {
         color: #333333;
       }
       
-      /* 分类按钮组 - Cursor风格 */
-      .category-buttons {
-        padding: 8px;
-        border-bottom: 1px solid #3e3e42;
-      }
-      
-      .light .category-buttons {
-        border-bottom: 1px solid #e1e1e1;
-      }
-      
-      .category-button {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        padding: 8px 12px;
-        margin-bottom: 4px;
-        background: transparent;
-        border: none;
-        border-radius: 6px;
-        color: #cccccc;
-        font-size: 13px;
-        cursor: pointer;
-        transition: all 0.2s ease;
-        text-align: left;
-      }
-      
-      .category-button:hover {
-        background: #2a2d2e;
-        color: #ffffff;
-      }
-      
-      .category-button.active {
-        background: #0e639c;
-        color: #ffffff;
-      }
-      
-      .light .category-button {
-        color: #333333;
-      }
-      
-      .light .category-button:hover {
-        background: #e1e1e1;
-        color: #333333;
-      }
-      
-      .light .category-button.active {
-        background: #007acc;
-        color: #ffffff;
-      }
-      
-      .category-icon {
-        margin-right: 8px;
-        font-size: 14px;
-        width: 16px;
-        text-align: center;
-      }
-
       /* 文章列表区域 */
       .sidebar-content {
         flex: 1;
@@ -216,61 +156,6 @@ const Style = () => {
       .light .section-title {
         color: #666666;
       }
-      
-      .sidebar-item {
-        display: flex;
-        align-items: center;
-        padding: 6px 8px;
-        border-radius: 4px;
-        cursor: pointer;
-        transition: all 0.2s ease;
-        color: #cccccc;
-        font-size: 13px;
-        margin-bottom: 2px;
-      }
-      
-      .sidebar-item:hover {
-        background: #2a2d2e;
-        color: #ffffff;
-      }
-      
-      .sidebar-item.active {
-        background: #094771;
-        color: #ffffff;
-      }
-      
-      .light .sidebar-item {
-        color: #333333;
-      }
-      
-      .light .sidebar-item:hover {
-        background: #e1e1e1;
-        color: #333333;
-      }
-      
-      .light .sidebar-item.active {
-        background: #007acc;
-        color: #ffffff;
-      }
-      
-      .sidebar-item-icon {
-        margin-right: 8px;
-        font-size: 14px;
-        width: 16px;
-        text-align: center;
-      }
-
-      /* 主编辑区域 */
-      .cursor-editor-area {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        background: #1e1e1e;
-      }
-      
-      .light .cursor-editor-area {
-        background: #ffffff;
-      }
 
       /* 标签页栏 - Cursor风格 */
       .cursor-tabs {
@@ -281,6 +166,11 @@ const Style = () => {
         align-items: center;
         overflow-x: auto;
         white-space: nowrap;
+        position: fixed;
+        top: 48px;
+        left: 0;
+        right: 0;
+        z-index: 40;
       }
       
       .light .cursor-tabs {
@@ -356,23 +246,99 @@ const Style = () => {
 
       /* 编辑器内容区域 */
       .cursor-editor-content {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
         background: #1e1e1e;
         color: #d4d4d4;
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         font-size: 14px;
         line-height: 1.6;
         padding: 24px;
-        overflow-y: auto;
+        margin-top: 83px; /* 48px header + 35px tabs */
+        min-height: calc(100vh - 83px);
       }
       
       .light .cursor-editor-content {
         background: #ffffff;
         color: #333333;
       }
+
+      /* 右侧边栏 - Cursor风格 */
+      .cursor-info-sidebar {
+        width: 280px;
+        background: #252526;
+        border-left: 1px solid #3e3e42;
+        display: flex;
+        flex-direction: column;
+        transition: width 0.3s ease;
+        position: fixed;
+        right: 0;
+        top: 48px;
+        height: calc(100vh - 48px);
+        z-index: 50;
+      }
       
+      .light .cursor-info-sidebar {
+        background: #f3f3f3;
+        border-left: 1px solid #e1e1e1;
+      }
+      
+      .cursor-info-sidebar.collapsed {
+        width: 0;
+        overflow: hidden;
+      }
+
+      /* 状态栏 - Cursor风格 */
+      .cursor-status-bar {
+        height: 22px;
+        background: #007acc;
+        color: #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 16px;
+        font-size: 12px;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+      }
+      
+      .status-left, .status-right {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+      
+      .status-item {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        cursor: pointer;
+        padding: 2px 4px;
+        border-radius: 2px;
+        transition: background 0.2s ease;
+      }
+      
+      .status-item:hover {
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      /* 调整主内容区域以适应固定侧边栏 */
+      #wrapper {
+        margin-left: 280px;
+        margin-right: 280px;
+        padding-bottom: 22px; /* 为状态栏留空间 */
+      }
+      
+      .cursor-sidebar.collapsed + #wrapper {
+        margin-left: 0;
+      }
+      
+      .cursor-info-sidebar.collapsed ~ #wrapper {
+        margin-right: 0;
+      }
+
       /* 文章内容样式 - Cursor风格 */
       .article-content {
         max-width: 800px;
@@ -465,143 +431,6 @@ const Style = () => {
         color: #666666;
         background: #f8f8f8;
       }
-      
-      /* 博客列表样式 - Cursor风格 */
-      .blog-list-content {
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 0;
-      }
-      
-      .blog-list-content h1,
-      .blog-list-content h2,
-      .blog-list-content h3 {
-        color: #d4d4d4;
-        margin-top: 32px;
-        margin-bottom: 16px;
-        font-weight: 600;
-      }
-      
-      .light .blog-list-content h1,
-      .light .blog-list-content h2,
-      .light .blog-list-content h3 {
-        color: #333333;
-      }
-      
-      .blog-list-content .blog-post-item {
-        background: #2d2d30;
-        border: 1px solid #3e3e42;
-        border-radius: 8px;
-        padding: 20px;
-        margin-bottom: 16px;
-        transition: all 0.2s ease;
-        cursor: pointer;
-      }
-      
-      .blog-list-content .blog-post-item:hover {
-        background: #37373d;
-        border-color: #007acc;
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-      }
-      
-      .light .blog-list-content .blog-post-item {
-        background: #f3f3f3;
-        border: 1px solid #e1e1e1;
-        color: #333333;
-      }
-      
-      .light .blog-list-content .blog-post-item:hover {
-        background: #e1e1e1;
-        border-color: #007acc;
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      }
-      
-      .blog-list-content .blog-post-title {
-        font-size: 18px;
-        font-weight: 600;
-        margin-bottom: 8px;
-        color: #d4d4d4;
-      }
-      
-      .light .blog-list-content .blog-post-title {
-        color: #333333;
-      }
-      
-      .blog-list-content .blog-post-summary {
-        color: #cccccc;
-        line-height: 1.5;
-        margin-bottom: 12px;
-      }
-      
-      .light .blog-list-content .blog-post-summary {
-        color: #666666;
-      }
-      
-      .blog-list-content .blog-post-meta {
-        font-size: 12px;
-        color: #888888;
-        display: flex;
-        gap: 16px;
-      }
-      
-      .light .blog-list-content .blog-post-meta {
-        color: #999999;
-      }
-
-      /* 右侧边栏 - Cursor风格 */
-      .cursor-info-sidebar {
-        width: 280px;
-        background: #252526;
-        border-left: 1px solid #3e3e42;
-        display: flex;
-        flex-direction: column;
-        transition: width 0.3s ease;
-      }
-      
-      .light .cursor-info-sidebar {
-        background: #f3f3f3;
-        border-left: 1px solid #e1e1e1;
-      }
-      
-      .cursor-info-sidebar.collapsed {
-        width: 0;
-        overflow: hidden;
-      }
-
-      /* 状态栏 - Cursor风格 */
-      .cursor-status-bar {
-        height: 22px;
-        background: #007acc;
-        color: #ffffff;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0 16px;
-        font-size: 12px;
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      }
-      
-      .status-left, .status-right {
-        display: flex;
-        align-items: center;
-        gap: 16px;
-      }
-      
-      .status-item {
-        display: flex;
-        align-items: center;
-        gap: 4px;
-        cursor: pointer;
-        padding: 2px 4px;
-        border-radius: 2px;
-        transition: background 0.2s ease;
-      }
-      
-      .status-item:hover {
-        background: rgba(255, 255, 255, 0.1);
-      }
 
       /* 滚动条样式 - Cursor风格 */
       ::-webkit-scrollbar {
@@ -640,6 +469,11 @@ const Style = () => {
         .cursor-info-sidebar {
           width: 0;
           overflow: hidden;
+        }
+        
+        #wrapper {
+          margin-left: 0;
+          margin-right: 0;
         }
         
         .cursor-editor-content {

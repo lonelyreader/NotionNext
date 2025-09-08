@@ -47,8 +47,8 @@ const AlgoliaSearchModal = dynamic(
 const WWAds = dynamic(() => import('@/components/WWAds'), { ssr: false })
 
 // 主题全局变量
-const ThemeGlobalGitbook = createContext()
-export const useGitBookGlobal = () => useContext(ThemeGlobalGitbook)
+const ThemeGlobalCursor = createContext()
+export const useGitBookGlobal = () => useContext(ThemeGlobalCursor)
 
 /**
  * 给最新的文章标一个红点
@@ -70,8 +70,7 @@ function getNavPagesWithLatest(allNavPages, latestPosts, post) {
 }
 
 /**
- * 基础布局 - Cursor风格
- * 将cursor的界面元素合理映射到博客功能
+ * 基础布局 - 基于gitbook2但使用cursor视觉风格
  * @returns {JSX.Element}
  * @constructor
  */
@@ -90,7 +89,6 @@ const LayoutBase = props => {
   const [tocVisible, changeTocVisible] = useState(false)
   const [pageNavVisible, changePageNavVisible] = useState(false)
   const [filteredNavPages, setFilteredNavPages] = useState(allNavPages)
-  const [activeCategory, setActiveCategory] = useState('all')
   const [leftSidebarCollapsed, setLeftSidebarCollapsed] = useState(false)
   const [rightSidebarCollapsed, setRightSidebarCollapsed] = useState(false)
 
@@ -106,22 +104,6 @@ const LayoutBase = props => {
     CONFIG
   )
 
-  // 分类按钮配置 - 映射到博客功能
-  const categoryButtons = [
-    { id: 'all', name: '全部文章', icon: 'fas fa-list', color: '#007acc' },
-    { id: 'latest', name: '最新文章', icon: 'fas fa-clock', color: '#28ca42' },
-    { id: 'category', name: '分类浏览', icon: 'fas fa-folder', color: '#ffbd2e' },
-    { id: 'tags', name: '标签云', icon: 'fas fa-tags', color: '#ff5f57' },
-    { id: 'archive', name: '归档', icon: 'fas fa-archive', color: '#9b59b6' }
-  ]
-
-  // 处理分类切换
-  const handleCategoryChange = (categoryId) => {
-    setActiveCategory(categoryId)
-    // 这里可以根据分类过滤文章
-    // 实际实现中可以根据categoryId过滤filteredNavPages
-  }
-
   // 切换侧边栏
   const toggleLeftSidebar = () => {
     setLeftSidebarCollapsed(!leftSidebarCollapsed)
@@ -132,7 +114,7 @@ const LayoutBase = props => {
   }
 
   return (
-    <ThemeGlobalGitbook.Provider
+    <ThemeGlobalCursor.Provider
       value={{
         searchModal,
         tocVisible,
@@ -148,7 +130,7 @@ const LayoutBase = props => {
 
       <div
         id='theme-cursor'
-        className={`${siteConfig('FONT_STYLE')} scroll-smooth w-full h-full min-h-screen`}>
+        className={`${siteConfig('FONT_STYLE')} pb-16 md:pb-0 scroll-smooth w-full h-full min-h-screen justify-center dark:text-gray-300`}>
         <AlgoliaSearchModal cRef={searchModal} {...props} />
 
         {/* Cursor风格顶部导航栏 */}
@@ -172,45 +154,40 @@ const LayoutBase = props => {
           </div>
         </div>
 
-        {/* Cursor工作区 */}
-        <div className="cursor-workspace">
-          {/* 左侧边栏 - 映射到博客分类功能 */}
-          <div className={`cursor-sidebar ${leftSidebarCollapsed ? 'collapsed' : ''}`}>
-            <div className="sidebar-title">
-              <span>EXPLORER</span>
-              <button 
-                onClick={toggleLeftSidebar}
-                className="text-gray-400 hover:text-white transition-colors"
-              >
-                <i className="fas fa-chevron-left"></i>
-              </button>
-            </div>
-            
-            {/* 分类按钮组 */}
-            <div className="category-buttons">
-              {categoryButtons.map(button => (
-                <button
-                  key={button.id}
-                  className={`category-button ${activeCategory === button.id ? 'active' : ''}`}
-                  onClick={() => handleCategoryChange(button.id)}
+        <main
+          id='wrapper'
+          className={`${siteConfig('LAYOUT_SIDEBAR_REVERSE') ? 'flex-row-reverse' : ''} relative flex justify-between w-full gap-x-6 h-full mx-auto max-w-screen-4xl`}>
+          
+          {/* 左侧边栏 - Cursor风格 */}
+          {fullWidth ? null : (
+            <div className={`cursor-sidebar ${leftSidebarCollapsed ? 'collapsed' : ''}`}>
+              <div className="sidebar-title">
+                <span>EXPLORER</span>
+                <button 
+                  onClick={toggleLeftSidebar}
+                  className="text-gray-400 hover:text-white transition-colors"
                 >
-                  <i className={`category-icon ${button.icon}`} style={{ color: button.color }}></i>
-                  {button.name}
+                  <i className="fas fa-chevron-left"></i>
                 </button>
-              ))}
-            </div>
-
-            {/* 文章列表 */}
-            <div className="sidebar-content">
-              <div className="sidebar-section">
-                <div className="section-title">文章列表</div>
+              </div>
+              
+              <div className="sidebar-content">
+                <div className="sidebar-section">
+                  <div className="section-title">文章列表</div>
+                  {slotLeft}
                   <NavPostList filteredNavPages={filteredNavPages} {...props} />
                 </div>
+              </div>
+              
+              <Footer {...props} />
             </div>
-          </div>
+          )}
 
-          {/* 主编辑区域 */}
-          <div className="cursor-editor-area">
+          {/* 中间内容区域 - Cursor风格 */}
+          <div
+            id='center-wrapper'
+            className='flex flex-col justify-between w-full relative z-10 pt-14 min-h-screen'>
+            
             {/* 标签页栏 */}
             <div className="cursor-tabs">
               <div className="tab active">
@@ -219,58 +196,15 @@ const LayoutBase = props => {
               </div>
             </div>
 
-            {/* 编辑器内容区域 */}
-            <div className="cursor-editor-content">
+            <div
+              id='container-inner'
+              className={`cursor-editor-content w-full ${fullWidth ? 'px-5' : 'max-w-3xl px-3 lg:px-0'} justify-center mx-auto`}>
               {slotTop}
-              
-              {post ? (
-                <div className="article-content">
-                  {/* 文章标题 */}
-                  <div className="article-header mb-8">
-                    <h1 className="text-3xl font-bold mb-4">{post.title}</h1>
-                    {post.summary && (
-                      <p className="text-lg opacity-80">{post.summary}</p>
-                    )}
-                    <div className="article-meta mt-4 text-sm opacity-60">
-                      {post.publishDay && <span>发布于 {post.publishDay}</span>}
-                      {post.tags && post.tags.length > 0 && (
-                        <span className="ml-4">
-                          标签: {post.tags.map(tag => tag.name).join(', ')}
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                  
-                  {/* Notion文章内容 */}
-                  <NotionPage post={post} />
-                </div>
-              ) : (
-                <div className="blog-list-content">
-                  <h1>博客文章</h1>
-                  <div className="blog-posts-grid">
-                    {filteredNavPages?.filter(item => item.type === 'Post').map(post => (
-                      <div key={post.id} className="blog-post-item">
-                        <h3 className="blog-post-title">
-                          <SmartLink href={`/${post.slug}`}>
-                            {post.title}
-                          </SmartLink>
-                        </h3>
-                        {post.summary && (
-                          <p className="blog-post-summary">{post.summary}</p>
-                        )}
-                        <div className="blog-post-meta">
-                          {post.publishDay && <span>发布于 {post.publishDay}</span>}
-                          {post.tags && post.tags.length > 0 && (
-                            <span>标签: {post.tags.map(tag => tag.name).join(', ')}</span>
-                          )}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
+              <WWAds className='w-full' orientation='horizontal' />
 
-              {/* 广告位 */}
+              {children}
+
+              {/* Google广告 */}
               <AdSlot type='in-article' />
               <WWAds className='w-full' orientation='horizontal' />
             </div>
@@ -298,10 +232,15 @@ const LayoutBase = props => {
                 </div>
               </div>
             </div>
+
+            {/* 底部 */}
+            <div className='md:hidden'>
+              <Footer {...props} />
+            </div>
           </div>
 
-          {/* 右侧边栏 - 信息卡片 */}
-          {!fullWidth && (
+          {/* 右侧边栏 - Cursor风格 */}
+          {fullWidth ? null : (
             <div className={`cursor-info-sidebar ${rightSidebarCollapsed ? 'collapsed' : ''}`}>
               <div className="sidebar-title">
                 <span>OUTLINE</span>
@@ -313,12 +252,12 @@ const LayoutBase = props => {
                 </button>
               </div>
               <div className="sidebar-content">
-                <InfoCard {...props} />
-                  {slotRight}
+                <ArticleInfo post={props?.post ? props?.post : props.notice} />
+                {slotRight}
               </div>
             </div>
           )}
-        </div>
+        </main>
 
         {/* 加载遮罩 */}
         {CURSOR_LOADING_COVER && <LoadingCover />}
@@ -327,7 +266,7 @@ const LayoutBase = props => {
         <JumpToTopButton />
         <Live2D />
       </div>
-    </ThemeGlobalGitbook.Provider>
+    </ThemeGlobalCursor.Provider>
   )
 }
 
