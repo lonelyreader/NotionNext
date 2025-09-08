@@ -52,14 +52,14 @@ const NavPostItem = props => {
         <div
           onMouseEnter={onHoverToggle}
           onClick={toggleOpenSubMenu}
-          className='simple-card cursor-pointer relative flex justify-between text-md'
+          className='gitbook-nav-item'
           key={group?.category}>
-          <span className={`${expanded && 'font-semibold'} text-gray-800 dark:text-white`}>
+          <span className={`flex-1 ${expanded && 'font-semibold'}`}>
             {group?.category}
           </span>
-          <div className='inline-flex items-center select-none pointer-events-none '>
+          <div className='inline-flex items-center select-none pointer-events-none'>
             <i
-              className={`px-2 fas fa-chevron-left transition-all opacity-70 duration-700 text-gray-800 dark:text-white ${expanded ? '-rotate-90' : ''}`}></i>
+              className={`fas fa-chevron-right transition-all duration-200 text-xs ${expanded ? 'rotate-90' : ''}`}></i>
           </div>
           {groupHasLatest &&
             siteConfig('GITBOOK_LATEST_POST_RED_BADGE') &&
@@ -67,8 +67,8 @@ const NavPostItem = props => {
         </div>
         <Collapse isOpen={expanded} onHeightChange={props.onHeightChange}>
           {group?.items?.map((post, index) => (
-            <div key={index} className='github-indent ml-4'>
-              <BlogPostCard className='ml-4' post={post} />
+            <div key={index} className='gitbook-indent'>
+              <BlogPostCard post={post} />
             </div>
           ))}
         </Collapse>

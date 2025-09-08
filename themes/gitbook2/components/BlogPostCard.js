@@ -13,8 +13,8 @@ const BlogPostCard = ({ post, className }) => {
     <SmartLink href={post?.href} passHref>
       <div
         key={post.id}
-        className={`${className} simple-card cursor-pointer
-                    ${currentSelected ? 'active text-gray-800 dark:text-white' : 'text-gray-800 dark:text-white'}`}>
+        className={`${className} gitbook-nav-item
+                    ${currentSelected ? 'active' : ''}`}>
         <div className='w-full select-none'>
           {siteConfig('POST_TITLE_ICON') && (
             <NotionIcon icon={post?.pageIcon} />
