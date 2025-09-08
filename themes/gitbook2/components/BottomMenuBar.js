@@ -20,7 +20,7 @@ export default function BottomMenuBar({ post, className }) {
   }
 
   return (
-    <div className='md:hidden fixed bottom-0 left-0 z-50 w-full h-16 bg-white/10 backdrop-blur-xl border-t border-yellow-400/20 bottom-button-group'>
+    <div className='md:hidden fixed bottom-0 left-0 z-50 w-full h-16 bg-purple-900/40 backdrop-blur-xl border-t border-yellow-400/15 bottom-button-group'>
       <div
         className={`grid h-full max-w-lg  mx-auto font-medium ${showTocButton && 'grid-cols-2'}`}>
         <button

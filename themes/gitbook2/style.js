@@ -37,61 +37,63 @@ const Style = () => {
         color: #EFEFEF;
       }
 
-      /* 左侧导航栏样式 - iOS 18磨砂玻璃 */
+      /* 左侧导航栏样式 - 紫色磨砂玻璃 */
       .nav-sidebar {
-        background: rgba(127, 38, 41, 0.15);
+        background: rgba(83, 40, 79, 0.25);
         backdrop-filter: blur(40px) saturate(180%);
         -webkit-backdrop-filter: blur(40px) saturate(180%);
-        border-right: 1px solid rgba(204, 159, 83, 0.2);
+        border-right: 1px solid rgba(204, 159, 83, 0.15);
         box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
       }
       
       .dark .nav-sidebar {
-        background: rgba(127, 38, 41, 0.15);
+        background: rgba(83, 40, 79, 0.25);
         backdrop-filter: blur(40px) saturate(180%);
         -webkit-backdrop-filter: blur(40px) saturate(180%);
-        border-right: 1px solid rgba(204, 159, 83, 0.2);
+        border-right: 1px solid rgba(204, 159, 83, 0.15);
         box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
       }
 
-      /* 右侧信息栏样式 - iOS 18磨砂玻璃 */
+      /* 右侧信息栏样式 - 紫色磨砂玻璃 */
       .info-sidebar {
-        background: rgba(55, 46, 44, 0.15);
+        background: rgba(83, 40, 79, 0.25);
         backdrop-filter: blur(40px) saturate(180%);
         -webkit-backdrop-filter: blur(40px) saturate(180%);
-        border-left: 1px solid rgba(204, 159, 83, 0.2);
+        border-left: 1px solid rgba(204, 159, 83, 0.15);
         box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
       }
       
       .dark .info-sidebar {
-        background: rgba(55, 46, 44, 0.15);
+        background: rgba(83, 40, 79, 0.25);
         backdrop-filter: blur(40px) saturate(180%);
         -webkit-backdrop-filter: blur(40px) saturate(180%);
-        border-left: 1px solid rgba(204, 159, 83, 0.2);
+        border-left: 1px solid rgba(204, 159, 83, 0.15);
         box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
       }
 
-      /* 文章内容区域样式 - iOS 18风格 */
+      /* 文章内容区域样式 - 扩展背景减少边框 */
       #center-wrapper {
-        background: rgba(239, 239, 239, 0.95);
+        background: rgba(239, 239, 239, 0.98);
         backdrop-filter: blur(40px) saturate(180%);
         -webkit-backdrop-filter: blur(40px) saturate(180%);
-        border: 1px solid rgba(204, 159, 83, 0.1);
-        border-radius: 20px;
+        border: none;
+        border-radius: 0;
         color: #372E2C;
-        margin: 20px;
-        padding: 30px;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        margin: 0;
+        padding: 40px 30px;
+        box-shadow: none;
+        min-height: 100vh;
       }
       
       .dark #center-wrapper {
-        background: rgba(239, 239, 239, 0.95);
+        background: rgba(239, 239, 239, 0.98);
         backdrop-filter: blur(40px) saturate(180%);
         -webkit-backdrop-filter: blur(40px) saturate(180%);
-        border: 1px solid rgba(204, 159, 83, 0.1);
-        border-radius: 20px;
+        border: none;
+        border-radius: 0;
         color: #372E2C;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        box-shadow: none;
+        min-height: 100vh;
       }
 
       /* 标题样式 - iOS 18风格 */
@@ -219,20 +221,20 @@ const Style = () => {
         color: #372E2C;
       }
 
-      /* 底部按钮组样式 - iOS 18磨砂玻璃 */
+      /* 底部按钮组样式 - 紫色磨砂玻璃 */
       .bottom-button-group {
-        background: rgba(127, 38, 41, 0.2);
+        background: rgba(83, 40, 79, 0.25);
         backdrop-filter: blur(40px) saturate(180%);
         -webkit-backdrop-filter: blur(40px) saturate(180%);
-        border-top: 1px solid rgba(204, 159, 83, 0.2);
+        border-top: 1px solid rgba(204, 159, 83, 0.15);
         box-shadow: 0px -8px 32px rgba(0, 0, 0, 0.1);
       }
       
       .dark .bottom-button-group {
-        background: rgba(127, 38, 41, 0.2);
+        background: rgba(83, 40, 79, 0.25);
         backdrop-filter: blur(40px) saturate(180%);
         -webkit-backdrop-filter: blur(40px) saturate(180%);
-        border-top: 1px solid rgba(204, 159, 83, 0.2);
+        border-top: 1px solid rgba(204, 159, 83, 0.15);
         box-shadow: 0px -8px 32px rgba(0, 0, 0, 0.1);
       }
 
