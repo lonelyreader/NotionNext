@@ -51,23 +51,24 @@ const Style = () => {
         color: #EFEFEF;
       }
 
-      /* 左侧导航栏 - Apple风格磨砂玻璃 */
+      /* 左侧导航栏 - 优化性能 */
       .nav-sidebar {
         position: fixed;
         left: 0;
         top: 0;
         width: 320px;
         min-height: 100vh;
-        background: rgba(239, 239, 239, 0.8);
-        backdrop-filter: blur(60px) saturate(200%);
-        -webkit-backdrop-filter: blur(60px) saturate(200%);
+        background: rgba(239, 239, 239, 0.95);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
         border-right: 1px solid rgba(83, 40, 79, 0.08);
-        box-shadow: 0 0 40px rgba(0, 0, 0, 0.02);
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.02);
         z-index: 10;
         overflow-y: auto;
         overflow-x: hidden;
         padding-top: 80px;
-        transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        transition: transform 0.2s ease;
+        will-change: transform;
       }
       
       /* 左侧导航栏收起状态 */
@@ -77,11 +78,11 @@ const Style = () => {
       
       /* 深色模式左侧导航栏 */
       .dark .nav-sidebar {
-        background: rgba(83, 40, 79, 0.25);
-        backdrop-filter: blur(60px) saturate(200%);
-        -webkit-backdrop-filter: blur(60px) saturate(200%);
+        background: rgba(83, 40, 79, 0.3);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
         border-right: 1px solid rgba(204, 159, 83, 0.1);
-        box-shadow: 0 0 40px rgba(0, 0, 0, 0.05);
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
       }
       
       /* 移动端隐藏左侧导航栏 */
@@ -91,23 +92,24 @@ const Style = () => {
         }
       }
 
-      /* 右侧信息栏 - Apple风格磨砂玻璃 */
+      /* 右侧信息栏 - 优化性能 */
       .info-sidebar {
         position: fixed;
         right: 0;
         top: 0;
         width: 320px;
         min-height: 100vh;
-        background: rgba(239, 239, 239, 0.8);
-        backdrop-filter: blur(60px) saturate(200%);
-        -webkit-backdrop-filter: blur(60px) saturate(200%);
+        background: rgba(239, 239, 239, 0.95);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
         border-left: 1px solid rgba(83, 40, 79, 0.08);
-        box-shadow: 0 0 40px rgba(0, 0, 0, 0.02);
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.02);
         z-index: 10;
         overflow-y: auto;
         overflow-x: hidden;
         padding-top: 80px;
-        transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        transition: transform 0.2s ease;
+        will-change: transform;
       }
       
       /* 右侧信息栏收起状态 */
@@ -117,11 +119,11 @@ const Style = () => {
       
       /* 深色模式右侧信息栏 */
       .dark .info-sidebar {
-        background: rgba(83, 40, 79, 0.25);
-        backdrop-filter: blur(60px) saturate(200%);
-        -webkit-backdrop-filter: blur(60px) saturate(200%);
+        background: rgba(83, 40, 79, 0.3);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
         border-left: 1px solid rgba(204, 159, 83, 0.1);
-        box-shadow: 0 0 40px rgba(0, 0, 0, 0.05);
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
       }
       
       /* 中等屏幕隐藏右侧信息栏 */
@@ -319,17 +321,17 @@ const Style = () => {
         box-shadow: 0 8px 30px rgba(239, 239, 239, 0.25);
       }
 
-      /* 卡片样式 - Apple风格磨砂玻璃 */
+      /* 卡片样式 - 简化设计 */
       .card, .info-card {
-        background: rgba(255, 255, 255, 0.7);
-        backdrop-filter: blur(40px) saturate(180%);
-        -webkit-backdrop-filter: blur(40px) saturate(180%);
-        border: 1px solid rgba(83, 40, 79, 0.06);
-        border-radius: 16px;
-        padding: 24px;
-        margin: 16px 0;
-        transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04);
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(83, 40, 79, 0.08);
+        border-radius: 8px;
+        padding: 16px;
+        margin: 12px 0;
+        transition: all 0.2s ease;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
         color: #372E2C;
         position: relative;
         overflow: hidden;
@@ -346,19 +348,19 @@ const Style = () => {
       }
       
       .card:hover, .info-card:hover {
-        background: rgba(255, 255, 255, 0.8);
-        border-color: rgba(83, 40, 79, 0.12);
-        box-shadow: 0 12px 48px rgba(0, 0, 0, 0.08);
-        transform: translateY(-4px) scale(1.01);
+        background: rgba(255, 255, 255, 0.95);
+        border-color: rgba(83, 40, 79, 0.15);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        transform: translateY(-1px);
       }
       
       /* 卡片样式 - 深色模式 */
       .dark .card, .dark .info-card {
-        background: rgba(83, 40, 79, 0.15);
-        backdrop-filter: blur(40px) saturate(180%);
-        -webkit-backdrop-filter: blur(40px) saturate(180%);
-        border: 1px solid rgba(204, 159, 83, 0.08);
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        background: rgba(83, 40, 79, 0.2);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(204, 159, 83, 0.1);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         color: #EFEFEF;
       }
       
@@ -421,6 +423,76 @@ const Style = () => {
         backdrop-filter: blur(20px);
         border-top: 1px solid rgba(204, 159, 83, 0.2);
         box-shadow: 0px -4px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      /* GitHub风格缩进样式 */
+      .github-indent {
+        position: relative;
+      }
+      
+      .github-indent::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 1px;
+        background: rgba(83, 40, 79, 0.15);
+        transition: background 0.2s ease;
+      }
+      
+      .dark .github-indent::before {
+        background: rgba(204, 159, 83, 0.2);
+      }
+      
+      .github-indent:hover::before {
+        background: rgba(83, 40, 79, 0.3);
+      }
+      
+      .dark .github-indent:hover::before {
+        background: rgba(204, 159, 83, 0.4);
+      }
+      
+      /* 简化卡片设计 - 移除圆角，与侧边栏融合 */
+      .simple-card {
+        background: transparent;
+        border: none;
+        border-radius: 0;
+        padding: 8px 12px;
+        margin: 0;
+        transition: background-color 0.15s ease;
+        position: relative;
+      }
+      
+      .simple-card:hover {
+        background: rgba(83, 40, 79, 0.08);
+      }
+      
+      .dark .simple-card:hover {
+        background: rgba(204, 159, 83, 0.1);
+      }
+      
+      .simple-card.active {
+        background: rgba(83, 40, 79, 0.12);
+        font-weight: 600;
+      }
+      
+      .dark .simple-card.active {
+        background: rgba(204, 159, 83, 0.15);
+      }
+      
+      .simple-card.active::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: rgba(83, 40, 79, 0.6);
+      }
+      
+      .dark .simple-card.active::before {
+        background: rgba(204, 159, 83, 0.6);
       }
 
       /* Apple风格滚动条样式 */
