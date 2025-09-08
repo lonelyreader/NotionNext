@@ -44,7 +44,6 @@ import CursorTabs from './components/CursorTabs'
 import CursorStatusBar from './components/CursorStatusBar'
 import CursorCommandPalette from './components/CursorCommandPalette'
 import BlogPostCard from './components/BlogPostCard'
-import NavPostList from './components/NavPostList'
 import CursorBlogList from './components/CursorBlogList'
 import CONFIG from './config'
 import { Style } from './style'
@@ -136,9 +135,6 @@ const LayoutBase = props => {
   const [activeTab, setActiveTab] = useState(null)
   const [tabs, setTabs] = useState([])
   const [commandPaletteOpen, setCommandPaletteOpen] = useState(false)
-  
-  // 获取当前文章信息
-  const { post } = props
 
   const handleViewChange = (view) => {
     setActiveView(view)
