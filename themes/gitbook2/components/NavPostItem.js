@@ -52,14 +52,14 @@ const NavPostItem = props => {
         <div
           onMouseEnter={onHoverToggle}
           onClick={toggleOpenSubMenu}
-          className='cursor-pointer relative flex justify-between text-md p-3 hover:bg-white/10 rounded-xl transition-all duration-300 border border-transparent hover:border-yellow-400/20 backdrop-blur-sm'
+          className='cursor-pointer relative flex justify-between text-md p-3 hover:bg-purple-600/10 dark:hover:bg-white/10 rounded-lg transition-all duration-300 border border-transparent hover:border-purple-600/20 dark:hover:border-yellow-400/20 backdrop-blur-sm'
           key={group?.category}>
-          <span className={`${expanded && 'font-semibold'} text-white`}>
+          <span className={`${expanded && 'font-semibold'} text-gray-800 dark:text-white`}>
             {group?.category}
           </span>
           <div className='inline-flex items-center select-none pointer-events-none '>
             <i
-              className={`px-2 fas fa-chevron-left transition-all opacity-70 duration-700 text-white ${expanded ? '-rotate-90' : ''}`}></i>
+              className={`px-2 fas fa-chevron-left transition-all opacity-70 duration-700 text-gray-800 dark:text-white ${expanded ? '-rotate-90' : ''}`}></i>
           </div>
           {groupHasLatest &&
             siteConfig('GITBOOK_LATEST_POST_RED_BADGE') &&
@@ -67,7 +67,7 @@ const NavPostItem = props => {
         </div>
         <Collapse isOpen={expanded} onHeightChange={props.onHeightChange}>
           {group?.items?.map((post, index) => (
-            <div key={index} className='ml-3 border-l border-white/20'>
+            <div key={index} className='ml-3 border-l border-gray-300/30 dark:border-white/20'>
               <BlogPostCard className='ml-3' post={post} />
             </div>
           ))}

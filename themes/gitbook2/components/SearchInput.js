@@ -121,14 +121,14 @@ const SearchInput = ({ currentSearch, cRef, className }) => {
         onClick={handleSearch}>
         <i
           className={
-            'hover:text-yellow-600 transform duration-200 text-yellow-500 cursor-pointer fas fa-search'
+            'hover:text-purple-700 dark:hover:text-yellow-600 transform duration-200 text-purple-600 dark:text-yellow-500 cursor-pointer fas fa-search'
           }
         />
       </div>
       <input
         ref={searchInputRef}
         type='text'
-        className={`rounded-2xl border border-yellow-400/20 pl-12 leading-12 placeholder-yellow-400/60 outline-none w-full transition-all duration-300 focus:border-yellow-400 focus:ring-4 focus:ring-yellow-400/10 text-gray-800 bg-white/95 backdrop-blur-xl shadow-lg hover:shadow-xl`}
+        className={`rounded-lg border border-purple-600/20 dark:border-yellow-400/20 pl-12 leading-12 placeholder-purple-600/60 dark:placeholder-yellow-400/60 outline-none w-full transition-all duration-300 focus:border-purple-600 dark:focus:border-yellow-400 focus:ring-4 focus:ring-purple-600/10 dark:focus:ring-yellow-400/10 text-gray-800 dark:text-white bg-white/95 dark:bg-gray-800/95 backdrop-blur-xl shadow-lg hover:shadow-xl`}
         onFocus={handleFocus}
         onKeyUp={handleKeyUp}
         placeholder='Search'
@@ -139,7 +139,7 @@ const SearchInput = ({ currentSearch, cRef, className }) => {
         defaultValue={currentSearch}
       />
       <div
-        className='absolute right-0 mr-4 items-center justify-center py-2 text-yellow-500'
+        className='absolute right-0 mr-4 items-center justify-center py-2 text-purple-600 dark:text-yellow-500'
         onClick={handleSearch}>
         Ctrl+K
       </div>
@@ -147,7 +147,7 @@ const SearchInput = ({ currentSearch, cRef, className }) => {
       {showClean && (
         <div className='-ml-12 cursor-pointer flex float-right items-center justify-center py-2'>
           <i
-            className='fas fa-times hover:text-yellow-600 transform duration-200 text-yellow-500 cursor-pointer'
+            className='fas fa-times hover:text-purple-700 dark:hover:text-yellow-600 transform duration-200 text-purple-600 dark:text-yellow-500 cursor-pointer'
             onClick={cleanSearch}
           />
         </div>
