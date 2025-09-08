@@ -50,7 +50,7 @@ const Style = () => {
         color: #f0f6fc;
       }
 
-      /* 左侧导航栏 - GitBook官方风格 */
+      /* 左侧导航栏 - 现代GitBook风格 */
       .nav-sidebar {
         position: fixed;
         left: 0;
@@ -58,15 +58,17 @@ const Style = () => {
         width: 280px;
         min-height: 100vh;
         background: #ffffff;
-        border-right: 1px solid #e1e4e8;
+        border-right: 1px solid #e5e7eb;
         z-index: 10;
         overflow-y: auto;
         overflow-x: hidden;
-        padding-top: 60px;
+        padding: 0;
         transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         will-change: transform;
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
+        box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.02);
+        display: flex;
+        flex-direction: column;
       }
       
       /* 左侧导航栏收起状态 */
@@ -79,6 +81,173 @@ const Style = () => {
         background: #0d1117;
         border-right: 1px solid #21262d;
         box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.05);
+      }
+      
+      /* 侧边栏头部区域 */
+      .nav-sidebar-header {
+        padding: 16px;
+        border-bottom: 1px solid #f3f4f6;
+        background: #ffffff;
+        position: sticky;
+        top: 0;
+        z-index: 20;
+      }
+      
+      .dark .nav-sidebar-header {
+        background: #0d1117;
+        border-bottom: 1px solid #21262d;
+      }
+      
+      /* 品牌标识区域 */
+      .nav-brand {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 16px;
+        font-weight: 600;
+        font-size: 16px;
+        color: #1f2937;
+      }
+      
+      .dark .nav-brand {
+        color: #f9fafb;
+      }
+      
+      .nav-brand-icon {
+        width: 20px;
+        height: 20px;
+        background: #3b82f6;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 12px;
+        font-weight: bold;
+      }
+      
+      /* 搜索框样式 */
+      .nav-search {
+        position: relative;
+        margin-bottom: 8px;
+      }
+      
+      .nav-search-input {
+        width: 100%;
+        padding: 8px 12px 8px 36px;
+        border: 1px solid #e5e7eb;
+        border-radius: 6px;
+        background: #f9fafb;
+        font-size: 14px;
+        color: #374151;
+        transition: all 0.15s ease;
+      }
+      
+      .nav-search-input:focus {
+        outline: none;
+        border-color: #3b82f6;
+        background: #ffffff;
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+      }
+      
+      .dark .nav-search-input {
+        background: #1f2937;
+        border-color: #374151;
+        color: #f9fafb;
+      }
+      
+      .dark .nav-search-input:focus {
+        background: #111827;
+        border-color: #3b82f6;
+      }
+      
+      .nav-search-icon {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 16px;
+        height: 16px;
+        color: #6b7280;
+      }
+      
+      .nav-search-shortcut {
+        position: absolute;
+        right: 8px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 11px;
+        color: #9ca3af;
+        background: #f3f4f6;
+        padding: 2px 6px;
+        border-radius: 4px;
+        border: 1px solid #e5e7eb;
+      }
+      
+      .dark .nav-search-shortcut {
+        background: #374151;
+        border-color: #4b5563;
+        color: #d1d5db;
+      }
+      
+      /* 侧边栏内容区域 */
+      .nav-sidebar-content {
+        flex: 1;
+        overflow-y: auto;
+        padding: 8px 0;
+      }
+      
+      /* 侧边栏底部区域 */
+      .nav-sidebar-footer {
+        padding: 16px;
+        border-top: 1px solid #f3f4f6;
+        background: #ffffff;
+        position: sticky;
+        bottom: 0;
+        z-index: 20;
+      }
+      
+      .dark .nav-sidebar-footer {
+        background: #0d1117;
+        border-top: 1px solid #21262d;
+      }
+      
+      /* 底部操作按钮 */
+      .nav-footer-item {
+        display: flex;
+        align-items: center;
+        padding: 8px 12px;
+        margin: 2px 0;
+        border: none;
+        background: transparent;
+        color: #6b7280;
+        font-size: 14px;
+        cursor: pointer;
+        transition: all 0.15s ease;
+        border-radius: 8px;
+        width: 100%;
+        text-align: left;
+      }
+      
+      .nav-footer-item:hover {
+        background: #f3f4f6;
+        color: #374151;
+      }
+      
+      .dark .nav-footer-item {
+        color: #9ca3af;
+      }
+      
+      .dark .nav-footer-item:hover {
+        background: #1f2937;
+        color: #f9fafb;
+      }
+      
+      .nav-footer-item .nav-icon {
+        width: 16px;
+        height: 16px;
+        margin-right: 8px;
+        flex-shrink: 0;
       }
       
       /* 移动端隐藏左侧导航栏 */
@@ -430,22 +599,23 @@ const Style = () => {
         border-right: 1px solid #444d56;
       }
       
-      /* GitBook官方风格导航项 */
+      /* 现代GitBook风格导航项 */
       .gitbook-nav-item {
         position: relative;
         display: flex;
         align-items: center;
-        padding: 6px 12px;
-        margin: 1px 8px;
+        padding: 8px 12px;
+        margin: 2px 12px;
         border: none;
         background: transparent;
-        color: #586069;
+        color: #6b7280;
         font-size: 14px;
         line-height: 1.4;
         cursor: pointer;
-        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-        border-radius: 6px;
+        transition: all 0.15s ease;
+        border-radius: 8px;
         font-weight: 400;
+        min-height: 36px;
       }
       
       .dark .gitbook-nav-item {
@@ -453,61 +623,128 @@ const Style = () => {
       }
       
       .gitbook-nav-item:hover {
-        background: #f6f8fa;
-        color: #24292e;
-        transform: translateX(2px);
+        background: #f3f4f6;
+        color: #374151;
       }
       
       .dark .gitbook-nav-item:hover {
-        background: #21262d;
-        color: #f0f6fc;
-        transform: translateX(2px);
+        background: #1f2937;
+        color: #f9fafb;
       }
       
       .gitbook-nav-item.active {
-        background: #0969da;
-        color: #ffffff;
+        background: #eff6ff;
+        color: #1d4ed8;
         font-weight: 500;
-        box-shadow: 0 1px 3px rgba(9, 105, 218, 0.3);
+        border: 1px solid #dbeafe;
       }
       
       .dark .gitbook-nav-item.active {
-        background: #1f6feb;
-        color: #ffffff;
-        box-shadow: 0 1px 3px rgba(31, 111, 235, 0.3);
+        background: #1e3a8a;
+        color: #93c5fd;
+        border: 1px solid #1e40af;
       }
       
-      /* GitBook官方风格缩进系统 */
+      /* 导航项图标 */
+      .gitbook-nav-item .nav-icon {
+        width: 16px;
+        height: 16px;
+        margin-right: 8px;
+        flex-shrink: 0;
+        color: inherit;
+      }
+      
+      /* 展开/收起按钮 */
+      .gitbook-nav-item .nav-expand {
+        margin-left: auto;
+        width: 16px;
+        height: 16px;
+        color: #9ca3af;
+        transition: transform 0.15s ease;
+        flex-shrink: 0;
+      }
+      
+      .gitbook-nav-item.expanded .nav-expand {
+        transform: rotate(90deg);
+      }
+      
+      /* 分组标题样式 */
+      .gitbook-nav-item.group-title {
+        font-weight: 500;
+        color: #374151;
+        margin-top: 8px;
+        margin-bottom: 4px;
+      }
+      
+      .dark .gitbook-nav-item.group-title {
+        color: #d1d5db;
+      }
+      
+      /* 子项样式 */
+      .gitbook-nav-item.sub-item {
+        margin-left: 24px;
+        font-size: 13px;
+        color: #6b7280;
+      }
+      
+      .dark .gitbook-nav-item.sub-item {
+        color: #9ca3af;
+      }
+      
+      /* 徽章样式 */
+      .gitbook-nav-item .nav-badge {
+        margin-left: auto;
+        background: #ef4444;
+        color: white;
+        font-size: 10px;
+        padding: 2px 6px;
+        border-radius: 10px;
+        font-weight: 500;
+        min-width: 16px;
+        text-align: center;
+        line-height: 1.2;
+      }
+      
+      /* 现代缩进系统 */
       .gitbook-indent {
         position: relative;
-        margin-left: 20px;
-        padding-left: 8px;
+        margin-left: 16px;
       }
       
       .gitbook-indent::before {
         content: '';
         position: absolute;
-        left: -12px;
+        left: -8px;
         top: 0;
         bottom: 0;
         width: 1px;
-        background: #d0d7de;
-        opacity: 0.6;
-        transition: all 0.2s ease;
+        background: #e5e7eb;
+        opacity: 0.5;
+        transition: all 0.15s ease;
       }
       
       .dark .gitbook-indent::before {
-        background: #30363d;
-        opacity: 0.8;
+        background: #374151;
+        opacity: 0.6;
       }
       
       /* 多级缩进 */
       .gitbook-indent .gitbook-indent {
-        margin-left: 16px;
+        margin-left: 12px;
       }
       
       .gitbook-indent .gitbook-indent::before {
-        left: -8px;
+        left: -6px;
+      }
+      
+      /* 折叠/展开动画 */
+      .nav-collapsible {
+        overflow: hidden;
+        transition: height 0.2s ease;
+      }
+      
+      .nav-collapsible.collapsed {
+        height: 0;
       }
       
       .gitbook-indent::after {
