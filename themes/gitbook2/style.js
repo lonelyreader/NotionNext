@@ -57,7 +57,7 @@ const Style = () => {
         left: 0;
         top: 0;
         width: 320px;
-        height: 100vh;
+        min-height: 100vh;
         background: rgba(239, 239, 239, 0.8);
         backdrop-filter: blur(60px) saturate(200%);
         -webkit-backdrop-filter: blur(60px) saturate(200%);
@@ -67,6 +67,12 @@ const Style = () => {
         overflow-y: auto;
         overflow-x: hidden;
         padding-top: 80px;
+        transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+      
+      /* 左侧导航栏收起状态 */
+      .nav-sidebar.collapsed {
+        transform: translateX(-100%);
       }
       
       /* 深色模式左侧导航栏 */
@@ -91,7 +97,7 @@ const Style = () => {
         right: 0;
         top: 0;
         width: 320px;
-        height: 100vh;
+        min-height: 100vh;
         background: rgba(239, 239, 239, 0.8);
         backdrop-filter: blur(60px) saturate(200%);
         -webkit-backdrop-filter: blur(60px) saturate(200%);
@@ -101,6 +107,12 @@ const Style = () => {
         overflow-y: auto;
         overflow-x: hidden;
         padding-top: 80px;
+        transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+      
+      /* 右侧信息栏收起状态 */
+      .info-sidebar.collapsed {
+        transform: translateX(100%);
       }
       
       /* 深色模式右侧信息栏 */
@@ -133,6 +145,30 @@ const Style = () => {
         margin-left: 320px;
         margin-right: 320px;
         z-index: 1;
+        transition: margin 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+      
+      /* 侧边栏收起时的正文边距调整 */
+      .nav-sidebar.collapsed {
+        transform: translateX(-100%);
+      }
+      
+      .info-sidebar.collapsed {
+        transform: translateX(100%);
+      }
+      
+      /* 当侧边栏收起时，调整正文边距 */
+      body.nav-collapsed #center-wrapper {
+        margin-left: 0;
+      }
+      
+      body.info-collapsed #center-wrapper {
+        margin-right: 0;
+      }
+      
+      body.nav-collapsed.info-collapsed #center-wrapper {
+        margin-left: 0;
+        margin-right: 0;
       }
       
       /* 深色模式正文背景容器 */
@@ -581,6 +617,90 @@ const Style = () => {
       /* 移动端显示底部导航栏 */
       @media (min-width: 769px) {
         .bottom-nav {
+          display: none;
+        }
+      }
+      
+      /* 侧边栏切换按钮 - 参考Cursor设计 */
+      .sidebar-toggle {
+        position: fixed;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 24px;
+        height: 48px;
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(83, 40, 79, 0.1);
+        border-radius: 0 12px 12px 0;
+        cursor: pointer;
+        z-index: 200;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+      }
+      
+      .sidebar-toggle:hover {
+        background: rgba(255, 255, 255, 1);
+        border-color: rgba(83, 40, 79, 0.2);
+        box-shadow: 4px 0 12px rgba(0, 0, 0, 0.15);
+        transform: translateY(-50%) translateX(2px);
+      }
+      
+      .sidebar-toggle.left {
+        left: 320px;
+        border-radius: 0 12px 12px 0;
+      }
+      
+      .sidebar-toggle.right {
+        right: 320px;
+        border-radius: 12px 0 0 12px;
+      }
+      
+      /* 侧边栏收起时的按钮位置 */
+      body.nav-collapsed .sidebar-toggle.left {
+        left: 0;
+      }
+      
+      body.info-collapsed .sidebar-toggle.right {
+        right: 0;
+      }
+      
+      /* 深色模式切换按钮 */
+      .dark .sidebar-toggle {
+        background: rgba(83, 40, 79, 0.8);
+        border-color: rgba(204, 159, 83, 0.1);
+        color: #EFEFEF;
+      }
+      
+      .dark .sidebar-toggle:hover {
+        background: rgba(83, 40, 79, 0.9);
+        border-color: rgba(204, 159, 83, 0.2);
+      }
+      
+      /* 按钮图标 */
+      .sidebar-toggle i {
+        font-size: 12px;
+        color: rgba(83, 40, 79, 0.7);
+        transition: all 0.3s ease;
+      }
+      
+      .dark .sidebar-toggle i {
+        color: rgba(204, 159, 83, 0.7);
+      }
+      
+      .sidebar-toggle:hover i {
+        color: rgba(83, 40, 79, 1);
+      }
+      
+      .dark .sidebar-toggle:hover i {
+        color: rgba(204, 159, 83, 1);
+      }
+      
+      /* 移动端隐藏切换按钮 */
+      @media (max-width: 768px) {
+        .sidebar-toggle {
           display: none;
         }
       }

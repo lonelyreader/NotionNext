@@ -36,6 +36,7 @@ import NavPostList from './components/NavPostList'
 import PageNavDrawer from './components/PageNavDrawer'
 import RevolverMaps from './components/RevolverMaps'
 import TagItemMini from './components/TagItemMini'
+import SidebarToggle from './components/SidebarToggle'
 import CONFIG from './config'
 import { Style } from './style'
 
@@ -233,6 +234,14 @@ const LayoutBase = props => {
 
         {/* 移动端底部导航栏 */}
         <BottomMenuBar {...props} />
+        
+        {/* 侧边栏切换按钮 */}
+        {!fullWidth && (
+          <>
+            <SidebarToggle side="left" />
+            <SidebarToggle side="right" />
+          </>
+        )}
       </div>
     </ThemeGlobalGitbook.Provider>
   )
