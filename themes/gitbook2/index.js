@@ -37,6 +37,8 @@ import PageNavDrawer from './components/PageNavDrawer'
 import RevolverMaps from './components/RevolverMaps'
 import TagItemMini from './components/TagItemMini'
 import SidebarToggle from './components/SidebarToggle'
+import Navbar from './components/Navbar'
+import Sidebar from './components/Sidebar'
 import CONFIG from './config'
 import { Style } from './style'
 
@@ -142,37 +144,36 @@ const LayoutBase = props => {
         className={`${siteConfig('FONT_STYLE')} pb-16 md:pb-0 scroll-smooth w-full h-full min-h-screen justify-center dark:text-gray-300 glow-effect`}>
         <AlgoliaSearchModal cRef={searchModal} {...props} />
 
-        {/* 顶部导航栏 */}
-        <Header {...props} />
+        {/* 新的顶部导航栏 */}
+        <Navbar 
+          leftSlot={<Header {...props} />}
+          rightSlot={null}
+        />
 
+        {/* 新的侧边栏 */}
+        {!fullWidth && (
+          <Sidebar>
+            <div className='p-5'>
+              {/* 嵌入 */}
+              {slotLeft}
+
+              {/* 所有文章列表 */}
+              <NavPostList filteredNavPages={filteredNavPages} {...props} />
+            </div>
+            <Footer {...props} />
+          </Sidebar>
+        )}
+
+        {/* 中间内容区域 */}
         <main
           id='wrapper'
-          className={`${siteConfig('LAYOUT_SIDEBAR_REVERSE') ? 'flex-row-reverse' : ''} relative flex justify-between w-full gap-x-6 h-full mx-auto max-w-screen-4xl`}>
-          {/* 左侧推拉抽屉 */}
-          {fullWidth ? null : (
-            <div className={'hidden md:block nav-sidebar'}>
-              <div className='w-80 pt-14 pb-4 sticky top-0 h-screen flex justify-between flex-col'>
-                {/* 导航 */}
-                <div className='overflow-y-scroll scroll-hidden pt-10 pl-5'>
-                  {/* 嵌入 */}
-                  {slotLeft}
-
-                  {/* 所有文章列表 */}
-                  <NavPostList filteredNavPages={filteredNavPages} {...props} />
-                </div>
-                {/* 页脚 */}
-                <Footer {...props} />
-              </div>
-            </div>
-          )}
-
-          {/* 中间内容区域 */}
+          className='relative w-full h-full mx-auto max-w-screen-4xl'>
           <div
             id='center-wrapper'
-            className='flex flex-col justify-between w-full relative z-10 pt-14 min-h-screen'>
+            className='flex flex-col justify-between w-full relative z-10 pt-16 min-h-screen'>
             <div
               id='container-inner'
-              className={`main-content w-full ${fullWidth ? 'px-5' : 'max-w-3xl px-3 lg:px-0'} justify-center mx-auto`}>
+              className={`gb2-content-card w-full ${fullWidth ? 'px-5' : 'max-w-3xl'} justify-center mx-auto`}>
               {slotTop}
               <WWAds className='w-full' orientation='horizontal' />
 
