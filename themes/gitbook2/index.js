@@ -162,6 +162,25 @@ const LayoutBase = props => {
                   <div className='nav-search'>
                     <SearchInput className='nav-search-input' />
                   </div>
+                  {/* Hide Sidebar 按钮 */}
+                  <button 
+                    className='nav-sidebar-hide-btn'
+                    onClick={() => {
+                      const sidebar = document.querySelector('.nav-sidebar');
+                      const showBtn = document.getElementById('nav-sidebar-show-btn');
+                      if (sidebar) {
+                        sidebar.classList.add('collapsed');
+                        if (showBtn) {
+                          showBtn.style.display = 'flex';
+                        }
+                      }
+                    }}
+                    title="Hide Sidebar"
+                  >
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                      <path d="M3.72 3.72a.75.75 0 011.06 0L8 6.94l3.22-3.22a.75.75 0 111.06 1.06L9.06 8l3.22 3.22a.75.75 0 01-1.06 1.06L8 9.06l-3.22 3.22a.75.75 0 01-1.06-1.06L6.94 8 3.72 4.78a.75.75 0 010-1.06z"/>
+                    </svg>
+                  </button>
                 </div>
                 
                 {/* 导航内容 */}
@@ -257,6 +276,27 @@ const LayoutBase = props => {
             <SidebarToggle side="right" />
           </>
         )}
+        
+        {/* 显示侧边栏按钮 - 当侧边栏被隐藏时显示 */}
+        <button 
+          className='nav-sidebar-show-btn'
+          id='nav-sidebar-show-btn'
+          onClick={() => {
+            const sidebar = document.querySelector('.nav-sidebar');
+            const showBtn = document.getElementById('nav-sidebar-show-btn');
+            if (sidebar) {
+              sidebar.classList.remove('collapsed');
+              if (showBtn) {
+                showBtn.style.display = 'none';
+              }
+            }
+          }}
+          title="Show Sidebar"
+        >
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M1 2.75A.75.75 0 011.75 2h12.5a.75.75 0 010 1.5H1.75A.75.75 0 011 2.75zm0 5A.75.75 0 011.75 7h12.5a.75.75 0 010 1.5H1.75A.75.75 0 011 7.75zM1.75 12a.75.75 0 000 1.5h12.5a.75.75 0 000-1.5H1.75z"/>
+          </svg>
+        </button>
       </div>
     </ThemeGlobalGitbook.Provider>
   )

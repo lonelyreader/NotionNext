@@ -76,50 +76,6 @@ const Style = () => {
         transform: translateX(-100%);
       }
       
-      /* 右上角方形toggle按钮 - 隐藏整个侧边栏 */
-      .nav-sidebar-toggle {
-        position: absolute;
-        top: 12px;
-        right: 12px;
-        width: 24px;
-        height: 24px;
-        background: #6a0dad;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        font-size: 12px;
-        font-weight: bold;
-        z-index: 30;
-        transition: all 0.2s ease;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      }
-      
-      .nav-sidebar-toggle::before {
-        content: '×';
-        font-size: 16px;
-        line-height: 1;
-      }
-      
-      .nav-sidebar-toggle:hover {
-        background: #5a0a9d;
-        transform: scale(1.05);
-      }
-      
-      .nav-sidebar-toggle:active {
-        transform: scale(0.95);
-      }
-      
-      .dark .nav-sidebar-toggle {
-        background: #8b5cf6;
-      }
-      
-      .dark .nav-sidebar-toggle:hover {
-        background: #7c3aed;
-      }
       
       /* 深色模式左侧导航栏 */
       .dark .nav-sidebar {
@@ -137,11 +93,109 @@ const Style = () => {
         top: 0;
         z-index: 20;
         flex-shrink: 0;
+        position: relative;
       }
       
       .dark .nav-sidebar-header {
         background: #0d1117;
         border-bottom: 1px solid #21262d;
+      }
+      
+      /* Hide Sidebar 按钮 */
+      .nav-sidebar-hide-btn {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        width: 24px;
+        height: 24px;
+        background: transparent;
+        border: 1px solid #d1d5da;
+        border-radius: 4px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #586069;
+        font-size: 12px;
+        z-index: 30;
+        transition: all 0.15s ease;
+        padding: 0;
+      }
+      
+      .nav-sidebar-hide-btn:hover {
+        background: #f6f8fa;
+        border-color: #8b949e;
+        color: #24292e;
+      }
+      
+      .nav-sidebar-hide-btn:active {
+        background: #e1e4e8;
+        transform: scale(0.95);
+      }
+      
+      .dark .nav-sidebar-hide-btn {
+        border-color: #444d56;
+        color: #8b949e;
+      }
+      
+      .dark .nav-sidebar-hide-btn:hover {
+        background: #21262d;
+        border-color: #6e7681;
+        color: #f0f6fc;
+      }
+      
+      .dark .nav-sidebar-hide-btn:active {
+        background: #30363d;
+      }
+      
+      /* 显示侧边栏按钮 - 默认隐藏 */
+      .nav-sidebar-show-btn {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        width: 32px;
+        height: 32px;
+        background: #ffffff;
+        border: 1px solid #d1d5da;
+        border-radius: 6px;
+        cursor: pointer;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        color: #586069;
+        z-index: 100;
+        transition: all 0.15s ease;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+      
+      .nav-sidebar-show-btn:hover {
+        background: #f6f8fa;
+        border-color: #8b949e;
+        color: #24292e;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+      
+      .nav-sidebar-show-btn:active {
+        background: #e1e4e8;
+        transform: scale(0.95);
+      }
+      
+      /* 显示按钮的显示状态由JavaScript控制 */
+      
+      .dark .nav-sidebar-show-btn {
+        background: #24292e;
+        border-color: #444d56;
+        color: #8b949e;
+      }
+      
+      .dark .nav-sidebar-show-btn:hover {
+        background: #21262d;
+        border-color: #6e7681;
+        color: #f0f6fc;
+      }
+      
+      .dark .nav-sidebar-show-btn:active {
+        background: #30363d;
       }
       
       /* 品牌标识区域 */
@@ -239,8 +293,8 @@ const Style = () => {
       .nav-sidebar-content {
         flex: 1;
         overflow-y: auto;
-        padding: 12px 0;
-        margin: 0 8px;
+        padding: 8px 0;
+        margin: 0;
       }
       
       /* 侧边栏底部区域 */
@@ -745,27 +799,26 @@ const Style = () => {
         border-right: 1px solid #444d56;
       }
       
-      /* GitBook标准风格导航项 */
+      /* GitBook专业风格导航项 */
       .gitbook-nav-item {
         position: relative;
         display: flex;
         align-items: center;
-        padding: 8px 16px;
+        padding: 6px 12px;
         margin: 0;
         border: none;
         background: transparent;
         color: #333333;
         font-size: 14px;
-        line-height: 1.5;
+        line-height: 1.4;
         cursor: pointer;
-        transition: all 0.2s ease;
-        border-radius: 6px;
+        transition: all 0.15s ease;
+        border-radius: 0;
         font-weight: 400;
-        min-height: 36px;
+        min-height: 28px;
         width: 100%;
         text-align: left;
-        margin: 2px 8px;
-        width: calc(100% - 16px);
+        margin: 0;
       }
       
       .dark .gitbook-nav-item {
@@ -773,12 +826,8 @@ const Style = () => {
       }
       
       .gitbook-nav-item:hover {
-        background: rgba(106, 13, 173, 0.1);
-        color: #6a0dad;
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        box-shadow: 0 2px 8px rgba(106, 13, 173, 0.2);
-        transform: translateY(-1px);
+        background: #f6f8fa;
+        color: #24292e;
       }
       
       .dark .gitbook-nav-item:hover {
@@ -791,16 +840,16 @@ const Style = () => {
       }
       
       .gitbook-nav-item.active {
-        background: #6a0dad;
-        color: #ffffff;
+        background: #f1f8ff;
+        color: #0366d6;
         font-weight: 500;
-        box-shadow: 0 2px 8px rgba(106, 13, 173, 0.3);
+        border-right: 2px solid #0366d6;
       }
       
       .dark .gitbook-nav-item.active {
-        background: #8b5cf6;
-        color: #ffffff;
-        box-shadow: 0 2px 8px rgba(139, 92, 246, 0.3);
+        background: #1c2128;
+        color: #58a6ff;
+        border-right: 2px solid #58a6ff;
       }
       
       /* 导航项图标 */
@@ -817,57 +866,62 @@ const Style = () => {
         margin-left: auto;
         width: 16px;
         height: 16px;
-        color: #6a0dad;
-        transition: transform 0.2s ease;
+        color: #586069;
+        transition: transform 0.15s ease;
         flex-shrink: 0;
         cursor: pointer;
         border-radius: 2px;
         display: flex;
         align-items: center;
         justify-content: center;
+        font-size: 12px;
       }
       
       .gitbook-nav-item .nav-expand:hover {
-        background: rgba(106, 13, 173, 0.1);
-        color: #5a0a9d;
+        background: #f6f8fa;
+        color: #24292e;
       }
       
       .gitbook-nav-item.expanded .nav-expand {
         transform: rotate(90deg);
-        background: rgba(106, 13, 173, 0.1);
+        background: transparent;
       }
       
       .dark .gitbook-nav-item .nav-expand {
-        color: #8b5cf6;
+        color: #8b949e;
       }
       
       .dark .gitbook-nav-item .nav-expand:hover {
-        background: rgba(139, 92, 246, 0.1);
-        color: #7c3aed;
+        background: #21262d;
+        color: #f0f6fc;
       }
       
       /* 分组标题样式 */
       .gitbook-nav-item.group-title {
         font-weight: 600;
-        color: #6a0dad;
-        margin-top: 12px;
-        margin-bottom: 6px;
-        font-size: 13px;
+        color: #24292e;
+        margin-top: 16px;
+        margin-bottom: 8px;
+        font-size: 12px;
         text-transform: uppercase;
         letter-spacing: 0.5px;
+        padding: 8px 12px 4px 12px;
+        background: #f6f8fa;
+        border-radius: 0;
       }
       
       .dark .gitbook-nav-item.group-title {
-        color: #8b5cf6;
+        color: #f0f6fc;
+        background: #21262d;
       }
       
       /* 子项样式 */
       .gitbook-nav-item.sub-item {
-        margin-left: 20px;
+        margin-left: 0;
         font-size: 13px;
-        color: #555555;
-        padding: 6px 12px;
-        min-height: 32px;
+        color: #586069;
+        padding: 4px 12px;
+        min-height: 24px;
       }
       
       .dark .gitbook-nav-item.sub-item {
@@ -888,20 +942,21 @@ const Style = () => {
         line-height: 1.2;
       }
       
-      /* 简洁缩进系统 */
+      /* GitBook专业缩进系统 */
       .gitbook-indent {
         position: relative;
-        margin-left: 20px;
+        margin-left: 16px;
+        padding-left: 8px;
       }
       
       .gitbook-indent::before {
         content: '';
         position: absolute;
-        left: -12px;
+        left: -8px;
         top: 0;
         bottom: 0;
         width: 1px;
-        background: #d1d5da;
+        background: #e1e4e8;
       }
       
       .dark .gitbook-indent::before {
@@ -930,11 +985,11 @@ const Style = () => {
       .gitbook-indent::after {
         content: '';
         position: absolute;
-        left: -16px;
-        top: 12px;
+        left: -8px;
+        top: 14px;
         width: 8px;
         height: 1px;
-        background: #d1d5da;
+        background: #e1e4e8;
       }
       
       .dark .gitbook-indent::after {
@@ -943,27 +998,29 @@ const Style = () => {
       
       /* 多级缩进 */
       .gitbook-indent-2 {
-        margin-left: 32px;
+        margin-left: 24px;
+        padding-left: 8px;
       }
       
       .gitbook-indent-2::before {
-        left: -32px;
+        left: -8px;
       }
       
       .gitbook-indent-2::after {
-        left: -32px;
+        left: -8px;
       }
       
       .gitbook-indent-3 {
-        margin-left: 48px;
+        margin-left: 32px;
+        padding-left: 8px;
       }
       
       .gitbook-indent-3::before {
-        left: -48px;
+        left: -8px;
       }
       
       .gitbook-indent-3::after {
-        left: -48px;
+        left: -8px;
       }
       
       /* GitBook风格容器 */
