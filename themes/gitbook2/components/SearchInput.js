@@ -115,43 +115,45 @@ const SearchInput = ({ currentSearch, cRef, className }) => {
   }
 
   return (
-    <div className={`${className} relative`}>
-      <div
-        className='absolute left-0 ml-4 items-center justify-center py-2'
-        onClick={handleSearch}>
-        <i
-          className={
-            'hover:text-purple-700 dark:hover:text-yellow-600 transform duration-200 text-purple-600 dark:text-yellow-500 cursor-pointer fas fa-search'
-          }
-        />
-      </div>
-      <input
-        ref={searchInputRef}
-        type='text'
-        className={`rounded-lg border border-purple-600/20 dark:border-yellow-400/20 pl-12 leading-12 placeholder-purple-600/60 dark:placeholder-yellow-400/60 outline-none w-full transition-all duration-300 focus:border-purple-600 dark:focus:border-yellow-400 focus:ring-4 focus:ring-purple-600/10 dark:focus:ring-yellow-400/10 text-gray-800 dark:text-white bg-white/95 dark:bg-gray-800/95 backdrop-blur-xl shadow-lg hover:shadow-xl`}
-        onFocus={handleFocus}
-        onKeyUp={handleKeyUp}
-        placeholder='Search'
-        onCompositionStart={lockSearchInput}
-        onCompositionUpdate={lockSearchInput}
-        onCompositionEnd={unLockSearchInput}
-        onChange={e => updateSearchKey(e.target.value)}
-        defaultValue={currentSearch}
-      />
-      <div
-        className='absolute right-0 mr-4 items-center justify-center py-2 text-purple-600 dark:text-yellow-500'
-        onClick={handleSearch}>
-        Ctrl+K
-      </div>
-
-      {showClean && (
-        <div className='-ml-12 cursor-pointer flex float-right items-center justify-center py-2'>
+    <div className={`${className} relative flex items-center`}>
+      <div className='relative flex-1'>
+        <div
+          className='absolute left-3 top-1/2 transform -translate-y-1/2 flex items-center justify-center'
+          onClick={handleSearch}>
           <i
-            className='fas fa-times hover:text-purple-700 dark:hover:text-yellow-600 transform duration-200 text-purple-600 dark:text-yellow-500 cursor-pointer'
-            onClick={cleanSearch}
+            className={
+              'hover:text-purple-700 dark:hover:text-yellow-600 transform duration-200 text-purple-600 dark:text-yellow-500 cursor-pointer fas fa-search text-sm'
+            }
           />
         </div>
-      )}
+        <input
+          ref={searchInputRef}
+          type='text'
+          className={`rounded-lg border border-purple-600/20 dark:border-yellow-400/20 pl-10 pr-20 h-10 placeholder-purple-600/60 dark:placeholder-yellow-400/60 outline-none w-full transition-all duration-300 focus:border-purple-600 dark:focus:border-yellow-400 focus:ring-4 focus:ring-purple-600/10 dark:focus:ring-yellow-400/10 text-gray-800 dark:text-white bg-white/95 dark:bg-gray-800/95 backdrop-blur-xl shadow-lg hover:shadow-xl text-sm`}
+          onFocus={handleFocus}
+          onKeyUp={handleKeyUp}
+          placeholder='Search'
+          onCompositionStart={lockSearchInput}
+          onCompositionUpdate={lockSearchInput}
+          onCompositionEnd={unLockSearchInput}
+          onChange={e => updateSearchKey(e.target.value)}
+          defaultValue={currentSearch}
+        />
+        <div
+          className='absolute right-3 top-1/2 transform -translate-y-1/2 flex items-center justify-center text-purple-600 dark:text-yellow-500 text-xs cursor-pointer'
+          onClick={handleSearch}>
+          Ctrl+K
+        </div>
+
+        {showClean && (
+          <div className='absolute right-12 top-1/2 transform -translate-y-1/2 flex items-center justify-center'>
+            <i
+              className='fas fa-times hover:text-purple-700 dark:hover:text-yellow-600 transform duration-200 text-purple-600 dark:text-yellow-500 cursor-pointer text-sm'
+              onClick={cleanSearch}
+            />
+          </div>
+        )}
+      </div>
     </div>
   )
 }

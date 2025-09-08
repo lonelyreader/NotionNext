@@ -9,12 +9,24 @@ const Style = () => {
     <style jsx global>{`
       /* iOS 18风格主题样式 */
       
+      /* 现代响应式设计基础 */
+      * {
+        box-sizing: border-box;
+      }
+      
+      html {
+        scroll-behavior: smooth;
+      }
+      
       /* 浅色模式 - EFEFEF为主 */
       body {
         background: #EFEFEF;
         color: #372E2C;
         min-height: 100vh;
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
       }
       
       /* 深色模式 - 紫色为主 */
@@ -24,78 +36,171 @@ const Style = () => {
         color: #EFEFEF;
       }
 
-      /* 主容器背景 - 浅色模式 */
+      /* 主容器 - 现代Grid布局 */
       #theme-gitbook {
+        display: grid;
+        grid-template-columns: 280px 1fr 280px;
+        grid-template-rows: auto 1fr auto;
+        grid-template-areas: 
+          "nav header header"
+          "nav main aside"
+          "nav footer aside";
+        min-height: 100vh;
         background: rgba(239, 239, 239, 0.8);
         backdrop-filter: blur(20px);
         color: #372E2C;
+        gap: 0;
       }
       
-      /* 主容器背景 - 深色模式 */
+      /* 深色模式主容器 */
       .dark #theme-gitbook {
         background: rgba(83, 40, 79, 0.1);
         backdrop-filter: blur(20px);
         color: #EFEFEF;
       }
+      
+      /* 响应式布局 */
+      @media (max-width: 1280px) {
+        #theme-gitbook {
+          grid-template-columns: 280px 1fr;
+          grid-template-areas: 
+            "nav header"
+            "nav main"
+            "nav footer";
+        }
+      }
+      
+      @media (max-width: 768px) {
+        #theme-gitbook {
+          grid-template-columns: 1fr;
+          grid-template-areas: 
+            "header"
+            "main"
+            "footer";
+        }
+      }
 
-      /* 左侧导航栏样式 - 浅色模式 */
+      /* 左侧导航栏 - 固定宽度贴合边缘 */
       .nav-sidebar {
-        background: rgba(239, 239, 239, 0.9);
+        grid-area: nav;
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 280px;
+        height: 100vh;
+        background: rgba(239, 239, 239, 0.95);
         backdrop-filter: blur(40px) saturate(180%);
         -webkit-backdrop-filter: blur(40px) saturate(180%);
         border-right: 1px solid rgba(83, 40, 79, 0.1);
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        box-shadow: 2px 0 20px rgba(0, 0, 0, 0.05);
+        z-index: 10;
+        overflow-y: auto;
+        padding-top: 80px;
       }
       
-      /* 左侧导航栏样式 - 深色模式 */
+      /* 深色模式左侧导航栏 */
       .dark .nav-sidebar {
         background: rgba(83, 40, 79, 0.3);
         backdrop-filter: blur(40px) saturate(180%);
         -webkit-backdrop-filter: blur(40px) saturate(180%);
         border-right: 1px solid rgba(204, 159, 83, 0.2);
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        box-shadow: 2px 0 20px rgba(0, 0, 0, 0.1);
+      }
+      
+      /* 移动端隐藏左侧导航栏 */
+      @media (max-width: 768px) {
+        .nav-sidebar {
+          display: none;
+        }
       }
 
-      /* 右侧信息栏样式 - 浅色模式 */
+      /* 右侧信息栏 - 固定宽度贴合边缘 */
       .info-sidebar {
-        background: rgba(239, 239, 239, 0.9);
+        grid-area: aside;
+        position: fixed;
+        right: 0;
+        top: 0;
+        width: 280px;
+        height: 100vh;
+        background: rgba(239, 239, 239, 0.95);
         backdrop-filter: blur(40px) saturate(180%);
         -webkit-backdrop-filter: blur(40px) saturate(180%);
         border-left: 1px solid rgba(83, 40, 79, 0.1);
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        box-shadow: -2px 0 20px rgba(0, 0, 0, 0.05);
+        z-index: 10;
+        overflow-y: auto;
+        padding-top: 80px;
       }
       
-      /* 右侧信息栏样式 - 深色模式 */
+      /* 深色模式右侧信息栏 */
       .dark .info-sidebar {
         background: rgba(83, 40, 79, 0.3);
         backdrop-filter: blur(40px) saturate(180%);
         -webkit-backdrop-filter: blur(40px) saturate(180%);
         border-left: 1px solid rgba(204, 159, 83, 0.2);
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        box-shadow: -2px 0 20px rgba(0, 0, 0, 0.1);
+      }
+      
+      /* 中等屏幕隐藏右侧信息栏 */
+      @media (max-width: 1280px) {
+        .info-sidebar {
+          display: none;
+        }
       }
 
-      /* 文章内容区域样式 - 浅色模式无缝结合 */
+      /* 正文背景容器 - 延展到全屏 */
       #center-wrapper {
+        grid-area: main;
         background: rgba(239, 239, 239, 0.95);
         backdrop-filter: blur(20px);
         border: none;
         border-radius: 0;
-        color: #372E2C;
         margin: 0;
-        padding: 40px 30px;
+        padding: 0;
         box-shadow: none;
         min-height: 100vh;
+        position: relative;
+        margin-left: 280px;
+        margin-right: 280px;
       }
       
-      /* 文章内容区域样式 - 深色模式无缝结合 */
+      /* 深色模式正文背景容器 */
       .dark #center-wrapper {
         background: rgba(83, 40, 79, 0.15);
         backdrop-filter: blur(20px);
-        border: none;
-        border-radius: 0;
+      }
+      
+      /* 正文文字容器 - 保持美观距离 */
+      .main-content {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 100px 40px 40px 40px;
+        color: #372E2C;
+        line-height: 1.7;
+      }
+      
+      /* 深色模式正文文字容器 */
+      .dark .main-content {
         color: #EFEFEF;
-        box-shadow: none;
-        min-height: 100vh;
+      }
+      
+      /* 响应式正文布局 */
+      @media (max-width: 1280px) {
+        #center-wrapper {
+          margin-left: 280px;
+          margin-right: 0;
+        }
+      }
+      
+      @media (max-width: 768px) {
+        #center-wrapper {
+          margin-left: 0;
+          margin-right: 0;
+        }
+        
+        .main-content {
+          padding: 80px 20px 20px 20px;
+        }
       }
 
       /* 标题样式 - 浅色模式 */
@@ -389,10 +494,52 @@ const Style = () => {
         transform: translateY(-2px);
       }
 
-      /* 响应式设计 */
-      @media (max-width: 768px) {
-        #center-wrapper {
-          padding: 10px;
+      /* 顶部导航栏 - 固定定位 */
+      .top-nav {
+        grid-area: header;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 80px;
+        z-index: 100;
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid rgba(83, 40, 79, 0.1);
+      }
+      
+      /* 深色模式顶部导航栏 */
+      .dark .top-nav {
+        background: rgba(83, 40, 79, 0.4);
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid rgba(204, 159, 83, 0.15);
+      }
+      
+      /* 底部导航栏 - 移动端 */
+      .bottom-nav {
+        grid-area: footer;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 80px;
+        z-index: 100;
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(20px);
+        border-top: 1px solid rgba(83, 40, 79, 0.1);
+      }
+      
+      /* 深色模式底部导航栏 */
+      .dark .bottom-nav {
+        background: rgba(83, 40, 79, 0.4);
+        backdrop-filter: blur(20px);
+        border-top: 1px solid rgba(204, 159, 83, 0.15);
+      }
+      
+      /* 移动端显示底部导航栏 */
+      @media (min-width: 769px) {
+        .bottom-nav {
+          display: none;
         }
       }
     `}</style>
