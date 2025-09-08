@@ -51,30 +51,31 @@ const Style = () => {
         color: #EFEFEF;
       }
 
-      /* 左侧导航栏 - 固定宽度贴合边缘 */
+      /* 左侧导航栏 - Apple风格磨砂玻璃 */
       .nav-sidebar {
         position: fixed;
         left: 0;
         top: 0;
-        width: 280px;
+        width: 320px;
         height: 100vh;
-        background: rgba(239, 239, 239, 0.95);
-        backdrop-filter: blur(40px) saturate(180%);
-        -webkit-backdrop-filter: blur(40px) saturate(180%);
-        border-right: 1px solid rgba(83, 40, 79, 0.1);
-        box-shadow: 2px 0 20px rgba(0, 0, 0, 0.05);
+        background: rgba(239, 239, 239, 0.8);
+        backdrop-filter: blur(60px) saturate(200%);
+        -webkit-backdrop-filter: blur(60px) saturate(200%);
+        border-right: 1px solid rgba(83, 40, 79, 0.08);
+        box-shadow: 0 0 40px rgba(0, 0, 0, 0.02);
         z-index: 10;
         overflow-y: auto;
+        overflow-x: hidden;
         padding-top: 80px;
       }
       
       /* 深色模式左侧导航栏 */
       .dark .nav-sidebar {
-        background: rgba(83, 40, 79, 0.3);
-        backdrop-filter: blur(40px) saturate(180%);
-        -webkit-backdrop-filter: blur(40px) saturate(180%);
-        border-right: 1px solid rgba(204, 159, 83, 0.2);
-        box-shadow: 2px 0 20px rgba(0, 0, 0, 0.1);
+        background: rgba(83, 40, 79, 0.25);
+        backdrop-filter: blur(60px) saturate(200%);
+        -webkit-backdrop-filter: blur(60px) saturate(200%);
+        border-right: 1px solid rgba(204, 159, 83, 0.1);
+        box-shadow: 0 0 40px rgba(0, 0, 0, 0.05);
       }
       
       /* 移动端隐藏左侧导航栏 */
@@ -84,30 +85,31 @@ const Style = () => {
         }
       }
 
-      /* 右侧信息栏 - 固定宽度贴合边缘 */
+      /* 右侧信息栏 - Apple风格磨砂玻璃 */
       .info-sidebar {
         position: fixed;
         right: 0;
         top: 0;
-        width: 280px;
+        width: 320px;
         height: 100vh;
-        background: rgba(239, 239, 239, 0.95);
-        backdrop-filter: blur(40px) saturate(180%);
-        -webkit-backdrop-filter: blur(40px) saturate(180%);
-        border-left: 1px solid rgba(83, 40, 79, 0.1);
-        box-shadow: -2px 0 20px rgba(0, 0, 0, 0.05);
+        background: rgba(239, 239, 239, 0.8);
+        backdrop-filter: blur(60px) saturate(200%);
+        -webkit-backdrop-filter: blur(60px) saturate(200%);
+        border-left: 1px solid rgba(83, 40, 79, 0.08);
+        box-shadow: 0 0 40px rgba(0, 0, 0, 0.02);
         z-index: 10;
         overflow-y: auto;
+        overflow-x: hidden;
         padding-top: 80px;
       }
       
       /* 深色模式右侧信息栏 */
       .dark .info-sidebar {
-        background: rgba(83, 40, 79, 0.3);
-        backdrop-filter: blur(40px) saturate(180%);
-        -webkit-backdrop-filter: blur(40px) saturate(180%);
-        border-left: 1px solid rgba(204, 159, 83, 0.2);
-        box-shadow: -2px 0 20px rgba(0, 0, 0, 0.1);
+        background: rgba(83, 40, 79, 0.25);
+        backdrop-filter: blur(60px) saturate(200%);
+        -webkit-backdrop-filter: blur(60px) saturate(200%);
+        border-left: 1px solid rgba(204, 159, 83, 0.1);
+        box-shadow: 0 0 40px rgba(0, 0, 0, 0.05);
       }
       
       /* 中等屏幕隐藏右侧信息栏 */
@@ -128,8 +130,8 @@ const Style = () => {
         box-shadow: none;
         min-height: 100vh;
         position: relative;
-        margin-left: 280px;
-        margin-right: 280px;
+        margin-left: 320px;
+        margin-right: 320px;
         z-index: 1;
       }
       
@@ -156,7 +158,7 @@ const Style = () => {
       /* 响应式正文布局 */
       @media (max-width: 1280px) {
         #center-wrapper {
-          margin-left: 280px;
+          margin-left: 320px;
           margin-right: 0;
         }
       }
@@ -221,28 +223,44 @@ const Style = () => {
         color: #CC9F53;
       }
 
-      /* 按钮样式 - 浅色模式 */
+      /* 按钮样式 - Apple风格磨砂玻璃 */
       button, .btn {
-        background: rgba(83, 40, 79, 0.9);
-        backdrop-filter: blur(20px) saturate(180%);
-        -webkit-backdrop-filter: blur(20px) saturate(180%);
-        border: 1px solid rgba(83, 40, 79, 0.3);
-        border-radius: 8px;
+        background: rgba(83, 40, 79, 0.8);
+        backdrop-filter: blur(30px) saturate(180%);
+        -webkit-backdrop-filter: blur(30px) saturate(180%);
+        border: 1px solid rgba(83, 40, 79, 0.2);
+        border-radius: 12px;
         color: #EFEFEF;
-        padding: 10px 20px;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        padding: 12px 24px;
+        transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         font-weight: 600;
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        box-shadow: 0 2px 10px rgba(83, 40, 79, 0.2);
+        box-shadow: 0 4px 20px rgba(83, 40, 79, 0.15);
         position: relative;
         overflow: hidden;
+        cursor: pointer;
+      }
+      
+      button::before, .btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+        transition: left 0.5s;
       }
       
       button:hover, .btn:hover {
-        background: rgba(83, 40, 79, 1);
-        border-color: rgba(83, 40, 79, 0.5);
-        box-shadow: 0 4px 15px rgba(83, 40, 79, 0.3);
-        transform: translateY(-1px);
+        background: rgba(83, 40, 79, 0.9);
+        border-color: rgba(83, 40, 79, 0.3);
+        box-shadow: 0 8px 30px rgba(83, 40, 79, 0.25);
+        transform: translateY(-2px) scale(1.02);
+      }
+      
+      button:hover::before, .btn:hover::before {
+        left: 100%;
       }
       
       button:active, .btn:active {
@@ -252,49 +270,71 @@ const Style = () => {
       
       /* 按钮样式 - 深色模式 */
       .dark button, .dark .btn {
-        background: rgba(239, 239, 239, 0.9);
-        border: 1px solid rgba(239, 239, 239, 0.3);
+        background: rgba(239, 239, 239, 0.8);
+        border: 1px solid rgba(239, 239, 239, 0.2);
         color: #53284F;
+        box-shadow: 0 4px 20px rgba(239, 239, 239, 0.15);
       }
       
       .dark button:hover, .dark .btn:hover {
-        background: rgba(239, 239, 239, 1);
-        border-color: rgba(239, 239, 239, 0.5);
+        background: rgba(239, 239, 239, 0.9);
+        border-color: rgba(239, 239, 239, 0.3);
         color: #372E2C;
+        box-shadow: 0 8px 30px rgba(239, 239, 239, 0.25);
       }
 
-      /* 卡片样式 - 浅色模式 */
+      /* 卡片样式 - Apple风格磨砂玻璃 */
       .card, .info-card {
-        background: rgba(239, 239, 239, 0.9);
-        backdrop-filter: blur(20px);
-        border: 1px solid rgba(83, 40, 79, 0.1);
-        border-radius: 12px;
-        padding: 20px;
-        margin: 12px 0;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(40px) saturate(180%);
+        -webkit-backdrop-filter: blur(40px) saturate(180%);
+        border: 1px solid rgba(83, 40, 79, 0.06);
+        border-radius: 16px;
+        padding: 24px;
+        margin: 16px 0;
+        transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04);
         color: #372E2C;
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .card::before, .info-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(83, 40, 79, 0.1), transparent);
       }
       
       .card:hover, .info-card:hover {
-        border-color: rgba(83, 40, 79, 0.2);
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        transform: translateY(-2px);
+        background: rgba(255, 255, 255, 0.8);
+        border-color: rgba(83, 40, 79, 0.12);
+        box-shadow: 0 12px 48px rgba(0, 0, 0, 0.08);
+        transform: translateY(-4px) scale(1.01);
       }
       
       /* 卡片样式 - 深色模式 */
       .dark .card, .dark .info-card {
-        background: rgba(83, 40, 79, 0.2);
-        backdrop-filter: blur(20px);
-        border: 1px solid rgba(204, 159, 83, 0.1);
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        background: rgba(83, 40, 79, 0.15);
+        backdrop-filter: blur(40px) saturate(180%);
+        -webkit-backdrop-filter: blur(40px) saturate(180%);
+        border: 1px solid rgba(204, 159, 83, 0.08);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
         color: #EFEFEF;
       }
       
+      .dark .card::before, .dark .info-card::before {
+        background: linear-gradient(90deg, transparent, rgba(204, 159, 83, 0.1), transparent);
+      }
+      
       .dark .card:hover, .dark .info-card:hover {
-        border-color: rgba(204, 159, 83, 0.2);
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-        transform: translateY(-2px);
+        background: rgba(83, 40, 79, 0.2);
+        border-color: rgba(204, 159, 83, 0.15);
+        box-shadow: 0 12px 48px rgba(0, 0, 0, 0.15);
+        transform: translateY(-4px) scale(1.01);
       }
 
       /* 输入框样式 - 浅色模式 */
@@ -347,25 +387,42 @@ const Style = () => {
         box-shadow: 0px -4px 20px rgba(0, 0, 0, 0.1);
       }
 
-      /* 滚动条样式 */
+      /* Apple风格滚动条样式 */
       ::-webkit-scrollbar {
-        width: 8px;
+        width: 6px;
       }
       
       ::-webkit-scrollbar-track {
-        background: rgba(127, 38, 41, 0.3);
-        border-radius: 10px;
+        background: transparent;
       }
       
       ::-webkit-scrollbar-thumb {
-        background: linear-gradient(135deg, #7F2629 0%, #53284F 100%);
-        border-radius: 10px;
+        background: rgba(83, 40, 79, 0.3);
+        border-radius: 3px;
         transition: all 0.3s ease;
       }
       
       ::-webkit-scrollbar-thumb:hover {
-        background: linear-gradient(135deg, #53284F 0%, #7F2629 100%);
-        box-shadow: 0 0 10px rgba(204, 159, 83, 0.5);
+        background: rgba(83, 40, 79, 0.5);
+      }
+      
+      /* 深色模式滚动条 */
+      .dark ::-webkit-scrollbar-thumb {
+        background: rgba(204, 159, 83, 0.3);
+      }
+      
+      .dark ::-webkit-scrollbar-thumb:hover {
+        background: rgba(204, 159, 83, 0.5);
+      }
+      
+      /* 隐藏滚动条但保持功能 */
+      .nav-sidebar, .info-sidebar {
+        scrollbar-width: thin;
+        scrollbar-color: rgba(83, 40, 79, 0.3) transparent;
+      }
+      
+      .dark .nav-sidebar, .dark .info-sidebar {
+        scrollbar-color: rgba(204, 159, 83, 0.3) transparent;
       }
 
       /* 文字颜色优化 - 浅色模式 */
@@ -473,7 +530,7 @@ const Style = () => {
         transform: translateY(-2px);
       }
 
-      /* 顶部导航栏 - 固定定位 */
+      /* 顶部导航栏 - Apple风格磨砂玻璃 */
       .top-nav {
         position: fixed;
         top: 0;
@@ -481,19 +538,23 @@ const Style = () => {
         right: 0;
         height: 80px;
         z-index: 100;
-        background: rgba(255, 255, 255, 0.9);
-        backdrop-filter: blur(20px);
-        border-bottom: 1px solid rgba(83, 40, 79, 0.1);
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(60px) saturate(200%);
+        -webkit-backdrop-filter: blur(60px) saturate(200%);
+        border-bottom: 1px solid rgba(83, 40, 79, 0.06);
+        box-shadow: 0 1px 20px rgba(0, 0, 0, 0.02);
       }
       
       /* 深色模式顶部导航栏 */
       .dark .top-nav {
-        background: rgba(83, 40, 79, 0.4);
-        backdrop-filter: blur(20px);
-        border-bottom: 1px solid rgba(204, 159, 83, 0.15);
+        background: rgba(83, 40, 79, 0.3);
+        backdrop-filter: blur(60px) saturate(200%);
+        -webkit-backdrop-filter: blur(60px) saturate(200%);
+        border-bottom: 1px solid rgba(204, 159, 83, 0.08);
+        box-shadow: 0 1px 20px rgba(0, 0, 0, 0.05);
       }
       
-      /* 底部导航栏 - 移动端 */
+      /* 底部导航栏 - Apple风格磨砂玻璃 */
       .bottom-nav {
         position: fixed;
         bottom: 0;
@@ -501,16 +562,20 @@ const Style = () => {
         right: 0;
         height: 80px;
         z-index: 100;
-        background: rgba(255, 255, 255, 0.9);
-        backdrop-filter: blur(20px);
-        border-top: 1px solid rgba(83, 40, 79, 0.1);
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(60px) saturate(200%);
+        -webkit-backdrop-filter: blur(60px) saturate(200%);
+        border-top: 1px solid rgba(83, 40, 79, 0.06);
+        box-shadow: 0 -1px 20px rgba(0, 0, 0, 0.02);
       }
       
       /* 深色模式底部导航栏 */
       .dark .bottom-nav {
-        background: rgba(83, 40, 79, 0.4);
-        backdrop-filter: blur(20px);
-        border-top: 1px solid rgba(204, 159, 83, 0.15);
+        background: rgba(83, 40, 79, 0.3);
+        backdrop-filter: blur(60px) saturate(200%);
+        -webkit-backdrop-filter: blur(60px) saturate(200%);
+        border-top: 1px solid rgba(204, 159, 83, 0.08);
+        box-shadow: 0 -1px 20px rgba(0, 0, 0, 0.05);
       }
       
       /* 移动端显示底部导航栏 */
