@@ -50,7 +50,7 @@ const Style = () => {
         color: #f0f6fc;
       }
 
-      /* 左侧导航栏 - 现代GitBook风格 */
+      /* 左侧导航栏 - 简洁GitBook风格 */
       .nav-sidebar {
         position: fixed;
         left: 0;
@@ -58,15 +58,14 @@ const Style = () => {
         width: 280px;
         min-height: 100vh;
         background: #ffffff;
-        border-right: 1px solid #e5e7eb;
+        border-right: 1px solid #e1e4e8;
         z-index: 10;
         overflow-y: auto;
         overflow-x: hidden;
         padding: 0;
-        transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: transform 0.2s ease;
         will-change: transform;
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.02);
         display: flex;
         flex-direction: column;
       }
@@ -86,7 +85,7 @@ const Style = () => {
       /* 侧边栏头部区域 */
       .nav-sidebar-header {
         padding: 16px;
-        border-bottom: 1px solid #f3f4f6;
+        border-bottom: 1px solid #e1e4e8;
         background: #ffffff;
         position: sticky;
         top: 0;
@@ -103,21 +102,21 @@ const Style = () => {
         display: flex;
         align-items: center;
         gap: 8px;
-        margin-bottom: 16px;
+        margin-bottom: 12px;
         font-weight: 600;
         font-size: 16px;
-        color: #1f2937;
+        color: #24292e;
       }
       
       .dark .nav-brand {
-        color: #f9fafb;
+        color: #f0f6fc;
       }
       
       .nav-brand-icon {
         width: 20px;
         height: 20px;
-        background: #3b82f6;
-        border-radius: 4px;
+        background: #0969da;
+        border-radius: 3px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -129,46 +128,44 @@ const Style = () => {
       /* 搜索框样式 */
       .nav-search {
         position: relative;
-        margin-bottom: 8px;
       }
       
       .nav-search-input {
         width: 100%;
-        padding: 8px 12px 8px 36px;
-        border: 1px solid #e5e7eb;
-        border-radius: 6px;
-        background: #f9fafb;
+        padding: 6px 12px 6px 32px;
+        border: 1px solid #d1d5da;
+        border-radius: 4px;
+        background: #f6f8fa;
         font-size: 14px;
-        color: #374151;
-        transition: all 0.15s ease;
+        color: #24292e;
+        transition: border-color 0.15s ease;
       }
       
       .nav-search-input:focus {
         outline: none;
-        border-color: #3b82f6;
+        border-color: #0969da;
         background: #ffffff;
-        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
       }
       
       .dark .nav-search-input {
-        background: #1f2937;
-        border-color: #374151;
-        color: #f9fafb;
+        background: #21262d;
+        border-color: #444d56;
+        color: #f0f6fc;
       }
       
       .dark .nav-search-input:focus {
-        background: #111827;
-        border-color: #3b82f6;
+        background: #0d1117;
+        border-color: #1f6feb;
       }
       
       .nav-search-icon {
         position: absolute;
-        left: 12px;
+        left: 10px;
         top: 50%;
         transform: translateY(-50%);
-        width: 16px;
-        height: 16px;
-        color: #6b7280;
+        width: 14px;
+        height: 14px;
+        color: #6a737d;
       }
       
       .nav-search-shortcut {
@@ -177,17 +174,17 @@ const Style = () => {
         top: 50%;
         transform: translateY(-50%);
         font-size: 11px;
-        color: #9ca3af;
-        background: #f3f4f6;
-        padding: 2px 6px;
-        border-radius: 4px;
-        border: 1px solid #e5e7eb;
+        color: #6a737d;
+        background: #f1f3f4;
+        padding: 1px 4px;
+        border-radius: 3px;
+        border: 1px solid #d1d5da;
       }
       
       .dark .nav-search-shortcut {
-        background: #374151;
-        border-color: #4b5563;
-        color: #d1d5db;
+        background: #21262d;
+        border-color: #444d56;
+        color: #8b949e;
       }
       
       /* 侧边栏内容区域 */
@@ -199,8 +196,8 @@ const Style = () => {
       
       /* 侧边栏底部区域 */
       .nav-sidebar-footer {
-        padding: 16px;
-        border-top: 1px solid #f3f4f6;
+        padding: 12px 16px;
+        border-top: 1px solid #e1e4e8;
         background: #ffffff;
         position: sticky;
         bottom: 0;
@@ -216,31 +213,32 @@ const Style = () => {
       .nav-footer-item {
         display: flex;
         align-items: center;
-        padding: 8px 12px;
-        margin: 2px 0;
+        padding: 6px 16px;
+        margin: 0;
         border: none;
         background: transparent;
-        color: #6b7280;
+        color: #586069;
         font-size: 14px;
         cursor: pointer;
-        transition: all 0.15s ease;
-        border-radius: 8px;
+        transition: background-color 0.15s ease;
+        border-radius: 0;
         width: 100%;
         text-align: left;
+        min-height: 32px;
       }
       
       .nav-footer-item:hover {
-        background: #f3f4f6;
-        color: #374151;
+        background: #f6f8fa;
+        color: #24292e;
       }
       
       .dark .nav-footer-item {
-        color: #9ca3af;
+        color: #c6cbd1;
       }
       
       .dark .nav-footer-item:hover {
-        background: #1f2937;
-        color: #f9fafb;
+        background: #21262d;
+        color: #f0f6fc;
       }
       
       .nav-footer-item .nav-icon {
@@ -599,23 +597,25 @@ const Style = () => {
         border-right: 1px solid #444d56;
       }
       
-      /* 现代GitBook风格导航项 */
+      /* 简洁GitBook风格导航项 */
       .gitbook-nav-item {
         position: relative;
         display: flex;
         align-items: center;
-        padding: 8px 12px;
-        margin: 2px 12px;
+        padding: 6px 16px;
+        margin: 0;
         border: none;
         background: transparent;
-        color: #6b7280;
+        color: #586069;
         font-size: 14px;
-        line-height: 1.4;
+        line-height: 1.5;
         cursor: pointer;
-        transition: all 0.15s ease;
-        border-radius: 8px;
+        transition: background-color 0.15s ease;
+        border-radius: 0;
         font-weight: 400;
-        min-height: 36px;
+        min-height: 32px;
+        width: 100%;
+        text-align: left;
       }
       
       .dark .gitbook-nav-item {
@@ -623,26 +623,24 @@ const Style = () => {
       }
       
       .gitbook-nav-item:hover {
-        background: #f3f4f6;
-        color: #374151;
+        background: #f6f8fa;
+        color: #24292e;
       }
       
       .dark .gitbook-nav-item:hover {
-        background: #1f2937;
-        color: #f9fafb;
+        background: #21262d;
+        color: #f0f6fc;
       }
       
       .gitbook-nav-item.active {
-        background: #eff6ff;
-        color: #1d4ed8;
+        background: #f1f8ff;
+        color: #0366d6;
         font-weight: 500;
-        border: 1px solid #dbeafe;
       }
       
       .dark .gitbook-nav-item.active {
-        background: #1e3a8a;
-        color: #93c5fd;
-        border: 1px solid #1e40af;
+        background: #1c2128;
+        color: #58a6ff;
       }
       
       /* 导航项图标 */
@@ -705,36 +703,33 @@ const Style = () => {
         line-height: 1.2;
       }
       
-      /* 现代缩进系统 */
+      /* 简洁缩进系统 */
       .gitbook-indent {
         position: relative;
-        margin-left: 16px;
+        margin-left: 20px;
       }
       
       .gitbook-indent::before {
         content: '';
         position: absolute;
-        left: -8px;
+        left: -12px;
         top: 0;
         bottom: 0;
         width: 1px;
-        background: #e5e7eb;
-        opacity: 0.5;
-        transition: all 0.15s ease;
+        background: #d1d5da;
       }
       
       .dark .gitbook-indent::before {
-        background: #374151;
-        opacity: 0.6;
+        background: #444d56;
       }
       
       /* 多级缩进 */
       .gitbook-indent .gitbook-indent {
-        margin-left: 12px;
+        margin-left: 16px;
       }
       
       .gitbook-indent .gitbook-indent::before {
-        left: -6px;
+        left: -8px;
       }
       
       /* 折叠/展开动画 */
