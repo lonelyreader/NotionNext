@@ -8,10 +8,10 @@ import CONFIG from '../config'
 import LogoBar from './LogoBar'
 import { MenuBarMobile } from './MenuBarMobile'
 import { MenuItemDrop } from './MenuItemDrop'
-import { useGitBookGlobal } from '../index'
+import SearchInput from './SearchInput'
 
 /**
- * GitBook3 顶栏：固定在最上方，只放品牌/全局菜单，不放搜索
+ * 页头：顶部导航栏 + 菜单
  * @param {} param0
  * @returns
  */
@@ -21,7 +21,6 @@ export default function Header(props) {
   const collapseRef = useRef(null)
 
   const { locale } = useGlobal()
-  const { isCollapsed, toggleSidebar } = useGitBookGlobal()
 
   const defaultLinks = [
     {
@@ -41,8 +40,13 @@ export default function Header(props) {
       name: locale.NAV.ARCHIVE,
       href: '/archive',
       show: siteConfig('GITBOOK_MENU_ARCHIVE', null, CONFIG)
+    },
+    {
+      icon: 'fas fa-search',
+      name: locale.NAV.SEARCH,
+      href: '/search',
+      show: siteConfig('GITBOOK_MENU_SEARCH', null, CONFIG)
     }
-    // 注意：搜索功能已移到左侧栏，这里不再显示
   ]
 
   let links = defaultLinks.concat(customNav)
@@ -59,44 +63,31 @@ export default function Header(props) {
   const enableClerk = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
 
   return (
-    <header id='gitbook3-topbar' className={'gitbook3-topbar ' + className}>
-      {/* 固定顶栏 */}
-      <div className='flex justify-center items-center w-full h-full px-6'>
-        <div className='max-w-screen-4xl w-full flex gap-x-4 justify-between items-center'>
-          {/* 左侧：品牌标识 */}
-          <div className='flex items-center'>
+    <div id='top-nav' className={'fixed top-0 w-full z-20 ' + className}>
+      {/* PC端菜单 */}
+      <div className='flex justify-center border-b dark:border-black items-center w-full h-16 bg-white dark:bg-hexo-black-gray'>
+        <div className='px-5 max-w-screen-4xl w-full flex gap-x-3 justify-between items-center'>
+          {/* 左侧*/}
+          <div className='flex'>
             <LogoBar {...props} />
+
+            {/* 桌面端顶部菜单 */}
+            <div className='hidden md:flex'>
+              {links &&
+                links?.map((link, index) => (
+                  <MenuItemDrop key={index} link={link} />
+                ))}
+            </div>
           </div>
 
-          {/* 中间：全局菜单 */}
-          <div className='hidden md:flex items-center gap-6'>
-            {links &&
-              links?.map((link, index) => (
-                <MenuItemDrop key={index} link={link} />
-              ))}
-          </div>
-
-          {/* 右侧：用户操作 */}
-          <div className='flex items-center gap-3'>
-            {/* 侧栏开关按钮（仅在侧栏收起时显示） */}
-            {isCollapsed && (
-              <button
-                onClick={toggleSidebar}
-                className='gitbook3-sidebar-toggle-btn'
-                aria-label="Show sidebar"
-                aria-expanded="false"
-                title="Show sidebar"
-              >
-                <i className='fas fa-bars' />
-              </button>
-            )}
-            
+          {/* 右侧 */}
+          <div className='flex items-center gap-4'>
             {/* 登录相关 */}
             {enableClerk && (
               <>
                 <SignedOut>
                   <SignInButton mode='modal'>
-                    <button className='gitbook-button primary'>
+                    <button className='bg-green-500 hover:bg-green-600 text-white rounded-lg px-3 py-2'>
                       {locale.COMMON.SIGN_IN}
                     </button>
                   </SignInButton>
@@ -105,20 +96,19 @@ export default function Header(props) {
               </>
             )}
             <DarkModeButton className='text-sm items-center h-full hidden md:flex' />
-            
-            {/* 移动端菜单按钮 */}
-            <div className='md:hidden flex items-center gap-3'>
+            <SearchInput className='hidden md:flex md:w-52 lg:w-72' />
+            {/* 折叠按钮、仅移动端显示 */}
+            <div className='mr-1 flex md:hidden justify-end items-center space-x-4  dark:text-gray-200'>
               <DarkModeButton className='flex text-md items-center h-full' />
-              <button
+              <div
                 onClick={toggleMenuOpen}
-                className='gitbook-button'
-                aria-label="Toggle menu">
+                className='cursor-pointer text-lg hover:scale-110 duration-150'>
                 {isOpen ? (
                   <i className='fas fa-times' />
                 ) : (
                   <i className='fa-solid fa-bars' />
                 )}
-              </button>
+              </div>
             </div>
           </div>
         </div>
@@ -130,7 +120,7 @@ export default function Header(props) {
         collapseRef={collapseRef}
         isOpen={isOpen}
         className='md:hidden'>
-        <div className='bg-white/95 backdrop-blur-xl pt-1 py-2 dark:bg-gray-800/95'>
+        <div className='bg-white dark:bg-hexo-black-gray pt-1 py-2 lg:hidden '>
           <MenuBarMobile
             {...props}
             onHeightChange={param =>
@@ -139,6 +129,6 @@ export default function Header(props) {
           />
         </div>
       </Collapse>
-    </header>
+    </div>
   )
 }

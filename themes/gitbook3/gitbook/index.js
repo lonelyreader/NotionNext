@@ -35,13 +35,7 @@ import JumpToTopButton from './components/JumpToTopButton'
 import NavPostList from './components/NavPostList'
 import PageNavDrawer from './components/PageNavDrawer'
 import RevolverMaps from './components/RevolverMaps'
-import SearchInput from './components/SearchInput'
 import TagItemMini from './components/TagItemMini'
-import SidebarToggle from './components/SidebarToggle'
-// GitBook3 新组件
-import GlobalSidebar from './components/GlobalSidebar'
-import ReadingCard from './components/ReadingCard'
-import EdgeHandle from './components/EdgeHandle'
 import CONFIG from './config'
 import { Style } from './style'
 
@@ -96,8 +90,8 @@ function getNavPagesWithLatest(allNavPages, latestPosts, post) {
 }
 
 /**
- * GitBook3 基础布局
- * 采用"顶栏 + 主区域两列"布局：TopBar + GlobalSidebar + ReadingCard
+ * 基础布局
+ * 采用左右两侧布局，移动端使用顶部导航栏
  * @returns {JSX.Element}
  * @constructor
  */
@@ -117,49 +111,7 @@ const LayoutBase = props => {
   const [pageNavVisible, changePageNavVisible] = useState(false)
   const [filteredNavPages, setFilteredNavPages] = useState(allNavPages)
 
-  // 侧栏状态管理
-  const [isCollapsed, setIsCollapsed] = useState(false)
-  const [isTemporarilyOpen, setIsTemporarilyOpen] = useState(false)
-
   const searchModal = useRef(null)
-
-  // 从localStorage读取侧栏状态
-  useEffect(() => {
-    const savedState = localStorage.getItem('gitbook3-sidebar-collapsed')
-    if (savedState !== null) {
-      setIsCollapsed(JSON.parse(savedState))
-    } else {
-      // 如果没有保存的状态，默认展开（防锁死）
-      setIsCollapsed(false)
-    }
-  }, [])
-
-  // 保存侧栏状态到localStorage
-  const toggleSidebar = () => {
-    const newState = !isCollapsed
-    setIsCollapsed(newState)
-    setIsTemporarilyOpen(false) // 切换时取消临时状态
-    
-    try {
-      localStorage.setItem('gitbook3-sidebar-collapsed', JSON.stringify(newState))
-    } catch (e) {
-      // 如果localStorage不可用，至少保持展开状态
-      console.warn('localStorage not available, keeping sidebar expanded')
-      setIsCollapsed(false)
-    }
-    
-    // 更新body类名以调整布局
-    if (newState) {
-      document.body.classList.add('gitbook3-sidebar-collapsed')
-    } else {
-      document.body.classList.remove('gitbook3-sidebar-collapsed')
-    }
-  }
-
-  // 临时滑出侧栏
-  const setTemporaryOpen = (open) => {
-    setIsTemporarilyOpen(open)
-  }
 
   useEffect(() => {
     setFilteredNavPages(getNavPagesWithLatest(allNavPages, latestPosts, post))
@@ -170,21 +122,6 @@ const LayoutBase = props => {
     true,
     CONFIG
   )
-  
-  // 键盘快捷键支持
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      // Cmd/Ctrl + B 切换侧栏
-      if ((e.metaKey || e.ctrlKey) && e.key === 'b') {
-        e.preventDefault()
-        toggleSidebar()
-      }
-    }
-
-    document.addEventListener('keydown', handleKeyDown)
-    return () => document.removeEventListener('keydown', handleKeyDown)
-  }, [isCollapsed, toggleSidebar])
-  
   return (
     <ThemeGlobalGitbook.Provider
       value={{
@@ -195,41 +132,95 @@ const LayoutBase = props => {
         setFilteredNavPages,
         allNavPages,
         pageNavVisible,
-        changePageNavVisible,
-        // 侧栏状态管理
-        isCollapsed,
-        isTemporarilyOpen,
-        toggleSidebar,
-        setTemporaryOpen
+        changePageNavVisible
       }}>
       <Style />
 
       <div
-        id='theme-gitbook3'
-        className={`${siteConfig('FONT_STYLE')} pb-16 md:pb-0 scroll-smooth w-full h-full min-h-screen justify-center dark:text-gray-300 glow-effect`}>
+        id='theme-gitbook'
+        className={`${siteConfig('FONT_STYLE')} pb-16 md:pb-0 scroll-smooth bg-white dark:bg-black w-full h-full min-h-screen justify-center dark:text-gray-300`}>
         <AlgoliaSearchModal cRef={searchModal} {...props} />
 
-        {/* 边缘把手（仅在桌面端且侧栏收起时显示） */}
-        <EdgeHandle />
-
-        {/* 固定顶栏 */}
+        {/* 顶部导航栏 */}
         <Header {...props} />
 
-        {/* 主区域两列布局 */}
-        <main id='gitbook3-main' className='gitbook3-main-layout'>
-          {/* 左侧全局侧栏 */}
-          <GlobalSidebar 
-            {...props} 
-            slotLeft={slotLeft}
-            filteredNavPages={filteredNavPages}
-          />
+        <main
+          id='wrapper'
+          className={`${siteConfig('LAYOUT_SIDEBAR_REVERSE') ? 'flex-row-reverse' : ''} relative flex justify-between w-full gap-x-6 h-full mx-auto max-w-screen-4xl`}>
+          {/* 左侧推拉抽屉 */}
+          {fullWidth ? null : (
+            <div className={'hidden md:block relative z-10 '}>
+              <div className='w-80 pt-14 pb-4 sticky top-0 h-screen flex justify-between flex-col'>
+                {/* 导航 */}
+                <div className='overflow-y-scroll scroll-hidden pt-10 pl-5'>
+                  {/* 嵌入 */}
+                  {slotLeft}
 
-          {/* 阅读卡片（合并了原来的中间内容列和右侧栏） */}
-          <ReadingCard post={post} prev={props.prev} next={props.next} notice={props.notice}>
-            {slotTop}
-            <WWAds className='w-full' orientation='horizontal' />
-            {children}
-          </ReadingCard>
+                  {/* 所有文章列表 */}
+                  <NavPostList filteredNavPages={filteredNavPages} {...props} />
+                </div>
+                {/* 页脚 */}
+                <Footer {...props} />
+              </div>
+            </div>
+          )}
+
+          {/* 中间内容区域 */}
+          <div
+            id='center-wrapper'
+            className='flex flex-col justify-between w-full relative z-10 pt-14 min-h-screen'>
+            <div
+              id='container-inner'
+              className={`w-full ${fullWidth ? 'px-5' : 'max-w-3xl px-3 lg:px-0'} justify-center mx-auto`}>
+              {slotTop}
+              <WWAds className='w-full' orientation='horizontal' />
+
+              {children}
+
+              {/* Google广告 */}
+              <AdSlot type='in-article' />
+              <WWAds className='w-full' orientation='horizontal' />
+            </div>
+
+            {/* 底部 */}
+            <div className='md:hidden'>
+              <Footer {...props} />
+            </div>
+          </div>
+
+          {/*  右侧 */}
+          {fullWidth ? null : (
+            <div
+              className={
+                'w-72 hidden 2xl:block dark:border-transparent flex-shrink-0 relative z-10 '
+              }>
+              <div className='py-14 sticky top-0'>
+                <ArticleInfo post={props?.post ? props?.post : props.notice} />
+
+                <div>
+                  {/* 桌面端目录 */}
+                  <Catalog {...props} />
+                  {slotRight}
+                  {router.route === '/' && (
+                    <>
+                      <InfoCard {...props} />
+                      {siteConfig(
+                        'GITBOOK_WIDGET_REVOLVER_MAPS',
+                        null,
+                        CONFIG
+                      ) === 'true' && <RevolverMaps />}
+                      <Live2D />
+                    </>
+                  )}
+                  {/* gitbook主题首页只显示公告 */}
+                  <Announcement {...props} />
+                </div>
+
+                <AdSlot type='in-article' />
+                <Live2D />
+              </div>
+            </div>
+          )}
         </main>
 
         {GITBOOK_LOADING_COVER && <LoadingCover />}

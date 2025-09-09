@@ -17,14 +17,6 @@ const CONFIG = {
 
   GITBOOK_FOLDER_HOVER_EXPAND: false, // 左侧导航文件夹鼠标悬停时自动展开；若为false，则要点击才能展开
 
-  // GitBook3 新特性
-  GITBOOK3_LAYOUT: 'reading-card', // 阅读卡片布局：topbar + sidebar + reading-card
-  GITBOOK3_STICKY_TOC: true, // 目录在卡片内部粘性定位
-  GITBOOK3_SIDEBAR_COLLAPSIBLE: true, // 左侧栏可收起
-  GITBOOK3_SEARCH_IN_SIDEBAR: true, // 搜索框移到左侧栏
-  GITBOOK3_LIQUID_GLASS: true, // Liquid Glass 审美系统
-  GITBOOK3_EDGE_HANDLE: true, // 边缘把手功能
-
   // Widget
   GITBOOK_WIDGET_REVOLVER_MAPS:
     process.env.NEXT_PUBLIC_WIDGET_REVOLVER_MAPS || 'false', // 地图插件
