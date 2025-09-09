@@ -144,13 +144,14 @@ const LayoutBase = props => {
         {/* 顶部导航栏 */}
         <Header {...props} />
 
-        <main
-          id='wrapper'
-          className={`${siteConfig('LAYOUT_SIDEBAR_REVERSE') ? 'flex-row-reverse' : ''} relative flex justify-between w-full gap-x-6 h-full mx-auto max-w-screen-4xl`}>
+        <div className='w-full max-w-screen-7xl mx-auto px-4 lg:px-6 xl:px-8'>
+          <main
+            id='wrapper'
+            className={`${siteConfig('LAYOUT_SIDEBAR_REVERSE') ? 'flex-row-reverse' : ''} relative flex w-full h-full gap-4 lg:gap-6 xl:gap-8`}>
           {/* 左侧推拉抽屉 */}
           {fullWidth ? null : (
-            <div className={'hidden md:block relative z-10 '}>
-              <div className='w-80 pt-14 pb-4 sticky top-0 h-screen flex justify-between flex-col'>
+            <div className={'hidden md:block relative z-10 flex-shrink-0'}>
+              <div className='w-72 lg:w-80 pt-14 pb-4 sticky top-0 h-screen flex justify-between flex-col'>
                 {/* 导航 */}
                 <div className='overflow-y-scroll scroll-hidden pt-10 pl-5'>
                   {/* 嵌入 */}
@@ -168,10 +169,10 @@ const LayoutBase = props => {
           {/* 中间内容区域 */}
           <div
             id='center-wrapper'
-            className='flex flex-col justify-between w-full relative z-10 pt-14 min-h-screen'>
+            className='flex flex-col justify-between flex-1 relative z-10 pt-14 min-h-screen'>
             <div
               id='container-inner'
-              className={`w-full ${fullWidth ? 'px-5' : 'max-w-3xl px-3 lg:px-0'} justify-center mx-auto`}>
+              className={`w-full ${fullWidth ? 'px-5' : 'max-w-4xl px-4 lg:px-6'} justify-center mx-auto`}>
               {slotTop}
               <WWAds className='w-full' orientation='horizontal' />
 
@@ -192,7 +193,7 @@ const LayoutBase = props => {
           {fullWidth ? null : (
             <div
               className={
-                'w-72 hidden 2xl:block dark:border-transparent flex-shrink-0 relative z-10 '
+                'w-64 lg:w-72 hidden xl:block dark:border-transparent flex-shrink-0 relative z-10'
               }>
               <div className='py-14 sticky top-0'>
                 <ArticleInfo post={props?.post ? props?.post : props.notice} />
@@ -222,6 +223,7 @@ const LayoutBase = props => {
             </div>
           )}
         </main>
+        </div>
 
         {GITBOOK_LOADING_COVER && <LoadingCover />}
 
