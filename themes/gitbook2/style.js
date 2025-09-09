@@ -98,9 +98,9 @@ const Style = () => {
           padding: 0 8px;
         }
         
-        /* 移动端标题优化 */
+        /* 移动端标题优化 - 缩小20% */
         #theme-gitbook h1 {
-          font-size: 1.75rem;
+          font-size: 1.4rem;
           line-height: 1.3;
           margin-bottom: 1rem;
           word-break: break-word;
@@ -112,10 +112,10 @@ const Style = () => {
           margin-bottom: 1rem;
         }
         
-        /* 移动端代码块优化 */
+        /* 移动端代码块优化 - 缩小20% */
         #theme-gitbook pre {
           overflow-x: auto;
-          font-size: 0.875rem;
+          font-size: 0.7rem;
           padding: 12px;
           margin: 1rem 0;
           border-radius: 6px;
@@ -159,15 +159,15 @@ const Style = () => {
         }
         
         #theme-gitbook h1 {
-          font-size: 1.5rem;
+          font-size: 1.2rem;
         }
         
         #theme-gitbook h2 {
-          font-size: 1.25rem;
+          font-size: 1rem;
         }
         
         #theme-gitbook h3 {
-          font-size: 1.125rem;
+          font-size: 0.9rem;
         }
         
         /* 移动端底部导航栏优化 */
@@ -308,22 +308,22 @@ const Style = () => {
         background-color: var(--shell-bg-dark);
       }
 
-      /* 正文字号与行距优化 */
+      /* 正文字号与行距优化 - 缩小20% */
       #theme-gitbook #article-wrapper {
-        font-size: 17px;
+        font-size: 13.6px;
         line-height: 1.7;
       }
 
       #theme-gitbook #article-wrapper p {
-        font-size: 17px;
+        font-size: 13.6px;
         line-height: 1.7;
         margin-top: 8px;
         margin-bottom: 16px;
       }
 
-      /* 标题流体字号 */
+      /* 标题流体字号 - 缩小20% */
       #theme-gitbook #article-wrapper h1 {
-        font-size: clamp(1.75rem, 4vw, 2.5rem);
+        font-size: clamp(1.4rem, 3.2vw, 2rem);
         line-height: 1.3;
         margin-top: 12px;
         margin-bottom: 10px;
@@ -331,7 +331,7 @@ const Style = () => {
       }
 
       #theme-gitbook #article-wrapper h2 {
-        font-size: clamp(1.5rem, 3.5vw, 2rem);
+        font-size: clamp(1.2rem, 2.8vw, 1.6rem);
         line-height: 1.4;
         margin-top: 16px;
         margin-bottom: 12px;
@@ -339,7 +339,7 @@ const Style = () => {
       }
 
       #theme-gitbook #article-wrapper h3 {
-        font-size: clamp(1.25rem, 3vw, 1.5rem);
+        font-size: clamp(1rem, 2.4vw, 1.2rem);
         line-height: 1.4;
         margin-top: 14px;
         margin-bottom: 10px;
@@ -347,7 +347,7 @@ const Style = () => {
       }
 
       #theme-gitbook #article-wrapper h4 {
-        font-size: clamp(1.125rem, 2.5vw, 1.25rem);
+        font-size: clamp(0.9rem, 2vw, 1rem);
         line-height: 1.5;
         margin-top: 12px;
         margin-bottom: 8px;
@@ -355,7 +355,7 @@ const Style = () => {
       }
 
       #theme-gitbook #article-wrapper h5 {
-        font-size: clamp(1rem, 2vw, 1.125rem);
+        font-size: clamp(0.8rem, 1.6vw, 0.9rem);
         line-height: 1.5;
         margin-top: 10px;
         margin-bottom: 8px;
@@ -363,7 +363,7 @@ const Style = () => {
       }
 
       #theme-gitbook #article-wrapper h6 {
-        font-size: clamp(0.875rem, 1.5vw, 1rem);
+        font-size: clamp(0.7rem, 1.2vw, 0.8rem);
         line-height: 1.5;
         margin-top: 8px;
         margin-bottom: 6px;
@@ -442,7 +442,7 @@ const Style = () => {
         border-bottom: 1px solid rgba(255, 255, 255, 0.05);
       }
 
-      /* 代码块与引用块优化 */
+      /* 代码块与引用块优化 - 缩小20% */
       #theme-gitbook #article-wrapper pre {
         margin: 16px 0;
         padding: 16px;
@@ -450,7 +450,7 @@ const Style = () => {
         border: 1px solid rgba(0, 0, 0, 0.05);
         border-radius: 8px;
         overflow-x: auto;
-        font-size: 14px;
+        font-size: 11.2px;
         line-height: 1.5;
       }
 
@@ -463,7 +463,7 @@ const Style = () => {
         background-color: rgba(0, 0, 0, 0.04);
         padding: 2px 6px;
         border-radius: 4px;
-        font-size: 0.9em;
+        font-size: 0.72em;
       }
 
       .dark #theme-gitbook #article-wrapper code {
@@ -498,10 +498,10 @@ const Style = () => {
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
       }
 
-      /* 图注明度弱化 */
+      /* 图注明度弱化 - 缩小20% */
       #theme-gitbook #article-wrapper figcaption,
       #theme-gitbook #article-wrapper .image-caption {
-        font-size: 13px;
+        font-size: 10.4px;
         color: rgba(0, 0, 0, 0.6);
         text-align: center;
         margin-top: 8px;
@@ -796,24 +796,24 @@ const Style = () => {
         transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
       }
       
-      /* 白纸工作区样式优化 */
+      /* 白纸工作区样式优化 - 调整边距 */
       #workspace-sheet {
         min-height: calc(100vh - 2rem);
-        margin-top: 16px;
-        margin-right: 20px;
-        margin-bottom: 28px;
+        margin-top: 12px;
+        margin-right: 16px;
+        margin-bottom: 20px;
         margin-left: 0;
       }
 
-      /* 纸面外边距与内边距优化 */
+      /* 纸面外边距与内边距优化 - 调整边距 */
       #theme-gitbook #container-inner {
-        padding-left: 28px;
-        padding-right: 28px;
+        padding-left: 20px;
+        padding-right: 20px;
       }
 
-      /* 右侧边栏内边距与正文对齐 */
+      /* 右侧边栏内边距与正文对齐 - 调整边距 */
       #theme-gitbook .hidden.lg\\:block {
-        padding-right: 28px;
+        padding-right: 20px;
       }
 
       /* 移动端内边距调整 */
@@ -824,8 +824,8 @@ const Style = () => {
         }
         
         #workspace-sheet {
-          margin-right: 16px;
-          margin-bottom: 24px;
+          margin-right: 12px;
+          margin-bottom: 20px;
         }
       }
 
@@ -836,8 +836,8 @@ const Style = () => {
         }
         
         #workspace-sheet {
-          margin-right: 12px;
-          margin-bottom: 20px;
+          margin-right: 8px;
+          margin-bottom: 16px;
         }
       }
       
@@ -861,6 +861,10 @@ const Style = () => {
         padding-left: 20px;
         padding-right: 20px;
         box-shadow: none;
+        width: 100%;
+        max-width: 100vw;
+        box-sizing: border-box;
+        overflow: hidden;
       }
 
       .dark #theme-gitbook #top-nav {
@@ -872,11 +876,15 @@ const Style = () => {
         height: 56px;
         padding-left: 20px;
         padding-right: 20px;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        overflow: hidden;
       }
 
-      /* 站点标题自适应优化 */
+      /* 站点标题自适应优化 - 缩小20% */
       #theme-gitbook #logo-wrapper a {
-        font-size: clamp(1.125rem, 2.5vw, 1.75rem);
+        font-size: clamp(0.9rem, 2vw, 1.4rem);
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -906,14 +914,14 @@ const Style = () => {
 
         #theme-gitbook #logo-wrapper a {
           max-width: 150px;
-          font-size: clamp(1rem, 3vw, 1.25rem);
+          font-size: clamp(0.8rem, 2.4vw, 1rem);
         }
       }
 
       @media (max-width: 480px) {
         #theme-gitbook #logo-wrapper a {
           max-width: 120px;
-          font-size: clamp(0.875rem, 4vw, 1.125rem);
+          font-size: clamp(0.7rem, 3.2vw, 0.9rem);
         }
       }
 
@@ -1007,11 +1015,12 @@ const Style = () => {
         justify-content: space-between;
       }
 
-      /* 左栏导航区域 */
+      /* 左栏导航区域 - 优化边距 */
       #theme-gitbook .hidden.md\\:block .overflow-y-scroll {
         flex: 1;
-        padding-top: 40px;
-        padding-left: 20px;
+        padding-top: 20px;
+        padding-left: 16px;
+        padding-right: 12px;
         overflow-y: auto;
         overflow-x: hidden;
       }
@@ -1060,29 +1069,30 @@ const Style = () => {
         background-color: rgba(255, 255, 255, 0.05);
       }
 
-      /* 分组标题与项密度优化 */
+      /* 分组标题与项密度优化 - 调整边距 */
       #theme-gitbook .cursor-pointer.relative.flex {
-        line-height: 38px;
-        padding-left: 20px;
-        padding-right: 20px;
+        line-height: 32px;
+        padding-left: 12px;
+        padding-right: 12px;
+        margin: 1px 0;
       }
 
-      /* 子项左缩进一致 */
+      /* 子项左缩进一致 - 优化边距 */
       #theme-gitbook .ml-3.border-l {
-        margin-left: 20px;
+        margin-left: 16px;
         border-left: 1px solid rgba(0, 0, 0, 0.12);
-        padding-left: 16px;
+        padding-left: 12px;
       }
 
       .dark #theme-gitbook .ml-3.border-l {
         border-left: 1px solid rgba(255, 255, 255, 0.12);
       }
 
-      /* 子项hover轻底色 */
+      /* 子项hover轻底色 - 优化边距 */
       #theme-gitbook .relative.py-1\\.5.cursor-pointer {
         transition: all 0.15s ease;
         border-radius: 6px;
-        padding: 6px 12px;
+        padding: 4px 8px;
         margin: 1px 0;
       }
 
