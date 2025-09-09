@@ -1,68 +1,48 @@
-import { useState, useEffect } from 'react'
 import { useGitBookGlobal } from '../index'
+import CONFIG from '../config'
+import { siteConfig } from '@/lib/config'
+import { useGlobal } from '@/lib/global'
 
 /**
- * 边缘把手组件
- * 当侧栏收起时显示，提供重新展开的入口
- * 遵循苹果HIG的侧栏与导航可发现性建议
+ * 桌面端侧栏边缘把手
+ * 当侧栏收起时显示，提供热区和点击功能
  */
 export default function EdgeHandle() {
-  const { isCollapsed, toggleSidebar, setTemporaryOpen } = useGitBookGlobal()
-  const [isHovering, setIsHovering] = useState(false)
-  const [isVisible, setIsVisible] = useState(false)
+  const { isCollapsed, setTemporaryOpen, toggleSidebar } = useGitBookGlobal()
+  const { fullWidth } = useGlobal()
 
-  // 只在桌面端且侧栏收起时显示
-  useEffect(() => {
-    const checkVisibility = () => {
-      const isDesktop = window.innerWidth >= 1024
-      setIsVisible(isDesktop && isCollapsed)
-    }
+  // 仅在桌面端且侧栏收起时显示
+  if (!CONFIG.GITBOOK3_EDGE_HANDLE || !isCollapsed || fullWidth) {
+    return null
+  }
 
-    checkVisibility()
-    window.addEventListener('resize', checkVisibility)
-    return () => window.removeEventListener('resize', checkVisibility)
-  }, [isCollapsed])
-
-  // 处理鼠标进入热区
   const handleMouseEnter = () => {
-    setIsHovering(true)
-    setTemporaryOpen(true) // 临时滑出侧栏
+    setTemporaryOpen(true)
   }
 
-  // 处理鼠标离开热区
   const handleMouseLeave = () => {
-    setIsHovering(false)
-    setTemporaryOpen(false) // 收起临时滑出的侧栏
+    setTemporaryOpen(false)
   }
 
-  // 处理点击把手
   const handleClick = () => {
     toggleSidebar()
   }
 
-  if (!isVisible) {
-    return null
-  }
-
   return (
-    <>
-      {/* 热区 */}
-      <div
-        className='gitbook3-hover-zone'
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        aria-hidden="true"
-      />
-      {/* 把手 */}
+    <div
+      className='gitbook3-edge-handle-container'
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
       <button
-        className={`gitbook3-edge-handle ${isHovering ? 'hovering' : ''}`}
+        className='gitbook3-edge-handle'
         onClick={handleClick}
         aria-label="Show sidebar"
         aria-expanded="false"
         title="Show sidebar"
       >
-        <i className='fas fa-chevron-right gitbook3-handle-icon' />
+        <i className='fas fa-bars' />
       </button>
-    </>
+    </div>
   )
 }

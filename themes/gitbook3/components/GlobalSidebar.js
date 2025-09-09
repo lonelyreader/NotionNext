@@ -1,10 +1,10 @@
 import { siteConfig } from '@/lib/config'
 import { useGlobal } from '@/lib/global'
-import { useState, useEffect } from 'react'
 import CONFIG from '../config'
 import SearchInput from './SearchInput'
 import NavPostList from './NavPostList'
 import InfoCard from './InfoCard'
+import { useGitBookGlobal } from '../index'
 
 /**
  * GitBook3 左侧全局侧栏
@@ -13,34 +13,10 @@ import InfoCard from './InfoCard'
 export default function GlobalSidebar(props) {
   const { slotLeft, filteredNavPages, allNavPages } = props
   const { fullWidth } = useGlobal()
-  const [isCollapsed, setIsCollapsed] = useState(false)
+  const { isCollapsed, isTemporarilyOpen, toggleSidebar } = useGitBookGlobal()
 
-  // 简单的侧栏切换，不使用localStorage
-  const toggleSidebar = () => {
-    const newState = !isCollapsed
-    setIsCollapsed(newState)
-    
-    // 更新body类名以调整布局
-    if (newState) {
-      document.body.classList.add('gitbook3-sidebar-collapsed')
-    } else {
-      document.body.classList.remove('gitbook3-sidebar-collapsed')
-    }
-  }
-
-  // 键盘快捷键支持
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      // Cmd/Ctrl + B 切换侧栏
-      if ((e.metaKey || e.ctrlKey) && e.key === 'b') {
-        e.preventDefault()
-        toggleSidebar()
-      }
-    }
-
-    document.addEventListener('keydown', handleKeyDown)
-    return () => document.removeEventListener('keydown', handleKeyDown)
-  }, [isCollapsed])
+  // 计算侧栏是否应该显示
+  const shouldShow = !isCollapsed || isTemporarilyOpen
 
   // 如果全宽模式，不显示侧栏
   if (fullWidth) {
@@ -50,10 +26,10 @@ export default function GlobalSidebar(props) {
   return (
     <aside 
       id='gitbook3-global-sidebar' 
-      className={`gitbook3-global-sidebar ${isCollapsed ? 'collapsed' : ''}`}
+      className={`gitbook3-global-sidebar ${isCollapsed ? 'collapsed' : ''} ${isTemporarilyOpen ? 'temporarily-open' : ''}`}
       role="navigation"
       aria-label="Global navigation"
-      aria-expanded={!isCollapsed}>
+      aria-expanded={shouldShow}>
       
       {/* 工具条：隐藏按钮 + 搜索框 */}
       <div className='gitbook3-sidebar-toolbar'>

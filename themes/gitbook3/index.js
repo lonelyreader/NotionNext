@@ -40,6 +40,8 @@ import TagItemMini from './components/TagItemMini'
 import SidebarToggle from './components/SidebarToggle'
 // GitBook3 新组件
 import GlobalSidebar from './components/GlobalSidebar'
+import ReadingCard from './components/ReadingCard'
+import EdgeHandle from './components/EdgeHandle'
 import CONFIG from './config'
 import { Style } from './style'
 
@@ -207,10 +209,13 @@ const LayoutBase = props => {
         className={`${siteConfig('FONT_STYLE')} pb-16 md:pb-0 scroll-smooth w-full h-full min-h-screen justify-center dark:text-gray-300 glow-effect`}>
         <AlgoliaSearchModal cRef={searchModal} {...props} />
 
+        {/* 边缘把手（仅在桌面端且侧栏收起时显示） */}
+        <EdgeHandle />
+
         {/* 固定顶栏 */}
         <Header {...props} />
 
-        {/* 主区域布局 */}
+        {/* 主区域两列布局 */}
         <main id='gitbook3-main' className='gitbook3-main-layout'>
           {/* 左侧全局侧栏 */}
           <GlobalSidebar 
@@ -219,24 +224,12 @@ const LayoutBase = props => {
             filteredNavPages={filteredNavPages}
           />
 
-          {/* 中间内容列 */}
-          <div id='gitbook3-content-column' className='gitbook3-content-column'>
-            <div className='gitbook3-content-wrapper'>
-              {/* 内容卡片 */}
-              <div className='gitbook3-content-card'>
-                <div className='gitbook3-content-body'>
-                  {slotTop}
-                  <WWAds className='w-full' orientation='horizontal' />
-                  {children}
-                </div>
-              </div>
-            </div>
-
-            {/* 移动端底部 */}
-            <div className='md:hidden'>
-              <Footer {...props} />
-            </div>
-          </div>
+          {/* 阅读卡片（合并了原来的中间内容列和右侧栏） */}
+          <ReadingCard post={post} prev={props.prev} next={props.next} notice={props.notice}>
+            {slotTop}
+            <WWAds className='w-full' orientation='horizontal' />
+            {children}
+          </ReadingCard>
         </main>
 
         {GITBOOK_LOADING_COVER && <LoadingCover />}

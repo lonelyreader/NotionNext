@@ -10,20 +10,40 @@ const Style = () => {
          CSS 变量定义
          ========================= */
       :root {
+        /* 布局尺寸 */
         --gitbook3-sidebar-width: 280px;
         --gitbook3-topbar-height: 64px;
         --gitbook3-container-radius: 12px;
+        --gitbook3-card-radius: 16px;
+        
+        /* 阴影系统 */
         --gitbook3-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
         --gitbook3-shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.1);
+        --gitbook3-shadow-card: 0 8px 32px rgba(0, 0, 0, 0.08);
+        
+        /* 边框与分隔 */
         --gitbook3-border: rgba(0, 0, 0, 0.06);
+        --gitbook3-border-light: rgba(0, 0, 0, 0.04);
+        
+        /* 文本颜色 */
         --gitbook3-text-primary: #1F2328;
         --gitbook3-text-secondary: #656D76;
+        --gitbook3-text-tertiary: #8B949E;
+        
+        /* 背景颜色 */
         --gitbook3-bg-primary: #FFFFFF;
         --gitbook3-bg-secondary: #F6F8FA;
         --gitbook3-bg-tertiary: #F1F3F4;
+        --gitbook3-bg-card: rgba(255, 255, 255, 0.95);
+        
+        /* 强调色 */
         --gitbook3-accent: #0969DA;
         --gitbook3-accent-hover: #0860CA;
+        --gitbook3-accent-active: #0550A3;
+        
+        /* 过渡动画 */
         --gitbook3-transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        --gitbook3-transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
         
         /* Liquid Glass 链接系统 */
         --gitbook3-link-color: #007aff;
@@ -50,14 +70,25 @@ const Style = () => {
       }
       
       .dark:root {
+        /* 深色模式布局尺寸 */
         --gitbook3-border: rgba(255, 255, 255, 0.08);
+        --gitbook3-border-light: rgba(255, 255, 255, 0.06);
+        
+        /* 深色模式文本颜色 */
         --gitbook3-text-primary: #E6EDF3;
         --gitbook3-text-secondary: #8B949E;
+        --gitbook3-text-tertiary: #6E7681;
+        
+        /* 深色模式背景颜色 */
         --gitbook3-bg-primary: #0D1117;
         --gitbook3-bg-secondary: #161B22;
         --gitbook3-bg-tertiary: #21262D;
+        --gitbook3-bg-card: rgba(13, 17, 23, 0.95);
+        
+        /* 深色模式强调色 */
         --gitbook3-accent: #58A6FF;
         --gitbook3-accent-hover: #1F6FEB;
+        --gitbook3-accent-active: #0969DA;
         
         /* 深色模式 Liquid Glass 链接系统 */
         --gitbook3-link-color: #58a6ff;
@@ -719,6 +750,100 @@ const Style = () => {
       
       .gitbook3-fade-in {
         animation: fadeIn 0.3s ease-out;
+      }
+      
+      /* =========================
+         边缘把手样式
+         ========================= */
+      .gitbook3-edge-handle-container {
+        position: fixed;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 40;
+        width: 54px; /* 22px handle + 16px hot zone on each side */
+        height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      
+      .gitbook3-edge-handle {
+        width: 22px;
+        height: 44px;
+        background: var(--gitbook3-bg-primary);
+        border: 1px solid var(--gitbook3-border);
+        border-radius: 11px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: var(--gitbook3-transition);
+        box-shadow: var(--gitbook3-shadow);
+        color: var(--gitbook3-text-secondary);
+        font-size: 12px;
+      }
+      
+      .gitbook3-edge-handle:hover {
+        background: var(--gitbook3-bg-secondary);
+        border-color: var(--gitbook3-accent);
+        color: var(--gitbook3-accent);
+        box-shadow: var(--gitbook3-shadow-hover);
+        transform: translateY(-1px);
+      }
+      
+      .gitbook3-edge-handle:focus {
+        outline: none;
+        border-color: var(--gitbook3-accent);
+        box-shadow: 0 0 0 3px rgba(9, 105, 218, 0.1);
+      }
+      
+      .gitbook3-edge-handle:active {
+        transform: translateY(0);
+        box-shadow: var(--gitbook3-shadow);
+      }
+      
+      /* 热区效果 */
+      .gitbook3-edge-handle-container:hover .gitbook3-global-sidebar.collapsed {
+        transform: translateX(0);
+        opacity: 1;
+      }
+      
+      /* 临时滑出状态 */
+      .gitbook3-global-sidebar.temporarily-open {
+        transform: translateX(0);
+        opacity: 1;
+        pointer-events: auto;
+      }
+      
+      /* TopBar 侧栏开关按钮 */
+      .gitbook3-sidebar-toggle-btn {
+        background: var(--gitbook3-bg-primary);
+        border: 1px solid var(--gitbook3-border);
+        border-radius: 8px;
+        padding: 8px 12px;
+        cursor: pointer;
+        transition: var(--gitbook3-transition);
+        color: var(--gitbook3-text-secondary);
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 40px;
+        height: 40px;
+      }
+      
+      .gitbook3-sidebar-toggle-btn:hover {
+        background: var(--gitbook3-bg-secondary);
+        border-color: var(--gitbook3-accent);
+        color: var(--gitbook3-accent);
+        box-shadow: var(--gitbook3-shadow);
+      }
+      
+      .gitbook3-sidebar-toggle-btn:focus {
+        outline: none;
+        border-color: var(--gitbook3-accent);
+        box-shadow: 0 0 0 3px rgba(9, 105, 218, 0.1);
       }
       
       /* =========================
