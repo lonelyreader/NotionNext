@@ -29,7 +29,7 @@ import Catalog from './components/Catalog'
 import CatalogDrawerWrapper from './components/CatalogDrawerWrapper'
 import CategoryItem from './components/CategoryItem'
 import Footer from './components/Footer'
-import Header from './components/Header'
+// import Header from './components/Header' // 已移除TopBar
 import InfoCard from './components/InfoCard'
 import JumpToTopButton from './components/JumpToTopButton'
 import NavPostList from './components/NavPostList'
@@ -212,12 +212,9 @@ const LayoutBase = props => {
         {/* 边缘把手（仅在桌面端且侧栏收起时显示） */}
         <EdgeHandle />
 
-        {/* 固定顶栏 */}
-        <Header {...props} />
-
-        {/* 主区域两列布局 */}
+        {/* 主区域两列布局（无TopBar） */}
         <main id='gitbook3-main' className='gitbook3-main-layout'>
-          {/* 左侧全局侧栏 */}
+          {/* 左侧全局侧栏（全高度） */}
           <GlobalSidebar 
             {...props} 
             slotLeft={slotLeft}

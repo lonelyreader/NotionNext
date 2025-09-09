@@ -212,14 +212,14 @@ const Style = () => {
       }
       
       /* =========================
-         主布局容器（两列布局）
+         主布局容器（两列布局，无TopBar）
          ========================= */
       .gitbook3-main-layout {
         display: grid;
         grid-template-columns: var(--gitbook3-sidebar-width) 1fr;
         grid-template-areas: "sidebar reading";
-        min-height: calc(100vh - var(--gitbook3-topbar-height));
-        margin-top: var(--gitbook3-topbar-height);
+        min-height: 100vh;
+        margin-top: 0;
         gap: 0;
       }
       
@@ -229,23 +229,25 @@ const Style = () => {
       }
       
       /* =========================
-         全局侧栏
+         全局侧栏（全高度）
          ========================= */
       .gitbook3-global-sidebar {
         grid-area: sidebar;
         background: var(--gitbook3-bg-primary);
         border-right: 1px solid var(--gitbook3-border);
-        height: calc(100vh - var(--gitbook3-topbar-height));
+        height: 100vh;
         overflow-y: auto;
         position: sticky;
-        top: var(--gitbook3-topbar-height);
-        transition: var(--gitbook3-transition);
+        top: 0;
+        transition: transform var(--gitbook3-transition), opacity var(--gitbook3-transition);
         z-index: 30;
+        will-change: transform, opacity;
       }
       
       .gitbook3-global-sidebar.collapsed {
         transform: translateX(-100%);
-        width: 0;
+        opacity: 0;
+        pointer-events: none;
       }
       
       .gitbook3-global-sidebar.temporarily-open {
@@ -269,6 +271,62 @@ const Style = () => {
         display: flex;
         align-items: center;
         gap: 12px;
+      }
+
+      /* 菜单按钮 */
+      .gitbook3-menu-btn {
+        background: var(--gitbook3-bg-primary);
+        border: 1px solid var(--gitbook3-border);
+        border-radius: 8px;
+        padding: 8px 12px;
+        cursor: pointer;
+        transition: var(--gitbook3-transition);
+        color: var(--gitbook3-text-secondary);
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 40px;
+        height: 40px;
+        margin-left: auto;
+      }
+      
+      .gitbook3-menu-btn:hover {
+        background: var(--gitbook3-bg-secondary);
+        border-color: var(--gitbook3-accent);
+        color: var(--gitbook3-accent);
+        box-shadow: var(--gitbook3-shadow);
+      }
+      
+      .gitbook3-menu-btn:focus {
+        outline: none;
+        border-color: var(--gitbook3-accent);
+        box-shadow: 0 0 0 3px rgba(9, 105, 218, 0.1);
+      }
+
+      /* 折叠菜单 */
+      .gitbook3-sidebar-menu-collapse {
+        border-bottom: 1px solid var(--gitbook3-border-light);
+      }
+
+      .gitbook3-sidebar-menu-content {
+        padding: 16px;
+        background: var(--gitbook3-bg-secondary);
+      }
+
+      .gitbook3-sidebar-menu-items {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-bottom: 16px;
+      }
+
+      .gitbook3-sidebar-user-actions {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding-top: 16px;
+        border-top: 1px solid var(--gitbook3-border-light);
       }
       
       /* 隐藏侧栏按钮 */
