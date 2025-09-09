@@ -261,6 +261,142 @@ const Style = () => {
           border-top-color: #374151;
         }
       }
+      
+      /* 修复移动端正文溢出问题 */
+      @media (max-width: 768px) {
+        /* 确保主容器不会溢出 */
+        #theme-gitbook {
+          width: 100%;
+          max-width: 100vw;
+          overflow-x: hidden;
+        }
+        
+        /* 修复主布局容器 */
+        #theme-gitbook main {
+          width: 100%;
+          max-width: 100%;
+          overflow-x: hidden;
+        }
+        
+        /* 修复内容包装器 */
+        #theme-gitbook #wrapper {
+          width: 100%;
+          max-width: 100%;
+          overflow-x: hidden;
+        }
+        
+        /* 修复中心内容区域 */
+        #theme-gitbook #center-wrapper {
+          width: 100%;
+          max-width: 100%;
+          overflow-x: hidden;
+        }
+        
+        /* 修复容器内部 */
+        #theme-gitbook #container-inner {
+          width: 100%;
+          max-width: 100%;
+          overflow-x: hidden;
+          box-sizing: border-box;
+        }
+        
+        /* 修复文章容器 */
+        #theme-gitbook #container {
+          width: 100%;
+          max-width: 100%;
+          overflow-x: hidden;
+        }
+        
+        /* 修复文章包装器 */
+        #theme-gitbook #article-wrapper {
+          width: 100%;
+          max-width: 100%;
+          overflow-x: hidden;
+          box-sizing: border-box;
+        }
+        
+        /* 确保所有内容元素不会溢出 */
+        #theme-gitbook * {
+          max-width: 100%;
+          box-sizing: border-box;
+        }
+        
+        /* 特别处理可能溢出的元素 */
+        #theme-gitbook pre,
+        #theme-gitbook code,
+        #theme-gitbook table,
+        #theme-gitbook img,
+        #theme-gitbook video,
+        #theme-gitbook iframe {
+          max-width: 100%;
+          overflow-x: auto;
+        }
+        
+        /* 修复长文本换行 */
+        #theme-gitbook p,
+        #theme-gitbook div,
+        #theme-gitbook span,
+        #theme-gitbook h1,
+        #theme-gitbook h2,
+        #theme-gitbook h3,
+        #theme-gitbook h4,
+        #theme-gitbook h5,
+        #theme-gitbook h6 {
+          word-wrap: break-word;
+          word-break: break-word;
+          overflow-wrap: break-word;
+        }
+        
+        /* 修复代码块 */
+        #theme-gitbook pre {
+          white-space: pre-wrap;
+          word-wrap: break-word;
+        }
+        
+        /* 修复表格 */
+        #theme-gitbook table {
+          width: 100%;
+          table-layout: fixed;
+        }
+        
+        #theme-gitbook table td,
+        #theme-gitbook table th {
+          word-wrap: break-word;
+          overflow-wrap: break-word;
+        }
+      }
+      
+      /* 超小屏幕优化 */
+      @media (max-width: 480px) {
+        #theme-gitbook #container-inner {
+          padding-left: 8px;
+          padding-right: 8px;
+        }
+        
+        #theme-gitbook #article-wrapper {
+          padding: 0 4px;
+        }
+        
+        #theme-gitbook h1 {
+          font-size: 1.25rem;
+          line-height: 1.2;
+        }
+        
+        #theme-gitbook h2 {
+          font-size: 1.125rem;
+          line-height: 1.2;
+        }
+        
+        #theme-gitbook h3 {
+          font-size: 1rem;
+          line-height: 1.2;
+        }
+        
+        #theme-gitbook p {
+          font-size: 0.875rem;
+          line-height: 1.5;
+        }
+      }
     `}</style>
   )
 }

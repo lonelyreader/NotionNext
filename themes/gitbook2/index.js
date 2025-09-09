@@ -144,10 +144,10 @@ const LayoutBase = props => {
         {/* 顶部导航栏 */}
         <Header {...props} />
 
-        <div className='w-full max-w-screen-7xl mx-auto px-2 sm:px-4 lg:px-6 xl:px-8'>
+        <div className='w-full max-w-screen-7xl mx-auto px-2 sm:px-4 lg:px-6 xl:px-8 overflow-x-hidden'>
           <main
             id='wrapper'
-            className={`${siteConfig('LAYOUT_SIDEBAR_REVERSE') ? 'flex-row-reverse' : ''} relative flex w-full h-full gap-4 lg:gap-6 xl:gap-8`}>
+            className={`${siteConfig('LAYOUT_SIDEBAR_REVERSE') ? 'flex-row-reverse' : ''} relative flex w-full h-full gap-2 sm:gap-4 lg:gap-6 xl:gap-8 overflow-x-hidden`}>
           {/* 左侧推拉抽屉 */}
           {fullWidth ? null : (
             <div className={'hidden md:block relative z-10 flex-shrink-0'}>
@@ -169,10 +169,10 @@ const LayoutBase = props => {
           {/* 中间内容区域 */}
           <div
             id='center-wrapper'
-            className='flex flex-col justify-between flex-1 relative z-10 pt-14 min-h-screen'>
+            className='flex flex-col justify-between flex-1 relative z-10 pt-14 min-h-screen overflow-x-hidden'>
             <div
               id='container-inner'
-              className={`w-full ${fullWidth ? 'px-2 sm:px-5' : 'max-w-4xl px-2 sm:px-4 lg:px-6'} justify-center mx-auto`}>
+              className={`w-full ${fullWidth ? 'px-2 sm:px-5' : 'max-w-4xl px-2 sm:px-4 lg:px-6'} justify-center mx-auto overflow-x-hidden`}>
               {slotTop}
               <WWAds className='w-full' orientation='horizontal' />
 
@@ -344,9 +344,9 @@ const LayoutSlug = props => {
       {lock && <ArticleLock validPassword={validPassword} />}
 
       {!lock && (
-        <div id='container'>
+        <div id='container' className='w-full overflow-x-hidden'>
           {/* title */}
-          <h1 className='text-3xl pt-12  dark:text-gray-300'>
+          <h1 className='text-2xl sm:text-3xl pt-12 dark:text-gray-300 break-words'>
             {siteConfig('POST_TITLE_ICON') && (
               <NotionIcon icon={post?.pageIcon} />
             )}
@@ -355,8 +355,8 @@ const LayoutSlug = props => {
 
           {/* Notion文章主体 */}
           {post && (
-            <section className='px-1'>
-              <div id='article-wrapper'>
+            <section className='px-1 w-full overflow-x-hidden'>
+              <div id='article-wrapper' className='w-full overflow-x-hidden'>
                 <NotionPage post={post} />
               </div>
 
