@@ -1,6 +1,5 @@
 import LazyImage from '@/components/LazyImage'
 import Router from 'next/router'
-import SocialButton from './SocialButton'
 import { siteConfig } from '@/lib/config'
 
 const InfoCard = (props) => {
@@ -15,7 +14,7 @@ const InfoCard = (props) => {
           <div className='author-bio'>{siteConfig('BIO')}</div>
         </div>
         <div className='author-social'>
-          <SocialButton/>
+          {/* SocialButton removed */}
         </div>
     </div>
   </div>

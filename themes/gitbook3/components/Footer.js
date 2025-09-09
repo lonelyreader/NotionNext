@@ -1,6 +1,5 @@
 import { BeiAnGongAn } from '@/components/BeiAnGongAn'
 import { siteConfig } from '@/lib/config'
-import SocialButton from './SocialButton'
 /**
  * 站点也叫
  * @param {*} param0
@@ -15,7 +14,6 @@ const Footer = ({ siteInfo }) => {
 
   return (
     <footer className='z-20 border p-4 rounded-xl border-purple-600/20 bg-white/90 dark:bg-purple-900/25 dark:border-yellow-400/15 backdrop-blur-xl justify-center text-center w-full text-sm relative card'>
-      <SocialButton />
 
       <div className='flex justify-center'>
         <div>
