@@ -210,7 +210,7 @@ const LayoutBase = props => {
                         null,
                         CONFIG
                       ) === 'true' && <RevolverMaps />}
-                      <Live2D />
+                      {/* <Live2D /> */}
                     </>
                   )}
                   {/* gitbook主题首页只显示公告 */}
@@ -218,7 +218,7 @@ const LayoutBase = props => {
                 </div>
 
                 <AdSlot type='in-article' />
-                <Live2D />
+                {/* <Live2D /> */}
               </div>
             </div>
           )}
