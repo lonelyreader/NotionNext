@@ -237,7 +237,6 @@ const LayoutBase = props => {
               <Footer {...props} />
             </div>
           </div>
->>>>>>> 3c11e6845977029d06005893824f4dc952d88cd4
         </main>
 
         {GITBOOK_LOADING_COVER && <LoadingCover />}
