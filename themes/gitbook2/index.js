@@ -8,7 +8,7 @@ import { Transition } from '@headlessui/react'
 import dynamic from 'next/dynamic'
 import SmartLink from '@/components/SmartLink'
 import { useRouter } from 'next/router'
-import { createContext, useContext, useEffect, useRef } from 'react'
+import { createContext, useContext, useEffect, useRef, useState } from 'react'
 import BlogPostBar from './components/BlogPostBar'
 import CONFIG from './config'
 import { Style } from './style'
@@ -60,18 +60,75 @@ const ThemeGlobalGitbook2 = createContext()
 export const useGitbook2Global = () => useContext(ThemeGlobalGitbook2)
 
 /**
+ * 给最新的文章标一个红点
+ */
+function getNavPagesWithLatest(allNavPages, latestPosts, post) {
+  // localStorage 保存id和上次阅读时间戳： posts_read_time = {"${post.id}":"Date()"}
+  const postReadTime = JSON.parse(
+    localStorage.getItem('post_read_time') || '{}'
+  )
+  if (post) {
+    postReadTime[getShortId(post.id)] = new Date().getTime()
+  }
+  // 更新
+  localStorage.setItem('post_read_time', JSON.stringify(postReadTime))
+
+  return allNavPages?.map(item => {
+    const res = {
+      short_id: item.short_id,
+      title: item.title || '',
+      pageCoverThumbnail: item.pageCoverThumbnail || '',
+      category: item.category || null,
+      tags: item.tags || null,
+      summary: item.summary || null,
+      slug: item.slug,
+      href: item.href,
+      pageIcon: item.pageIcon || '',
+      lastEditedDate: item.lastEditedDate
+    }
+    // 属于最新文章通常6篇 && (无阅读记录 || 最近更新时间大于上次阅读时间)
+    if (
+      latestPosts.some(post => post?.id.indexOf(item?.short_id) === 14) &&
+      (!postReadTime[item.short_id] ||
+        postReadTime[item.short_id] < new Date(item.lastEditedDate).getTime())
+    ) {
+      return { ...res, isLatest: true }
+    } else {
+      return res
+    }
+  })
+}
+
+/**
  * 基础布局 - GitBook风格三栏布局
  *
  * @param {*} props
  * @returns
  */
 const LayoutBase = props => {
-  const { children, slotTop } = props
+  const { 
+    children, 
+    slotTop, 
+    post, 
+    allNavPages, 
+    latestPosts 
+  } = props
   const { onLoading, fullWidth } = useGlobal()
+  const router = useRouter()
   const searchModal = useRef(null)
+  const [filteredNavPages, setFilteredNavPages] = useState(allNavPages)
+
+  useEffect(() => {
+    setFilteredNavPages(getNavPagesWithLatest(allNavPages, latestPosts, post))
+  }, [router, allNavPages, latestPosts, post])
 
   return (
-    <ThemeGlobalGitbook2.Provider value={{ searchModal }}>
+    <ThemeGlobalGitbook2.Provider value={{ 
+      searchModal, 
+      filteredNavPages, 
+      setFilteredNavPages, 
+      allNavPages 
+    }}>
       <div
         id='theme-gitbook2'
         className={`${siteConfig('FONT_STYLE')} min-h-screen flex flex-col dark:text-gray-300 bg-white dark:bg-black scroll-smooth`}>
@@ -81,7 +138,7 @@ const LayoutBase = props => {
         <div className='flex-1 flex'>
           {/* 左侧边栏 - 按Category分组的文章列表 */}
           <div className='hidden lg:block w-72 flex-shrink-0 border-r dark:border-gray-800 border-gray-200 bg-gray-50 dark:bg-gray-900'>
-            <SideBar {...props} />
+            <SideBar {...props} filteredNavPages={filteredNavPages} />
           </div>
 
           {/* 中间内容区域 */}
@@ -157,7 +214,7 @@ const LayoutBase = props => {
                 <i className='fas fa-times text-gray-600 dark:text-gray-300' />
               </button>
             </div>
-            <SideBar {...props} />
+            <SideBar {...props} filteredNavPages={filteredNavPages} />
           </div>
         </div>
 
@@ -215,11 +272,47 @@ const LayoutBase = props => {
 
 /**
  * 博客首页 - GitBook风格
+ * 重定向到指定文章页面
  * @param {*} props
  * @returns
  */
 const LayoutIndex = props => {
-  return <LayoutPostList {...props} />
+  const router = useRouter()
+  const index = siteConfig('GITBOOK2_INDEX_PAGE', 'about', CONFIG)
+  const [hasRedirected, setHasRedirected] = useState(false)
+
+  useEffect(() => {
+    const tryRedirect = async () => {
+      if (!hasRedirected) {
+        setHasRedirected(true)
+        
+        // 重定向到指定文章
+        await router.push(index)
+        
+        // 检查页面加载情况
+        setTimeout(() => {
+          const article = document.querySelector('#article-wrapper #notion-article')
+          if (!article) {
+            console.log('请检查您的Notion数据库中是否包含此slug页面：', index)
+            
+            // 显示错误信息
+            const containerInner = document.querySelector('#theme-gitbook2 #container-inner')
+            const newHTML = `<h1 class="text-3xl pt-12 dark:text-gray-300">配置有误</h1><blockquote class="notion-quote notion-block-ce76391f3f2842d386468ff1eb705b92"><div>请在您的notion中添加一个slug为${index}的文章</div></blockquote>`
+            containerInner?.insertAdjacentHTML('afterbegin', newHTML)
+          }
+        }, 2000)
+      }
+    }
+
+    if (index) {
+      console.log('重定向', index)
+      tryRedirect()
+    } else {
+      console.log('无重定向', index)
+    }
+  }, [index, hasRedirected])
+
+  return null // 不渲染任何内容
 }
 
 /**
@@ -373,61 +466,89 @@ const LayoutArchive = props => {
  * @returns
  */
 const LayoutSlug = props => {
-  const { post, lock, validPassword, prev, next, recommendPosts } = props
-  const { fullWidth } = useGlobal()
-
+  const { post, lock, validPassword, prev, next, recommendPosts, siteInfo } = props
+  const router = useRouter()
+  
   // 动态加载TOC组件
   const TableOfContents = dynamic(() => import('./components/TableOfContents'), {
     ssr: false
   })
 
-  // 动态加载Article组件
-  const Article = dynamic(() => import('./components/Article'), {
-    ssr: false
-  })
+  // 如果是文档首页文章，则修改浏览器标签
+  const index = siteConfig('GITBOOK2_INDEX_PAGE', 'about', CONFIG)
+  const basePath = router.asPath.split('?')[0]
+  const title = basePath?.indexOf(index) > 0
+    ? `${post?.title} | ${siteInfo?.description}`
+    : `${post?.title} | ${siteInfo?.title}`
 
+  const waiting404 = siteConfig('POST_WAITING_TIME_FOR_404') * 1000
   useEffect(() => {
-    // 在文章页面加载时，将TOC内容插入到指定容器
-    if (post && !lock) {
-      const tocContainer = document.getElementById('toc-container')
-      const mobileTocContainer = document.getElementById('mobile-toc-container')
-      
-      if (tocContainer || mobileTocContainer) {
-        // 这里将通过React Portal或直接DOM操作来插入TOC内容
-        // 具体实现将在TableOfContents组件中处理
-      }
+    // 404
+    if (!post) {
+      setTimeout(() => {
+        if (isBrowser) {
+          const article = document.querySelector('#article-wrapper #notion-article')
+          if (!article) {
+            router.push('/404').then(() => {
+              console.warn('找不到页面', router.asPath)
+            })
+          }
+        }
+      }, waiting404)
     }
-  }, [post, lock])
+  }, [post])
 
   return (
     <>
+      {/* 文章锁 */}
       {lock && <ArticleLock validPassword={validPassword} />}
 
       {!lock && post && (
-        <div className='min-h-screen bg-white dark:bg-black'>
-          {/* 文章内容区域 */}
-          <div className='max-w-4xl mx-auto px-6 py-8'>
-            {/* 文章信息 */}
-            <ArticleInfo post={post} />
+        <div id='container'>
+          {/* 文章标题 */}
+          <h1 className='text-3xl pt-12 dark:text-gray-300'>
+            {siteConfig('POST_TITLE_ICON') && (
+              <NotionIcon icon={post?.pageIcon} />
+            )}
+            {post?.title}
+          </h1>
 
-            {/* 文章主体 */}
-            <div id='article-wrapper' className='prose prose-lg max-w-none dark:prose-invert'>
-              <Article post={post} />
-            </div>
+          {/* Notion文章主体 */}
+          {post && (
+            <section className='px-1'>
+              <div id='article-wrapper'>
+                <NotionPage post={post} />
+              </div>
 
-            {/* 文章底部信息 */}
-            <div className='mt-12 pt-8 border-t dark:border-gray-800 border-gray-200'>
-              {post?.type === 'Post' && (
-                <>
-                  <ArticleAround prev={prev} next={next} />
-                  <RecommendPosts recommendPosts={recommendPosts} />
-                </>
-              )}
+              {/* 分享 */}
+              <ShareBar post={post} />
               
+              {/* 文章分类和标签信息 */}
+              <div className='flex justify-between'>
+                {siteConfig('POST_DETAIL_CATEGORY') && post?.category && (
+                  <div className='flex items-center'>
+                    <i className='mr-1 fas fa-folder' />
+                    <span>{post.category}</span>
+                  </div>
+                )}
+                <div>
+                  {siteConfig('POST_DETAIL_TAG') &&
+                    post?.tagItems?.map(tag => (
+                      <span key={tag.name} className='mr-2 text-sm text-gray-500 dark:text-gray-400'>
+                        #{tag.name}
+                      </span>
+                    ))}
+                </div>
+              </div>
+
+              {post?.type === 'Post' && (
+                <ArticleAround prev={prev} next={next} />
+              )}
+
               {/* 评论区 */}
               <Comment frontMatter={post} />
-            </div>
-          </div>
+            </section>
+          )}
 
           {/* 桌面端TOC */}
           <div className='hidden xl:block'>

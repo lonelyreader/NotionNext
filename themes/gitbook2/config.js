@@ -1,5 +1,26 @@
 const CONFIG = {
+  // GitBook风格配置
+  GITBOOK2_INDEX_PAGE: 'about', // 文档首页显示的文章，请确保此路径包含在您的notion数据库中
 
+  GITBOOK2_AUTO_SORT: process.env.NEXT_PUBLIC_GITBOOK2_AUTO_SORT || true, // 是否自动按分类名归组排序文章
+
+  GITBOOK2_LATEST_POST_RED_BADGE: process.env.NEXT_PUBLIC_GITBOOK2_LATEST_POST_RED_BADGE || true, // 是否给最新文章显示红点
+
+  // 菜单配置
+  GITBOOK2_MENU_CATEGORY: true, // 显示分类
+  GITBOOK2_BOOK_MENU_TAG: true, // 显示标签
+  GITBOOK2_MENU_ARCHIVE: true, // 显示归档
+  GITBOOK2_MENU_SEARCH: true, // 显示搜索
+
+  // 导航文章自动排他折叠
+  GITBOOK2_EXCLUSIVE_COLLAPSE: true, // 一次只展开一个分类，其它文件夹自动关闭
+
+  GITBOOK2_FOLDER_HOVER_EXPAND: false, // 左侧导航文件夹鼠标悬停时自动展开
+
+  // Widget配置
+  GITBOOK2_WIDGET_TO_TOP: true, // 跳回顶部
+
+  // 原有配置保留
   GITBOOK2_LOGO_IMG: '/Logo.webp',
   GITBOOK2_TOP_BAR: true, // 显示顶栏
   GITBOOK2_TOP_BAR_CONTENT: process.env.NEXT_PUBLIC_THEME_GITBOOK2_TOP_TIPS || '',
@@ -11,12 +32,6 @@ const CONFIG = {
 
   GITBOOK2_POST_COVER_ENABLE: process.env.NEXT_PUBLIC_GITBOOK2_POST_COVER_ENABLE || false, // 是否展示博客封面
 
-  GITBOOK2_ARTICLE_RECOMMEND_POSTS: process.env.NEXT_PUBLIC_GITBOOK2_ARTICLE_RECOMMEND_POSTS || true, // 文章详情底部显示推荐
-
-  // 菜单配置
-  GITBOOK2_MENU_CATEGORY: true, // 显示分类
-  GITBOOK2_MENU_TAG: true, // 显示标签
-  GITBOOK2_MENU_ARCHIVE: true, // 显示归档
-  GITBOOK2_MENU_SEARCH: true // 显示搜索
+  GITBOOK2_ARTICLE_RECOMMEND_POSTS: process.env.NEXT_PUBLIC_GITBOOK2_ARTICLE_RECOMMEND_POSTS || true // 文章详情底部显示推荐
 }
 export default CONFIG

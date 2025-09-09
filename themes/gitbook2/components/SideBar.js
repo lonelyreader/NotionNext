@@ -9,7 +9,7 @@ import SmartLink from '@/components/SmartLink'
  * @returns
  */
 export default function SideBar(props) {
-  const { allNavPages = [] } = props
+  const { filteredNavPages = [] } = props
   const { locale } = useGlobal()
   const router = useRouter()
   const [expandedCategories, setExpandedCategories] = useState(new Set())
@@ -21,7 +21,7 @@ export default function SideBar(props) {
   }, [router.asPath])
 
   // 按Category分组文章
-  const groupedPosts = allNavPages.reduce((acc, post) => {
+  const groupedPosts = filteredNavPages.reduce((acc, post) => {
     if (post.type === 'Post' && post.status === 'Published') {
       const category = post.category || '未分类'
       if (!acc[category]) {
@@ -43,11 +43,11 @@ export default function SideBar(props) {
 
   // 默认展开当前文章所在的分类
   useEffect(() => {
-    const currentPost = allNavPages.find(post => post.href === currentPath)
+    const currentPost = filteredNavPages.find(post => post.href === currentPath)
     if (currentPost && currentPost.category) {
       setExpandedCategories(prev => new Set([...prev, currentPost.category]))
     }
-  }, [currentPath, allNavPages])
+  }, [currentPath, filteredNavPages])
 
   const toggleCategory = (category) => {
     setExpandedCategories(prev => {
@@ -154,7 +154,7 @@ export default function SideBar(props) {
           <div className='text-xs text-gray-500 dark:text-gray-400'>
             <div className='flex justify-between'>
               <span>总文章数:</span>
-              <span>{allNavPages.filter(p => p.type === 'Post' && p.status === 'Published').length}</span>
+              <span>{filteredNavPages.filter(p => p.type === 'Post' && p.status === 'Published').length}</span>
             </div>
             <div className='flex justify-between'>
               <span>分类数:</span>
