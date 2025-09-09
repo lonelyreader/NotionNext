@@ -663,23 +663,23 @@ const Style = () => {
         box-shadow: 0 4px 12px rgba(9, 105, 218, 0.3);
       }
       
-      /* =========================
-         表单元素样式
-         ========================= */
-      input, textarea, select {
-        background: var(--gitbook3-bg-primary);
-        border: 1px solid var(--gitbook3-border);
-        border-radius: 6px;
-        color: var(--gitbook3-text-primary);
-        font-size: 14px;
-        padding: 8px 12px;
-        transition: var(--gitbook3-transition);
+      /* 特殊链接样式覆盖 - 保持 Liquid Glass 风格 */
+      .gitbook3-nav-item a {
+        color: var(--gitbook3-text-secondary);
+        padding: 4px 8px;
+        margin: -4px -8px;
+        border-radius: var(--gitbook3-glass-radius);
       }
       
-      input:focus, textarea:focus, select:focus {
-        outline: none;
-        border-color: var(--gitbook3-accent);
-        box-shadow: 0 0 0 3px rgba(9, 105, 218, 0.1);
+      .gitbook3-nav-item a:hover,
+      .gitbook3-nav-item a:focus-visible {
+        color: var(--gitbook3-text-primary);
+        background: var(--gitbook3-glass-clear-bg);
+        backdrop-filter: blur(var(--gitbook3-glass-blur)) saturate(var(--gitbook3-glass-saturation)) brightness(var(--gitbook3-glass-brightness));
+        -webkit-backdrop-filter: blur(var(--gitbook3-glass-blur)) saturate(var(--gitbook3-glass-saturation)) brightness(var(--gitbook3-glass-brightness));
+        border: 1px solid var(--gitbook3-glass-clear-border);
+        box-shadow: var(--gitbook3-glass-clear-shadow);
+        transform: translateY(-1px);
       }
       
       /* =========================
