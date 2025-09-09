@@ -567,37 +567,43 @@ const Style = () => {
         color: #10b981;
       }
 
-      /* 作者InfoCard优化 */
+      /* 作者InfoCard优化 - 左侧导航栏底部居中 */
       #theme-gitbook #info-card {
-        padding: 20px 0;
-        border-radius: 12px;
-        background-color: rgba(0, 0, 0, 0.01);
-        border: 1px solid rgba(0, 0, 0, 0.05);
-        margin: 16px 0;
+        padding: 16px 12px;
+        border-radius: 0;
+        background-color: transparent;
+        border: none;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        box-shadow: none;
       }
 
       .dark #theme-gitbook #info-card {
-        background-color: rgba(255, 255, 255, 0.02);
-        border: 1px solid rgba(255, 255, 255, 0.05);
+        background-color: transparent;
+        border: none;
       }
 
       #theme-gitbook #info-card img {
-        width: 80px;
-        height: 80px;
+        width: 60px;
+        height: 60px;
         border-radius: 50%;
         transition: transform 0.15s ease;
       }
 
       #theme-gitbook #info-card img:hover {
-        transform: scale(1.02);
+        transform: scale(1.05);
       }
 
       #theme-gitbook #info-card .text-xl {
-        font-size: 1.125rem;
+        font-size: 0.9rem;
         font-weight: 500;
         color: rgba(0, 0, 0, 0.8);
-        margin: 8px 0;
+        margin: 4px 0;
         transition: color 0.15s ease;
+        text-align: center;
       }
 
       .dark #theme-gitbook #info-card .text-xl {
@@ -605,24 +611,26 @@ const Style = () => {
       }
 
       #theme-gitbook #info-card .font-light {
-        font-size: 0.875rem;
+        font-size: 0.7rem;
         color: rgba(0, 0, 0, 0.6);
         line-height: 1.4;
-        margin-bottom: 12px;
+        margin-bottom: 8px;
+        text-align: center;
       }
 
       .dark #theme-gitbook #info-card .font-light {
         color: rgba(255, 255, 255, 0.6);
       }
 
-      /* 社交按钮优化 */
+      /* 社交按钮优化 - 左侧导航栏底部 */
       #theme-gitbook #info-card .social-button {
         border: 1px solid rgba(0, 0, 0, 0.1);
-        border-radius: 6px;
-        padding: 6px 12px;
-        margin: 4px;
+        border-radius: 4px;
+        padding: 4px 8px;
+        margin: 2px;
         transition: all 0.15s ease;
         background-color: transparent;
+        font-size: 0.7rem;
       }
 
       #theme-gitbook #info-card .social-button:hover {
@@ -796,12 +804,10 @@ const Style = () => {
         transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
       }
       
-      /* 白纸工作区样式优化 - 调整边距 */
+      /* 白纸工作区样式优化 - 统一边距 */
       #workspace-sheet {
         min-height: calc(100vh - 2rem);
-        margin-top: 12px;
-        margin-right: 16px;
-        margin-bottom: 20px;
+        margin: 20px;
         margin-left: 0;
       }
 
@@ -824,8 +830,8 @@ const Style = () => {
         }
         
         #workspace-sheet {
-          margin-right: 12px;
-          margin-bottom: 20px;
+          margin: 16px;
+          margin-left: 0;
         }
       }
 
@@ -836,8 +842,8 @@ const Style = () => {
         }
         
         #workspace-sheet {
-          margin-right: 8px;
-          margin-bottom: 16px;
+          margin: 12px;
+          margin-left: 0;
         }
       }
       
@@ -853,7 +859,7 @@ const Style = () => {
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
       }
 
-      /* 顶栏与纸面关系优化 */
+      /* 顶栏与纸面关系优化 - 自适应布局 */
       #theme-gitbook #top-nav {
         background-color: white;
         border-bottom: 1px solid rgba(0, 0, 0, 0.05);
@@ -880,6 +886,75 @@ const Style = () => {
         max-width: 100%;
         box-sizing: border-box;
         overflow: hidden;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 8px;
+      }
+
+      /* 顶部导航栏自适应布局优化 */
+      #theme-gitbook #top-nav .flex > div:first-child {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        min-width: 0;
+        gap: 12px;
+      }
+
+      #theme-gitbook #top-nav .flex > div:last-child {
+        flex: 0 0 auto;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        min-width: 0;
+      }
+
+      /* Logo区域自适应 */
+      #theme-gitbook #logo-wrapper {
+        flex: 0 0 auto;
+        min-width: 0;
+        max-width: 200px;
+      }
+
+      /* 桌面端菜单自适应 */
+      #theme-gitbook #top-nav .hidden.md\\:flex {
+        flex: 0 0 auto;
+        display: flex;
+        gap: 8px;
+        min-width: 0;
+      }
+
+      /* 搜索框自适应 */
+      #theme-gitbook .search-input {
+        flex: 0 0 auto;
+        min-width: 200px;
+        max-width: 300px;
+        width: clamp(200px, 20vw, 300px);
+      }
+
+      /* 移动端优化 */
+      @media (max-width: 768px) {
+        #theme-gitbook #top-nav .flex {
+          gap: 4px;
+        }
+        
+        #theme-gitbook #top-nav .flex > div:first-child {
+          gap: 8px;
+        }
+        
+        #theme-gitbook #top-nav .flex > div:last-child {
+          gap: 4px;
+        }
+        
+        #theme-gitbook #logo-wrapper {
+          max-width: 150px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        #theme-gitbook #logo-wrapper {
+          max-width: 120px;
+        }
       }
 
       /* 站点标题自适应优化 - 缩小20% */
@@ -1009,7 +1084,7 @@ const Style = () => {
         width: 260px;
         height: 100vh;
         padding-top: 56px;
-        padding-bottom: 16px;
+        padding-bottom: 0;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -1023,6 +1098,43 @@ const Style = () => {
         padding-right: 12px;
         overflow-y: auto;
         overflow-x: hidden;
+      }
+
+      /* 左侧导航栏Footer优化 */
+      #theme-gitbook .hidden.md\\:block footer {
+        background-color: transparent;
+        border: none;
+        border-radius: 0;
+        padding: 12px 16px;
+        margin: 0;
+        text-align: center;
+        font-size: 0.7rem;
+        line-height: 1.4;
+        color: rgba(0, 0, 0, 0.6);
+        border-top: 1px solid rgba(0, 0, 0, 0.05);
+      }
+
+      .dark #theme-gitbook .hidden.md\\:block footer {
+        color: rgba(255, 255, 255, 0.6);
+        border-top-color: rgba(255, 255, 255, 0.1);
+      }
+
+      #theme-gitbook .hidden.md\\:block footer a {
+        color: rgba(0, 0, 0, 0.7);
+        text-decoration: none;
+        transition: color 0.15s ease;
+      }
+
+      .dark #theme-gitbook .hidden.md\\:block footer a {
+        color: rgba(255, 255, 255, 0.7);
+      }
+
+      #theme-gitbook .hidden.md\\:block footer a:hover {
+        color: rgba(0, 0, 0, 0.9);
+      }
+
+      .dark #theme-gitbook .hidden.md\\:block footer a:hover {
+        color: rgba(255, 255, 255, 0.9);
       }
 
       /* 大屏幕左栏宽度调整 */
