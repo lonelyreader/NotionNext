@@ -16,10 +16,59 @@ const Style = () => {
       :root {
         --shell-bg: #F6F7F9;
         --shell-bg-dark: #0B0B0C;
+        --header-h: 56px;
       }
 
       .bottom-button-group {
         box-shadow: 0px -3px 10px 0px rgba(0, 0, 0, 0.1);
+      }
+
+      /* 滚动条自动隐藏样式 */
+      .scrollable {
+        scrollbar-gutter: stable both-edges;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      /* WebKit 滚动条样式 */
+      .scrollable::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+
+      .scrollable::-webkit-scrollbar-track {
+        background: transparent;
+      }
+
+      .scrollable:not(:hover)::-webkit-scrollbar-thumb {
+        background-color: transparent;
+        border-radius: 9999px;
+      }
+
+      .scrollable:hover::-webkit-scrollbar-thumb {
+        background-color: rgba(0, 0, 0, 0.25);
+        border-radius: 9999px;
+      }
+
+      .dark .scrollable:hover::-webkit-scrollbar-thumb {
+        background-color: rgba(255, 255, 255, 0.28);
+      }
+
+      /* Firefox 滚动条样式 */
+      .scrollable {
+        scrollbar-width: thin;
+        scrollbar-color: rgba(0, 0, 0, 0.25) transparent;
+      }
+
+      .scrollable:not(:hover) {
+        scrollbar-color: transparent transparent;
+      }
+
+      .dark .scrollable {
+        scrollbar-color: rgba(255, 255, 255, 0.28) transparent;
+      }
+
+      .dark .scrollable:not(:hover) {
+        scrollbar-color: transparent transparent;
       }
 
       /* GitBook2 主题移动端响应式优化 */
@@ -265,6 +314,18 @@ const Style = () => {
       @media (max-width: 1024px) {
         #workspace-sheet {
           grid-template-columns: 1fr;
+        }
+      }
+
+      /* 移动端响应式优化 */
+      @media (max-width: 768px) {
+        #workspace-sheet {
+          margin-right: 1rem;
+          height: calc(100vh - 1rem);
+        }
+        
+        #center-wrapper {
+          height: calc(100% - var(--header-h)) !important;
         }
       }
       

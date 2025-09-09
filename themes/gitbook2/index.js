@@ -117,6 +117,27 @@ const LayoutBase = props => {
     setFilteredNavPages(getNavPagesWithLatest(allNavPages, latestPosts, post))
   }, [router])
 
+  // 动态设置 Header 高度
+  useEffect(() => {
+    const updateHeaderHeight = () => {
+      const header = document.querySelector('#top-nav')
+      if (header) {
+        const height = header.offsetHeight
+        document.documentElement.style.setProperty('--header-h', `${height}px`)
+      }
+    }
+
+    // 初始设置
+    updateHeaderHeight()
+
+    // 监听窗口大小变化
+    window.addEventListener('resize', updateHeaderHeight)
+
+    return () => {
+      window.removeEventListener('resize', updateHeaderHeight)
+    }
+  }, [])
+
   const GITBOOK_LOADING_COVER = siteConfig(
     'GITBOOK_LOADING_COVER',
     true,
@@ -138,7 +159,7 @@ const LayoutBase = props => {
 
       <div
         id='theme-gitbook'
-        className={`${siteConfig('FONT_STYLE')} pb-20 md:pb-0 scroll-smooth w-full h-full min-h-screen justify-center dark:text-gray-300`}
+        className={`${siteConfig('FONT_STYLE')} h-screen overflow-hidden scroll-smooth w-full justify-center dark:text-gray-300`}
         style={{ backgroundColor: 'var(--shell-bg)' }}>
         <AlgoliaSearchModal cRef={searchModal} {...props} />
 
@@ -149,7 +170,7 @@ const LayoutBase = props => {
           {/* 左侧推拉抽屉 */}
           {fullWidth ? null : (
             <div className={'hidden md:block relative z-10 flex-shrink-0'}>
-              <div className='w-[260px] xl:w-[280px] shrink-0 sticky top-0 h-screen overflow-auto bg-[var(--shell-bg)] dark:bg-[var(--shell-bg-dark)] border-r border-black/5 dark:border-white/10 pt-14 pb-4 flex justify-between flex-col'>
+              <div className='w-[260px] xl:w-[280px] shrink-0 h-screen overflow-auto sticky top-0 bg-[var(--shell-bg)] dark:bg-[var(--shell-bg-dark)] border-r border-black/5 dark:border-white/10 pt-14 pb-4 flex justify-between flex-col scrollable'>
                 {/* 导航 */}
                 <div className='overflow-y-scroll scroll-hidden pt-10 pl-5'>
                   {/* 嵌入 */}
@@ -167,17 +188,17 @@ const LayoutBase = props => {
           {/* 白纸工作区 */}
           <div
             id='workspace-sheet'
-            className='flex-1 my-4 mr-4 xl:mr-6 bg-white dark:bg-neutral-950 rounded-2xl shadow-sm ring-1 ring-black/5 dark:ring-white/10 overflow-hidden grid md:grid-cols-1 lg:grid-cols-[minmax(0,1fr)_18rem] gap-6'>
+            className='flex-1 h-[calc(100vh-2rem)] my-4 mr-4 xl:mr-6 bg-white dark:bg-neutral-950 rounded-2xl shadow-sm ring-1 ring-black/5 dark:ring-white/10 overflow-hidden grid md:grid-cols-1 lg:grid-cols-[minmax(0,1fr)_18rem] gap-6'>
             
-            {/* Header 移动到白纸顶部 */}
-            <div className='col-span-full'>
+            {/* Header 固定在白纸顶部 */}
+            <div className='col-span-full sticky top-0 z-20 bg-white dark:bg-neutral-950 border-b border-black/5 dark:border-white/10'>
               <Header {...props} />
             </div>
 
             {/* 中间内容区域 */}
             <div
               id='center-wrapper'
-              className='flex flex-col justify-between min-w-0 overflow-x-hidden'>
+              className='h-[calc(100%-var(--header-h))] overflow-auto min-w-0 scrollable'>
               <div
                 id='container-inner'
                 className={`w-full ${fullWidth ? 'px-6 pb-8 md:px-4' : 'max-w-4xl px-6 pb-8 md:px-4'} justify-center mx-auto overflow-x-hidden`}>
@@ -189,17 +210,17 @@ const LayoutBase = props => {
                 {/* Google广告 */}
                 <AdSlot type='in-article' />
                 <WWAds className='w-full' orientation='horizontal' />
-              </div>
 
-              {/* 底部 */}
-              <div className='md:hidden'>
-                <Footer {...props} />
+                {/* 底部 */}
+                <div className='md:hidden'>
+                  <Footer {...props} />
+                </div>
               </div>
             </div>
 
             {/* 右侧边栏 */}
             {fullWidth ? null : (
-              <div className='hidden lg:block sticky top-[56px] max-h-[calc(100vh-56px-32px)] overflow-auto pr-6'>
+              <div className='hidden lg:block h-[calc(100%-var(--header-h))] overflow-auto pr-6 scrollable'>
                 <div className='py-4'>
                   <ArticleInfo post={props?.post ? props?.post : props.notice} />
 
