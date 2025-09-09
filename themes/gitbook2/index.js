@@ -138,11 +138,9 @@ const LayoutBase = props => {
 
       <div
         id='theme-gitbook'
-        className={`${siteConfig('FONT_STYLE')} pb-20 md:pb-0 scroll-smooth bg-white dark:bg-black w-full h-full min-h-screen justify-center dark:text-gray-300`}>
+        className={`${siteConfig('FONT_STYLE')} pb-20 md:pb-0 scroll-smooth w-full h-full min-h-screen justify-center dark:text-gray-300`}
+        style={{ backgroundColor: 'var(--shell-bg)' }}>
         <AlgoliaSearchModal cRef={searchModal} {...props} />
-
-        {/* 顶部导航栏 */}
-        <Header {...props} />
 
         <div className='w-full max-w-screen-7xl mx-auto px-2 sm:px-4 lg:px-6 xl:px-8 overflow-x-hidden'>
           <main
@@ -151,7 +149,7 @@ const LayoutBase = props => {
           {/* 左侧推拉抽屉 */}
           {fullWidth ? null : (
             <div className={'hidden md:block relative z-10 flex-shrink-0'}>
-              <div className='w-72 lg:w-80 pt-14 pb-4 sticky top-0 h-screen flex justify-between flex-col'>
+              <div className='w-[260px] xl:w-[280px] shrink-0 sticky top-0 h-screen overflow-auto bg-[var(--shell-bg)] dark:bg-[var(--shell-bg-dark)] border-r border-black/5 dark:border-white/10 pt-14 pb-4 flex justify-between flex-col'>
                 {/* 导航 */}
                 <div className='overflow-y-scroll scroll-hidden pt-10 pl-5'>
                   {/* 嵌入 */}
@@ -166,62 +164,70 @@ const LayoutBase = props => {
             </div>
           )}
 
-          {/* 中间内容区域 */}
+          {/* 白纸工作区 */}
           <div
-            id='center-wrapper'
-            className='flex flex-col justify-between flex-1 relative z-10 pt-14 min-h-screen overflow-x-hidden'>
-            <div
-              id='container-inner'
-              className={`w-full ${fullWidth ? 'px-2 sm:px-5' : 'max-w-4xl px-2 sm:px-4 lg:px-6'} justify-center mx-auto overflow-x-hidden`}>
-              {slotTop}
-              <WWAds className='w-full' orientation='horizontal' />
-
-              {children}
-
-              {/* Google广告 */}
-              <AdSlot type='in-article' />
-              <WWAds className='w-full' orientation='horizontal' />
+            id='workspace-sheet'
+            className='flex-1 my-4 mr-4 xl:mr-6 bg-white dark:bg-neutral-950 rounded-2xl shadow-sm ring-1 ring-black/5 dark:ring-white/10 overflow-hidden grid md:grid-cols-1 lg:grid-cols-[minmax(0,1fr)_18rem] gap-6'>
+            
+            {/* Header 移动到白纸顶部 */}
+            <div className='col-span-full'>
+              <Header {...props} />
             </div>
 
-            {/* 底部 */}
-            <div className='md:hidden'>
-              <Footer {...props} />
-            </div>
-          </div>
-
-          {/*  右侧 */}
-          {fullWidth ? null : (
+            {/* 中间内容区域 */}
             <div
-              className={
-                'w-64 lg:w-72 hidden xl:block dark:border-transparent flex-shrink-0 relative z-10'
-              }>
-              <div className='py-14 sticky top-0'>
-                <ArticleInfo post={props?.post ? props?.post : props.notice} />
+              id='center-wrapper'
+              className='flex flex-col justify-between min-w-0 overflow-x-hidden'>
+              <div
+                id='container-inner'
+                className={`w-full ${fullWidth ? 'px-6 pb-8 md:px-4' : 'max-w-4xl px-6 pb-8 md:px-4'} justify-center mx-auto overflow-x-hidden`}>
+                {slotTop}
+                <WWAds className='w-full' orientation='horizontal' />
 
-                <div>
-                  {/* 桌面端目录 */}
-                  <Catalog {...props} />
-                  {slotRight}
-                  {router.route === '/' && (
-                    <>
-                      <InfoCard {...props} />
-                      {siteConfig(
-                        'GITBOOK_WIDGET_REVOLVER_MAPS',
-                        null,
-                        CONFIG
-                      ) === 'true' && <RevolverMaps />}
-                      {/* <Live2D /> */}
-                    </>
-                  )}
-                  {/* gitbook主题首页只显示公告 */}
-                  <Announcement {...props} />
-                </div>
+                {children}
 
+                {/* Google广告 */}
                 <AdSlot type='in-article' />
-                {/* <Live2D /> */}
+                <WWAds className='w-full' orientation='horizontal' />
+              </div>
+
+              {/* 底部 */}
+              <div className='md:hidden'>
+                <Footer {...props} />
               </div>
             </div>
-          )}
+
+            {/* 右侧边栏 */}
+            {fullWidth ? null : (
+              <div className='hidden lg:block sticky top-[56px] max-h-[calc(100vh-56px-32px)] overflow-auto pr-6'>
+                <div className='py-4'>
+                  <ArticleInfo post={props?.post ? props?.post : props.notice} />
+
+                  <div>
+                    {/* 桌面端目录 */}
+                    <Catalog {...props} />
+                    {slotRight}
+                    {router.route === '/' && (
+                      <>
+                        <InfoCard {...props} />
+                        {siteConfig(
+                          'GITBOOK_WIDGET_REVOLVER_MAPS',
+                          null,
+                          CONFIG
+                        ) === 'true' && <RevolverMaps />}
+                        {/* <Live2D /> */}
+                      </>
+                    )}
+                    {/* gitbook主题首页只显示公告 */}
+                    <Announcement {...props} />
+                  </div>
+
+                  <AdSlot type='in-article' />
+                  {/* <Live2D /> */}
+                </div>
+              </div>
+            )}
+          </div>
         </main>
         </div>
 

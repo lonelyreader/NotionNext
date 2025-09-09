@@ -63,10 +63,10 @@ export default function Header(props) {
   const enableClerk = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
 
   return (
-    <div id='top-nav' className={'fixed top-0 w-full z-20 ' + className}>
+    <div id='top-nav' className={'sticky top-0 z-20 ' + className}>
       {/* PC端菜单 */}
-      <div className='flex justify-center border-b dark:border-gray-700 items-center w-full h-16 bg-white dark:bg-gray-800 shadow-sm'>
-        <div className='px-2 sm:px-5 max-w-screen-4xl w-full flex gap-x-2 sm:gap-x-3 justify-between items-center'>
+      <div className='flex justify-center border-b border-black/5 dark:border-white/10 items-center w-full h-16 bg-transparent px-6 py-3 md:px-4'>
+        <div className='w-full flex gap-x-2 sm:gap-x-3 justify-between items-center'>
           {/* 左侧*/}
           <div className='flex'>
             <LogoBar {...props} />
@@ -120,7 +120,7 @@ export default function Header(props) {
         collapseRef={collapseRef}
         isOpen={isOpen}
         className='md:hidden'>
-        <div className='bg-white dark:bg-gray-800 pt-1 py-2 lg:hidden border-b border-gray-200 dark:border-gray-700'>
+        <div className='bg-transparent pt-1 py-2 lg:hidden'>
           <MenuBarMobile
             {...props}
             onHeightChange={param =>

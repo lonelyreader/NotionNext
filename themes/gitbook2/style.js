@@ -12,6 +12,12 @@ const Style = () => {
         background-color: black;
       }
 
+      /* 壳体背景变量定义 */
+      :root {
+        --shell-bg: #F6F7F9;
+        --shell-bg-dark: #0B0B0C;
+      }
+
       .bottom-button-group {
         box-shadow: 0px -3px 10px 0px rgba(0, 0, 0, 0.1);
       }
@@ -245,10 +251,38 @@ const Style = () => {
         }
       }
       
+      /* 深色模式壳体背景 */
+      .dark #theme-gitbook {
+        background-color: var(--shell-bg-dark);
+      }
+      
+      /* 白纸工作区样式优化 */
+      #workspace-sheet {
+        min-height: calc(100vh - 2rem);
+      }
+      
+      /* 确保白纸工作区在移动端的正确显示 */
+      @media (max-width: 1024px) {
+        #workspace-sheet {
+          grid-template-columns: 1fr;
+        }
+      }
+      
+      /* 左侧边栏样式优化 */
+      #theme-gitbook .hidden.md\\:block > div {
+        background-color: var(--shell-bg);
+        border-right: 1px solid rgba(0, 0, 0, 0.05);
+      }
+      
+      .dark #theme-gitbook .hidden.md\\:block > div {
+        background-color: var(--shell-bg-dark);
+        border-right: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      
       /* 移动端深色模式优化 */
       @media (max-width: 768px) {
         .dark #theme-gitbook {
-          background-color: #000000;
+          background-color: var(--shell-bg-dark);
         }
         
         .dark #theme-gitbook #top-nav {
