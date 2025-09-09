@@ -1,8 +1,9 @@
 import { siteConfig } from '@/lib/config'
 import { deepClone } from '@/lib/utils'
 import { useGitBookGlobal } from '../index'
-import { useImperativeHandle, useRef, useState } from 'react'
+import { useImperativeHandle, useRef, useState, useCallback } from 'react'
 import { useHotkeys } from 'react-hotkeys-hook'
+import { debounce } from 'lodash'
 let lock = false
 
 /**
@@ -29,7 +30,7 @@ const SearchInput = ({ currentSearch, cRef, className }) => {
     handleSearch()
   })
 
-  const handleSearch = () => {
+  const handleSearch = useCallback(() => {
     // 使用Algolia
     if (siteConfig('ALGOLIA_APP_ID')) {
       searchModal?.current?.openSearch()
@@ -55,7 +56,13 @@ const SearchInput = ({ currentSearch, cRef, className }) => {
 
     // 更新完
     setFilteredNavPages(filterAllNavPages)
-  }
+  }, [allNavPages, setFilteredNavPages, searchModal])
+
+  // 防抖搜索
+  const debouncedSearch = useCallback(
+    debounce(handleSearch, 250),
+    [handleSearch]
+  )
 
   /**
    * 回车键
@@ -101,8 +108,10 @@ const SearchInput = ({ currentSearch, cRef, className }) => {
     searchInputRef.current.value = val
     if (val) {
       setShowClean(true)
+      debouncedSearch()
     } else {
       setShowClean(false)
+      setFilteredNavPages(allNavPages)
     }
   }
 
