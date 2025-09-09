@@ -36,36 +36,26 @@ jobs:
         run: pip install requests
 
       - name: Push
+        env:
+          URL: ${{ secrets.URL }}
+          BAIDU_TOKEN: ${{ secrets.BAIDU_TOKEN }}
+          BING_API_KEY: ${{ secrets.BING_API_KEY }}
         run: |
-          # 检查必要的secrets是否存在
-          # 注意：这些secrets需要在GitHub仓库设置中配置
-          # URL: 你的网站URL
-          # BAIDU_TOKEN: 百度站长平台的推送token
-          # BING_API_KEY: Bing站长工具的API密钥
-          
-          if [ -z "${{ secrets.URL }}" ]; then
+          if [ -n "$URL" ]; then
+            if [ -n "$BAIDU_TOKEN" ]; then
+              python pushUrl.py --url $URL --baidu_token $BAIDU_TOKEN
+            else
+              echo "请前往 Github Action Secrets 配置 BAIDU_TOKEN:"
+              echo "详情参见: 'https://www.ghlcode.cn/fe032806-5362-4d82-b746-a0b26ce8b9d9'"
+            fi
+            if [ -n "$BING_API_KEY" ]; then
+              python pushUrl.py --url $URL --bing_api_key $BING_API_KEY
+            else
+              echo "请前往 Github Action Secrets 配置 BING_API_KEY:"
+              echo "详情参见: 'https://www.ghlcode.cn/fe032806-5362-4d82-b746-a0b26ce8b9d9'"
+            fi
+          else
             echo "请前往 Github Action Secrets 配置 URL:"
-            echo "详情参见: 'https://www.ghlcode.cn/fe032806-5362-4d82-b746-a0b26ce8b9d9'"
-            exit 0
-          fi
-          
-          URL="${{ secrets.URL }}"
-          
-          # 推送百度
-          if [ -n "${{ secrets.BAIDU_TOKEN }}" ]; then
-            echo "开始推送链接到百度..."
-            python pushUrl.py --url "$URL" --baidu_token "${{ secrets.BAIDU_TOKEN }}"
-          else
-            echo "请前往 Github Action Secrets 配置 BAIDU_TOKEN:"
-            echo "详情参见: 'https://www.ghlcode.cn/fe032806-5362-4d82-b746-a0b26ce8b9d9'"
-          fi
-          
-          # 推送Bing
-          if [ -n "${{ secrets.BING_API_KEY }}" ]; then
-            echo "开始推送链接到Bing..."
-            python pushUrl.py --url "$URL" --bing_api_key "${{ secrets.BING_API_KEY }}"
-          else
-            echo "请前往 Github Action Secrets 配置 BING_API_KEY:"
             echo "详情参见: 'https://www.ghlcode.cn/fe032806-5362-4d82-b746-a0b26ce8b9d9'"
           fi
       
