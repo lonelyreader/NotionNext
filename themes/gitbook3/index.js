@@ -40,9 +40,6 @@ import TagItemMini from './components/TagItemMini'
 import SidebarToggle from './components/SidebarToggle'
 // GitBook3 新组件
 import GlobalSidebar from './components/GlobalSidebar'
-import RightAside from './components/RightAside'
-import DocumentHeader from './components/DocumentHeader'
-import ContentCard from './components/ContentCard'
 import CONFIG from './config'
 import { Style } from './style'
 
@@ -152,7 +149,7 @@ const LayoutBase = props => {
         {/* 固定顶栏 */}
         <Header {...props} />
 
-        {/* 主区域三列布局 */}
+        {/* 主区域布局 */}
         <main id='gitbook3-main' className='gitbook3-main-layout'>
           {/* 左侧全局侧栏 */}
           <GlobalSidebar 
@@ -164,15 +161,14 @@ const LayoutBase = props => {
           {/* 中间内容列 */}
           <div id='gitbook3-content-column' className='gitbook3-content-column'>
             <div className='gitbook3-content-wrapper'>
-              {/* 文档头部 */}
-              <DocumentHeader post={post} notice={props.notice} />
-              
               {/* 内容卡片 */}
-              <ContentCard post={post} prev={props.prev} next={props.next}>
-                {slotTop}
-                <WWAds className='w-full' orientation='horizontal' />
-                {children}
-              </ContentCard>
+              <div className='gitbook3-content-card'>
+                <div className='gitbook3-content-body'>
+                  {slotTop}
+                  <WWAds className='w-full' orientation='horizontal' />
+                  {children}
+                </div>
+              </div>
             </div>
 
             {/* 移动端底部 */}
@@ -180,14 +176,6 @@ const LayoutBase = props => {
               <Footer {...props} />
             </div>
           </div>
-
-          {/* 右侧信息栏 */}
-          <RightAside 
-            {...props} 
-            slotRight={slotRight}
-            post={post}
-            notice={props.notice}
-          />
         </main>
 
         {GITBOOK_LOADING_COVER && <LoadingCover />}

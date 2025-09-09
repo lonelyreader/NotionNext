@@ -15,19 +15,10 @@ export default function GlobalSidebar(props) {
   const { fullWidth } = useGlobal()
   const [isCollapsed, setIsCollapsed] = useState(false)
 
-  // 从localStorage读取侧栏状态
-  useEffect(() => {
-    const savedState = localStorage.getItem('gitbook3-sidebar-collapsed')
-    if (savedState !== null) {
-      setIsCollapsed(JSON.parse(savedState))
-    }
-  }, [])
-
-  // 保存侧栏状态到localStorage
+  // 简单的侧栏切换，不使用localStorage
   const toggleSidebar = () => {
     const newState = !isCollapsed
     setIsCollapsed(newState)
-    localStorage.setItem('gitbook3-sidebar-collapsed', JSON.stringify(newState))
     
     // 更新body类名以调整布局
     if (newState) {

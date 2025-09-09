@@ -28,6 +28,29 @@ const Style = () => {
         --gitbook3-accent: #0969DA;
         --gitbook3-accent-hover: #0860CA;
         --gitbook3-transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        
+        /* Liquid Glass 链接系统 */
+        --gitbook3-link-color: #007aff;
+        --gitbook3-link-color-hover: #0056cc;
+        --gitbook3-link-color-active: #004499;
+        
+        /* 玻璃材质参数 */
+        --gitbook3-glass-blur: 8px;
+        --gitbook3-glass-saturation: 1.4;
+        --gitbook3-glass-brightness: 1.1;
+        
+        /* 微胶囊玻璃背景 - Clear外观 */
+        --gitbook3-glass-clear-bg: rgba(255, 255, 255, 0.8);
+        --gitbook3-glass-clear-border: rgba(0, 0, 0, 0.06);
+        --gitbook3-glass-clear-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+        --gitbook3-glass-clear-shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.08);
+        --gitbook3-glass-clear-shadow-active: 0 4px 12px rgba(0, 0, 0, 0.04);
+        
+        /* 微胶囊圆角 */
+        --gitbook3-glass-radius: 9px;
+        
+        /* 链接过渡动画 */
+        --gitbook3-link-transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
       }
       
       .dark:root {
@@ -39,6 +62,18 @@ const Style = () => {
         --gitbook3-bg-tertiary: #21262D;
         --gitbook3-accent: #58A6FF;
         --gitbook3-accent-hover: #1F6FEB;
+        
+        /* 深色模式 Liquid Glass 链接系统 */
+        --gitbook3-link-color: #58a6ff;
+        --gitbook3-link-color-hover: #79c0ff;
+        --gitbook3-link-color-active: #388bfd;
+        
+        /* 深色模式微胶囊玻璃背景 - Tint外观 */
+        --gitbook3-glass-clear-bg: rgba(0, 0, 0, 0.6);
+        --gitbook3-glass-clear-border: rgba(255, 255, 255, 0.08);
+        --gitbook3-glass-clear-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+        --gitbook3-glass-clear-shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.3);
+        --gitbook3-glass-clear-shadow-active: 0 4px 12px rgba(0, 0, 0, 0.15);
       }
       
       /* =========================
@@ -62,6 +97,79 @@ const Style = () => {
         overflow-x: hidden;
         line-height: 1.6;
         transition: var(--gitbook3-transition);
+      }
+      
+      /* =========================
+         Liquid Glass 链接系统
+         ========================= */
+      a {
+        color: var(--gitbook3-link-color);
+        text-decoration: none;
+        position: relative;
+        display: inline-block;
+        transition: var(--gitbook3-link-transition);
+        border-radius: var(--gitbook3-glass-radius);
+        padding: 2px 4px;
+        margin: -2px -4px;
+        z-index: 1;
+      }
+      
+      /* 悬停和聚焦状态 - Liquid Glass 微胶囊 */
+      a:hover,
+      a:focus-visible {
+        color: var(--gitbook3-link-color-hover);
+        background: var(--gitbook3-glass-clear-bg);
+        backdrop-filter: blur(var(--gitbook3-glass-blur)) saturate(var(--gitbook3-glass-saturation)) brightness(var(--gitbook3-glass-brightness));
+        -webkit-backdrop-filter: blur(var(--gitbook3-glass-blur)) saturate(var(--gitbook3-glass-saturation)) brightness(var(--gitbook3-glass-brightness));
+        border: 1px solid var(--gitbook3-glass-clear-border);
+        box-shadow: var(--gitbook3-glass-clear-shadow-hover);
+        transform: translateY(-1px);
+        text-decoration: none;
+      }
+      
+      /* 按下状态 - 玻璃轻压效果 */
+      a:active {
+        color: var(--gitbook3-link-color-active);
+        background: var(--gitbook3-glass-clear-bg);
+        backdrop-filter: blur(var(--gitbook3-glass-blur)) saturate(var(--gitbook3-glass-saturation)) brightness(var(--gitbook3-glass-brightness));
+        -webkit-backdrop-filter: blur(var(--gitbook3-glass-blur)) saturate(var(--gitbook3-glass-saturation)) brightness(var(--gitbook3-glass-brightness));
+        border: 1px solid var(--gitbook3-glass-clear-border);
+        box-shadow: var(--gitbook3-glass-clear-shadow-active);
+        transform: translateY(0);
+        transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      
+      /* 禁用状态 */
+      a:disabled,
+      a[disabled] {
+        opacity: 0.5;
+        cursor: default;
+        pointer-events: none;
+      }
+      
+      /* 无障碍支持 - 减少透明度时的降级处理 */
+      @media (prefers-reduced-transparency: reduce) {
+        a:hover,
+        a:focus-visible,
+        a:active {
+          background: var(--gitbook3-glass-clear-bg);
+          backdrop-filter: none;
+          -webkit-backdrop-filter: none;
+          border: 2px solid var(--gitbook3-link-color);
+        }
+      }
+      
+      /* 减少动效时的降级处理 */
+      @media (prefers-reduced-motion: reduce) {
+        a {
+          transition: none;
+        }
+        
+        a:hover,
+        a:focus-visible,
+        a:active {
+          transform: none;
+        }
       }
       
       /* =========================
@@ -571,17 +679,23 @@ const Style = () => {
         box-shadow: 0 4px 12px rgba(9, 105, 218, 0.3);
       }
       
-      /* 链接样式 */
-      a {
-        color: var(--gitbook3-accent);
-        text-decoration: none;
-        transition: var(--gitbook3-transition);
+      /* 特殊链接样式覆盖 - 保持 Liquid Glass 风格 */
+      .gitbook3-nav-item a {
+        color: var(--gitbook3-text-secondary);
+        padding: 4px 8px;
+        margin: -4px -8px;
+        border-radius: var(--gitbook3-glass-radius);
       }
       
-      a:hover {
-        color: var(--gitbook3-accent-hover);
-        text-decoration: underline;
-        text-underline-offset: 2px;
+      .gitbook3-nav-item a:hover,
+      .gitbook3-nav-item a:focus-visible {
+        color: var(--gitbook3-text-primary);
+        background: var(--gitbook3-glass-clear-bg);
+        backdrop-filter: blur(var(--gitbook3-glass-blur)) saturate(var(--gitbook3-glass-saturation)) brightness(var(--gitbook3-glass-brightness));
+        -webkit-backdrop-filter: blur(var(--gitbook3-glass-blur)) saturate(var(--gitbook3-glass-saturation)) brightness(var(--gitbook3-glass-brightness));
+        border: 1px solid var(--gitbook3-glass-clear-border);
+        box-shadow: var(--gitbook3-glass-clear-shadow);
+        transform: translateY(-1px);
       }
       
       /* 标题样式 */
