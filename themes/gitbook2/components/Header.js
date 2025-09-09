@@ -65,8 +65,8 @@ export default function Header(props) {
   return (
     <div id='top-nav' className={'fixed top-0 w-full z-20 ' + className}>
       {/* PC端菜单 */}
-      <div className='flex justify-center border-b dark:border-black items-center w-full h-16 bg-white dark:bg-hexo-black-gray'>
-        <div className='px-5 max-w-screen-4xl w-full flex gap-x-3 justify-between items-center'>
+      <div className='flex justify-center border-b dark:border-gray-700 items-center w-full h-16 bg-white dark:bg-gray-800 shadow-sm'>
+        <div className='px-2 sm:px-5 max-w-screen-4xl w-full flex gap-x-2 sm:gap-x-3 justify-between items-center'>
           {/* 左侧*/}
           <div className='flex'>
             <LogoBar {...props} />
@@ -98,11 +98,11 @@ export default function Header(props) {
             <DarkModeButton className='text-sm items-center h-full hidden md:flex' />
             <SearchInput className='hidden md:flex md:w-52 lg:w-72' />
             {/* 折叠按钮、仅移动端显示 */}
-            <div className='mr-1 flex md:hidden justify-end items-center space-x-4  dark:text-gray-200'>
+            <div className='mr-1 flex md:hidden justify-end items-center space-x-2 sm:space-x-4 dark:text-gray-200'>
               <DarkModeButton className='flex text-md items-center h-full' />
               <div
                 onClick={toggleMenuOpen}
-                className='cursor-pointer text-lg hover:scale-110 duration-150'>
+                className='cursor-pointer text-lg hover:scale-110 duration-150 p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors'>
                 {isOpen ? (
                   <i className='fas fa-times' />
                 ) : (
@@ -120,7 +120,7 @@ export default function Header(props) {
         collapseRef={collapseRef}
         isOpen={isOpen}
         className='md:hidden'>
-        <div className='bg-white dark:bg-hexo-black-gray pt-1 py-2 lg:hidden '>
+        <div className='bg-white dark:bg-gray-800 pt-1 py-2 lg:hidden border-b border-gray-200 dark:border-gray-700'>
           <MenuBarMobile
             {...props}
             onHeightChange={param =>

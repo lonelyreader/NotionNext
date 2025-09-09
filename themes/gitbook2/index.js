@@ -138,13 +138,13 @@ const LayoutBase = props => {
 
       <div
         id='theme-gitbook'
-        className={`${siteConfig('FONT_STYLE')} pb-16 md:pb-0 scroll-smooth bg-white dark:bg-black w-full h-full min-h-screen justify-center dark:text-gray-300`}>
+        className={`${siteConfig('FONT_STYLE')} pb-20 md:pb-0 scroll-smooth bg-white dark:bg-black w-full h-full min-h-screen justify-center dark:text-gray-300`}>
         <AlgoliaSearchModal cRef={searchModal} {...props} />
 
         {/* 顶部导航栏 */}
         <Header {...props} />
 
-        <div className='w-full max-w-screen-7xl mx-auto px-4 lg:px-6 xl:px-8'>
+        <div className='w-full max-w-screen-7xl mx-auto px-2 sm:px-4 lg:px-6 xl:px-8'>
           <main
             id='wrapper'
             className={`${siteConfig('LAYOUT_SIDEBAR_REVERSE') ? 'flex-row-reverse' : ''} relative flex w-full h-full gap-4 lg:gap-6 xl:gap-8`}>
@@ -172,7 +172,7 @@ const LayoutBase = props => {
             className='flex flex-col justify-between flex-1 relative z-10 pt-14 min-h-screen'>
             <div
               id='container-inner'
-              className={`w-full ${fullWidth ? 'px-5' : 'max-w-4xl px-4 lg:px-6'} justify-center mx-auto`}>
+              className={`w-full ${fullWidth ? 'px-2 sm:px-5' : 'max-w-4xl px-2 sm:px-4 lg:px-6'} justify-center mx-auto`}>
               {slotTop}
               <WWAds className='w-full' orientation='horizontal' />
 
