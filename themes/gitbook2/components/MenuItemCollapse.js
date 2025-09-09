@@ -1,5 +1,6 @@
 import Collapse from '@/components/Collapse'
 import SmartLink from '@/components/SmartLink'
+import { useRouter } from 'next/router'
 import { useState } from 'react'
 
 /**
@@ -14,6 +15,14 @@ export const MenuItemCollapse = props => {
 
   const [isOpen, changeIsOpen] = useState(false)
 
+  const router = useRouter()
+
+  if (!link || !link.show) {
+    return null
+  }
+
+  const selected = router.pathname === link.href || router.asPath === link.href
+
   const toggleShow = () => {
     changeShow(!show)
   }
@@ -22,44 +31,40 @@ export const MenuItemCollapse = props => {
     changeIsOpen(!isOpen)
   }
 
-  if (!link || !link.show) {
-    return null
-  }
-
   return (
     <>
       <div
-        className='w-full px-8 py-3 text-left border-b dark:bg-hexo-black-gray dark:border-black'
+        className={
+          (selected
+            ? 'bg-green-600 text-white hover:text-white'
+            : 'hover:text-green-600') +
+          ' px-7 w-full text-left duration-200 dark:bg-hexo-black-gray dark:border-black'
+        }
         onClick={toggleShow}>
         {!hasSubMenu && (
           <SmartLink
             href={link?.href}
             target={link?.target}
-            className='items-center flex justify-between pl-2 pr-4 dark:text-gray-200 no-underline tracking-widest pb-1'>
-            <span className='text-blue-600 dark:text-blue-300 hover:text-red-400 transition-all items-center duration-200'>
-              {link?.icon && (
-                <span className='mr-2'>
-                  <i className={link.icon} />
-                </span>
-              )}
-              {link?.name}
-            </span>
+            className='py-2 w-full my-auto items-center justify-between flex  '>
+            <div>
+              <div className={`${link.icon} text-center w-4 mr-4`} />
+              {link.name}
+            </div>
           </SmartLink>
         )}
+
         {hasSubMenu && (
           <div
             onClick={hasSubMenu ? toggleOpenSubMenu : null}
-            className='items-center flex justify-between pl-2 pr-4 cursor-pointer  dark:text-gray-200 no-underline tracking-widest pb-1'>
-            <span className='text-blue-600 dark:text-blue-300 hover:text-red-400 transition-all items-center duration-200'>
-              {link?.icon && (
-                <span className='mr-2'>
-                  <i className={link.icon} />
-                </span>
-              )}
-              {link?.name}
-            </span>
-            <i
-              className={`px-2 fa fa-plus transition-all duration-200 ${isOpen && 'rotate-45'} text-gray-400`}></i>
+            className='py-2 font-extralight flex justify-between cursor-pointer  dark:text-gray-200 no-underline tracking-widest'>
+            <div>
+              <div className={`${link.icon} text-center w-4 mr-4`} />
+              {link.name}
+            </div>
+            <div className='inline-flex items-center '>
+              <i
+                className={`px-2 fas fa-chevron-right transition-all duration-200 ${isOpen ? 'rotate-90' : ''}`}></i>
+            </div>
           </div>
         )}
       </div>
@@ -67,20 +72,20 @@ export const MenuItemCollapse = props => {
       {/* 折叠子菜单 */}
       {hasSubMenu && (
         <Collapse isOpen={isOpen} onHeightChange={props.onHeightChange}>
-          {link.subMenus.map((sLink, index) => {
+          {link?.subMenus?.map((sLink, index) => {
             return (
               <div
                 key={index}
-                className='dark:bg-black text-left px-10 justify-start text-blue-600 dark:text-blue-300 bg-gray-50 hover:bg-gray-50 dark:hover:bg-gray-900 tracking-widest transition-all duration-200 border-b dark:border-gray-800 py-3 pr-6'>
+                className='
+              not:last-child:border-b-0 border-b dark:border-gray-800 py-2 px-14 cursor-pointer hover:bg-gray-100 dark:text-gray-200
+              font-extralight dark:bg-black text-left justify-start text-gray-600 bg-gray-50 dark:hover:bg-gray-900 tracking-widest transition-all duration-200'>
                 <SmartLink href={sLink.href} target={link?.target}>
-                  <span className='ml-4 text-sm'>
-                    {sLink?.icon && (
-                      <span className='mr-2 w-4'>
-                        <i className={sLink.icon} />
-                      </span>
-                    )}
+                  <div>
+                    <div
+                      className={`${sLink.icon} text-center w-3 mr-3 text-xs`}
+                    />
                     {sLink.title}
-                  </span>
+                  </div>
                 </SmartLink>
               </div>
             )

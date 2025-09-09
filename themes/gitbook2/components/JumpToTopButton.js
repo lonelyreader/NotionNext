@@ -1,6 +1,3 @@
-import { useGlobal } from '@/lib/global'
-import { useEffect, useState } from 'react'
-
 /**
  * 跳转到网页顶部
  * 当屏幕下滑500像素后会出现该控件
@@ -9,27 +6,23 @@ import { useEffect, useState } from 'react'
  * @returns {JSX.Element}
  * @constructor
  */
-const JumpToTopButton = () => {
-  const { locale } = useGlobal()
-  const [show, switchShow] = useState(false)
-  const scrollListener = () => {
-    const scrollY = window.pageYOffset
-    const shouldShow = scrollY > 200
-    if (shouldShow !== show) {
-      switchShow(shouldShow)
-    }
-  }
-
-  useEffect(() => {
-    document.addEventListener('scroll', scrollListener)
-    return () => document.removeEventListener('scroll', scrollListener)
-  }, [show])
-
-  return <div title={locale.POST.TOP}
-        className={(show ? ' opacity-100 ' : 'invisible  opacity-0') + ' transition-all duration-300 flex items-center justify-center cursor-pointer bg-black h-10 w-10 bg-opacity-40 rounded-sm'}
-        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-    ><i className='fas fa-angle-up text-white ' />
+const JumpToTopButton = ({ showPercent = false, percent, className }) => {
+  return (
+    <div
+      id='jump-to-top'
+      data-aos='fade-up'
+      data-aos-duration='300'
+      data-aos-once='false'
+      data-aos-anchor-placement='top-center'
+      className='fixed xl:right-96 xl:mr-20 right-2 bottom-24 z-20'>
+      <i
+        className='shadow fas fa-chevron-up cursor-pointer p-2 rounded-full border bg-white dark:bg-hexo-black-gray'
+        onClick={() => {
+          window.scrollTo({ top: 0, behavior: 'smooth' })
+        }}
+      />
     </div>
+  )
 }
 
 export default JumpToTopButton

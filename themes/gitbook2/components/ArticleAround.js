@@ -1,3 +1,4 @@
+import { useGlobal } from '@/lib/global'
 import SmartLink from '@/components/SmartLink'
 
 /**
@@ -6,27 +7,35 @@ import SmartLink from '@/components/SmartLink'
  * @returns
  */
 export default function ArticleAround({ prev, next }) {
+  const { locale } = useGlobal()
+
   if (!prev || !next) {
     return <></>
   }
+
   return (
-        <section className='text-gray-800 dark:text-gray-400 h-12 flex items-center justify-between space-x-5 my-4'>
-            {prev && <SmartLink
-                href={`/${prev.slug}`}
-                passHref
-                className='text-sm cursor-pointer justify-start items-center flex hover:underline duration-300'>
+    <section className='text-gray-800 dark:text-gray-400 flex items-center justify-between gap-x-3 my-4'>
+      <SmartLink
+        href={prev.href}
+        passHref
+        className='rounded border w-full h-20 px-3 cursor-pointer justify-between items-center flex hover:text-green-500 duration-300'>
+        <i className='mr-1 fas fa-angle-left' />
+        <div>
+          <div>{locale.COMMON.PREV_POST}</div>
+          <div>{prev.title}</div>
+        </div>
+      </SmartLink>
 
-                <i className='mr-1 fas fa-angle-double-left' />{prev.title}
-
-            </SmartLink>}
-            {next && <SmartLink
-                href={`/${next.slug}`}
-                passHref
-                className='text-sm cursor-pointer justify-end items-center flex hover:underline duration-300'>
-                {next.title}
-                <i className='ml-1 my-1 fas fa-angle-double-right' />
-
-            </SmartLink>}
-        </section>
+      <SmartLink
+        href={next.href}
+        passHref
+        className='rounded border w-full h-20 px-3 cursor-pointer justify-between items-center flex hover:text-green-500 duration-300'>
+        <div>
+          <div>{locale.COMMON.NEXT_POST}</div>
+          <div> {next.title}</div>
+        </div>
+        <i className='ml-1 my-1 fas fa-angle-right' />
+      </SmartLink>
+    </section>
   )
 }

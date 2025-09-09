@@ -1,13 +1,21 @@
+// import { useGlobal } from '@/lib/global'
 import dynamic from 'next/dynamic'
 
 const NotionPage = dynamic(() => import('@/components/NotionPage'))
 
-const Announcement = ({ post, className }) => {
-  if (!post) {
+const Announcement = ({ notice, className }) => {
+//   const { locale } = useGlobal()
+  if (notice?.blockMap) {
+    return <div className={className}>
+        <section id='announcement-wrapper' className="dark:text-gray-300 rounded-xl px-2 py-4">
+            {/* <div><i className='mr-2 fas fa-bullhorn' />{locale.COMMON.ANNOUNCEMENT}</div> */}
+            {notice && (<div id="announcement-content">
+            <NotionPage post={notice} />
+        </div>)}
+        </section>
+    </div>
+  } else {
     return <></>
   }
-  return <>{post && (<div id="announcement-content" className='px-3'>
-        <NotionPage post={post} />
-    </div>)} </>
 }
 export default Announcement

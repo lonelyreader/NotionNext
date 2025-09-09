@@ -1,13 +1,12 @@
 import { BeiAnGongAn } from '@/components/BeiAnGongAn'
-import DarkModeButton from '@/components/DarkModeButton'
 import { siteConfig } from '@/lib/config'
-
+import SocialButton from './SocialButton'
 /**
- * 页脚
- * @param {*} props
+ * 站点也叫
+ * @param {*} param0
  * @returns
  */
-export default function Footer(props) {
+const Footer = ({ siteInfo }) => {
   const d = new Date()
   const currentYear = d.getFullYear()
   const since = siteConfig('SINCE')
@@ -15,35 +14,53 @@ export default function Footer(props) {
     parseInt(since) < currentYear ? since + '-' + currentYear : currentYear
 
   return (
-    <footer className='relative w-full bg-black px-6 border-t'>
-      <DarkModeButton className='text-center pt-4' />
+    <footer className='z-20 border p-2 rounded-lg bg:white dark:border-black dark:bg-hexo-black-gray justify-center text-center w-full text-sm relative'>
+      <SocialButton />
 
-      <div className='text-yellow-300 container mx-auto max-w-4xl py-6 md:flex flex-wrap md:flex-no-wrap md:justify-between items-center text-sm'>
-        <div className='text-center'>
-          &copy;{`${copyrightDate}`} {siteConfig('AUTHOR')}. All rights
-          reserved.
+      <div className='flex justify-center'>
+        <div>
+          <i className='mx-1 animate-pulse fas fa-heart' />{' '}
+          <a
+            href={siteConfig('LINK')}
+            className='underline font-bold text-gray-500 dark:text-gray-300 '>
+            {siteConfig('AUTHOR')}
+          </a>
+          .<br />
         </div>
-        <div className='md:p-0 text-center md:text-right text-xs'>
-          {/* 右侧链接 */}
-          {/* <a href="#" className="text-black no-underline hover:underline">Privacy Policy</a> */}
-          {siteConfig('BEI_AN') && (
-            <a
-              href={siteConfig('BEI_AN_LINK')}
-              className='no-underline hover:underline ml-4'>
-              {siteConfig('BEI_AN')}
-            </a>
-          )}
-          <BeiAnGongAn />
-          <span className='no-underline ml-4'>
-            Powered by
-            <a
-              href='https://github.com/tangly1024/NotionNext'
-              className=' hover:underline'>
-              NotionNext {siteConfig('VERSION')}
-            </a>
-          </span>
-        </div>
+        © {`${copyrightDate}`}
       </div>
+
+      {siteConfig('BEI_AN') && (
+        <>
+          <i className='fas fa-shield-alt' />{' '}
+          <a href={siteConfig('BEI_AN_LINK')} className='mr-2'>
+            {siteConfig('BEI_AN')}
+          </a>
+          <BeiAnGongAn />
+          <br />
+        </>
+      )}
+
+      <span className='hidden busuanzi_container_site_pv'>
+        <i className='fas fa-eye' />
+        <span className='px-1 busuanzi_value_site_pv'> </span>{' '}
+      </span>
+      <span className='pl-2 hidden busuanzi_container_site_uv'>
+        <i className='fas fa-users' />{' '}
+        <span className='px-1 busuanzi_value_site_uv'> </span>{' '}
+      </span>
+      <div className='text-xs font-serif'>
+        Powered By{' '}
+        <a
+          href='https://github.com/tangly1024/NotionNext'
+          className='underline text-gray-500 dark:text-gray-300'>
+          NotionNext {siteConfig('VERSION')}
+        </a>
+      </div>
+      {/* SEO title */}
+      <h1 className='pt-1 hidden'>{siteConfig('TITLE')}</h1>
     </footer>
   )
 }
+
+export default Footer

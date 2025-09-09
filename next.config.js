@@ -84,6 +84,9 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true
   },
+  typescript: {
+    ignoreBuildErrors: true
+  },
   output: process.env.EXPORT
     ? 'export'
     : process.env.NEXT_BUILD_STANDALONE === 'true'

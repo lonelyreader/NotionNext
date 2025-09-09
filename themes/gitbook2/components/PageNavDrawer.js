@@ -1,5 +1,5 @@
 import { useGlobal } from '@/lib/global'
-import { useGitBookGlobal } from '@/themes/gitbook'
+import { useGitBookGlobal } from '../index'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import NavPostList from './NavPostList'

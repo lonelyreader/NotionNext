@@ -1,7 +1,7 @@
 import SmartLink from '@/components/SmartLink'
 
 /**
- * 归档分组文章
+ * 归档分组
  * @param {*} param0
  * @returns
  */
@@ -11,9 +11,8 @@ export default function BlogArchiveItem({ archiveTitle, archivePosts }) {
       <div id={archiveTitle} className='pt-16 pb-4 text-3xl dark:text-gray-300'>
         {archiveTitle}
       </div>
-
       <ul>
-        {archivePosts[archiveTitle].map(post => {
+        {archivePosts[archiveTitle]?.map(post => {
           return (
             <li
               key={post.id}
@@ -22,8 +21,8 @@ export default function BlogArchiveItem({ archiveTitle, archivePosts }) {
                 <span className='text-gray-400'>{post.date?.start_date}</span>{' '}
                 &nbsp;
                 <SmartLink
-                  href={post?.href}
                   passHref
+                  href={post?.href}
                   className='dark:text-gray-400  dark:hover:text-gray-300 overflow-x-hidden hover:underline cursor-pointer text-gray-600'>
                   {post.title}
                 </SmartLink>
