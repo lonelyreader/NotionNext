@@ -19,7 +19,7 @@ const Footer = ({ siteInfo }) => {
         <i className='mx-1 animate-pulse fas fa-heart text-red-500' />{' '}
         <a
           href={siteConfig('LINK')}
-          className='underline hover:text-blue-600 dark:hover:text-blue-400 transition-colors'>
+          className='underline hover:text-purple-600 dark:hover:text-purple-400 transition-colors'>
           {siteConfig('AUTHOR')}
         </a>
       </div>
@@ -35,7 +35,7 @@ const Footer = ({ siteInfo }) => {
       {siteConfig('BEI_AN') && (
         <div className='text-xs text-gray-500 dark:text-gray-400 mt-2 text-center'>
           <i className='fas fa-shield-alt' />{' '}
-          <a href={siteConfig('BEI_AN_LINK')} className='hover:text-blue-600 dark:hover:text-blue-400'>
+          <a href={siteConfig('BEI_AN_LINK')} className='hover:text-purple-600 dark:hover:text-purple-400'>
             {siteConfig('BEI_AN')}
           </a>
           <BeiAnGongAn />
@@ -55,7 +55,7 @@ const Footer = ({ siteInfo }) => {
         Powered By{' '}
         <a
           href='https://github.com/tangly1024/NotionNext'
-          className='underline hover:text-blue-600 dark:hover:text-blue-400 transition-colors'>
+          className='underline hover:text-purple-600 dark:hover:text-purple-400 transition-colors'>
           NotionNext {siteConfig('VERSION')}
         </a>
       </div>

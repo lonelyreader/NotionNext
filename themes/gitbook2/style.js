@@ -184,14 +184,14 @@ const Style = () => {
       #theme-gitbook2 .notion-quote {
         margin: 0.875rem 0;
         padding: 0.75rem 1rem;
-        border-left: 4px solid #3b82f6;
+        border-left: 4px solid #53284F;
         background: #f8fafc;
         border-radius: 0 8px 8px 0;
       }
 
       .dark #theme-gitbook2 .notion-quote {
         background: #1e293b;
-        border-left-color: #60a5fa;
+        border-left-color: #53284F;
       }
 
       /* 左侧导航优化 */
@@ -208,24 +208,24 @@ const Style = () => {
       }
 
       #theme-gitbook2 .nav-item:hover {
-        background: rgba(59, 130, 246, 0.1);
-        color: #3b82f6;
+        background: rgba(83, 40, 79, 0.1);
+        color: #53284F;
       }
 
       .dark #theme-gitbook2 .nav-item:hover {
-        background: rgba(96, 165, 250, 0.1);
-        color: #60a5fa;
+        background: rgba(83, 40, 79, 0.1);
+        color: #53284F;
       }
 
       #theme-gitbook2 .nav-item.current {
-        background: rgba(59, 130, 246, 0.15);
-        color: #3b82f6;
+        background: rgba(83, 40, 79, 0.15);
+        color: #53284F;
         font-weight: 500;
       }
 
       .dark #theme-gitbook2 .nav-item.current {
-        background: rgba(96, 165, 250, 0.15);
-        color: #60a5fa;
+        background: rgba(83, 40, 79, 0.15);
+        color: #53284F;
       }
 
       /* 折叠箭头动画 */
@@ -284,7 +284,7 @@ const Style = () => {
       #theme-gitbook2 .search-input:hover {
         background: rgba(255, 255, 255, 0.8);
         border-color: rgba(0, 0, 0, 0.12);
-        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        box-shadow: 0 0 0 3px rgba(83, 40, 79, 0.1);
         height: 36px;
         line-height: 36px;
       }
@@ -382,7 +382,7 @@ const Style = () => {
 
       /* 可访问性支持 */
       #theme-gitbook2 .nav-item:focus {
-        outline: 2px solid #3b82f6;
+        outline: 2px solid #53284F;
         outline-offset: 2px;
       }
 
@@ -391,7 +391,7 @@ const Style = () => {
       }
 
       #theme-gitbook2 .collapse-button:focus {
-        outline: 2px solid #3b82f6;
+        outline: 2px solid #53284F;
         outline-offset: 2px;
       }
 
