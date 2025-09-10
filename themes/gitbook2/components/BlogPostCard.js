@@ -15,17 +15,26 @@ const BlogPostCard = ({ post, className }) => {
         key={post.id}
         className={`${className} pill-hover relative cursor-pointer ${
           currentSelected ? 'active' : ''
-        }`}>
-        <div className='w-full select-none flex items-center'>
+        }`}
+        role='link'
+        tabIndex={0}
+        aria-current={currentSelected ? 'page' : undefined}>
+        <div className='w-full select-none flex items-center gap-2'>
           {siteConfig('POST_TITLE_ICON') && (
-            <NotionIcon icon={post?.pageIcon} />
-          )}{' '}
-          <span className={currentSelected ? 'font-semibold' : ''}>{post.title}</span>
+            <div className='flex-shrink-0 w-4 h-4 flex items-center justify-center'>
+              <NotionIcon icon={post?.pageIcon} />
+            </div>
+          )}
+          <span className={`flex-1 ${currentSelected ? 'font-semibold' : ''}`}>
+            {post.title}
+          </span>
+          {/* 最新文章加个红点 */}
+          {post?.isLatest && siteConfig('GITBOOK_LATEST_POST_RED_BADGE') && (
+            <div className='flex-shrink-0'>
+              <Badge />
+            </div>
+          )}
         </div>
-        {/* 最新文章加个红点 */}
-        {post?.isLatest && siteConfig('GITBOOK_LATEST_POST_RED_BADGE') && (
-          <Badge />
-        )}
       </div>
     </SmartLink>
   )

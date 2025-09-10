@@ -49,7 +49,7 @@ const WWAds = dynamic(() => import('@/components/WWAds'), { ssr: false })
 const ThemeGlobalGitbook2 = createContext()
 export const useGitBookGlobal = () => useContext(ThemeGlobalGitbook2)
 
-// 导航状态管理
+// 导航状态管理 - 三态状态机
 const useNavState = () => {
   const [navState, setNavState] = useState('collapsed') // 'collapsed' | 'expanded' | 'pinned'
   
@@ -76,7 +76,11 @@ const useNavState = () => {
     setNavState('collapsed')
   }
   
-  return { navState, toggleNav, pinNav, collapseNav }
+  const expandNav = () => {
+    setNavState('expanded')
+  }
+  
+  return { navState, toggleNav, pinNav, collapseNav, expandNav }
 }
 
 /**
@@ -140,7 +144,7 @@ const LayoutBase = props => {
   const [tocVisible, changeTocVisible] = useState(false)
   const [pageNavVisible, changePageNavVisible] = useState(false)
   const [filteredNavPages, setFilteredNavPages] = useState(allNavPages)
-  const { navState, toggleNav, pinNav, collapseNav } = useNavState()
+  const { navState, toggleNav, pinNav, collapseNav, expandNav } = useNavState()
 
   const searchModal = useRef(null)
 
@@ -167,8 +171,17 @@ const LayoutBase = props => {
         navState,
         toggleNav,
         pinNav,
-        collapseNav
+        collapseNav,
+        expandNav
       }}>
+      {/* Font Awesome CDN */}
+      <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossOrigin="anonymous"
+        referrerPolicy="no-referrer"
+      />
       <Style />
 
       <div
@@ -183,64 +196,95 @@ const LayoutBase = props => {
           
           {/* 左侧导航栏 - Liquid Glass 三态 */}
           {fullWidth ? null : (
-            <div className={`hidden md:block relative z-10 ${
-              navState === 'collapsed' ? 'nav-collapsed' : 
-              navState === 'expanded' ? 'nav-expanded' : 
-              'nav-pinned'
-            }`}>
-              <div className={`h-full flex flex-col ${
-                navState === 'collapsed' ? 'w-12' : 'w-80'
-              } ${navState === 'expanded' ? 'liquid-glass' : 'shell-container'}`}>
-                {/* 导航控制按钮 */}
-                <div className='flex-shrink-0 p-2 flex justify-between items-center'>
-                  {navState === 'collapsed' ? (
-                    <button
-                      onClick={toggleNav}
-                      className='pill-hover w-8 h-8 flex items-center justify-center'
-                      aria-label='展开导航'
-                    >
-                      <i className='fas fa-bars text-sm' />
-                    </button>
-                  ) : (
-                    <div className='flex items-center gap-2'>
+            <>
+              {/* Collapsed 状态 - 最小化按钮 */}
+              {navState === 'collapsed' && (
+                <div className='hidden md:block nav-collapsed'>
+                  <div className='h-full flex flex-col w-12 shell-container'>
+                    <div className='flex-shrink-0 p-2 flex justify-center items-center'>
                       <button
-                        onClick={navState === 'expanded' ? pinNav : collapseNav}
-                        className='pill-hover px-2 py-1 text-xs'
-                        aria-label={navState === 'expanded' ? '钉选导航' : '收起导航'}
+                        onClick={expandNav}
+                        className='pill-hover w-8 h-8 flex items-center justify-center'
+                        aria-label='打开导航'
                       >
-                        <i className={`fas ${navState === 'expanded' ? 'fa-thumbtack' : 'fa-times'}`} />
+                        <i className='fas fa-bars text-sm' />
                       </button>
-                      {navState === 'expanded' && (
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Expanded 状态 - 悬浮面板 */}
+              {navState === 'expanded' && (
+                <>
+                  {/* Scrim 遮罩 */}
+                  <div 
+                    className='fixed inset-0 bg-black bg-opacity-20 z-40'
+                    onClick={collapseNav}
+                  />
+                  <div className='hidden md:block nav-expanded liquid-glass'>
+                    <div className='h-full flex flex-col'>
+                      {/* 关闭按钮 - 面板内部左上角 */}
+                      <div className='flex-shrink-0 p-4 flex justify-end items-start'>
                         <button
                           onClick={collapseNav}
-                          className='pill-hover px-2 py-1 text-xs'
-                          aria-label='关闭导航'
+                          className='pill-hover w-8 h-8 flex items-center justify-center'
+                          aria-label='关闭'
                         >
-                          <i className='fas fa-times' />
+                          <i className='fas fa-xmark text-sm' />
                         </button>
-                      )}
+                      </div>
+                      
+                      {/* 导航内容 */}
+                      <div className='flex-1 overflow-y-auto scroll-hidden px-5 pb-4'>
+                        {/* 嵌入 */}
+                        {slotLeft}
+
+                        {/* 所有文章列表 */}
+                        <NavPostList filteredNavPages={filteredNavPages} {...props} />
+                      </div>
+                      
+                      {/* 页脚 */}
+                      <div className='flex-shrink-0 p-4'>
+                        <Footer {...props} />
+                      </div>
                     </div>
-                  )}
-                </div>
-                
-                {/* 导航内容 */}
-                {navState !== 'collapsed' && (
-                  <>
-                    <div className='flex-1 overflow-y-auto scroll-hidden pl-5 pr-4' style={{ paddingTop: '20px' }}>
+                  </div>
+                </>
+              )}
+
+              {/* Pinned 状态 - 固定侧栏 */}
+              {navState === 'pinned' && (
+                <div className='hidden md:block nav-pinned shell-container'>
+                  <div className='h-full flex flex-col'>
+                    {/* 控制按钮 */}
+                    <div className='flex-shrink-0 p-4 flex justify-between items-center'>
+                      <button
+                        onClick={collapseNav}
+                        className='pill-hover w-8 h-8 flex items-center justify-center'
+                        aria-label='收起导航'
+                      >
+                        <i className='fas fa-outdent text-sm' />
+                      </button>
+                    </div>
+                    
+                    {/* 导航内容 */}
+                    <div className='flex-1 overflow-y-auto scroll-hidden px-5 pb-4'>
                       {/* 嵌入 */}
                       {slotLeft}
 
                       {/* 所有文章列表 */}
                       <NavPostList filteredNavPages={filteredNavPages} {...props} />
                     </div>
+                    
                     {/* 页脚 */}
-                    <div className='flex-shrink-0 p-2'>
+                    <div className='flex-shrink-0 p-4'>
                       <Footer {...props} />
                     </div>
-                  </>
-                )}
-              </div>
-            </div>
+                  </div>
+                </div>
+              )}
+            </>
           )}
 
           {/* 白纸容器 - 承载Header+中栏+右栏 */}
@@ -384,7 +428,7 @@ const LayoutIndex = props => {
             '#article-wrapper #notion-article'
           )
           if (!article) {
-            console.log('请检查您的Notion数据库中是否包含此slug页面： ', index)
+            // 页面未找到，显示错误信息
 
             // 显示错误信息
             const containerInner = document.querySelector(
@@ -398,10 +442,10 @@ const LayoutIndex = props => {
     }
 
     if (index) {
-      console.log('重定向', index)
+      // 重定向到指定页面
       tryRedirect()
     } else {
-      console.log('无重定向', index)
+      // 无重定向配置
     }
   }, [index, hasRedirected]) // 将 hasRedirected 作为依赖确保状态变更时更新
 
@@ -560,7 +604,7 @@ const Layout404 = props => {
       const article = isBrowser && document.getElementById('article-wrapper')
       if (!article) {
         router.push('/').then(() => {
-          // console.log('找不到页面', router.asPath)
+          // 页面未找到，已重定向到404
         })
       }
     }, 3000)

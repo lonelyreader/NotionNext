@@ -20,7 +20,7 @@ export default function Header(props) {
   const { className, customNav, customMenu } = props
   const [isOpen, changeShow] = useState(false)
   const collapseRef = useRef(null)
-  const { navState, toggleNav, changePageNavVisible } = useGitBookGlobal()
+  const { navState, toggleNav, pinNav, collapseNav, expandNav, changePageNavVisible } = useGitBookGlobal()
 
   const { locale } = useGlobal()
 
@@ -86,14 +86,38 @@ export default function Header(props) {
           <div className='flex items-center gap-4'>
             {/* 桌面端椭圆胶囊容器 */}
             <div className='hidden md:flex pill-container'>
-              {/* 导航切换按钮 */}
-              <button
-                onClick={toggleNav}
-                className='pill-hover w-8 h-8 flex items-center justify-center'
-                aria-label='切换导航'
-              >
-                <i className={`fas ${navState === 'collapsed' ? 'fa-bars' : 'fa-times'} text-sm`} />
-              </button>
+              {/* 导航控制按钮 */}
+              {navState === 'collapsed' && (
+                <button
+                  onClick={expandNav}
+                  className='pill-hover w-8 h-8 flex items-center justify-center'
+                  aria-label='打开导航'
+                >
+                  <i className='fas fa-bars text-sm' />
+                </button>
+              )}
+              
+              {navState === 'expanded' && (
+                <>
+                  <button
+                    onClick={pinNav}
+                    className='pill-hover w-8 h-8 flex items-center justify-center'
+                    aria-label='钉选导航'
+                  >
+                    <i className='fas fa-thumbtack text-sm' />
+                  </button>
+                </>
+              )}
+              
+              {navState === 'pinned' && (
+                <button
+                  onClick={collapseNav}
+                  className='pill-hover w-8 h-8 flex items-center justify-center'
+                  aria-label='收起导航'
+                >
+                  <i className='fas fa-outdent text-sm' />
+                </button>
+              )}
               
               {/* 登录相关 */}
               {enableClerk && (

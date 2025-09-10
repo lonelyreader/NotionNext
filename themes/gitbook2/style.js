@@ -248,7 +248,7 @@ const Style = () => {
 
       /* 折叠箭头动画 */
       #theme-gitbook2 .collapse-arrow {
-        transition: transform 0.2s ease;
+        transition: transform var(--anim-quick) ease-out;
         font-size: 12px;
         opacity: 0.6;
       }
@@ -277,47 +277,51 @@ const Style = () => {
       }
       
       #theme-gitbook2 .search-input {
-        background: rgba(255, 255, 255, 0.7);
-        backdrop-filter: blur(18px);
-        -webkit-backdrop-filter: blur(18px);
-        border: 1px solid rgba(0, 0, 0, 0.08);
-        border-radius: 18px;
+        background: var(--glass-bg-light);
+        backdrop-filter: blur(var(--glass-blur));
+        -webkit-backdrop-filter: blur(var(--glass-blur));
+        border: 1px solid var(--glass-stroke-light);
+        border-radius: var(--radius-pill);
         padding: 0 12px;
         font-size: 14px;
-        transition: all 0.2s ease;
+        transition: all var(--anim-quick) ease-out;
         height: 36px;
         line-height: 36px;
         display: flex;
         align-items: center;
         color: #374151;
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
       }
 
       .dark #theme-gitbook2 .search-input {
-        background: rgba(0, 0, 0, 0.5);
-        border-color: rgba(255, 255, 255, 0.14);
+        background: var(--glass-bg-dark);
+        border-color: var(--glass-stroke-dark);
         color: #d1d5db;
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
       }
 
       #theme-gitbook2 .search-input:focus,
       #theme-gitbook2 .search-input:hover {
-        background: rgba(255, 255, 255, 0.8);
-        border-color: rgba(0, 0, 0, 0.12);
-        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        background: var(--glass-bg-light);
+        border-color: var(--glass-stroke-light);
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1), 0 1px 3px 0 rgba(0, 0, 0, 0.1);
         height: 36px;
         line-height: 36px;
+        transform: none;
       }
 
       .dark #theme-gitbook2 .search-input:focus,
       .dark #theme-gitbook2 .search-input:hover {
-        background: rgba(0, 0, 0, 0.6);
-        border-color: rgba(255, 255, 255, 0.18);
+        background: var(--glass-bg-dark);
+        border-color: var(--glass-stroke-dark);
+        box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.1), 0 1px 3px 0 rgba(0, 0, 0, 0.3);
       }
 
       #theme-gitbook2 .search-shortcut {
         font-size: 11px;
         color: #9ca3af;
         opacity: 0.6;
-        transition: opacity 0.2s ease;
+        transition: opacity var(--anim-quick) ease-out;
         display: flex;
         align-items: center;
         height: 100%;
@@ -325,6 +329,7 @@ const Style = () => {
         top: 50%;
         transform: translateY(-50%);
         right: 12px;
+        pointer-events: none;
       }
 
       #theme-gitbook2 .search-input:focus + .search-shortcut,
@@ -344,6 +349,7 @@ const Style = () => {
         left: 12px;
         color: #9ca3af;
         font-size: 14px;
+        pointer-events: none;
       }
 
       /* 滚动条样式 - 默认隐藏 */
@@ -505,6 +511,8 @@ const Style = () => {
         border-radius: var(--radius-pill);
         transition: all var(--anim-quick) ease-out;
         cursor: pointer;
+        border: none;
+        background: transparent;
       }
 
       .pill-hover::before {
@@ -526,6 +534,15 @@ const Style = () => {
         opacity: 1;
       }
 
+      .pill-hover:active::before {
+        opacity: 1;
+        background: rgba(59, 130, 246, 0.2);
+      }
+
+      .dark .pill-hover:active::before {
+        background: rgba(96, 165, 250, 0.2);
+      }
+
       .pill-hover.active::before {
         opacity: 1;
         background: rgba(59, 130, 246, 0.15);
@@ -539,6 +556,7 @@ const Style = () => {
       .nav-collapsed {
         width: 48px;
         overflow: hidden;
+        transition: all var(--anim-quick) ease-out;
       }
 
       .nav-expanded {
@@ -557,6 +575,7 @@ const Style = () => {
         overflow-y: auto;
         scrollbar-width: none;
         -ms-overflow-style: none;
+        transition: all var(--anim-quick) ease-out;
       }
 
       .nav-expanded::-webkit-scrollbar {
@@ -577,6 +596,7 @@ const Style = () => {
         overflow-y: auto;
         scrollbar-width: none;
         -ms-overflow-style: none;
+        transition: all var(--anim-quick) ease-out;
       }
 
       .nav-pinned::-webkit-scrollbar {
@@ -638,6 +658,14 @@ const Style = () => {
         .pill-container,
         .nav-expanded {
           background: var(--paper-bg);
+          backdrop-filter: none;
+          -webkit-backdrop-filter: none;
+        }
+        
+        #theme-gitbook2 .search-input {
+          background: var(--paper-bg);
+          backdrop-filter: none;
+          -webkit-backdrop-filter: none;
         }
       }
 
@@ -648,6 +676,14 @@ const Style = () => {
           top: 8px;
           width: 260px;
           height: calc(100vh - 16px);
+        }
+        
+        .nav-pinned {
+          width: 260px;
+        }
+        
+        .paper-pinned {
+          padding-left: 260px;
         }
       }
 
