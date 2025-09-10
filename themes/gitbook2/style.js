@@ -12,32 +12,12 @@ const Style = () => {
         --page-bg: #F6F7F9;
         --paper-bg: #FFFFFF;
         --divider-1: rgba(0,0,0,0.06);
-        
-        // Liquid Glass 变量
-        --glass-bg-light: rgba(255,255,255,.70);
-        --glass-bg-dark: rgba(255,255,255,.10);
-        --glass-stroke-light: rgba(0,0,0,.08);
-        --glass-stroke-dark: rgba(255,255,255,.16);
-        --glass-blur: 20px;
-        --radius-pane: 16px;
-        --radius-pill: 9999px;
-        --pill-hover-light: rgba(0,0,0,.06);
-        --pill-hover-dark: rgba(255,255,255,.22);
-        --anim-quick: 160ms;
       }
       
       .dark {
         --page-bg: #0B0B0C;
         --paper-bg: #1f2937;
         --divider-1: rgba(255,255,255,0.12);
-        
-        // 暗色模式 Liquid Glass 变量
-        --glass-bg-light: rgba(0,0,0,.45);
-        --glass-bg-dark: rgba(0,0,0,.55);
-        --glass-stroke-light: rgba(255,255,255,.12);
-        --glass-stroke-dark: rgba(255,255,255,.16);
-        --pill-hover-light: rgba(255,255,255,.18);
-        --pill-hover-dark: rgba(255,255,255,.24);
       }
       
       // 底色
@@ -100,13 +80,13 @@ const Style = () => {
         position: relative !important;
         z-index: 20 !important;
         background: var(--paper-bg) !important;
-        border-bottom: 1px solid var(--divider-1) !important;
+        border-bottom: 1px solid var(--divider-1);
         box-shadow: none !important;
       }
       
       .dark #top-nav {
         background: var(--paper-bg) !important;
-        border-bottom: 1px solid var(--divider-1) !important;
+        border-bottom-color: var(--divider-1);
       }
 
       /* GitBook风格排版优化 */
@@ -250,7 +230,7 @@ const Style = () => {
 
       /* 折叠箭头动画 */
       #theme-gitbook2 .collapse-arrow {
-        transition: transform var(--anim-quick) ease-out;
+        transition: transform 0.2s ease;
         font-size: 12px;
         opacity: 0.6;
       }
@@ -279,51 +259,47 @@ const Style = () => {
       }
       
       #theme-gitbook2 .search-input {
-        background: var(--glass-bg-light);
-        backdrop-filter: blur(var(--glass-blur));
-        -webkit-backdrop-filter: blur(var(--glass-blur));
-        border: 1px solid var(--glass-stroke-light);
-        border-radius: var(--radius-pill);
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        border-radius: 18px;
         padding: 0 12px;
         font-size: 14px;
-        transition: all var(--anim-quick) ease-out;
+        transition: all 0.2s ease;
         height: 36px;
         line-height: 36px;
         display: flex;
         align-items: center;
         color: #374151;
-        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
       }
 
       .dark #theme-gitbook2 .search-input {
-        background: var(--glass-bg-dark);
-        border-color: var(--glass-stroke-dark);
+        background: rgba(0, 0, 0, 0.5);
+        border-color: rgba(255, 255, 255, 0.14);
         color: #d1d5db;
-        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
       }
 
       #theme-gitbook2 .search-input:focus,
       #theme-gitbook2 .search-input:hover {
-        background: var(--glass-bg-light);
-        border-color: var(--glass-stroke-light);
-        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1), 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+        background: rgba(255, 255, 255, 0.8);
+        border-color: rgba(0, 0, 0, 0.12);
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
         height: 36px;
         line-height: 36px;
-        transform: none;
       }
 
       .dark #theme-gitbook2 .search-input:focus,
       .dark #theme-gitbook2 .search-input:hover {
-        background: var(--glass-bg-dark);
-        border-color: var(--glass-stroke-dark);
-        box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.1), 0 1px 3px 0 rgba(0, 0, 0, 0.3);
+        background: rgba(0, 0, 0, 0.6);
+        border-color: rgba(255, 255, 255, 0.18);
       }
 
       #theme-gitbook2 .search-shortcut {
         font-size: 11px;
         color: #9ca3af;
         opacity: 0.6;
-        transition: opacity var(--anim-quick) ease-out;
+        transition: opacity 0.2s ease;
         display: flex;
         align-items: center;
         height: 100%;
@@ -331,7 +307,6 @@ const Style = () => {
         top: 50%;
         transform: translateY(-50%);
         right: 12px;
-        pointer-events: none;
       }
 
       #theme-gitbook2 .search-input:focus + .search-shortcut,
@@ -351,7 +326,6 @@ const Style = () => {
         left: 12px;
         color: #9ca3af;
         font-size: 14px;
-        pointer-events: none;
       }
 
       /* 滚动条样式 - 默认隐藏 */
@@ -397,26 +371,17 @@ const Style = () => {
         background: rgba(255, 255, 255, 0.3);
       }
 
-      /* 白纸内部分隔线 - 移除左侧竖线 */
+      /* 白纸内部分隔线 */
       .paper-container .border-l {
-        border-left: none;
+        border-left: 1px solid var(--divider-1);
       }
 
       .dark .paper-container .border-l {
-        border-left: none;
+        border-left: 1px solid var(--divider-1);
       }
 
       /* 可访问性支持 */
-      .pill-hover:focus {
-        outline: 2px solid #3b82f6;
-        outline-offset: 2px;
-      }
-
-      .pill-hover:focus::before {
-        opacity: 1;
-      }
-
-      .pill-container button:focus {
+      #theme-gitbook2 .nav-item:focus {
         outline: 2px solid #3b82f6;
         outline-offset: 2px;
       }
@@ -425,404 +390,9 @@ const Style = () => {
         outline: none;
       }
 
-      /* 键盘导航支持 */
-      .pill-hover:focus-visible {
+      #theme-gitbook2 .collapse-button:focus {
         outline: 2px solid #3b82f6;
         outline-offset: 2px;
-      }
-
-      /* 高对比度模式支持 */
-      @media (prefers-contrast: high) {
-        .pill-hover::before {
-          background: rgba(0, 0, 0, 0.3);
-        }
-        
-        .dark .pill-hover::before {
-          background: rgba(255, 255, 255, 0.3);
-        }
-        
-        .pill-hover.active::before {
-          background: rgba(0, 0, 0, 0.4);
-        }
-        
-        .dark .pill-hover.active::before {
-          background: rgba(255, 255, 255, 0.4);
-        }
-      }
-
-      /* 减少动画支持 */
-      @media (prefers-reduced-motion: reduce) {
-        .pill-hover::before,
-        .pill-container,
-        .nav-expanded,
-        .mobile-drawer,
-        .mobile-drawer-overlay {
-          transition: none !important;
-        }
-        
-        .collapse-arrow {
-          transition: none !important;
-        }
-      }
-
-      /* Liquid Glass 基础样式 */
-      .liquid-glass {
-        background: var(--glass-bg-light);
-        backdrop-filter: blur(var(--glass-blur));
-        -webkit-backdrop-filter: blur(var(--glass-blur));
-        border: 1px solid var(--glass-stroke-light);
-        border-radius: var(--radius-pane);
-        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-      }
-
-      .dark .liquid-glass {
-        background: var(--glass-bg-dark);
-        border-color: var(--glass-stroke-dark);
-        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
-      }
-
-      /* 椭圆胶囊容器 */
-      .pill-container {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        padding: 0 10px;
-        height: 36px;
-        background: var(--glass-bg-light);
-        backdrop-filter: blur(var(--glass-blur));
-        -webkit-backdrop-filter: blur(var(--glass-blur));
-        border: 1px solid var(--glass-stroke-light);
-        border-radius: var(--radius-pill);
-        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
-        transition: all var(--anim-quick) ease-out;
-      }
-
-      .dark .pill-container {
-        background: var(--glass-bg-dark);
-        border-color: var(--glass-stroke-dark);
-        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
-      }
-
-      /* 主菜单按钮样式 */
-      .main-menu-btn {
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-width: 32px;
-        min-height: 32px;
-        border-radius: var(--radius-pill);
-        transition: all var(--anim-quick) ease-out;
-        cursor: pointer;
-        border: none;
-        background: transparent;
-        color: #374151;
-      }
-
-      .dark .main-menu-btn {
-        color: #d1d5db;
-      }
-
-      .main-menu-btn::before {
-        content: '';
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 28px;
-        height: 28px;
-        background: var(--pill-hover-light);
-        border-radius: var(--radius-pill);
-        opacity: 0;
-        transform: translate(-50%, -50%);
-        transition: opacity var(--anim-quick) ease-out;
-        pointer-events: none;
-      }
-
-      .main-menu-btn:hover::before {
-        opacity: 1;
-      }
-
-      .main-menu-btn:active::before {
-        opacity: 1;
-        background: rgba(59, 130, 246, 0.2);
-      }
-
-      .dark .main-menu-btn::before {
-        background: var(--pill-hover-dark);
-      }
-
-      .dark .main-menu-btn:active::before {
-        background: rgba(96, 165, 250, 0.2);
-      }
-
-      /* 椭圆 hover 高亮 */
-      .pill-hover {
-        position: relative;
-        display: flex;
-        align-items: center;
-        min-height: 44px;
-        padding: 0 12px;
-        border-radius: var(--radius-pill);
-        transition: all var(--anim-quick) ease-out;
-        cursor: pointer;
-        border: none;
-        background: transparent;
-      }
-
-      .pill-hover::before {
-        content: '';
-        position: absolute;
-        top: 50%;
-        left: 8px;
-        right: 8px;
-        height: 28px;
-        background: var(--pill-hover-light);
-        border-radius: var(--radius-pill);
-        opacity: 0;
-        transform: translateY(-50%);
-        transition: opacity var(--anim-quick) ease-out;
-        pointer-events: none;
-      }
-
-      .pill-hover:hover::before {
-        opacity: 1;
-      }
-
-      .pill-hover:active::before {
-        opacity: 1;
-        background: rgba(59, 130, 246, 0.2);
-      }
-
-      .dark .pill-hover::before {
-        background: var(--pill-hover-dark);
-      }
-
-      .dark .pill-hover:active::before {
-        background: rgba(96, 165, 250, 0.2);
-      }
-
-      .pill-hover.active::before {
-        opacity: 1;
-        background: rgba(59, 130, 246, 0.15);
-      }
-
-      .dark .pill-hover.active::before {
-        background: rgba(96, 165, 250, 0.15);
-      }
-
-      /* 导航状态样式 */
-      .nav-collapsed {
-        width: 48px;
-        overflow: hidden;
-        transition: all var(--anim-quick) ease-out;
-      }
-
-      .nav-expanded {
-        position: fixed;
-        left: 20px;
-        top: 20px;
-        width: 280px;
-        height: calc(100vh - 40px);
-        z-index: 50;
-        background: var(--glass-bg-light);
-        backdrop-filter: blur(var(--glass-blur));
-        -webkit-backdrop-filter: blur(var(--glass-blur));
-        border: 1px solid var(--glass-stroke-light);
-        border-radius: var(--radius-pane);
-        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-        overflow-y: auto;
-        scrollbar-width: none;
-        -ms-overflow-style: none;
-        transition: all var(--anim-quick) ease-out;
-      }
-
-      .nav-expanded::-webkit-scrollbar {
-        display: none;
-      }
-
-      .dark .nav-expanded {
-        background: var(--glass-bg-dark);
-        border-color: var(--glass-stroke-dark);
-        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
-      }
-
-      .nav-pinned {
-        width: 280px;
-        position: sticky;
-        top: 0;
-        height: 100vh;
-        overflow-y: auto;
-        scrollbar-width: none;
-        -ms-overflow-style: none;
-        transition: all var(--anim-quick) ease-out;
-      }
-
-      .nav-pinned::-webkit-scrollbar {
-        display: none;
-      }
-
-      /* 版心协同 */
-      .paper-collapsed {
-        width: 100%;
-        padding-left: 0;
-        transition: padding-left var(--anim-quick) ease-out;
-      }
-
-      .paper-expanded {
-        width: 100%;
-        padding-left: 0;
-        transition: padding-left var(--anim-quick) ease-out;
-      }
-
-      .paper-pinned {
-        padding-left: 280px;
-        transition: padding-left var(--anim-quick) ease-out;
-      }
-
-      /* 确保白纸容器在状态切换时平滑过渡 */
-      .paper-container {
-        transition: padding-left var(--anim-quick) ease-out;
-      }
-
-      /* 导航状态切换时的平滑过渡 */
-      .nav-collapsed,
-      .nav-expanded,
-      .nav-pinned {
-        transition: all var(--anim-quick) ease-out;
-      }
-
-      /* 可访问性回退 */
-      @media (prefers-reduced-motion: reduce) {
-        .liquid-glass,
-        .pill-container,
-        .pill-hover,
-        .nav-expanded {
-          transition: none;
-        }
-      }
-
-      @media (prefers-contrast: high) {
-        .liquid-glass,
-        .pill-container,
-        .nav-expanded {
-          background: var(--paper-bg);
-          backdrop-filter: none;
-          -webkit-backdrop-filter: none;
-        }
-      }
-
-      @supports not (backdrop-filter: blur(20px)) {
-        .liquid-glass,
-        .pill-container,
-        .nav-expanded {
-          background: var(--paper-bg);
-          backdrop-filter: none;
-          -webkit-backdrop-filter: none;
-        }
-        
-        #theme-gitbook2 .search-input {
-          background: var(--paper-bg);
-          backdrop-filter: none;
-          -webkit-backdrop-filter: none;
-        }
-      }
-
-      /* 响应式适配 */
-      @media (max-width: 1279px) {
-        .nav-expanded {
-          left: 16px;
-          top: 16px;
-          width: 260px;
-          height: calc(100vh - 32px);
-        }
-        
-        .nav-pinned {
-          width: 260px;
-        }
-        
-        .paper-pinned {
-          padding-left: 260px;
-        }
-      }
-
-      @media (max-width: 1023px) {
-        .nav-expanded {
-          left: 12px;
-          top: 12px;
-          width: 240px;
-          height: calc(100vh - 24px);
-        }
-        
-        .nav-pinned {
-          width: 240px;
-        }
-        
-        .paper-pinned {
-          padding-left: 240px;
-        }
-      }
-
-      @media (max-width: 767px) {
-        .nav-expanded,
-        .nav-pinned {
-          display: none !important;
-        }
-        
-        .paper-collapsed,
-        .paper-expanded,
-        .paper-pinned {
-          padding-left: 0 !important;
-        }
-        
-        /* 移动端抽屉式导航 */
-        .mobile-drawer {
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 280px;
-          height: 100vh;
-          z-index: 1000;
-          background: var(--glass-bg-light);
-          backdrop-filter: blur(var(--glass-blur));
-          -webkit-backdrop-filter: blur(var(--glass-blur));
-          border-right: 1px solid var(--glass-stroke-light);
-          transform: translateX(-100%);
-          transition: transform var(--anim-quick) ease-out;
-          overflow-y: auto;
-          scrollbar-width: none;
-          -ms-overflow-style: none;
-        }
-        
-        .mobile-drawer::-webkit-scrollbar {
-          display: none;
-        }
-        
-        .mobile-drawer.open {
-          transform: translateX(0);
-        }
-        
-        .dark .mobile-drawer {
-          background: var(--glass-bg-dark);
-          border-right-color: var(--glass-stroke-dark);
-        }
-        
-        .mobile-drawer-overlay {
-          position: fixed;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background: rgba(0, 0, 0, 0.5);
-          z-index: 999;
-          opacity: 0;
-          visibility: hidden;
-          transition: all var(--anim-quick) ease-out;
-        }
-        
-        .mobile-drawer-overlay.open {
-          opacity: 1;
-          visibility: visible;
-        }
       }
 
       /* 移动端保持原有行为 */
@@ -884,115 +454,6 @@ const Style = () => {
         #wrapper {
           padding: 16px 16px 24px 0 !important;
         }
-      }
-
-      /* 顶栏通用：强制横排、基线一致 */
-      #header, .dashboard-header, .top-nav, #nav-header, #top-nav {
-        display: flex !important;
-        align-items: center !important;
-        gap: 12px !important;
-        flex-wrap: nowrap !important;
-      }
-      #header i, .dashboard-header i, .top-nav i, #top-nav i { 
-        font-size: 18px !important; 
-        line-height: 1 !important; 
-      }
-
-      /* 中部导航项不允许换行/竖排 */
-      #header .menu, .dashboard-header .menu, .top-nav .menu, #top-nav .menu {
-        display: flex !important;
-        align-items: center !important;
-        white-space: nowrap !important;
-        overflow: hidden;
-      }
-
-      /* 搜索框与右侧胶囊容器垂直居中且等高 */
-      .search-group, .topbar-pill, .search-container, .pill-container {
-        height: 36px !important;
-        display: flex !important;
-        align-items: center !important;
-      }
-
-      /* Pinned 时的版心左内边距 —— 不动右栏 */
-      body.nav-pinned #container-inner, 
-      body.nav-pinned #container, 
-      body.nav-pinned .paper-container {
-        padding-left: 280px !important;
-      }
-
-      /* Expanded 抽屉玻璃材质 */
-      #left-drawer {
-        background: var(--glass-bg-light);
-        backdrop-filter: blur(var(--glass-blur));
-        -webkit-backdrop-filter: blur(var(--glass-blur));
-        border: 1px solid var(--glass-stroke-light);
-        border-radius: var(--radius-pane);
-        box-shadow: 0 4px 12px rgba(0,0,0,.06);
-      }
-      .dark #left-drawer {
-        background: var(--glass-bg-dark);
-        border-color: var(--glass-stroke-dark);
-      }
-
-      /* 顶栏右侧胶囊容器 */
-      .topbar-pill {
-        background: var(--glass-bg-light);
-        backdrop-filter: blur(var(--glass-blur));
-        border: 1px solid var(--glass-stroke-light);
-        border-radius: var(--radius-pill);
-        height: 36px;
-        padding: 0 8px;
-      }
-      .dark .topbar-pill {
-        background: var(--glass-bg-dark);
-        border-color: var(--glass-stroke-dark);
-      }
-      .topbar-pill .btn,
-      #left-drawer .btn {
-        height: 32px; 
-        width: 32px;
-        border-radius: var(--radius-pill);
-        display: flex; 
-        align-items: center; 
-        justify-content: center;
-      }
-      .topbar-pill .btn:hover,
-      #left-drawer .btn:hover { 
-        background: var(--pill-hover-light); 
-      }
-      .dark .topbar-pill .btn:hover,
-      .dark #left-drawer .btn:hover { 
-        background: var(--pill-hover-dark); 
-      }
-
-      /* 左/右侧栏列表项的"椭圆 hover" */
-      .sidebar-item, .rightbar-item {
-        min-height: 44px;
-        display: flex; 
-        align-items: center;
-        border-radius: var(--radius-pill);
-        padding: 0 12px;
-      }
-      .sidebar-item:hover, .rightbar-item:hover {
-        background: var(--pill-hover-light);
-      }
-      .dark .sidebar-item:hover, .dark .rightbar-item:hover {
-        background: var(--pill-hover-dark);
-      }
-
-      /* 顶栏=白纸同底色，仅 1px 分隔线；去掉左栏与白纸的竖线 */
-      .header-bg { 
-        background: var(--paper-bg, #fff); 
-        border-bottom: 1px solid var(--divider-1, rgba(0,0,0,.06)); 
-        box-shadow: none; 
-      }
-      .left-border-line, .layout-divider-vertical { 
-        display: none !important; 
-      }
-
-      /* 隐藏作者卡片（InfoCard 组件） */
-      #info-card { 
-        display: none !important; 
       }
     `}</style>
   )
