@@ -174,14 +174,16 @@ const LayoutBase = props => {
         collapseNav,
         expandNav
       }}>
-      {/* Font Awesome CDN */}
-      <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
-        crossOrigin="anonymous"
-        referrerPolicy="no-referrer"
-      />
+      <Head>
+        {/* Font Awesome CSS */}
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+          integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+          crossOrigin="anonymous"
+          referrerPolicy="no-referrer"
+        />
+      </Head>
       <Style />
 
       <div
@@ -206,8 +208,9 @@ const LayoutBase = props => {
                         onClick={expandNav}
                         className='pill-hover w-8 h-8 flex items-center justify-center'
                         aria-label='打开导航'
+                        title='打开导航'
                       >
-                        <i className='fas fa-bars text-sm' />
+                        <i className='fa-solid fa-indent text-sm' />
                       </button>
                     </div>
                   </div>
@@ -228,10 +231,11 @@ const LayoutBase = props => {
                       <div className='flex-shrink-0 p-4 flex justify-end items-start'>
                         <button
                           onClick={collapseNav}
-                          className='pill-hover w-8 h-8 flex items-center justify-center'
-                          aria-label='关闭'
+                          className='pill-hover w-8 h-8 flex items-center justify-center rounded-full'
+                          aria-label='关闭导航'
+                          title='关闭导航'
                         >
-                          <i className='fas fa-xmark text-sm' />
+                          <i className='fa-solid fa-outdent text-sm' />
                         </button>
                       </div>
                       
@@ -263,8 +267,9 @@ const LayoutBase = props => {
                         onClick={collapseNav}
                         className='pill-hover w-8 h-8 flex items-center justify-center'
                         aria-label='收起导航'
+                        title='收起导航'
                       >
-                        <i className='fas fa-outdent text-sm' />
+                        <i className='fa-solid fa-outdent text-sm' />
                       </button>
                     </div>
                     
@@ -292,7 +297,9 @@ const LayoutBase = props => {
             navState === 'collapsed' ? 'paper-collapsed' : 
             navState === 'expanded' ? 'paper-expanded' : 
             'paper-pinned'
-          }`}>
+          }`} style={{
+            paddingLeft: navState === 'pinned' ? '280px' : '0'
+          }}>
             {/* Header - 吸附在白纸顶部 */}
             <div className='flex-shrink-0'>
               <Header {...props} />

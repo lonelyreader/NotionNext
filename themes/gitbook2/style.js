@@ -19,9 +19,10 @@ const Style = () => {
         --glass-stroke-light: rgba(0,0,0,.08);
         --glass-stroke-dark: rgba(255,255,255,.16);
         --glass-blur: 20px;
-        --radius-pill: 9999px;
         --radius-pane: 16px;
-        --pill-hover: rgba(255,255,255,.18);
+        --radius-pill: 9999px;
+        --pill-hover-light: rgba(255,255,255,.18);
+        --pill-hover-dark: rgba(255,255,255,.24);
         --anim-quick: 160ms;
       }
       
@@ -35,7 +36,8 @@ const Style = () => {
         --glass-bg-dark: rgba(0,0,0,.55);
         --glass-stroke-light: rgba(255,255,255,.12);
         --glass-stroke-dark: rgba(255,255,255,.16);
-        --pill-hover: rgba(255,255,255,.24);
+        --pill-hover-light: rgba(255,255,255,.18);
+        --pill-hover-dark: rgba(255,255,255,.24);
       }
       
       // 底色
@@ -98,13 +100,13 @@ const Style = () => {
         position: relative !important;
         z-index: 20 !important;
         background: var(--paper-bg) !important;
-        border-bottom: 1px solid var(--divider-1);
+        border-bottom: 1px solid var(--divider-1) !important;
         box-shadow: none !important;
       }
       
       .dark #top-nav {
         background: var(--paper-bg) !important;
-        border-bottom-color: var(--divider-1);
+        border-bottom: 1px solid var(--divider-1) !important;
       }
 
       /* GitBook风格排版优化 */
@@ -395,13 +397,13 @@ const Style = () => {
         background: rgba(255, 255, 255, 0.3);
       }
 
-      /* 白纸内部分隔线 */
+      /* 白纸内部分隔线 - 移除左侧竖线 */
       .paper-container .border-l {
-        border-left: 1px solid var(--divider-1);
+        border-left: none;
       }
 
       .dark .paper-container .border-l {
-        border-left: 1px solid var(--divider-1);
+        border-left: none;
       }
 
       /* 可访问性支持 */
@@ -501,6 +503,58 @@ const Style = () => {
         box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
       }
 
+      /* 主菜单按钮样式 */
+      .main-menu-btn {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 32px;
+        min-height: 32px;
+        border-radius: var(--radius-pill);
+        transition: all var(--anim-quick) ease-out;
+        cursor: pointer;
+        border: none;
+        background: transparent;
+        color: #374151;
+      }
+
+      .dark .main-menu-btn {
+        color: #d1d5db;
+      }
+
+      .main-menu-btn::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 28px;
+        height: 28px;
+        background: var(--pill-hover-light);
+        border-radius: var(--radius-pill);
+        opacity: 0;
+        transform: translate(-50%, -50%);
+        transition: opacity var(--anim-quick) ease-out;
+        pointer-events: none;
+      }
+
+      .main-menu-btn:hover::before {
+        opacity: 1;
+      }
+
+      .main-menu-btn:active::before {
+        opacity: 1;
+        background: rgba(59, 130, 246, 0.2);
+      }
+
+      .dark .main-menu-btn::before {
+        background: var(--pill-hover-dark);
+      }
+
+      .dark .main-menu-btn:active::before {
+        background: rgba(96, 165, 250, 0.2);
+      }
+
       /* 椭圆 hover 高亮 */
       .pill-hover {
         position: relative;
@@ -522,7 +576,7 @@ const Style = () => {
         left: 8px;
         right: 8px;
         height: 28px;
-        background: var(--pill-hover);
+        background: var(--pill-hover-light);
         border-radius: var(--radius-pill);
         opacity: 0;
         transform: translateY(-50%);
@@ -537,6 +591,10 @@ const Style = () => {
       .pill-hover:active::before {
         opacity: 1;
         background: rgba(59, 130, 246, 0.2);
+      }
+
+      .dark .pill-hover::before {
+        background: var(--pill-hover-dark);
       }
 
       .dark .pill-hover:active::before {
@@ -561,17 +619,17 @@ const Style = () => {
 
       .nav-expanded {
         position: fixed;
-        left: 16px;
-        top: 16px;
+        left: 20px;
+        top: 20px;
         width: 280px;
-        height: calc(100vh - 32px);
+        height: calc(100vh - 40px);
         z-index: 50;
         background: var(--glass-bg-light);
         backdrop-filter: blur(var(--glass-blur));
         -webkit-backdrop-filter: blur(var(--glass-blur));
         border: 1px solid var(--glass-stroke-light);
         border-radius: var(--radius-pane);
-        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
         overflow-y: auto;
         scrollbar-width: none;
         -ms-overflow-style: none;
@@ -585,7 +643,7 @@ const Style = () => {
       .dark .nav-expanded {
         background: var(--glass-bg-dark);
         border-color: var(--glass-stroke-dark);
-        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
       }
 
       .nav-pinned {
@@ -672,10 +730,10 @@ const Style = () => {
       /* 响应式适配 */
       @media (max-width: 1279px) {
         .nav-expanded {
-          left: 8px;
-          top: 8px;
+          left: 16px;
+          top: 16px;
           width: 260px;
-          height: calc(100vh - 16px);
+          height: calc(100vh - 32px);
         }
         
         .nav-pinned {
@@ -689,10 +747,10 @@ const Style = () => {
 
       @media (max-width: 1023px) {
         .nav-expanded {
-          left: 4px;
-          top: 4px;
+          left: 12px;
+          top: 12px;
           width: 240px;
-          height: calc(100vh - 8px);
+          height: calc(100vh - 24px);
         }
         
         .nav-pinned {

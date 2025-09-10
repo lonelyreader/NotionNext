@@ -69,8 +69,19 @@ export default function Header(props) {
       {/* PC端菜单 */}
       <div className='flex justify-center items-center w-full' style={{ height: 'var(--header-height, 56px)' }}>
         <div className='px-5 max-w-screen-4xl w-full flex gap-x-3 justify-between items-center'>
-          {/* 左侧*/}
-          <div className='flex'>
+          {/* 左侧 - 主菜单按钮 + Logo */}
+          <div className='flex items-center'>
+            {/* 主菜单按钮 - 固定在左侧 */}
+            <button
+              onClick={toggleNav}
+              className='main-menu-btn w-8 h-8 flex items-center justify-center mr-3'
+              aria-label='主菜单'
+              title='主菜单'
+              style={{ minWidth: '32px', minHeight: '32px' }}
+            >
+              <i className={`fa-solid ${navState === 'collapsed' ? 'fa-indent' : 'fa-outdent'} text-lg`} />
+            </button>
+            
             <LogoBar {...props} />
 
             {/* 桌面端顶部菜单 */}
@@ -82,40 +93,22 @@ export default function Header(props) {
             </div>
           </div>
 
-          {/* 右侧 - 椭圆胶囊容器 */}
+          {/* 右侧 - 搜索框 + 胶囊容器 */}
           <div className='flex items-center gap-4'>
+            {/* 搜索框 - 独立玻璃药丸 */}
+            <SearchInput className='hidden md:flex md:w-52 lg:w-72' />
+            
             {/* 桌面端椭圆胶囊容器 */}
             <div className='hidden md:flex pill-container'>
-              {/* 导航控制按钮 */}
-              {navState === 'collapsed' && (
+              {/* 钉选按钮 - 仅在 Expanded 或 Pinned 状态显示 */}
+              {(navState === 'expanded' || navState === 'pinned') && (
                 <button
-                  onClick={expandNav}
-                  className='pill-hover w-8 h-8 flex items-center justify-center'
-                  aria-label='打开导航'
+                  onClick={navState === 'expanded' ? pinNav : expandNav}
+                  className='pill-hover flex items-center justify-center'
+                  aria-label={navState === 'expanded' ? '钉选导航' : '取消钉选'}
+                  title={navState === 'expanded' ? '钉选导航' : '取消钉选'}
                 >
-                  <i className='fas fa-bars text-sm' />
-                </button>
-              )}
-              
-              {navState === 'expanded' && (
-                <>
-                  <button
-                    onClick={pinNav}
-                    className='pill-hover w-8 h-8 flex items-center justify-center'
-                    aria-label='钉选导航'
-                  >
-                    <i className='fas fa-thumbtack text-sm' />
-                  </button>
-                </>
-              )}
-              
-              {navState === 'pinned' && (
-                <button
-                  onClick={collapseNav}
-                  className='pill-hover w-8 h-8 flex items-center justify-center'
-                  aria-label='收起导航'
-                >
-                  <i className='fas fa-outdent text-sm' />
+                  <i className={`fa-solid fa-thumbtack text-lg ${navState === 'pinned' ? 'text-blue-500' : ''}`} />
                 </button>
               )}
               
@@ -124,25 +117,34 @@ export default function Header(props) {
                 <>
                   <SignedOut>
                     <SignInButton mode='modal'>
-                      <button className='pill-hover px-3 py-1 text-sm'>
+                      <button 
+                        className='pill-hover px-4 py-2 text-sm'
+                        aria-label='登录'
+                        title='登录'
+                      >
                         {locale.COMMON.SIGN_IN}
                       </button>
                     </SignInButton>
                   </SignedOut>
-                  <div className='pill-hover w-8 h-8 flex items-center justify-center'>
+                  <div 
+                    className='pill-hover flex items-center justify-center'
+                    aria-label='用户菜单'
+                    title='用户菜单'
+                  >
                     <UserButton />
                   </div>
                 </>
               )}
               
               {/* 暗色模式切换 */}
-              <div className='pill-hover w-8 h-8 flex items-center justify-center'>
-                <DarkModeButton className='text-sm' />
+              <div 
+                className='pill-hover flex items-center justify-center'
+                aria-label='切换主题'
+                title='切换主题'
+              >
+                <DarkModeButton className='text-lg' />
               </div>
             </div>
-            
-            {/* 搜索框 - 独立玻璃药丸 */}
-            <SearchInput className='hidden md:flex md:w-52 lg:w-72' />
             
             {/* 移动端按钮 */}
             <div className='mr-1 flex md:hidden justify-end items-center space-x-4 dark:text-gray-200'>
@@ -151,6 +153,7 @@ export default function Header(props) {
                 onClick={changePageNavVisible}
                 className='pill-hover w-8 h-8 flex items-center justify-center'
                 aria-label='打开导航'
+                title='打开导航'
               >
                 <i className='fas fa-bars text-sm' />
               </button>
