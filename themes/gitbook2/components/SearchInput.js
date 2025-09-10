@@ -115,7 +115,7 @@ const SearchInput = ({ currentSearch, cRef, className }) => {
   }
 
   return (
-    <div className={`${className} relative search-container flex items-center`}>
+    <div className={`${className} relative search-container flex items-center`} style={{ height: '36px' }}>
       <div
         className='absolute left-0 ml-3 flex items-center justify-center'
         onClick={handleSearch}

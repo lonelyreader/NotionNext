@@ -13,7 +13,7 @@ const BlogPostCard = ({ post, className }) => {
     <SmartLink href={post?.href} passHref>
       <div
         key={post.id}
-        className={`${className} pill-hover relative cursor-pointer ${
+        className={`${className} pill-hover sidebar-item relative cursor-pointer ${
           currentSelected ? 'active' : ''
         }`}
         role='link'

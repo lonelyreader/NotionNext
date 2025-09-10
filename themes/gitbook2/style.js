@@ -21,8 +21,8 @@ const Style = () => {
         --glass-blur: 20px;
         --radius-pane: 16px;
         --radius-pill: 9999px;
-        --pill-hover-light: rgba(255,255,255,.18);
-        --pill-hover-dark: rgba(255,255,255,.24);
+        --pill-hover-light: rgba(0,0,0,.06);
+        --pill-hover-dark: rgba(255,255,255,.22);
         --anim-quick: 160ms;
       }
       
@@ -884,6 +884,115 @@ const Style = () => {
         #wrapper {
           padding: 16px 16px 24px 0 !important;
         }
+      }
+
+      /* 顶栏通用：强制横排、基线一致 */
+      #header, .dashboard-header, .top-nav, #nav-header, #top-nav {
+        display: flex !important;
+        align-items: center !important;
+        gap: 12px !important;
+        flex-wrap: nowrap !important;
+      }
+      #header i, .dashboard-header i, .top-nav i, #top-nav i { 
+        font-size: 18px !important; 
+        line-height: 1 !important; 
+      }
+
+      /* 中部导航项不允许换行/竖排 */
+      #header .menu, .dashboard-header .menu, .top-nav .menu, #top-nav .menu {
+        display: flex !important;
+        align-items: center !important;
+        white-space: nowrap !important;
+        overflow: hidden;
+      }
+
+      /* 搜索框与右侧胶囊容器垂直居中且等高 */
+      .search-group, .topbar-pill, .search-container, .pill-container {
+        height: 36px !important;
+        display: flex !important;
+        align-items: center !important;
+      }
+
+      /* Pinned 时的版心左内边距 —— 不动右栏 */
+      body.nav-pinned #container-inner, 
+      body.nav-pinned #container, 
+      body.nav-pinned .paper-container {
+        padding-left: 280px !important;
+      }
+
+      /* Expanded 抽屉玻璃材质 */
+      #left-drawer {
+        background: var(--glass-bg-light);
+        backdrop-filter: blur(var(--glass-blur));
+        -webkit-backdrop-filter: blur(var(--glass-blur));
+        border: 1px solid var(--glass-stroke-light);
+        border-radius: var(--radius-pane);
+        box-shadow: 0 4px 12px rgba(0,0,0,.06);
+      }
+      .dark #left-drawer {
+        background: var(--glass-bg-dark);
+        border-color: var(--glass-stroke-dark);
+      }
+
+      /* 顶栏右侧胶囊容器 */
+      .topbar-pill {
+        background: var(--glass-bg-light);
+        backdrop-filter: blur(var(--glass-blur));
+        border: 1px solid var(--glass-stroke-light);
+        border-radius: var(--radius-pill);
+        height: 36px;
+        padding: 0 8px;
+      }
+      .dark .topbar-pill {
+        background: var(--glass-bg-dark);
+        border-color: var(--glass-stroke-dark);
+      }
+      .topbar-pill .btn,
+      #left-drawer .btn {
+        height: 32px; 
+        width: 32px;
+        border-radius: var(--radius-pill);
+        display: flex; 
+        align-items: center; 
+        justify-content: center;
+      }
+      .topbar-pill .btn:hover,
+      #left-drawer .btn:hover { 
+        background: var(--pill-hover-light); 
+      }
+      .dark .topbar-pill .btn:hover,
+      .dark #left-drawer .btn:hover { 
+        background: var(--pill-hover-dark); 
+      }
+
+      /* 左/右侧栏列表项的"椭圆 hover" */
+      .sidebar-item, .rightbar-item {
+        min-height: 44px;
+        display: flex; 
+        align-items: center;
+        border-radius: var(--radius-pill);
+        padding: 0 12px;
+      }
+      .sidebar-item:hover, .rightbar-item:hover {
+        background: var(--pill-hover-light);
+      }
+      .dark .sidebar-item:hover, .dark .rightbar-item:hover {
+        background: var(--pill-hover-dark);
+      }
+
+      /* 顶栏=白纸同底色，仅 1px 分隔线；去掉左栏与白纸的竖线 */
+      .header-bg { 
+        background: var(--paper-bg, #fff); 
+        border-bottom: 1px solid var(--divider-1, rgba(0,0,0,.06)); 
+        box-shadow: none; 
+      }
+      .left-border-line, .layout-divider-vertical { 
+        display: none !important; 
+      }
+
+      /* 隐藏作者卡片（InfoCard 组件） */
+      #info-card { 
+        display: none !important; 
       }
     `}</style>
   )

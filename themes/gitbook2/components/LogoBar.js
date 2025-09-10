@@ -11,7 +11,7 @@ import CONFIG from '../config'
 export default function LogoBar(props) {
   const { siteInfo } = props
   return (
-    <div id='logo-wrapper' className='w-full flex items-center mr-2'>
+    <div id='logo-wrapper' className='w-full flex items-center mr-2' style={{ height: '36px' }}>
       <SmartLink
         href={`/${siteConfig('GITBOOK_INDEX_PAGE', '', CONFIG)}`}
         className='flex text-lg font-bold md:text-2xl dark:text-gray-200 items-center'>

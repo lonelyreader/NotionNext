@@ -143,6 +143,7 @@ const LayoutBase = props => {
   const router = useRouter()
   const [tocVisible, changeTocVisible] = useState(false)
   const [pageNavVisible, changePageNavVisible] = useState(false)
+  const [navPinned, setNavPinned] = useState(false)
   const [filteredNavPages, setFilteredNavPages] = useState(allNavPages)
   const { navState, toggleNav, pinNav, collapseNav, expandNav } = useNavState()
 
@@ -152,28 +153,36 @@ const LayoutBase = props => {
     setFilteredNavPages(getNavPagesWithLatest(allNavPages, latestPosts, post))
   }, [router])
 
+  useEffect(() => {
+    if (typeof document !== 'undefined') {
+      document.body.classList.toggle('nav-pinned', navPinned)
+    }
+  }, [navPinned])
+
   const GITBOOK_LOADING_COVER = siteConfig(
     'GITBOOK_LOADING_COVER',
     true,
     CONFIG
   )
   return (
-    <ThemeGlobalGitbook2.Provider
-      value={{
-        searchModal,
-        tocVisible,
-        changeTocVisible,
-        filteredNavPages,
-        setFilteredNavPages,
-        allNavPages,
-        pageNavVisible,
-        changePageNavVisible,
-        navState,
-        toggleNav,
-        pinNav,
-        collapseNav,
-        expandNav
-      }}>
+      <ThemeGlobalGitbook2.Provider
+        value={{
+          searchModal,
+          tocVisible,
+          changeTocVisible,
+          filteredNavPages,
+          setFilteredNavPages,
+          allNavPages,
+          pageNavVisible,
+          changePageNavVisible,
+          navPinned,
+          setNavPinned,
+          navState,
+          toggleNav,
+          pinNav,
+          collapseNav,
+          expandNav
+        }}>
       <Head>
         {/* Font Awesome CSS */}
         <link

@@ -52,7 +52,7 @@ const NavPostItem = props => {
         <div
           onMouseEnter={onHoverToggle}
           onClick={toggleOpenSubMenu}
-          className='pill-hover'
+          className='pill-hover sidebar-item'
           key={group?.category}
           role='button'
           tabIndex={0}
