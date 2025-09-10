@@ -138,7 +138,7 @@ const SearchInput = ({ currentSearch, cRef, className }) => {
         onChange={e => updateSearchKey(e.target.value)}
         defaultValue={currentSearch}
         aria-label='Search'
-        style={{ height: '40px', lineHeight: '40px' }}
+        style={{ height: '36px', lineHeight: '36px' }}
       />
       <div
         className='search-shortcut absolute right-0 mr-3 flex items-center justify-center pointer-events-none'

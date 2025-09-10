@@ -9,11 +9,15 @@ const Style = () => {
     <style jsx global>{`
       // 页面背景色变量
       :root {
-        --page-bg: #f3f4f6;
+        --page-bg: #F6F7F9;
+        --paper-bg: #FFFFFF;
+        --divider-1: rgba(0,0,0,0.06);
       }
       
       .dark {
-        --page-bg: #111827;
+        --page-bg: #0B0B0C;
+        --paper-bg: #1f2937;
+        --divider-1: rgba(255,255,255,0.12);
       }
       
       // 底色
@@ -47,16 +51,16 @@ const Style = () => {
 
       /* 白纸容器样式 */
       .paper-container {
-        background: white;
+        background: var(--paper-bg);
         border-radius: 16px;
-        border: 1px solid #e5e7eb;
+        border: 1px solid var(--divider-1);
         box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         overflow: hidden;
       }
 
       .dark .paper-container {
-        background: #1f2937;
-        border-color: #374151;
+        background: var(--paper-bg);
+        border-color: var(--divider-1);
         box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
       }
 
@@ -75,14 +79,14 @@ const Style = () => {
       #top-nav {
         position: relative !important;
         z-index: 20 !important;
-        background: white !important;
-        border-bottom: 1px solid #e5e7eb;
+        background: var(--paper-bg) !important;
+        border-bottom: 1px solid var(--divider-1);
         box-shadow: none !important;
       }
       
       .dark #top-nav {
-        background: #1f2937 !important;
-        border-bottom-color: #374151;
+        background: var(--paper-bg) !important;
+        border-bottom-color: var(--divider-1);
       }
 
       /* GitBook风格排版优化 */
@@ -246,47 +250,55 @@ const Style = () => {
         display: none !important;
       }
 
-      /* 搜索框优化 - 垂直居中对齐 */
+      /* 搜索框优化 - 液态玻璃材质 */
       #theme-gitbook2 .search-container {
         display: flex;
         align-items: center;
         position: relative;
-        height: 40px;
+        height: 36px;
       }
       
       #theme-gitbook2 .search-input {
-        background: #f8fafc;
-        border: 1px solid #e2e8f0;
-        border-radius: 8px;
-        padding: 8px 12px;
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        border-radius: 18px;
+        padding: 0 12px;
         font-size: 14px;
         transition: all 0.2s ease;
-        opacity: 0.7;
-        height: 40px;
-        line-height: 40px;
+        height: 36px;
+        line-height: 36px;
         display: flex;
         align-items: center;
+        color: #374151;
       }
 
       .dark #theme-gitbook2 .search-input {
-        background: #1e293b;
-        border-color: #334155;
+        background: rgba(0, 0, 0, 0.5);
+        border-color: rgba(255, 255, 255, 0.14);
         color: #d1d5db;
       }
 
       #theme-gitbook2 .search-input:focus,
       #theme-gitbook2 .search-input:hover {
-        opacity: 1;
-        border-color: #3b82f6;
+        background: rgba(255, 255, 255, 0.8);
+        border-color: rgba(0, 0, 0, 0.12);
         box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-        height: 40px;
-        line-height: 40px;
+        height: 36px;
+        line-height: 36px;
+      }
+
+      .dark #theme-gitbook2 .search-input:focus,
+      .dark #theme-gitbook2 .search-input:hover {
+        background: rgba(0, 0, 0, 0.6);
+        border-color: rgba(255, 255, 255, 0.18);
       }
 
       #theme-gitbook2 .search-shortcut {
         font-size: 11px;
         color: #9ca3af;
-        opacity: 0.5;
+        opacity: 0.6;
         transition: opacity 0.2s ease;
         display: flex;
         align-items: center;
@@ -294,6 +306,7 @@ const Style = () => {
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
+        right: 12px;
       }
 
       #theme-gitbook2 .search-input:focus + .search-shortcut,
@@ -310,6 +323,9 @@ const Style = () => {
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
+        left: 12px;
+        color: #9ca3af;
+        font-size: 14px;
       }
 
       /* 滚动条样式 - 默认隐藏 */
@@ -357,11 +373,11 @@ const Style = () => {
 
       /* 白纸内部分隔线 */
       .paper-container .border-l {
-        border-left: 1px solid #e5e7eb;
+        border-left: 1px solid var(--divider-1);
       }
 
       .dark .paper-container .border-l {
-        border-left: 1px solid #374151;
+        border-left: 1px solid var(--divider-1);
       }
 
       /* 可访问性支持 */
@@ -422,7 +438,8 @@ const Style = () => {
           top: 0 !important;
           left: 0 !important;
           right: 0 !important;
-          background: var(--page-bg) !important;
+          background: var(--paper-bg) !important;
+          border-bottom: 1px solid var(--divider-1) !important;
           z-index: 1000 !important;
         }
 
