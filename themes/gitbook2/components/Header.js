@@ -20,7 +20,7 @@ export default function Header(props) {
   const { className, customNav, customMenu } = props
   const [isOpen, changeShow] = useState(false)
   const collapseRef = useRef(null)
-  const { navState, toggleNav, pinNav, collapseNav, expandNav, changePageNavVisible, navPinned, setNavPinned } = useGitBookGlobal()
+  const { navState, toggleNav, pinNav, collapseNav, expandNav, changePageNavVisible, navPinned, setNavPinned, pageNavVisible } = useGitBookGlobal()
 
   const { locale } = useGlobal()
 
