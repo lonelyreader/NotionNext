@@ -20,6 +20,10 @@ const CONFIG = {
   // Widget
   GITBOOK_WIDGET_REVOLVER_MAPS:
     process.env.NEXT_PUBLIC_WIDGET_REVOLVER_MAPS || 'false', // 地图插件
-  GITBOOK_WIDGET_TO_TOP: true // 跳回顶部
+  GITBOOK_WIDGET_TO_TOP: true, // 跳回顶部
+  
+  // 插件开关
+  GITBOOK_AUTHOR_CARD_ENABLED: false, // 作者卡片开关，默认关闭
+  GITBOOK_LIVE2D_ENABLED: false // 2D狗开关，默认关闭
 }
 export default CONFIG

@@ -13,8 +13,16 @@ export default function Live2D() {
   const showPet = JSON.parse(siteConfig('WIDGET_PET'))
   const petLink = siteConfig('WIDGET_PET_LINK')
   const petSwitchTheme = siteConfig('WIDGET_PET_SWITCH_THEME')
+  
+  // 检查gitbook2主题的Live2D开关
+  const isGitbookLive2DEnabled = siteConfig('GITBOOK_LIVE2D_ENABLED', false)
 
   useEffect(() => {
+    // 如果gitbook2主题的Live2D被禁用，直接返回，不加载任何资源
+    if (!isGitbookLive2DEnabled) {
+      return
+    }
+    
     if (showPet && !isMobile()) {
       Promise.all([
         loadExternalResource(
@@ -32,7 +40,7 @@ export default function Live2D() {
         }
       })
     }
-  }, [theme])
+  }, [theme, isGitbookLive2DEnabled])
 
   function handleClick() {
     if (petSwitchTheme) {
@@ -40,6 +48,11 @@ export default function Live2D() {
     }
   }
 
+  // 如果gitbook2主题的Live2D被禁用，不渲染任何内容
+  if (!isGitbookLive2DEnabled) {
+    return <></>
+  }
+  
   if (!showPet) {
     return <></>
   }

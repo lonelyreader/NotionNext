@@ -65,7 +65,11 @@ const Style = () => {
       #top-nav {
         position: relative !important;
         z-index: 20 !important;
-        background: transparent !important;
+        background: white !important;
+      }
+      
+      .dark #top-nav {
+        background: #1f2937 !important;
       }
 
       /* GitBook风格排版优化 */
@@ -276,6 +280,12 @@ const Style = () => {
       }
 
       /* 搜索框优化 */
+      #theme-gitbook2 .search-container {
+        display: flex;
+        align-items: center;
+        position: relative;
+      }
+      
       #theme-gitbook2 .search-input {
         background: #f8fafc;
         border: 1px solid #e2e8f0;
@@ -284,6 +294,10 @@ const Style = () => {
         font-size: 14px;
         transition: all 0.2s ease;
         opacity: 0.7;
+        height: 40px;
+        line-height: 40px;
+        display: flex;
+        align-items: center;
       }
 
       .dark #theme-gitbook2 .search-input {
@@ -304,11 +318,22 @@ const Style = () => {
         color: #9ca3af;
         opacity: 0.5;
         transition: opacity 0.2s ease;
+        display: flex;
+        align-items: center;
+        height: 100%;
       }
 
       #theme-gitbook2 .search-input:focus + .search-shortcut,
       #theme-gitbook2 .search-container:hover .search-shortcut {
         opacity: 0.8;
+      }
+      
+      /* 搜索图标对齐 */
+      #theme-gitbook2 .search-container .fas.fa-search {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
       }
 
       /* 滚动条样式 - 默认隐藏 */

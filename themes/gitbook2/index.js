@@ -174,11 +174,12 @@ const LayoutBase = props => {
             </div>
 
             {/* 白纸内容区域 - 中栏+右栏 */}
-            <div className='flex-1 flex overflow-hidden'>
+            <div className='flex-1 flex overflow-hidden' style={{ gap: '24px' }}>
               {/* 中间内容区域 */}
               <div
                 id='center-wrapper'
-                className='flex flex-col flex-1 relative z-10 h-full'>
+                className='flex flex-col flex-1 relative z-10 h-full'
+                style={{ minWidth: 0 }}>
                 <div
                   id='container-inner'
                   className={`w-full h-full overflow-y-auto scroll-hidden ${fullWidth ? 'px-8' : 'max-w-4xl px-8 lg:px-8'} justify-center mx-auto`}
@@ -203,8 +204,9 @@ const LayoutBase = props => {
               {fullWidth ? null : (
                 <div
                   className={
-                    'w-80 hidden 2xl:block dark:border-transparent flex-shrink-0 relative z-10 h-full border-l border-gray-200 dark:border-gray-700'
-                  }>
+                    'w-80 hidden lg:block dark:border-transparent flex-shrink-0 relative z-10 h-full border-l border-gray-200 dark:border-gray-700'
+                  }
+                  style={{ minWidth: '320px' }}>
                   <div className='h-full overflow-y-auto scroll-hidden px-6' style={{ paddingTop: '24px', paddingBottom: '24px' }}>
                     <ArticleInfo post={props?.post ? props?.post : props.notice} />
 

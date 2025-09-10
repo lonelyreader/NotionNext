@@ -115,10 +115,11 @@ const SearchInput = ({ currentSearch, cRef, className }) => {
   }
 
   return (
-    <div className={`${className} relative search-container`}>
+    <div className={`${className} relative search-container flex items-center`}>
       <div
-        className='absolute left-0 ml-3 items-center justify-center py-2'
-        onClick={handleSearch}>
+        className='absolute left-0 ml-3 flex items-center justify-center'
+        onClick={handleSearch}
+        style={{ height: '100%' }}>
         <i
           className='fas fa-search text-gray-400 dark:text-gray-500'
           aria-hidden='true'
@@ -137,10 +138,12 @@ const SearchInput = ({ currentSearch, cRef, className }) => {
         onChange={e => updateSearchKey(e.target.value)}
         defaultValue={currentSearch}
         aria-label='Search'
+        style={{ height: '40px', lineHeight: '40px' }}
       />
       <div
-        className='search-shortcut absolute right-0 mr-3 items-center justify-center py-2 pointer-events-none'
-        aria-hidden='true'>
+        className='search-shortcut absolute right-0 mr-3 flex items-center justify-center pointer-events-none'
+        aria-hidden='true'
+        style={{ height: '100%' }}>
         Ctrl+K
       </div>
 
