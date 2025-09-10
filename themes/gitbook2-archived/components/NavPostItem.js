@@ -52,38 +52,25 @@ const NavPostItem = props => {
         <div
           onMouseEnter={onHoverToggle}
           onClick={toggleOpenSubMenu}
-          className='nav-item'
-          key={group?.category}
-          role='button'
-          tabIndex={0}
-          aria-expanded={expanded}
-          aria-controls={`nav-group-${group?.category}`}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-              e.preventDefault()
-              toggleOpenSubMenu()
-            }
-          }}>
+          className='cursor-pointer relative flex justify-between text-md p-2 hover:bg-gray-50 rounded-md dark:hover:bg-yellow-100 dark:hover:text-yellow-600'
+          key={group?.category}>
           <span className={`${expanded && 'font-semibold'}`}>
             {group?.category}
           </span>
-          <div className='inline-flex items-center select-none pointer-events-none'>
+          <div className='inline-flex items-center select-none pointer-events-none '>
             <i
-              className={`collapse-arrow fas fa-chevron-right ${expanded ? 'expanded' : ''}`}
-              aria-hidden='true'></i>
+              className={`px-2 fas fa-chevron-left transition-all opacity-50 duration-700 ${expanded ? '-rotate-90' : ''}`}></i>
           </div>
           {groupHasLatest &&
             siteConfig('GITBOOK_LATEST_POST_RED_BADGE') &&
             !expanded && <Badge />}
         </div>
         <Collapse isOpen={expanded} onHeightChange={props.onHeightChange}>
-          <div id={`nav-group-${group?.category}`}>
-            {group?.items?.map((post, index) => (
-              <div key={index} className='ml-3 border-l'>
-                <BlogPostCard className='ml-3' post={post} />
-              </div>
-            ))}
-          </div>
+          {group?.items?.map((post, index) => (
+            <div key={index} className='ml-3 border-l'>
+              <BlogPostCard className='ml-3' post={post} />
+            </div>
+          ))}
         </Collapse>
       </>
     )

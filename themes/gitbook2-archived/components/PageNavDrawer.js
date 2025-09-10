@@ -1,5 +1,5 @@
 import { useGlobal } from '@/lib/global'
-import { useGitBookGlobal } from '@/themes/gitbook2'
+import { useGitBookGlobal } from '../index'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import NavPostList from './NavPostList'
@@ -28,22 +28,22 @@ const PageNavDrawer = props => {
   return (
     <>
       <div
-        id='gitbook2-left-float'
+        id='gitbook-left-float'
         className='fixed top-0 left-0 z-40 md:hidden'>
         {/* 侧边菜单 */}
         <div
           className={`${pageNavVisible ? 'animate__slideInLeft ' : '-ml-80 animate__slideOutLeft'} 
-                      overflow-y-hidden shadow-card w-72 duration-200 fixed left-1 bottom-16 rounded py-2 bg-white dark:bg-hexo-black-gray`}>
-          <div className='px-4 pb-2 flex justify-between items-center border-b font-bold'>
-            <span>{locale.COMMON.ARTICLE_LIST}</span>
+                      overflow-y-hidden shadow-card w-72 duration-200 fixed left-1 bottom-16 rounded-lg py-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600`}>
+          <div className='px-4 pb-2 flex justify-between items-center border-b border-gray-200 dark:border-gray-600 font-bold text-gray-800 dark:text-gray-200'>
+            <span className='text-sm'>{locale.COMMON.ARTICLE_LIST}</span>
             <i
-              className='fas fa-times p-1 cursor-pointer'
+              className='fas fa-times p-1 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors duration-200'
               onClick={() => {
                 changePageNavVisible(false)
               }}></i>
           </div>
           {/* 所有文章列表 */}
-          <div className='dark:text-gray-400 text-gray-600 h-96 overflow-y-scroll p-3'>
+          <div className='dark:text-gray-300 text-gray-600 h-96 overflow-y-scroll p-3 scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-600'>
             <NavPostList filteredNavPages={filteredNavPages} />
           </div>
         </div>

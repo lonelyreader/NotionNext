@@ -27,9 +27,9 @@ import BlogArchiveItem from './components/BlogArchiveItem'
 import BottomMenuBar from './components/BottomMenuBar'
 import Catalog from './components/Catalog'
 import CatalogDrawerWrapper from './components/CatalogDrawerWrapper'
+import Header from './components/Header'
 import CategoryItem from './components/CategoryItem'
 import Footer from './components/Footer'
-import Header from './components/Header'
 import InfoCard from './components/InfoCard'
 import JumpToTopButton from './components/JumpToTopButton'
 import NavPostList from './components/NavPostList'
@@ -46,8 +46,8 @@ const AlgoliaSearchModal = dynamic(
 const WWAds = dynamic(() => import('@/components/WWAds'), { ssr: false })
 
 // 主题全局变量
-const ThemeGlobalGitbook2 = createContext()
-export const useGitBookGlobal = () => useContext(ThemeGlobalGitbook2)
+const ThemeGlobalGitbook = createContext()
+export const useGitBookGlobal = () => useContext(ThemeGlobalGitbook)
 
 /**
  * 给最新的文章标一个红点
@@ -117,13 +117,34 @@ const LayoutBase = props => {
     setFilteredNavPages(getNavPagesWithLatest(allNavPages, latestPosts, post))
   }, [router])
 
+  // 动态设置 Header 高度
+  useEffect(() => {
+    const updateHeaderHeight = () => {
+      const header = document.querySelector('#top-nav')
+      if (header) {
+        const height = header.offsetHeight
+        document.documentElement.style.setProperty('--header-h', `${height}px`)
+      }
+    }
+
+    // 初始设置
+    updateHeaderHeight()
+
+    // 监听窗口大小变化
+    window.addEventListener('resize', updateHeaderHeight)
+
+    return () => {
+      window.removeEventListener('resize', updateHeaderHeight)
+    }
+  }, [])
+
   const GITBOOK_LOADING_COVER = siteConfig(
     'GITBOOK_LOADING_COVER',
     true,
     CONFIG
   )
   return (
-    <ThemeGlobalGitbook2.Provider
+    <ThemeGlobalGitbook.Provider
       value={{
         searchModal,
         tocVisible,
@@ -137,21 +158,21 @@ const LayoutBase = props => {
       <Style />
 
       <div
-        id='theme-gitbook2'
-        className={`${siteConfig('FONT_STYLE')} pb-16 md:pb-0 bg-gray-100 dark:bg-gray-900 w-full h-screen overflow-hidden justify-center dark:text-gray-300`}>
+        id='theme-gitbook'
+        className={`${siteConfig('FONT_STYLE')} h-screen overflow-hidden scroll-smooth w-full justify-center dark:text-gray-300`}
+        style={{ backgroundColor: 'var(--shell-bg)' }}>
         <AlgoliaSearchModal cRef={searchModal} {...props} />
 
-        <main
-          id='wrapper'
-          className={`${siteConfig('LAYOUT_SIDEBAR_REVERSE') ? 'flex-row-reverse' : ''} relative flex w-full h-full`}
-          style={{ padding: '16px 24px 32px 0' }}>
-          
-          {/* 左侧灰壳体 - 导航栏 */}
+        <div className='w-full max-w-screen-7xl mx-auto px-2 sm:px-4 lg:px-6 xl:px-8 overflow-x-hidden h-screen'>
+          <main
+            id='wrapper'
+            className={`${siteConfig('LAYOUT_SIDEBAR_REVERSE') ? 'flex-row-reverse' : ''} relative flex w-full h-full gap-2 sm:gap-4 lg:gap-6 xl:gap-8 overflow-x-hidden`}>
+          {/* 左侧推拉抽屉 */}
           {fullWidth ? null : (
-            <div className={'hidden md:block relative z-10 '}>
-              <div className='w-80 h-full flex flex-col shell-container'>
+            <div className={'hidden md:block relative z-10 flex-shrink-0'}>
+              <div className='w-[260px] xl:w-[280px] shrink-0 h-full overflow-y-auto bg-[var(--shell-bg)] dark:bg-[var(--shell-bg-dark)] border-r border-black/5 dark:border-white/10 flex flex-col scrollable'>
                 {/* 导航 */}
-                <div className='flex-1 overflow-y-auto scroll-hidden pl-5 pr-4' style={{ paddingTop: '20px' }}>
+                <div className='flex-1 overflow-y-auto scroll-hidden pt-10 pl-5'>
                   {/* 嵌入 */}
                   {slotLeft}
 
@@ -159,30 +180,30 @@ const LayoutBase = props => {
                   <NavPostList filteredNavPages={filteredNavPages} {...props} />
                 </div>
                 {/* 页脚 */}
-                <div className='flex-shrink-0 p-2'>
-                  <Footer {...props} />
-                </div>
+                <Footer {...props} />
               </div>
             </div>
           )}
 
-          {/* 白纸容器 - 承载Header+中栏+右栏 */}
-          <div className='flex-1 h-full flex flex-col paper-container'>
-            {/* Header - 吸附在白纸顶部 */}
-            <div className='flex-shrink-0'>
+          {/* 白纸工作区 */}
+          <div
+            id='workspace-sheet'
+            className='flex-1 h-[calc(100vh-2rem)] mt-4 mr-6 mb-8 bg-white dark:bg-neutral-950 rounded-2xl shadow-sm ring-1 ring-black/5 dark:ring-white/10 overflow-hidden flex flex-col'>
+            
+            {/* Header 固定在白纸顶部 */}
+            <div className='sticky top-0 z-20 bg-white dark:bg-neutral-950 border-b border-black/5 dark:border-white/10'>
               <Header {...props} />
             </div>
 
-            {/* 白纸内容区域 - 中栏+右栏 */}
+            {/* 内容区域容器 */}
             <div className='flex-1 flex overflow-hidden'>
               {/* 中间内容区域 */}
               <div
                 id='center-wrapper'
-                className='flex flex-col flex-1 relative z-10 h-full'>
+                className='flex-1 overflow-y-auto min-w-0 scrollable'>
                 <div
                   id='container-inner'
-                  className={`w-full h-full overflow-y-auto scroll-hidden ${fullWidth ? 'px-8' : 'max-w-4xl px-8 lg:px-8'} justify-center mx-auto`}
-                  style={{ paddingTop: '24px' }}>
+                  className={`w-full ${fullWidth ? 'px-6 pb-8 md:px-4' : 'max-w-4xl px-6 pb-8 md:px-4'} justify-center mx-auto overflow-x-hidden`}>
                   {slotTop}
                   <WWAds className='w-full' orientation='horizontal' />
 
@@ -191,21 +212,18 @@ const LayoutBase = props => {
                   {/* Google广告 */}
                   <AdSlot type='in-article' />
                   <WWAds className='w-full' orientation='horizontal' />
-                </div>
 
-                {/* 底部 */}
-                <div className='md:hidden'>
-                  <Footer {...props} />
+                  {/* 底部 */}
+                  <div className='md:hidden'>
+                    <Footer {...props} />
+                  </div>
                 </div>
               </div>
 
               {/* 右侧边栏 */}
               {fullWidth ? null : (
-                <div
-                  className={
-                    'w-80 hidden 2xl:block dark:border-transparent flex-shrink-0 relative z-10 h-full border-l border-gray-200 dark:border-gray-700'
-                  }>
-                  <div className='h-full overflow-y-auto scroll-hidden px-6' style={{ paddingTop: '24px', paddingBottom: '24px' }}>
+                <div className='hidden lg:block w-72 overflow-y-auto pr-6 scrollable'>
+                  <div className='py-4'>
                     <ArticleInfo post={props?.post ? props?.post : props.notice} />
 
                     <div>
@@ -220,7 +238,7 @@ const LayoutBase = props => {
                             null,
                             CONFIG
                           ) === 'true' && <RevolverMaps />}
-                          <Live2D />
+                          {/* <Live2D /> */}
                         </>
                       )}
                       {/* gitbook主题首页只显示公告 */}
@@ -228,13 +246,14 @@ const LayoutBase = props => {
                     </div>
 
                     <AdSlot type='in-article' />
-                    <Live2D />
+                    {/* <Live2D /> */}
                   </div>
                 </div>
               )}
             </div>
           </div>
         </main>
+        </div>
 
         {GITBOOK_LOADING_COVER && <LoadingCover />}
 
@@ -247,7 +266,7 @@ const LayoutBase = props => {
         {/* 移动端底部导航栏 */}
         <BottomMenuBar {...props} />
       </div>
-    </ThemeGlobalGitbook2.Provider>
+    </ThemeGlobalGitbook.Provider>
   )
 }
 
@@ -281,7 +300,7 @@ const LayoutIndex = props => {
 
             // 显示错误信息
             const containerInner = document.querySelector(
-              '#theme-gitbook2 #container-inner'
+              '#theme-gitbook #container-inner'
             )
             const newHTML = `<h1 class="text-3xl pt-12 dark:text-gray-300">配置有误</h1><blockquote class="notion-quote notion-block-ce76391f3f2842d386468ff1eb705b92"><div>请在您的notion中添加一个slug为${index}的文章</div></blockquote>`
             containerInner?.insertAdjacentHTML('afterbegin', newHTML)
@@ -355,9 +374,9 @@ const LayoutSlug = props => {
       {lock && <ArticleLock validPassword={validPassword} />}
 
       {!lock && (
-        <div id='container'>
+        <div id='container' className='w-full overflow-x-hidden'>
           {/* title */}
-          <h1 className='text-3xl pt-12  dark:text-gray-300'>
+          <h1 className='text-2xl sm:text-3xl pt-12 dark:text-gray-300 break-words'>
             {siteConfig('POST_TITLE_ICON') && (
               <NotionIcon icon={post?.pageIcon} />
             )}
@@ -366,8 +385,8 @@ const LayoutSlug = props => {
 
           {/* Notion文章主体 */}
           {post && (
-            <section className='px-1'>
-              <div id='article-wrapper'>
+            <section className='px-1 w-full overflow-x-hidden'>
+              <div id='article-wrapper' className='w-full overflow-x-hidden'>
                 <NotionPage post={post} />
               </div>
 

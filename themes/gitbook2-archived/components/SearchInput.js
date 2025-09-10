@@ -1,8 +1,9 @@
 import { siteConfig } from '@/lib/config'
 import { deepClone } from '@/lib/utils'
-import { useGitBookGlobal } from '@/themes/gitbook2'
-import { useImperativeHandle, useRef, useState } from 'react'
+import { useGitBookGlobal } from '../index'
+import { useImperativeHandle, useRef, useState, useCallback } from 'react'
 import { useHotkeys } from 'react-hotkeys-hook'
+import { debounce } from 'lodash'
 let lock = false
 
 /**
@@ -29,7 +30,7 @@ const SearchInput = ({ currentSearch, cRef, className }) => {
     handleSearch()
   })
 
-  const handleSearch = () => {
+  const handleSearch = useCallback(() => {
     // 使用Algolia
     if (siteConfig('ALGOLIA_APP_ID')) {
       searchModal?.current?.openSearch()
@@ -55,7 +56,13 @@ const SearchInput = ({ currentSearch, cRef, className }) => {
 
     // 更新完
     setFilteredNavPages(filterAllNavPages)
-  }
+  }, [allNavPages, setFilteredNavPages, searchModal])
+
+  // 防抖搜索
+  const debouncedSearch = useCallback(
+    debounce(handleSearch, 250),
+    [handleSearch]
+  )
 
   /**
    * 回车键
@@ -101,8 +108,10 @@ const SearchInput = ({ currentSearch, cRef, className }) => {
     searchInputRef.current.value = val
     if (val) {
       setShowClean(true)
+      debouncedSearch()
     } else {
       setShowClean(false)
+      setFilteredNavPages(allNavPages)
     }
   }
 
@@ -115,19 +124,20 @@ const SearchInput = ({ currentSearch, cRef, className }) => {
   }
 
   return (
-    <div className={`${className} relative search-container`}>
+    <div className={`${className} relative`}>
       <div
-        className='absolute left-0 ml-3 items-center justify-center py-2'
+        className='absolute left-0 ml-4 items-center justify-center py-2'
         onClick={handleSearch}>
         <i
-          className='fas fa-search text-gray-400 dark:text-gray-500'
-          aria-hidden='true'
+          className={
+            'hover:text-black transform duration-200 text-gray-500  dark:hover:text-gray-300 cursor-pointer fas fa-search'
+          }
         />
       </div>
       <input
         ref={searchInputRef}
         type='text'
-        className='search-input pl-10 pr-20 w-full'
+        className={`rounded-lg border dark:border-black pl-12 leading-10 placeholder-gray-500 outline-none w-full transition focus:shadow-lg text-black bg-gray-100 dark:bg-black dark:text-white`}
         onFocus={handleFocus}
         onKeyUp={handleKeyUp}
         placeholder='Search'
@@ -136,20 +146,18 @@ const SearchInput = ({ currentSearch, cRef, className }) => {
         onCompositionEnd={unLockSearchInput}
         onChange={e => updateSearchKey(e.target.value)}
         defaultValue={currentSearch}
-        aria-label='Search'
       />
       <div
-        className='search-shortcut absolute right-0 mr-3 items-center justify-center py-2 pointer-events-none'
-        aria-hidden='true'>
+        className='absolute right-0 mr-4 items-center justify-center py-2 text-gray-400 dark:text-gray-600'
+        onClick={handleSearch}>
         Ctrl+K
       </div>
 
       {showClean && (
-        <div className='absolute right-8 top-1/2 transform -translate-y-1/2 cursor-pointer'>
+        <div className='-ml-12 cursor-pointer flex float-right items-center justify-center py-2'>
           <i
-            className='fas fa-times text-gray-400 hover:text-gray-600 dark:hover:text-gray-300'
+            className='fas fa-times hover:text-black transform duration-200 text-gray-400 cursor-pointer   dark:hover:text-gray-300'
             onClick={cleanSearch}
-            aria-label='Clear search'
           />
         </div>
       )}
