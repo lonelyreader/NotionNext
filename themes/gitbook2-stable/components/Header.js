@@ -9,7 +9,6 @@ import LogoBar from './LogoBar'
 import { MenuBarMobile } from './MenuBarMobile'
 import { MenuItemDrop } from './MenuItemDrop'
 import SearchInput from './SearchInput'
-import { useGitBookGlobal } from '../index'
 
 /**
  * 页头：顶部导航栏 + 菜单
@@ -20,7 +19,6 @@ export default function Header(props) {
   const { className, customNav, customMenu } = props
   const [isOpen, changeShow] = useState(false)
   const collapseRef = useRef(null)
-  const { navState, toggleNav, changePageNavVisible } = useGitBookGlobal()
 
   const { locale } = useGlobal()
 
@@ -82,54 +80,35 @@ export default function Header(props) {
             </div>
           </div>
 
-          {/* 右侧 - 椭圆胶囊容器 */}
+          {/* 右侧 */}
           <div className='flex items-center gap-4'>
-            {/* 桌面端椭圆胶囊容器 */}
-            <div className='hidden md:flex pill-container'>
-              {/* 导航切换按钮 */}
-              <button
-                onClick={toggleNav}
-                className='pill-hover w-8 h-8 flex items-center justify-center'
-                aria-label='切换导航'
-              >
-                <i className={`fas ${navState === 'collapsed' ? 'fa-bars' : 'fa-times'} text-sm`} />
-              </button>
-              
-              {/* 登录相关 */}
-              {enableClerk && (
-                <>
-                  <SignedOut>
-                    <SignInButton mode='modal'>
-                      <button className='pill-hover px-3 py-1 text-sm'>
-                        {locale.COMMON.SIGN_IN}
-                      </button>
-                    </SignInButton>
-                  </SignedOut>
-                  <div className='pill-hover w-8 h-8 flex items-center justify-center'>
-                    <UserButton />
-                  </div>
-                </>
-              )}
-              
-              {/* 暗色模式切换 */}
-              <div className='pill-hover w-8 h-8 flex items-center justify-center'>
-                <DarkModeButton className='text-sm' />
-              </div>
-            </div>
-            
-            {/* 搜索框 - 独立玻璃药丸 */}
+            {/* 登录相关 */}
+            {enableClerk && (
+              <>
+                <SignedOut>
+                  <SignInButton mode='modal'>
+                    <button className='bg-green-500 hover:bg-green-600 text-white rounded-lg px-3 py-2'>
+                      {locale.COMMON.SIGN_IN}
+                    </button>
+                  </SignInButton>
+                </SignedOut>
+                <UserButton />
+              </>
+            )}
+            <DarkModeButton className='text-sm items-center h-full hidden md:flex' />
             <SearchInput className='hidden md:flex md:w-52 lg:w-72' />
-            
-            {/* 移动端按钮 */}
-            <div className='mr-1 flex md:hidden justify-end items-center space-x-4 dark:text-gray-200'>
+            {/* 折叠按钮、仅移动端显示 */}
+            <div className='mr-1 flex md:hidden justify-end items-center space-x-4  dark:text-gray-200'>
               <DarkModeButton className='flex text-md items-center h-full' />
-              <button
-                onClick={changePageNavVisible}
-                className='pill-hover w-8 h-8 flex items-center justify-center'
-                aria-label='打开导航'
-              >
-                <i className='fas fa-bars text-sm' />
-              </button>
+              <div
+                onClick={toggleMenuOpen}
+                className='cursor-pointer text-lg hover:scale-110 duration-150'>
+                {isOpen ? (
+                  <i className='fas fa-times' />
+                ) : (
+                  <i className='fa-solid fa-bars' />
+                )}
+              </div>
             </div>
           </div>
         </div>

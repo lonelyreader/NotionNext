@@ -17,14 +17,15 @@ export const MenuItemDrop = ({ link }) => {
       onMouseOver={() => changeShow(true)}
       onMouseOut={() => changeShow(false)}>
       {!hasSubMenu && (
-        <div className='pill-hover'>
+        <div
+          className={
+            'px-2 h-full whitespace-nowrap duration-300 text-sm justify-between dark:text-gray-300 cursor-pointer flex flex-nowrap items-center ' +
+            (selected
+              ? 'bg-green-600 text-white hover:text-white'
+              : 'hover:text-green-600')
+          }>
           <SmartLink href={link?.href} target={link?.target}>
-            <div className={`flex items-center gap-2 text-sm ${
-              selected ? 'active' : ''
-            }`}>
-              {link?.icon && <i className={link?.icon} />} 
-              <span>{link?.name}</span>
-            </div>
+            {link?.icon && <i className={link?.icon} />} {link?.name}
           </SmartLink>
         </div>
       )}
@@ -32,15 +33,18 @@ export const MenuItemDrop = ({ link }) => {
       {/* 包含子菜单 */}
       {hasSubMenu && (
         <>
-          <div className='pill-hover'>
-            <div className={`flex items-center gap-2 text-sm ${
-              selected ? 'active' : ''
-            }`}>
-              {link?.icon && <i className={link?.icon} />} 
-              <span>{link?.name}</span>
+          <div
+            className={
+              'px-2 h-full whitespace-nowrap duration-300 text-sm justify-between dark:text-gray-300 cursor-pointer flex flex-nowrap items-center ' +
+              (selected
+                ? 'bg-green-600 text-white hover:text-white'
+                : 'hover:text-green-600')
+            }>
+            <div>
+              {link?.icon && <i className={link?.icon} />} {link?.name}
               {hasSubMenu && (
                 <i
-                  className={`fas fa-chevron-down transition-all duration-300 ${show ? ' rotate-180' : ''}`}></i>
+                  className={`px-2 fas fa-chevron-down duration-500 transition-all ${show ? ' rotate-180' : ''}`}></i>
               )}
             </div>
           </div>

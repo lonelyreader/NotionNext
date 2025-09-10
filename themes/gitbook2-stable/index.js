@@ -49,36 +49,6 @@ const WWAds = dynamic(() => import('@/components/WWAds'), { ssr: false })
 const ThemeGlobalGitbook2 = createContext()
 export const useGitBookGlobal = () => useContext(ThemeGlobalGitbook2)
 
-// 导航状态管理
-const useNavState = () => {
-  const [navState, setNavState] = useState('collapsed') // 'collapsed' | 'expanded' | 'pinned'
-  
-  const toggleNav = () => {
-    setNavState(prev => {
-      switch (prev) {
-        case 'collapsed':
-          return 'expanded'
-        case 'expanded':
-          return 'collapsed'
-        case 'pinned':
-          return 'collapsed'
-        default:
-          return 'collapsed'
-      }
-    })
-  }
-  
-  const pinNav = () => {
-    setNavState('pinned')
-  }
-  
-  const collapseNav = () => {
-    setNavState('collapsed')
-  }
-  
-  return { navState, toggleNav, pinNav, collapseNav }
-}
-
 /**
  * 给最新的文章标一个红点
  */
@@ -140,7 +110,6 @@ const LayoutBase = props => {
   const [tocVisible, changeTocVisible] = useState(false)
   const [pageNavVisible, changePageNavVisible] = useState(false)
   const [filteredNavPages, setFilteredNavPages] = useState(allNavPages)
-  const { navState, toggleNav, pinNav, collapseNav } = useNavState()
 
   const searchModal = useRef(null)
 
@@ -163,11 +132,7 @@ const LayoutBase = props => {
         setFilteredNavPages,
         allNavPages,
         pageNavVisible,
-        changePageNavVisible,
-        navState,
-        toggleNav,
-        pinNav,
-        collapseNav
+        changePageNavVisible
       }}>
       <Style />
 
@@ -181,74 +146,28 @@ const LayoutBase = props => {
           className={`${siteConfig('LAYOUT_SIDEBAR_REVERSE') ? 'flex-row-reverse' : ''} relative flex w-full h-full`}
           style={{ padding: '16px 24px 32px 0' }}>
           
-          {/* 左侧导航栏 - Liquid Glass 三态 */}
+          {/* 左侧灰壳体 - 导航栏 */}
           {fullWidth ? null : (
-            <div className={`hidden md:block relative z-10 ${
-              navState === 'collapsed' ? 'nav-collapsed' : 
-              navState === 'expanded' ? 'nav-expanded' : 
-              'nav-pinned'
-            }`}>
-              <div className={`h-full flex flex-col ${
-                navState === 'collapsed' ? 'w-12' : 'w-80'
-              } ${navState === 'expanded' ? 'liquid-glass' : 'shell-container'}`}>
-                {/* 导航控制按钮 */}
-                <div className='flex-shrink-0 p-2 flex justify-between items-center'>
-                  {navState === 'collapsed' ? (
-                    <button
-                      onClick={toggleNav}
-                      className='pill-hover w-8 h-8 flex items-center justify-center'
-                      aria-label='展开导航'
-                    >
-                      <i className='fas fa-bars text-sm' />
-                    </button>
-                  ) : (
-                    <div className='flex items-center gap-2'>
-                      <button
-                        onClick={navState === 'expanded' ? pinNav : collapseNav}
-                        className='pill-hover px-2 py-1 text-xs'
-                        aria-label={navState === 'expanded' ? '钉选导航' : '收起导航'}
-                      >
-                        <i className={`fas ${navState === 'expanded' ? 'fa-thumbtack' : 'fa-times'}`} />
-                      </button>
-                      {navState === 'expanded' && (
-                        <button
-                          onClick={collapseNav}
-                          className='pill-hover px-2 py-1 text-xs'
-                          aria-label='关闭导航'
-                        >
-                          <i className='fas fa-times' />
-                        </button>
-                      )}
-                    </div>
-                  )}
-                </div>
-                
-                {/* 导航内容 */}
-                {navState !== 'collapsed' && (
-                  <>
-                    <div className='flex-1 overflow-y-auto scroll-hidden pl-5 pr-4' style={{ paddingTop: '20px' }}>
-                      {/* 嵌入 */}
-                      {slotLeft}
+            <div className={'hidden md:block relative z-10 '}>
+              <div className='w-80 h-full flex flex-col shell-container'>
+                {/* 导航 */}
+                <div className='flex-1 overflow-y-auto scroll-hidden pl-5 pr-4' style={{ paddingTop: '20px' }}>
+                  {/* 嵌入 */}
+                  {slotLeft}
 
-                      {/* 所有文章列表 */}
-                      <NavPostList filteredNavPages={filteredNavPages} {...props} />
-                    </div>
-                    {/* 页脚 */}
-                    <div className='flex-shrink-0 p-2'>
-                      <Footer {...props} />
-                    </div>
-                  </>
-                )}
+                  {/* 所有文章列表 */}
+                  <NavPostList filteredNavPages={filteredNavPages} {...props} />
+                </div>
+                {/* 页脚 */}
+                <div className='flex-shrink-0 p-2'>
+                  <Footer {...props} />
+                </div>
               </div>
             </div>
           )}
 
           {/* 白纸容器 - 承载Header+中栏+右栏 */}
-          <div className={`flex-1 h-full flex flex-col paper-container ${
-            navState === 'collapsed' ? 'paper-collapsed' : 
-            navState === 'expanded' ? 'paper-expanded' : 
-            'paper-pinned'
-          }`}>
+          <div className='flex-1 h-full flex flex-col paper-container'>
             {/* Header - 吸附在白纸顶部 */}
             <div className='flex-shrink-0'>
               <Header {...props} />
@@ -326,30 +245,6 @@ const LayoutBase = props => {
 
         {/* 移动端导航抽屉 */}
         <PageNavDrawer {...props} filteredNavPages={filteredNavPages} />
-        
-        {/* 移动端 Liquid Glass 抽屉 */}
-        <div className={`mobile-drawer-overlay ${pageNavVisible ? 'open' : ''}`} onClick={changePageNavVisible} />
-        <div className={`mobile-drawer ${pageNavVisible ? 'open' : ''}`}>
-          <div className='p-4'>
-            <div className='flex justify-between items-center mb-4'>
-              <h2 className='text-lg font-semibold'>导航</h2>
-              <button
-                onClick={changePageNavVisible}
-                className='pill-hover w-8 h-8 flex items-center justify-center'
-                aria-label='关闭导航'
-              >
-                <i className='fas fa-times' />
-              </button>
-            </div>
-            <div className='space-y-2'>
-              {slotLeft}
-              <NavPostList filteredNavPages={filteredNavPages} {...props} />
-            </div>
-            <div className='mt-8'>
-              <Footer {...props} />
-            </div>
-          </div>
-        </div>
 
         {/* 移动端底部导航栏 */}
         <BottomMenuBar {...props} />

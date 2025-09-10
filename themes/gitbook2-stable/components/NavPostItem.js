@@ -52,7 +52,7 @@ const NavPostItem = props => {
         <div
           onMouseEnter={onHoverToggle}
           onClick={toggleOpenSubMenu}
-          className='pill-hover'
+          className='nav-item'
           key={group?.category}
           role='button'
           tabIndex={0}
@@ -64,7 +64,7 @@ const NavPostItem = props => {
               toggleOpenSubMenu()
             }
           }}>
-          <span className={`flex-1 ${expanded && 'font-semibold'}`}>
+          <span className={`${expanded && 'font-semibold'}`}>
             {group?.category}
           </span>
           <div className='inline-flex items-center select-none pointer-events-none'>
