@@ -23,11 +23,12 @@ const Style = () => {
         box-shadow: 0px -3px 10px 0px rgba(0, 0, 0, 0.1);
       }
 
-      /* 滚动条自动隐藏样式 - 优化版 */
+      /* 滚动条自动隐藏样式 - GitBook风格 */
       .scrollable {
         scrollbar-gutter: stable both-edges;
         -webkit-overflow-scrolling: touch;
         transition: scrollbar-color 0.2s ease;
+        scrollbar-width: thin;
       }
 
       /* WebKit 滚动条样式 - 优化版 */
@@ -40,19 +41,21 @@ const Style = () => {
         background: transparent;
       }
 
-      .scrollable:not(:hover)::-webkit-scrollbar-thumb {
+      .scrollable:not(:hover):not(:focus-within)::-webkit-scrollbar-thumb {
         background-color: transparent;
         border-radius: 9999px;
         transition: background-color 0.2s ease;
       }
 
-      .scrollable:hover::-webkit-scrollbar-thumb {
+      .scrollable:hover::-webkit-scrollbar-thumb,
+      .scrollable:focus-within::-webkit-scrollbar-thumb {
         background-color: rgba(0, 0, 0, 0.2);
         border-radius: 9999px;
         transition: background-color 0.2s ease;
       }
 
-      .dark .scrollable:hover::-webkit-scrollbar-thumb {
+      .dark .scrollable:hover::-webkit-scrollbar-thumb,
+      .dark .scrollable:focus-within::-webkit-scrollbar-thumb {
         background-color: rgba(255, 255, 255, 0.25);
       }
 
@@ -62,7 +65,7 @@ const Style = () => {
         scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
       }
 
-      .scrollable:not(:hover) {
+      .scrollable:not(:hover):not(:focus-within) {
         scrollbar-color: transparent transparent;
       }
 
@@ -70,7 +73,7 @@ const Style = () => {
         scrollbar-color: rgba(255, 255, 255, 0.25) transparent;
       }
 
-      .dark .scrollable:not(:hover) {
+      .dark .scrollable:not(:hover):not(:focus-within) {
         scrollbar-color: transparent transparent;
       }
 
@@ -308,65 +311,65 @@ const Style = () => {
         background-color: var(--shell-bg-dark);
       }
 
-      /* 正文字号与行距优化 - 缩小20% */
+      /* 正文字号与行距优化 - GitBook风格 */
       #theme-gitbook #article-wrapper {
-        font-size: 13.6px;
+        font-size: 17px;
         line-height: 1.7;
       }
 
       #theme-gitbook #article-wrapper p {
-        font-size: 13.6px;
+        font-size: 17px;
         line-height: 1.7;
         margin-top: 8px;
         margin-bottom: 16px;
       }
 
-      /* 标题流体字号 - 缩小20% */
+      /* 标题流体字号 - GitBook风格 */
       #theme-gitbook #article-wrapper h1 {
-        font-size: clamp(1.4rem, 3.2vw, 2rem);
+        font-size: clamp(1.5rem, 4vw, 2rem);
         line-height: 1.3;
-        margin-top: 12px;
-        margin-bottom: 10px;
+        margin-top: 10px;
+        margin-bottom: 18px;
         font-weight: 600;
       }
 
       #theme-gitbook #article-wrapper h2 {
-        font-size: clamp(1.2rem, 2.8vw, 1.6rem);
+        font-size: clamp(1.25rem, 3.5vw, 1.75rem);
         line-height: 1.4;
-        margin-top: 16px;
-        margin-bottom: 12px;
+        margin-top: 18px;
+        margin-bottom: 16px;
         font-weight: 600;
       }
 
       #theme-gitbook #article-wrapper h3 {
-        font-size: clamp(1rem, 2.4vw, 1.2rem);
+        font-size: clamp(1.125rem, 3vw, 1.5rem);
         line-height: 1.4;
-        margin-top: 14px;
-        margin-bottom: 10px;
+        margin-top: 16px;
+        margin-bottom: 14px;
         font-weight: 600;
       }
 
       #theme-gitbook #article-wrapper h4 {
-        font-size: clamp(0.9rem, 2vw, 1rem);
+        font-size: clamp(1rem, 2.5vw, 1.25rem);
         line-height: 1.5;
-        margin-top: 12px;
-        margin-bottom: 8px;
+        margin-top: 14px;
+        margin-bottom: 12px;
         font-weight: 600;
       }
 
       #theme-gitbook #article-wrapper h5 {
-        font-size: clamp(0.8rem, 1.6vw, 0.9rem);
+        font-size: clamp(0.875rem, 2vw, 1.125rem);
         line-height: 1.5;
-        margin-top: 10px;
-        margin-bottom: 8px;
+        margin-top: 12px;
+        margin-bottom: 10px;
         font-weight: 600;
       }
 
       #theme-gitbook #article-wrapper h6 {
-        font-size: clamp(0.7rem, 1.2vw, 0.8rem);
+        font-size: clamp(0.8rem, 1.5vw, 1rem);
         line-height: 1.5;
-        margin-top: 8px;
-        margin-bottom: 6px;
+        margin-top: 10px;
+        margin-bottom: 8px;
         font-weight: 600;
       }
 
@@ -402,11 +405,11 @@ const Style = () => {
         margin-top: 8px;
       }
 
-      /* 表格样式优化 */
+      /* 表格样式优化 - GitBook风格 */
       #theme-gitbook #article-wrapper table {
         border-collapse: collapse;
         width: 100%;
-        margin: 16px 0;
+        margin: 18px 0;
         border: 1px solid rgba(0, 0, 0, 0.1);
         border-radius: 6px;
         overflow: hidden;
@@ -442,7 +445,7 @@ const Style = () => {
         border-bottom: 1px solid rgba(255, 255, 255, 0.05);
       }
 
-      /* 代码块与引用块优化 - 缩小20% */
+      /* 代码块与引用块优化 - GitBook风格 */
       #theme-gitbook #article-wrapper pre {
         margin: 16px 0;
         padding: 16px;
@@ -450,7 +453,7 @@ const Style = () => {
         border: 1px solid rgba(0, 0, 0, 0.05);
         border-radius: 8px;
         overflow-x: auto;
-        font-size: 11.2px;
+        font-size: 14px;
         line-height: 1.5;
       }
 
@@ -470,10 +473,10 @@ const Style = () => {
         background-color: rgba(255, 255, 255, 0.08);
       }
 
-      /* 引用块优化 */
+      /* 引用块优化 - GitBook风格 */
       #theme-gitbook #article-wrapper blockquote {
-        margin: 16px 0;
-        padding: 12px 16px;
+        margin: 18px 0;
+        padding: 16px 20px;
         border-left: 4px solid #059669;
         background-color: rgba(5, 150, 105, 0.03);
         border-radius: 0 6px 6px 0;
@@ -514,20 +517,23 @@ const Style = () => {
         color: rgba(255, 255, 255, 0.6);
       }
 
-      /* 目录层级密度优化 */
+      /* 目录层级密度优化 - GitBook风格 */
       #theme-gitbook .toc-wrapper {
-        line-height: 30px;
+        line-height: 1.5;
       }
 
       #theme-gitbook .toc-wrapper a {
         display: block;
-        padding: 4px 0;
+        padding: 8px 0;
         text-decoration: none;
         transition: all 0.15s ease;
         border-left: 2px solid transparent;
         padding-left: 16px;
-        margin: 2px 0;
+        margin: 1px 0;
         border-radius: 0 4px 4px 0;
+        min-height: 36px;
+        display: flex;
+        align-items: center;
       }
 
       #theme-gitbook .toc-wrapper a:hover {
@@ -540,17 +546,21 @@ const Style = () => {
         color: #10b981;
       }
 
-      /* 目录层级缩进 */
+      /* 目录层级缩进 - GitBook风格 */
       #theme-gitbook .toc-wrapper .notion-table-of-contents-item-indent-level-0 {
         margin-left: 0;
       }
 
       #theme-gitbook .toc-wrapper .notion-table-of-contents-item-indent-level-1 {
-        margin-left: 14px;
+        margin-left: 16px;
       }
 
       #theme-gitbook .toc-wrapper .notion-table-of-contents-item-indent-level-2 {
-        margin-left: 22px;
+        margin-left: 32px;
+      }
+
+      #theme-gitbook .toc-wrapper .notion-table-of-contents-item-indent-level-3 {
+        margin-left: 48px;
       }
 
       /* 当前阅读锚点高亮 */
@@ -567,15 +577,15 @@ const Style = () => {
         color: #10b981;
       }
 
-      /* 作者InfoCard优化 - 左侧导航栏底部居中 */
+      /* 作者InfoCard优化 - GitBook风格弱化 */
       #theme-gitbook #info-card {
-        padding: 16px 12px;
-        border-radius: 0;
+        padding: 12px 16px;
+        border-radius: 8px;
         background-color: transparent;
-        border: none;
-        margin: 0;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        margin: 16px 0;
         display: flex;
-        justify-content: center;
+        flex-direction: column;
         align-items: center;
         width: 100%;
         box-shadow: none;
@@ -583,69 +593,70 @@ const Style = () => {
 
       .dark #theme-gitbook #info-card {
         background-color: transparent;
-        border: none;
+        border: 1px solid rgba(255, 255, 255, 0.1);
       }
 
       #theme-gitbook #info-card img {
-        width: 60px;
-        height: 60px;
+        width: 48px;
+        height: 48px;
         border-radius: 50%;
         transition: transform 0.15s ease;
       }
 
       #theme-gitbook #info-card img:hover {
-        transform: scale(1.05);
+        transform: scale(1.02);
       }
 
       #theme-gitbook #info-card .text-xl {
-        font-size: 0.9rem;
-        font-weight: 500;
-        color: rgba(0, 0, 0, 0.8);
-        margin: 4px 0;
+        font-size: 0.875rem;
+        font-weight: 400;
+        color: rgba(0, 0, 0, 0.7);
+        margin: 6px 0 2px 0;
         transition: color 0.15s ease;
         text-align: center;
       }
 
       .dark #theme-gitbook #info-card .text-xl {
-        color: rgba(255, 255, 255, 0.8);
+        color: rgba(255, 255, 255, 0.7);
       }
 
       #theme-gitbook #info-card .font-light {
-        font-size: 0.7rem;
-        color: rgba(0, 0, 0, 0.6);
+        font-size: 0.75rem;
+        color: rgba(0, 0, 0, 0.5);
         line-height: 1.4;
         margin-bottom: 8px;
         text-align: center;
       }
 
       .dark #theme-gitbook #info-card .font-light {
-        color: rgba(255, 255, 255, 0.6);
+        color: rgba(255, 255, 255, 0.5);
       }
 
-      /* 社交按钮优化 - 左侧导航栏底部 */
+      /* 社交按钮优化 - GitBook风格 */
       #theme-gitbook #info-card .social-button {
-        border: 1px solid rgba(0, 0, 0, 0.1);
-        border-radius: 4px;
-        padding: 4px 8px;
-        margin: 2px;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        border-radius: 6px;
+        padding: 6px 10px;
+        margin: 3px;
         transition: all 0.15s ease;
         background-color: transparent;
-        font-size: 0.7rem;
+        font-size: 0.75rem;
+        font-weight: 400;
       }
 
       #theme-gitbook #info-card .social-button:hover {
-        background-color: rgba(0, 0, 0, 0.04);
-        border-color: rgba(0, 0, 0, 0.15);
-        transform: translateY(-1px);
+        background-color: rgba(0, 0, 0, 0.03);
+        border-color: rgba(0, 0, 0, 0.12);
+        transform: translateY(-0.5px);
       }
 
       .dark #theme-gitbook #info-card .social-button {
-        border-color: rgba(255, 255, 255, 0.1);
+        border-color: rgba(255, 255, 255, 0.08);
       }
 
       .dark #theme-gitbook #info-card .social-button:hover {
-        background-color: rgba(255, 255, 255, 0.05);
-        border-color: rgba(255, 255, 255, 0.2);
+        background-color: rgba(255, 255, 255, 0.03);
+        border-color: rgba(255, 255, 255, 0.15);
       }
 
       /* 文章信息模块优化 */
@@ -781,6 +792,38 @@ const Style = () => {
         transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
       }
 
+      /* 易用性优化 - GitBook风格 */
+      #theme-gitbook button:focus,
+      #theme-gitbook a:focus,
+      #theme-gitbook input:focus,
+      #theme-gitbook textarea:focus,
+      #theme-gitbook select:focus {
+        outline: 2px solid #059669;
+        outline-offset: 2px;
+      }
+
+      .dark #theme-gitbook button:focus,
+      .dark #theme-gitbook a:focus,
+      .dark #theme-gitbook input:focus,
+      .dark #theme-gitbook textarea:focus,
+      .dark #theme-gitbook select:focus {
+        outline: 2px solid #10b981;
+        outline-offset: 2px;
+      }
+
+      /* 键盘导航优化 */
+      #theme-gitbook .cursor-pointer:focus {
+        background-color: rgba(0, 0, 0, 0.05);
+        outline: 2px solid #059669;
+        outline-offset: 2px;
+      }
+
+      .dark #theme-gitbook .cursor-pointer:focus {
+        background-color: rgba(255, 255, 255, 0.05);
+        outline: 2px solid #10b981;
+        outline-offset: 2px;
+      }
+
       /* 大面积卡片禁用 scale 放大 */
       #theme-gitbook .hover\\:scale-105:hover {
         transform: scale(1.02) !important;
@@ -804,60 +847,62 @@ const Style = () => {
         transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
       }
       
-      /* 白纸工作区样式优化 - 大幅缩小边距 */
+      /* 白纸工作区样式优化 - GitBook风格 */
       #workspace-sheet {
-        min-height: calc(100vh - 2rem);
-        margin: 8px;
+        height: calc(100vh - 2rem);
+        margin-top: 1rem;
+        margin-right: 1.5rem;
+        margin-bottom: 2rem;
         margin-left: 0;
+        background-color: white;
+        border-radius: 14px;
+        border: 1px solid rgba(0, 0, 0, 0.06);
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
       }
 
-      /* 纸面外边距与内边距优化 - 大幅缩小边距 */
+      .dark #workspace-sheet {
+        background-color: #0a0a0a;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+      }
+
+      /* 纸面外边距与内边距优化 - GitBook风格 */
       #theme-gitbook #container-inner {
-        padding-left: 8px;
-        padding-right: 8px;
+        padding-left: 32px;
+        padding-right: 32px;
       }
 
-      /* 右侧边栏内边距与正文对齐 - 大幅缩小边距 */
+      /* 右侧边栏内边距与正文对齐 - GitBook风格 */
       #theme-gitbook .hidden.lg\\:block {
-        padding-right: 8px;
+        padding-right: 32px;
       }
 
-      /* 移动端内边距调整 - 大幅缩小 */
+      /* 移动端内边距调整 - GitBook风格 */
       @media (max-width: 768px) {
         #theme-gitbook #container-inner {
-          padding-left: 6px;
-          padding-right: 6px;
-        }
-        
-        #workspace-sheet {
-          margin: 6px;
-          margin-left: 0;
+          padding-left: 20px;
+          padding-right: 20px;
         }
       }
 
       @media (max-width: 480px) {
         #theme-gitbook #container-inner {
-          padding-left: 4px;
-          padding-right: 4px;
+          padding-left: 16px;
+          padding-right: 16px;
         }
         
         #workspace-sheet {
-          margin: 4px;
+          margin-top: 0.25rem;
+          margin-right: 0.25rem;
+          margin-bottom: 0.5rem;
           margin-left: 0;
+          height: calc(100vh - 0.5rem);
         }
       }
       
-      /* 白纸圆角与轮廓优化 */
-      #workspace-sheet {
-        border-radius: 15px;
-        border: 1px solid rgba(0, 0, 0, 0.06);
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-      }
-
-      .dark #workspace-sheet {
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-      }
 
       /* 顶栏与纸面关系优化 - 自适应布局 */
       #theme-gitbook #top-nav {
@@ -868,9 +913,12 @@ const Style = () => {
         padding-right: 20px;
         box-shadow: none;
         width: 100%;
-        max-width: 100vw;
+        max-width: 100%;
         box-sizing: border-box;
         overflow: hidden;
+        position: sticky;
+        top: 0;
+        z-index: 20;
       }
 
       .dark #theme-gitbook #top-nav {
@@ -957,9 +1005,9 @@ const Style = () => {
         }
       }
 
-      /* 站点标题自适应优化 - 缩小20% */
+      /* 站点标题自适应优化 - GitBook风格 */
       #theme-gitbook #logo-wrapper a {
-        font-size: clamp(0.9rem, 2vw, 1.4rem);
+        font-size: clamp(1rem, 2.5vw, 1.5rem);
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -967,6 +1015,7 @@ const Style = () => {
         display: flex;
         align-items: center;
         gap: 8px;
+        font-weight: 600;
       }
 
       #theme-gitbook #logo-wrapper img {
@@ -1062,11 +1111,7 @@ const Style = () => {
       /* 左栏覆盖与滚动优化 */
       #theme-gitbook .hidden.md\\:block {
         width: 260px;
-        height: 100vh;
-        position: fixed;
-        left: 0;
-        top: 0;
-        z-index: 10;
+        height: 100%;
         background-color: var(--shell-bg);
         border-right: 1px solid rgba(0, 0, 0, 0.05);
         overflow-y: auto;
@@ -1082,9 +1127,7 @@ const Style = () => {
       /* 左栏内容区域 */
       #theme-gitbook .hidden.md\\:block > div {
         width: 260px;
-        height: 100vh;
-        padding-top: 56px;
-        padding-bottom: 0;
+        height: 100%;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -1148,29 +1191,33 @@ const Style = () => {
         }
       }
 
-      /* 折叠箭头样式优化 */
+      /* 折叠箭头样式优化 - GitBook风格 */
       #theme-gitbook .fas.fa-chevron-left {
-        transition: transform 0.2s ease, opacity 0.2s ease;
-        opacity: 0.6;
-        font-size: 0.75rem;
+        transition: transform 0.18s ease, opacity 0.18s ease;
+        opacity: 0.5;
+        font-size: 0.7rem;
         transform: rotate(0deg);
+        font-weight: 300;
       }
 
       #theme-gitbook .fas.fa-chevron-left:hover {
-        opacity: 1;
+        opacity: 0.8;
       }
 
       #theme-gitbook .fas.fa-chevron-left.-rotate-90 {
         transform: rotate(-90deg);
-        opacity: 0.8;
+        opacity: 0.7;
       }
 
-      /* 分组标题hover效果优化 */
+      /* 分组标题hover效果优化 - GitBook风格 */
       #theme-gitbook .cursor-pointer.relative.flex {
         transition: all 0.15s ease;
         border-radius: 6px;
         padding: 8px 12px;
         margin: 2px 0;
+        min-height: 36px;
+        display: flex;
+        align-items: center;
       }
 
       #theme-gitbook .cursor-pointer.relative.flex:hover {
@@ -1181,12 +1228,13 @@ const Style = () => {
         background-color: rgba(255, 255, 255, 0.05);
       }
 
-      /* 分组标题与项密度优化 - 调整边距 */
+      /* 分组标题与项密度优化 - GitBook风格 */
       #theme-gitbook .cursor-pointer.relative.flex {
-        line-height: 32px;
+        line-height: 1.4;
         padding-left: 12px;
         padding-right: 12px;
         margin: 1px 0;
+        min-height: 36px;
       }
 
       /* 子项左缩进一致 - 优化边距 */
@@ -1200,12 +1248,15 @@ const Style = () => {
         border-left: 1px solid rgba(255, 255, 255, 0.12);
       }
 
-      /* 子项hover轻底色 - 优化边距 */
+      /* 子项hover轻底色 - GitBook风格 */
       #theme-gitbook .relative.py-1\\.5.cursor-pointer {
         transition: all 0.15s ease;
         border-radius: 6px;
-        padding: 4px 8px;
+        padding: 8px 12px;
         margin: 1px 0;
+        min-height: 36px;
+        display: flex;
+        align-items: center;
       }
 
       #theme-gitbook .relative.py-1\\.5.cursor-pointer:hover {
@@ -1247,12 +1298,15 @@ const Style = () => {
       /* 移动端响应式优化 */
       @media (max-width: 768px) {
         #workspace-sheet {
-          margin-right: 1rem;
+          margin-top: 0.5rem;
+          margin-right: 0.5rem;
+          margin-bottom: 1rem;
+          margin-left: 0;
           height: calc(100vh - 1rem);
         }
         
         #center-wrapper {
-          height: calc(100% - var(--header-h)) !important;
+          height: auto !important;
         }
       }
       
@@ -1424,3 +1478,4 @@ const Style = () => {
 }
 
 export { Style }
+
