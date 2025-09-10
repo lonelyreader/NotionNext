@@ -119,7 +119,7 @@ const SearchInput = ({ currentSearch, cRef, className }) => {
       <div
         className='absolute left-0 ml-3 flex items-center justify-center'
         onClick={handleSearch}
-        style={{ height: '100%' }}>
+        style={{ height: '100%', top: '50%', transform: 'translateY(-50%)' }}>
         <i
           className='fas fa-search text-gray-400 dark:text-gray-500'
           aria-hidden='true'
@@ -143,7 +143,7 @@ const SearchInput = ({ currentSearch, cRef, className }) => {
       <div
         className='search-shortcut absolute right-0 mr-3 flex items-center justify-center pointer-events-none'
         aria-hidden='true'
-        style={{ height: '100%' }}>
+        style={{ height: '100%', top: '50%', transform: 'translateY(-50%)' }}>
         Ctrl+K
       </div>
 

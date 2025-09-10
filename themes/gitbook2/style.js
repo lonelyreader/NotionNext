@@ -64,22 +64,24 @@ const Style = () => {
       .shell-container {
         background: var(--page-bg);
         border-radius: 16px 0 0 16px;
-        border-right: 1px solid #e5e7eb;
+        border-right: none;
       }
 
       .dark .shell-container {
-        border-right-color: #374151;
+        border-right: none;
       }
 
-      /* Header样式调整 - 与页面背景色统一 */
+      /* Header样式调整 - 与白纸背景色统一 */
       #top-nav {
         position: relative !important;
         z-index: 20 !important;
-        background: var(--page-bg) !important;
+        background: white !important;
         border-bottom: 1px solid #e5e7eb;
+        box-shadow: none !important;
       }
       
       .dark #top-nav {
+        background: #1f2937 !important;
         border-bottom-color: #374151;
       }
 
@@ -233,61 +235,15 @@ const Style = () => {
         transform: rotate(90deg);
       }
 
-      /* 作者信息卡片优化 */
-      #theme-gitbook2 .author-card {
-        background: white;
-        border: 1px solid #e5e7eb;
-        border-radius: 12px;
-        padding: 16px;
-        margin: 16px 0;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      /* 作者信息卡片优化 - 完全隐藏 */
+      #theme-gitbook2 .author-card,
+      #theme-gitbook2 #info-card {
+        display: none !important;
       }
 
-      .dark #theme-gitbook2 .author-card {
-        background: #1f2937;
-        border-color: #374151;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-      }
-
-      #theme-gitbook2 .author-card .author-name {
-        font-weight: 500;
-        font-size: 14px;
-        color: #374151;
-        margin-bottom: 8px;
-      }
-
-      .dark #theme-gitbook2 .author-card .author-name {
-        color: #d1d5db;
-      }
-
-      #theme-gitbook2 .author-card .social-buttons {
-        display: flex;
-        gap: 8px;
-        margin-top: 12px;
-      }
-
-      #theme-gitbook2 .author-card .social-button {
-        width: 32px;
-        height: 32px;
-        border: 1px solid #e5e7eb;
-        border-radius: 6px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: all 0.2s ease;
-        background: white;
-      }
-
-      .dark #theme-gitbook2 .author-card .social-button {
-        border-color: #374151;
-        background: #1f2937;
-      }
-
-      #theme-gitbook2 .author-card .social-button:hover {
-        border-color: #3b82f6;
-        color: #3b82f6;
-        transform: translateY(-1px);
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      .dark #theme-gitbook2 .author-card,
+      .dark #theme-gitbook2 #info-card {
+        display: none !important;
       }
 
       /* 搜索框优化 - 垂直居中对齐 */
@@ -307,7 +263,7 @@ const Style = () => {
         transition: all 0.2s ease;
         opacity: 0.7;
         height: 40px;
-        line-height: 24px;
+        line-height: 40px;
         display: flex;
         align-items: center;
       }
@@ -323,6 +279,8 @@ const Style = () => {
         opacity: 1;
         border-color: #3b82f6;
         box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        height: 40px;
+        line-height: 40px;
       }
 
       #theme-gitbook2 .search-shortcut {
