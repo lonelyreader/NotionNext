@@ -7,9 +7,22 @@
 const Style = () => {
   return (
     <style jsx global>{`
+      // 页面背景色变量
+      :root {
+        --page-bg: #f3f4f6;
+      }
+      
+      .dark {
+        --page-bg: #111827;
+      }
+      
       // 底色
+      body, #theme-gitbook2 {
+        background-color: var(--page-bg);
+      }
+      
       .dark body {
-        background-color: #111827;
+        background-color: var(--page-bg);
       }
 
       .bottom-button-group {
@@ -24,11 +37,7 @@ const Style = () => {
         right: 0;
         bottom: 0;
         overflow: hidden;
-        background-color: #f3f4f6;
-      }
-
-      .dark #theme-gitbook2 {
-        background-color: #111827;
+        background-color: var(--page-bg);
       }
 
       /* Header 高度变量 */
@@ -51,25 +60,27 @@ const Style = () => {
         box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
       }
 
-      /* 灰壳体样式 */
+      /* 灰壳体样式 - 与页面背景色统一 */
       .shell-container {
-        background: #e5e7eb;
+        background: var(--page-bg);
         border-radius: 16px 0 0 16px;
+        border-right: 1px solid #e5e7eb;
       }
 
       .dark .shell-container {
-        background: #374151;
+        border-right-color: #374151;
       }
 
-      /* Header样式调整 */
+      /* Header样式调整 - 与页面背景色统一 */
       #top-nav {
         position: relative !important;
         z-index: 20 !important;
-        background: white !important;
+        background: var(--page-bg) !important;
+        border-bottom: 1px solid #e5e7eb;
       }
       
       .dark #top-nav {
-        background: #1f2937 !important;
+        border-bottom-color: #374151;
       }
 
       /* GitBook风格排版优化 */
@@ -279,11 +290,12 @@ const Style = () => {
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
       }
 
-      /* 搜索框优化 */
+      /* 搜索框优化 - 垂直居中对齐 */
       #theme-gitbook2 .search-container {
         display: flex;
         align-items: center;
         position: relative;
+        height: 40px;
       }
       
       #theme-gitbook2 .search-input {
@@ -295,7 +307,7 @@ const Style = () => {
         transition: all 0.2s ease;
         opacity: 0.7;
         height: 40px;
-        line-height: 40px;
+        line-height: 24px;
         display: flex;
         align-items: center;
       }
@@ -321,6 +333,9 @@ const Style = () => {
         display: flex;
         align-items: center;
         height: 100%;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
       }
 
       #theme-gitbook2 .search-input:focus + .search-shortcut,
@@ -328,12 +343,15 @@ const Style = () => {
         opacity: 0.8;
       }
       
-      /* 搜索图标对齐 */
+      /* 搜索图标对齐 - 垂直居中 */
       #theme-gitbook2 .search-container .fas.fa-search {
         display: flex;
         align-items: center;
         justify-content: center;
         height: 100%;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
       }
 
       /* 滚动条样式 - 默认隐藏 */
@@ -446,12 +464,8 @@ const Style = () => {
           top: 0 !important;
           left: 0 !important;
           right: 0 !important;
-          background: white !important;
+          background: var(--page-bg) !important;
           z-index: 1000 !important;
-        }
-
-        .dark #top-nav {
-          background: #1f2937 !important;
         }
 
         /* 移动端字体调整 */

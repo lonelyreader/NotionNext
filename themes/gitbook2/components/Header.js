@@ -65,7 +65,7 @@ export default function Header(props) {
   return (
     <div id='top-nav' className={'relative w-full z-20 ' + className}>
       {/* PC端菜单 */}
-      <div className='flex justify-center border-b border-gray-200 dark:border-gray-700 items-center w-full bg-white dark:bg-gray-800' style={{ height: 'var(--header-height, 56px)' }}>
+      <div className='flex justify-center items-center w-full' style={{ height: 'var(--header-height, 56px)' }}>
         <div className='px-5 max-w-screen-4xl w-full flex gap-x-3 justify-between items-center'>
           {/* 左侧*/}
           <div className='flex'>
@@ -120,7 +120,7 @@ export default function Header(props) {
         collapseRef={collapseRef}
         isOpen={isOpen}
         className='md:hidden'>
-        <div className='bg-white dark:bg-hexo-black-gray pt-1 py-2 lg:hidden '>
+        <div className='pt-1 py-2 lg:hidden '>
           <MenuBarMobile
             {...props}
             onHeightChange={param =>

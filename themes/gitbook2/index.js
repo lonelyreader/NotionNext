@@ -204,7 +204,7 @@ const LayoutBase = props => {
               {fullWidth ? null : (
                 <div
                   className={
-                    'w-80 hidden lg:block dark:border-transparent flex-shrink-0 relative z-10 h-full border-l border-gray-200 dark:border-gray-700'
+                    'w-80 hidden xl:block dark:border-transparent flex-shrink-0 relative z-10 h-full border-l border-gray-200 dark:border-gray-700'
                   }
                   style={{ minWidth: '320px' }}>
                   <div className='h-full overflow-y-auto scroll-hidden px-6' style={{ paddingTop: '24px', paddingBottom: '24px' }}>
@@ -222,7 +222,7 @@ const LayoutBase = props => {
                             null,
                             CONFIG
                           ) === 'true' && <RevolverMaps />}
-                          <Live2D />
+                          {siteConfig('GITBOOK_LIVE2D_ENABLED', false, CONFIG) && <Live2D />}
                         </>
                       )}
                       {/* gitbook主题首页只显示公告 */}
@@ -230,7 +230,7 @@ const LayoutBase = props => {
                     </div>
 
                     <AdSlot type='in-article' />
-                    <Live2D />
+                    {siteConfig('GITBOOK_LIVE2D_ENABLED', false, CONFIG) && <Live2D />}
                   </div>
                 </div>
               )}
