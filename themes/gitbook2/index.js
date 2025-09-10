@@ -27,9 +27,9 @@ import BlogArchiveItem from './components/BlogArchiveItem'
 import BottomMenuBar from './components/BottomMenuBar'
 import Catalog from './components/Catalog'
 import CatalogDrawerWrapper from './components/CatalogDrawerWrapper'
+import Header from './components/Header'
 import CategoryItem from './components/CategoryItem'
 import Footer from './components/Footer'
-import Header from './components/Header'
 import InfoCard from './components/InfoCard'
 import JumpToTopButton from './components/JumpToTopButton'
 import NavPostList from './components/NavPostList'
@@ -162,6 +162,9 @@ const LayoutBase = props => {
         className={`${siteConfig('FONT_STYLE')} h-screen overflow-hidden scroll-smooth w-full justify-center dark:text-gray-300`}
         style={{ backgroundColor: 'var(--shell-bg)' }}>
         <AlgoliaSearchModal cRef={searchModal} {...props} />
+
+        {/* 顶部导航栏 */}
+        <Header {...props} />
 
         <div className='w-full max-w-screen-7xl mx-auto px-2 sm:px-4 lg:px-6 xl:px-8 overflow-x-hidden'>
           <main

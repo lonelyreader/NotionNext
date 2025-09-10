@@ -804,45 +804,45 @@ const Style = () => {
         transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
       }
       
-      /* 白纸工作区样式优化 - 统一边距 */
+      /* 白纸工作区样式优化 - 大幅缩小边距 */
       #workspace-sheet {
         min-height: calc(100vh - 2rem);
-        margin: 20px;
+        margin: 8px;
         margin-left: 0;
       }
 
-      /* 纸面外边距与内边距优化 - 调整边距 */
+      /* 纸面外边距与内边距优化 - 大幅缩小边距 */
       #theme-gitbook #container-inner {
-        padding-left: 20px;
-        padding-right: 20px;
+        padding-left: 8px;
+        padding-right: 8px;
       }
 
-      /* 右侧边栏内边距与正文对齐 - 调整边距 */
+      /* 右侧边栏内边距与正文对齐 - 大幅缩小边距 */
       #theme-gitbook .hidden.lg\\:block {
-        padding-right: 20px;
+        padding-right: 8px;
       }
 
-      /* 移动端内边距调整 */
+      /* 移动端内边距调整 - 大幅缩小 */
       @media (max-width: 768px) {
         #theme-gitbook #container-inner {
-          padding-left: 18px;
-          padding-right: 18px;
+          padding-left: 6px;
+          padding-right: 6px;
         }
         
         #workspace-sheet {
-          margin: 16px;
+          margin: 6px;
           margin-left: 0;
         }
       }
 
       @media (max-width: 480px) {
         #theme-gitbook #container-inner {
-          padding-left: 16px;
-          padding-right: 16px;
+          padding-left: 4px;
+          padding-right: 4px;
         }
         
         #workspace-sheet {
-          margin: 12px;
+          margin: 4px;
           margin-left: 0;
         }
       }
@@ -1090,12 +1090,12 @@ const Style = () => {
         justify-content: space-between;
       }
 
-      /* 左栏导航区域 - 优化边距 */
+      /* 左栏导航区域 - 大幅缩小边距 */
       #theme-gitbook .hidden.md\\:block .overflow-y-scroll {
         flex: 1;
-        padding-top: 20px;
-        padding-left: 16px;
-        padding-right: 12px;
+        padding-top: 12px;
+        padding-left: 8px;
+        padding-right: 6px;
         overflow-y: auto;
         overflow-x: hidden;
       }
