@@ -87,7 +87,7 @@ export default function Header(props) {
               <>
                 <SignedOut>
                   <SignInButton mode='modal'>
-                    <button className='bg-purple-600 hover:bg-purple-700 text-white rounded-lg px-3 py-2'>
+                    <button className='bg-gray-800 hover:bg-gray-900 text-white rounded-lg px-3 py-2'>
                       {locale.COMMON.SIGN_IN}
                     </button>
                   </SignInButton>
