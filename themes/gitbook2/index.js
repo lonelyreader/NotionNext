@@ -144,7 +144,7 @@ const LayoutBase = props => {
         <main
           id='wrapper'
           className={`${siteConfig('LAYOUT_SIDEBAR_REVERSE') ? 'flex-row-reverse' : ''} relative flex w-full h-full`}
-          style={{ padding: '16px 24px 32px 0' }}>
+          style={{ padding: '16px 16px 28px 16px' }}>
           
           {/* 左侧灰壳体 - 导航栏 */}
           {fullWidth ? null : (
@@ -182,8 +182,8 @@ const LayoutBase = props => {
                 style={{ minWidth: 0 }}>
                 <div
                   id='container-inner'
-                  className={`w-full h-full overflow-y-auto scroll-hidden ${fullWidth ? 'px-8' : 'max-w-4xl px-8 lg:px-8'} justify-center mx-auto`}
-                  style={{ paddingTop: '24px' }}>
+                  className={`w-full h-full overflow-y-auto scroll-hidden ${fullWidth ? 'px-8' : 'max-w-4xl px-6 lg:px-6'} justify-center mx-auto`}
+                  style={{ paddingTop: '24px', maxWidth: '940px' }}>
                   {slotTop}
                   <WWAds className='w-full' orientation='horizontal' />
 

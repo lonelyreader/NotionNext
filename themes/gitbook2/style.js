@@ -58,6 +58,20 @@ const Style = () => {
         overflow: hidden;
       }
 
+      /* 白纸内层容器样式 - 最大内容宽度940px，左右内留白24px */
+      #container-inner {
+        max-width: 940px !important;
+        padding-left: 24px !important;
+        padding-right: 24px !important;
+      }
+
+      /* 确保右侧栏保持原有宽度和位置 */
+      .paper-container .w-80 {
+        width: 20rem !important; /* 320px */
+        min-width: 20rem !important;
+        flex-shrink: 0 !important;
+      }
+
       .dark .paper-container {
         background: var(--paper-bg);
         border-color: var(--divider-1);
@@ -82,6 +96,14 @@ const Style = () => {
         background: var(--paper-bg) !important;
         border-bottom: 1px solid var(--divider-1);
         box-shadow: none !important;
+      }
+
+      /* Header内容区域对齐 - 与container-inner保持一致的内留白 */
+      #top-nav .px-5 {
+        max-width: 940px !important;
+        margin: 0 auto !important;
+        padding-left: 24px !important;
+        padding-right: 24px !important;
       }
       
       .dark #top-nav {
@@ -256,6 +278,8 @@ const Style = () => {
         align-items: center;
         position: relative;
         height: 36px;
+        width: auto;
+        min-width: 200px;
       }
       
       #theme-gitbook2 .search-input {
@@ -446,6 +470,19 @@ const Style = () => {
         /* 移动端字体调整 */
         #theme-gitbook2 p {
           font-size: 16px;
+        }
+      }
+
+      /* 响应式外间距设置 */
+      @media (min-width: 1280px) {
+        #wrapper {
+          padding: 16px 16px 28px 16px !important;
+        }
+      }
+
+      @media (min-width: 1024px) and (max-width: 1279px) {
+        #wrapper {
+          padding: 16px 12px 28px 12px !important;
         }
       }
 
