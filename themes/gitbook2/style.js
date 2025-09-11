@@ -89,15 +89,10 @@ const Style = () => {
         border-bottom-color: var(--divider-1);
       }
 
-      /* GitBook风格排版优化 */
+      /* GitBook风格排版优化 - 使用Tailwind字体类 */
       #theme-gitbook2 {
-        font-family: 'Lato', 'Source Han Serif', 'Source Han Serif SC', 'Source Han Serif TC', 'Source Han Serif JP', 'Source Han Serif KR', serif;
+        font-family: theme('fontFamily.gitbook2-serif');
         line-height: 1.7;
-      }
-
-      /* 确保西文字符优先使用Lato字体 */
-      #theme-gitbook2 * {
-        font-family: 'Lato', 'Source Han Serif', 'Source Han Serif SC', 'Source Han Serif TC', 'Source Han Serif JP', 'Source Han Serif KR', serif;
       }
 
       /* 特别针对西文字符的字体设置 */
@@ -106,7 +101,18 @@ const Style = () => {
       #theme-gitbook2 code,
       #theme-gitbook2 pre,
       #theme-gitbook2 .font-mono {
-        font-family: 'Lato', sans-serif;
+        font-family: theme('fontFamily.gitbook2-sans');
+      }
+
+      /* 确保FontAwesome图标正常显示 */
+      #theme-gitbook2 i[class*="fa-"] {
+        font-family: "Font Awesome 6 Free", "Font Awesome 6 Pro", "Font Awesome 5 Free", "Font Awesome 5 Pro", FontAwesome !important;
+        font-weight: 900 !important;
+        font-style: normal !important;
+        font-variant: normal !important;
+        text-rendering: auto !important;
+        -webkit-font-smoothing: antialiased !important;
+        -moz-osx-font-smoothing: grayscale !important;
       }
 
       /* 流体字号 - 站点标题和Logo */
