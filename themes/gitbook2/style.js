@@ -537,6 +537,81 @@ const Style = () => {
           padding: 16px 16px 24px 0 !important;
         }
       }
+
+      /* ===== 版心令牌：让 100% 看起来像 85%，但不改字号 ===== */
+      :root{
+        --paper-max: 920px;   /* 常规桌面版心宽度 */
+        --paper-pad: 32px;    /* 白纸内层左右内边距 */
+      }
+      @media (min-width:1536px){
+        :root{ --paper-max: 960px; } /* 超宽屏稍微放宽 */
+      }
+      @media (min-width:1024px) and (max-width:1279px){
+        :root{ --paper-pad: 24px; }  /* 中桌面内边距略收窄 */
+      }
+
+      /* ===== 白纸"内层容器"（承载 header + 正文 + 右栏的那个版心层） =====
+         你项目里一般叫 #container-inner；若命名不同，请绑定到实际那个"版心层" */
+      #container-inner{
+        max-width: var(--paper-max) !important;
+        padding-left:  var(--paper-pad) !important;
+        padding-right: var(--paper-pad) !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        box-sizing: content-box !important; /* 防止 padding 把版心算进宽度 */
+      }
+
+      /* ===== Header"内层容器"与白纸强绑定 =====
+         下面列出一组常见选择器，至少会命中其中一个。
+         若你的 header 内层容器类名不同，请把它补到这组选择器里。 */
+      .header-inner, 
+      #header .inner, 
+      .top-nav .inner, 
+      .nav-header-inner,
+      .dashboard-header > div:first-child {
+        max-width: var(--paper-max) !important;
+        padding-left:  var(--paper-pad) !important;
+        padding-right: var(--paper-pad) !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        box-sizing: content-box !important;
+
+        /* 三列：左=标题，中=导航，右=搜索；强制一行不换 */
+        display: grid !important;
+        grid-template-columns: auto 1fr auto !important;
+        align-items: center !important;
+        column-gap: 16px !important;
+        white-space: nowrap !important;
+      }
+
+      /* 中间列：允许横向滚动、不挤两侧 */
+      .header-inner > :nth-child(2),
+      #header .inner > :nth-child(2),
+      .top-nav .inner > :nth-child(2),
+      .nav-header-inner > :nth-child(2),
+      .dashboard-header > div:first-child > :nth-child(2){
+        min-width: 0 !important;
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+      }
+
+      /* 右列：搜索贴右，垂直居中 */
+      .header-inner > :last-child,
+      #header .inner > :last-child,
+      .top-nav .inner > :last-child,
+      .nav-header-inner > :last-child,
+      .dashboard-header > div:first-child > :last-child{
+        justify-self: end !important;
+        display: flex !important;
+        align-items: center !important;
+      }
+
+      /* ===== 白纸外留白（卡片与灰底之间；不影响对齐） ===== */
+      #container{
+        padding-top: 16px !important;
+        padding-bottom: 28px !important;
+        /* 左右外间距来自外层布局，保持你现在的 16px 即可 */
+      }
     `}</style>
   )
 }
