@@ -91,8 +91,22 @@ const Style = () => {
 
       /* GitBook风格排版优化 */
       #theme-gitbook2 {
-        font-family: 'Source Han Serif', 'Source Han Serif SC', 'Source Han Serif TC', 'Source Han Serif JP', 'Source Han Serif KR', serif;
+        font-family: 'Lato', 'Source Han Serif', 'Source Han Serif SC', 'Source Han Serif TC', 'Source Han Serif JP', 'Source Han Serif KR', serif;
         line-height: 1.7;
+      }
+
+      /* 确保西文字符优先使用Lato字体 */
+      #theme-gitbook2 * {
+        font-family: 'Lato', 'Source Han Serif', 'Source Han Serif SC', 'Source Han Serif TC', 'Source Han Serif JP', 'Source Han Serif KR', serif;
+      }
+
+      /* 特别针对西文字符的字体设置 */
+      #theme-gitbook2 [lang="en"],
+      #theme-gitbook2 .english-text,
+      #theme-gitbook2 code,
+      #theme-gitbook2 pre,
+      #theme-gitbook2 .font-mono {
+        font-family: 'Lato', sans-serif;
       }
 
       /* 流体字号 - 站点标题和Logo */
