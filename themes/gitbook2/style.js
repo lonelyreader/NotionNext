@@ -12,6 +12,8 @@ const Style = () => {
         --page-bg: #F6F7F9;
         --paper-bg: #FFFFFF;
         --divider-1: rgba(0,0,0,0.06);
+        --paper-max: 920px;
+        --paper-gutter: 32px;
       }
       
       .dark {
@@ -58,11 +60,18 @@ const Style = () => {
         overflow: hidden;
       }
 
-      /* 白纸内层容器样式 - 最大内容宽度940px，左右内留白24px */
+      /* 白纸内层容器样式 - 使用设计令牌 */
       #container-inner {
-        max-width: 940px !important;
-        padding-left: 24px !important;
-        padding-right: 24px !important;
+        max-width: var(--paper-max) !important;
+        padding-left: var(--paper-gutter) !important;
+        padding-right: var(--paper-gutter) !important;
+        margin: 0 auto !important;
+      }
+
+      /* 确保正文H1与Header左列对齐 */
+      #container-inner h1 {
+        margin-left: 0 !important;
+        padding-left: 0 !important;
       }
 
       /* 确保右侧栏保持原有宽度和位置 */
@@ -98,12 +107,33 @@ const Style = () => {
         box-shadow: none !important;
       }
 
-      /* Header内容区域对齐 - 与container-inner保持一致的内留白 */
+      /* Header内容区域对齐 - 与container-inner使用相同的设计令牌 */
       #top-nav .px-5 {
-        max-width: 940px !important;
+        max-width: var(--paper-max) !important;
         margin: 0 auto !important;
-        padding-left: 24px !important;
-        padding-right: 24px !important;
+        padding-left: var(--paper-gutter) !important;
+        padding-right: var(--paper-gutter) !important;
+        display: grid !important;
+        grid-template-columns: auto 1fr auto !important;
+        align-items: center !important;
+        column-gap: 16px !important;
+        white-space: nowrap !important;
+      }
+
+      /* Header中间导航按钮组 - 防止换行，允许横向滚动 */
+      #top-nav .px-5 > div:first-child {
+        overflow: hidden !important;
+      }
+
+      #top-nav .px-5 .hidden.md\\:flex {
+        overflow-x: auto !important;
+        white-space: nowrap !important;
+        scrollbar-width: none !important;
+        -ms-overflow-style: none !important;
+      }
+
+      #top-nav .px-5 .hidden.md\\:flex::-webkit-scrollbar {
+        display: none !important;
       }
       
       .dark #top-nav {
@@ -470,6 +500,13 @@ const Style = () => {
         /* 移动端字体调整 */
         #theme-gitbook2 p {
           font-size: 16px;
+        }
+      }
+
+      /* 超宽屏调整 - ≥1536px时增加版心宽度 */
+      @media (min-width: 1536px) {
+        :root {
+          --paper-max: 960px;
         }
       }
 
