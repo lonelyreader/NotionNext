@@ -10,16 +10,19 @@ export const MenuBarMobile = props => {
   let links = [
     // { name: locale.NAV.INDEX, href: '/' || '/', show: true },
     {
+      icon: 'fas fa-th',
       name: locale.COMMON.CATEGORY,
       href: '/category',
       show: siteConfig('GITBOOK_MENU_CATEGORY', null, CONFIG)
     },
     {
+      icon: 'fas fa-tag',
       name: locale.COMMON.TAGS,
       href: '/tag',
       show: siteConfig('GITBOOK_BOOK_MENU_TAG', null, CONFIG)
     },
     {
+      icon: 'fas fa-archive',
       name: locale.NAV.ARCHIVE,
       href: '/archive',
       show: siteConfig('GITBOOK_MENU_ARCHIVE', null, CONFIG)
