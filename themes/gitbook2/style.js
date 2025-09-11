@@ -13,7 +13,7 @@ const Style = () => {
         --paper-bg: #FFFFFF;
         --divider-1: rgba(0,0,0,0.06);
         --paper-max: 920px;
-        --paper-gutter: 32px;
+        --paper-pad: 32px;
       }
       
       .dark {
@@ -61,19 +61,7 @@ const Style = () => {
       }
 
       /* 白纸内层容器样式 - 使用设计令牌 */
-      #container-inner {
-        max-width: var(--paper-max) !important;
-        padding-left: var(--paper-gutter) !important;
-        padding-right: var(--paper-gutter) !important;
-        margin: 0 auto !important;
-      }
 
-      /* 响应式内边距调整 */
-      @media (min-width: 1024px) and (max-width: 1279px) {
-        :root {
-          --paper-gutter: 24px;
-        }
-      }
 
       /* 确保正文H1与Header左列对齐 */
       #container-inner h1 {
@@ -118,8 +106,8 @@ const Style = () => {
       #top-nav .px-5 {
         max-width: var(--paper-max) !important;
         margin: 0 auto !important;
-        padding-left: var(--paper-gutter) !important;
-        padding-right: var(--paper-gutter) !important;
+        padding-left: var(--paper-pad) !important;
+        padding-right: var(--paper-pad) !important;
         display: grid !important;
         grid-template-columns: auto 1fr auto !important;
         align-items: center !important;
@@ -539,10 +527,6 @@ const Style = () => {
       }
 
       /* ===== 版心令牌：让 100% 看起来像 85%，但不改字号 ===== */
-      :root{
-        --paper-max: 920px;   /* 常规桌面版心宽度 */
-        --paper-pad: 32px;    /* 白纸内层左右内边距 */
-      }
       @media (min-width:1536px){
         :root{ --paper-max: 960px; } /* 超宽屏稍微放宽 */
       }
@@ -550,16 +534,6 @@ const Style = () => {
         :root{ --paper-pad: 24px; }  /* 中桌面内边距略收窄 */
       }
 
-      /* ===== 白纸"内层容器"（承载 header + 正文 + 右栏的那个版心层） =====
-         你项目里一般叫 #container-inner；若命名不同，请绑定到实际那个"版心层" */
-      #container-inner{
-        max-width: var(--paper-max) !important;
-        padding-left:  var(--paper-pad) !important;
-        padding-right: var(--paper-pad) !important;
-        margin-left: auto !important;
-        margin-right: auto !important;
-        box-sizing: content-box !important; /* 防止 padding 把版心算进宽度 */
-      }
 
       /* ===== Header"内层容器"与白纸强绑定 =====
          下面列出一组常见选择器，至少会命中其中一个。
@@ -626,8 +600,8 @@ const Style = () => {
       #top-nav > div,
       #top-nav .px-5 {
         max-width: var(--paper-max) !important;
-        padding-left:  var(--paper-gutter, var(--paper-pad, 32px)) !important;
-        padding-right: var(--paper-gutter, var(--paper-pad, 32px)) !important;
+        padding-left: var(--paper-pad) !important;
+        padding-right: var(--paper-pad) !important;
         margin-left:auto !important;
         margin-right:auto !important;
         box-sizing: content-box !important;
@@ -660,7 +634,7 @@ const Style = () => {
       }
 
       /* ===== 修正版心对齐问题 ===== */
-      /* ① 强制覆盖 #container-inner 的内联样式 */
+      /* ① 强制覆盖 #container-inner 的内联样式和类名 */
       #container-inner {
         max-width: var(--paper-max) !important;
         padding-left: var(--paper-pad) !important;
@@ -668,6 +642,13 @@ const Style = () => {
         margin-left: auto !important;
         margin-right: auto !important;
         box-sizing: content-box !important;
+      }
+      
+      /* 覆盖Tailwind的px-6类 */
+      #container-inner.px-6,
+      #container-inner.lg\\:px-6 {
+        padding-left: var(--paper-pad) !important;
+        padding-right: var(--paper-pad) !important;
       }
 
       /* ② Header 外层与 #wrapper 保持一致的左右外边距 */
@@ -679,6 +660,37 @@ const Style = () => {
       /* ③ Header 真正的内层容器 - 覆盖Tailwind类名 */
       #top-nav > div > div.px-5,
       #top-nav > div > div.max-w-screen-4xl {
+        max-width: var(--paper-max) !important;
+        padding-left: var(--paper-pad) !important;
+        padding-right: var(--paper-pad) !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        box-sizing: content-box !important;
+      }
+
+      /* ===== 强力修正版心对齐问题 ===== */
+      /* 直接覆盖Header内层容器的所有样式 */
+      #top-nav > div > div {
+        max-width: var(--paper-max) !important;
+        padding-left: var(--paper-pad) !important;
+        padding-right: var(--paper-pad) !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        box-sizing: content-box !important;
+      }
+
+      /* 使用属性选择器作为备选方案 */
+      div[class*="px-5"][class*="max-w-screen-4xl"] {
+        max-width: var(--paper-max) !important;
+        padding-left: var(--paper-pad) !important;
+        padding-right: var(--paper-pad) !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        box-sizing: content-box !important;
+      }
+
+      /* 最终保险：使用更具体的选择器 */
+      #top-nav > div > div.px-5.max-w-screen-4xl.w-full.flex.gap-x-3.justify-between.items-center {
         max-width: var(--paper-max) !important;
         padding-left: var(--paper-pad) !important;
         padding-right: var(--paper-pad) !important;
