@@ -658,6 +658,58 @@ const Style = () => {
         display:flex !important;
         align-items:center !important;
       }
+
+      /* ===== 修正版心对齐问题 ===== */
+      /* ① 强制覆盖 #container-inner 的内联样式 */
+      #container-inner {
+        max-width: var(--paper-max) !important;
+        padding-left: var(--paper-pad) !important;
+        padding-right: var(--paper-pad) !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        box-sizing: content-box !important;
+      }
+
+      /* ② Header 外层与 #wrapper 保持一致的左右外边距 */
+      #top-nav {
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+      }
+
+      /* ③ Header 内层容器与白纸版心完全对齐 */
+      #top-nav > div {
+        max-width: var(--paper-max) !important;
+        padding-left: var(--paper-pad) !important;
+        padding-right: var(--paper-pad) !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        box-sizing: content-box !important;
+        
+        display: grid !important;
+        grid-template-columns: auto 1fr auto !important;
+        align-items: center !important;
+        column-gap: 16px !important;
+        white-space: nowrap !important;
+      }
+
+      /* ④ 中间列横向滚动 */
+      #top-nav > div > :nth-child(2) {
+        min-width: 0 !important;
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        scrollbar-width: none !important;
+        -ms-overflow-style: none !important;
+      }
+      #top-nav > div > :nth-child(2)::-webkit-scrollbar {
+        display: none !important;
+      }
+
+      /* ⑤ 右列贴右对齐 */
+      #top-nav > div > :last-child {
+        justify-self: end !important;
+        display: flex !important;
+        align-items: center !important;
+      }
     `}</style>
   )
 }
