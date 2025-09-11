@@ -19,7 +19,10 @@ const Footer = ({ siteInfo }) => {
         <i className='mx-1 animate-pulse fas fa-heart text-red-500' />{' '}
         <a
           href={siteConfig('LINK')}
-          className='underline hover:text-gray-800 dark:hover:text-gray-600 transition-colors'>
+          className='underline transition-colors'
+          style={{color: '#372E2C'}}
+          onMouseEnter={(e) => e.target.style.color = '#2A221F'}
+          onMouseLeave={(e) => e.target.style.color = '#372E2C'}>
           {siteConfig('AUTHOR')}
         </a>
       </div>
@@ -35,7 +38,7 @@ const Footer = ({ siteInfo }) => {
       {siteConfig('BEI_AN') && (
         <div className='text-xs text-gray-500 dark:text-gray-400 mt-2 text-center'>
           <i className='fas fa-shield-alt' />{' '}
-          <a href={siteConfig('BEI_AN_LINK')} className='hover:text-gray-800 dark:hover:text-gray-600'>
+          <a href={siteConfig('BEI_AN_LINK')} style={{color: '#372E2C'}} onMouseEnter={(e) => e.target.style.color = '#2A221F'} onMouseLeave={(e) => e.target.style.color = '#372E2C'}>
             {siteConfig('BEI_AN')}
           </a>
           <BeiAnGongAn />
@@ -55,7 +58,10 @@ const Footer = ({ siteInfo }) => {
         Powered By{' '}
         <a
           href='https://github.com/tangly1024/NotionNext'
-          className='underline hover:text-gray-800 dark:hover:text-gray-600 transition-colors'>
+          className='underline transition-colors'
+          style={{color: '#372E2C'}}
+          onMouseEnter={(e) => e.target.style.color = '#2A221F'}
+          onMouseLeave={(e) => e.target.style.color = '#372E2C'}>
           NotionNext {siteConfig('VERSION')}
         </a>
       </div>

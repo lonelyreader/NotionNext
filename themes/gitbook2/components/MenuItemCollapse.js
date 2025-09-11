@@ -36,10 +36,21 @@ export const MenuItemCollapse = props => {
       <div
         className={
           (selected
-            ? 'bg-gray-800 text-white hover:text-white'
-            : 'hover:text-gray-800') +
+            ? 'text-white hover:text-white'
+            : '') +
           ' px-7 w-full text-left duration-200 dark:bg-hexo-black-gray dark:border-black'
         }
+        style={selected ? {backgroundColor: '#372E2C'} : {}}
+        onMouseEnter={(e) => {
+          if (!selected) {
+            e.target.style.color = '#372E2C';
+          }
+        }}
+        onMouseLeave={(e) => {
+          if (!selected) {
+            e.target.style.color = '';
+          }
+        }}
         onClick={toggleShow}>
         {!hasSubMenu && (
           <SmartLink

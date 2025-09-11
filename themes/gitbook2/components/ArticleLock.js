@@ -54,7 +54,10 @@ export const ArticleLock = props => {
             className='outline-none w-full text-sm pl-5 rounded-l transition focus:shadow-lg dark:text-gray-300 font-light leading-10 text-black bg-gray-100 dark:bg-gray-500'></input>
           <div
             onClick={submitPassword}
-            className='px-3 whitespace-nowrap cursor-pointer items-center justify-center py-2 bg-gray-700 hover:bg-gray-600 text-white rounded-r duration-300'>
+            className='px-3 whitespace-nowrap cursor-pointer items-center justify-center py-2 text-white rounded-r duration-300'
+            style={{backgroundColor: '#372E2C'}}
+            onMouseEnter={(e) => e.target.style.backgroundColor = '#2A221F'}
+            onMouseLeave={(e) => e.target.style.backgroundColor = '#372E2C'}>
             <i className={'duration-200 cursor-pointer fas fa-key'}>
               &nbsp;{locale.COMMON.SUBMIT}
             </i>

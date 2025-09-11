@@ -18,7 +18,9 @@ export default function ArticleAround({ prev, next }) {
       <SmartLink
         href={prev.href}
         passHref
-        className='rounded border w-full h-20 px-3 cursor-pointer justify-between items-center flex hover:text-gray-800 duration-300'>
+        className='rounded border w-full h-20 px-3 cursor-pointer justify-between items-center flex duration-300'
+        onMouseEnter={(e) => e.target.style.color = '#372E2C'}
+        onMouseLeave={(e) => e.target.style.color = ''}>
         <i className='mr-1 fas fa-angle-left' />
         <div>
           <div>{locale.COMMON.PREV_POST}</div>
@@ -29,7 +31,9 @@ export default function ArticleAround({ prev, next }) {
       <SmartLink
         href={next.href}
         passHref
-        className='rounded border w-full h-20 px-3 cursor-pointer justify-between items-center flex hover:text-gray-800 duration-300'>
+        className='rounded border w-full h-20 px-3 cursor-pointer justify-between items-center flex duration-300'
+        onMouseEnter={(e) => e.target.style.color = '#372E2C'}
+        onMouseLeave={(e) => e.target.style.color = ''}>
         <div>
           <div>{locale.COMMON.NEXT_POST}</div>
           <div> {next.title}</div>

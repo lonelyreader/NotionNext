@@ -82,8 +82,22 @@ const Catalog = ({ post }) => {
                 key={id}
                 href={`#${id}`}
                 //  notion-table-of-contents-item
-                className={`${activeSection === id && 'border-gray-800 text-gray-800 font-bold'} border-l pl-4 block hover:text-gray-800 border-lduration-300 transform font-light dark:text-gray-300
-              notion-table-of-contents-item-indent-level-${tocItem.indentLevel} catalog-item `}>
+                className={`${activeSection === id && 'font-bold'} border-l pl-4 block border-lduration-300 transform font-light dark:text-gray-300
+              notion-table-of-contents-item-indent-level-${tocItem.indentLevel} catalog-item `}
+                style={{
+                  color: activeSection === id ? '#372E2C' : '',
+                  borderColor: activeSection === id ? '#372E2C' : ''
+                }}
+                onMouseEnter={(e) => {
+                  if (activeSection !== id) {
+                    e.target.style.color = '#372E2C';
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (activeSection !== id) {
+                    e.target.style.color = '';
+                  }
+                }}>
                 <span
                   style={{
                     display: 'inline-block',

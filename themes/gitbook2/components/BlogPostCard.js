@@ -14,7 +14,8 @@ const BlogPostCard = ({ post, className }) => {
       <div
         key={post.id}
         className={`${className} relative py-1.5 cursor-pointer px-1.5 rounded-md hover:bg-gray-50
-                    ${currentSelected ? 'text-gray-800 dark:bg-yellow-100 dark:text-yellow-600 font-semibold' : ' dark:hover:bg-yellow-100 dark:hover:text-yellow-600'}`}>
+                    ${currentSelected ? 'font-semibold' : ''}`}
+        style={currentSelected ? {color: '#372E2C'} : {}}>
         <div className='w-full select-none'>
           {siteConfig('POST_TITLE_ICON') && (
             <NotionIcon icon={post?.pageIcon} />

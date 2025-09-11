@@ -87,7 +87,7 @@ export default function Header(props) {
               <>
                 <SignedOut>
                   <SignInButton mode='modal'>
-                    <button className='bg-gray-800 hover:bg-gray-900 text-white rounded-lg px-3 py-2'>
+                    <button className='text-white rounded-lg px-3 py-2' style={{backgroundColor: '#372E2C'}} onMouseEnter={(e) => e.target.style.backgroundColor = '#2A221F'} onMouseLeave={(e) => e.target.style.backgroundColor = '#372E2C'}>
                       {locale.COMMON.SIGN_IN}
                     </button>
                   </SignInButton>

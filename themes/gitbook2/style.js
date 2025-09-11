@@ -12,8 +12,6 @@ const Style = () => {
         --page-bg: #F6F7F9;
         --paper-bg: #FFFFFF;
         --divider-1: rgba(0,0,0,0.06);
-        --paper-max: 920px;
-        --paper-pad: 32px;
       }
       
       .dark {
@@ -60,22 +58,6 @@ const Style = () => {
         overflow: hidden;
       }
 
-      /* 白纸内层容器样式 - 使用设计令牌 */
-
-
-      /* 确保正文H1与Header左列对齐 */
-      #container-inner h1 {
-        margin-left: 0 !important;
-        padding-left: 0 !important;
-      }
-
-      /* 确保右侧栏保持原有宽度和位置 */
-      .paper-container .w-80 {
-        width: 20rem !important; /* 320px */
-        min-width: 20rem !important;
-        flex-shrink: 0 !important;
-      }
-
       .dark .paper-container {
         background: var(--paper-bg);
         border-color: var(--divider-1);
@@ -101,36 +83,6 @@ const Style = () => {
         border-bottom: 1px solid var(--divider-1);
         box-shadow: none !important;
       }
-
-      /* Header内层容器 - 与白纸内层容器使用相同的设计令牌 */
-      #top-nav .px-5 {
-        max-width: var(--paper-max) !important;
-        margin: 0 auto !important;
-        padding-left: var(--paper-pad) !important;
-        padding-right: var(--paper-pad) !important;
-        display: grid !important;
-        grid-template-columns: auto 1fr auto !important;
-        align-items: center !important;
-        column-gap: 16px !important;
-        white-space: nowrap !important;
-      }
-
-      /* Header中间导航按钮组 - 防止换行，允许横向滚动 */
-      #top-nav .px-5 > div:first-child {
-        min-width: 0 !important;
-        overflow-x: auto !important;
-        white-space: nowrap !important;
-        scrollbar-width: none !important;
-        -ms-overflow-style: none !important;
-      }
-
-      #top-nav .px-5 > div:first-child::-webkit-scrollbar {
-        display: none !important;
-      }
-
-      #top-nav .px-5 .hidden.md\\:flex {
-        white-space: nowrap !important;
-      }
       
       .dark #top-nav {
         background: var(--paper-bg) !important;
@@ -139,7 +91,7 @@ const Style = () => {
 
       /* GitBook风格排版优化 */
       #theme-gitbook2 {
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        font-family: 'Source Han Serif', 'Source Han Serif SC', 'Source Han Serif TC', 'Source Han Serif JP', 'Source Han Serif KR', serif;
         line-height: 1.7;
       }
 
@@ -232,14 +184,14 @@ const Style = () => {
       #theme-gitbook2 .notion-quote {
         margin: 0.875rem 0;
         padding: 0.75rem 1rem;
-        border-left: 4px solid #372E2C;
+        border-left: 4px solid #3b82f6;
         background: #f8fafc;
         border-radius: 0 8px 8px 0;
       }
 
       .dark #theme-gitbook2 .notion-quote {
         background: #1e293b;
-        border-left-color: #372E2C;
+        border-left-color: #60a5fa;
       }
 
       /* 左侧导航优化 */
@@ -304,8 +256,6 @@ const Style = () => {
         align-items: center;
         position: relative;
         height: 36px;
-        width: auto;
-        min-width: 200px;
       }
       
       #theme-gitbook2 .search-input {
@@ -499,225 +449,11 @@ const Style = () => {
         }
       }
 
-      /* 超宽屏调整 - ≥1536px时增加版心宽度 */
-      @media (min-width: 1536px) {
-        :root {
-          --paper-max: 960px;
-        }
-      }
-
-      /* 响应式外间距设置 */
-      @media (min-width: 1280px) {
-        #wrapper {
-          padding: 16px 16px 28px 16px !important;
-        }
-      }
-
-      @media (min-width: 1024px) and (max-width: 1279px) {
-        #wrapper {
-          padding: 16px 12px 28px 12px !important;
-        }
-      }
-
       /* 窄屏优化 */
       @media (max-width: 1024px) {
         #wrapper {
           padding: 16px 16px 24px 0 !important;
         }
-      }
-
-      /* ===== 版心令牌：让 100% 看起来像 85%，但不改字号 ===== */
-      @media (min-width:1536px){
-        :root{ --paper-max: 960px; } /* 超宽屏稍微放宽 */
-      }
-      @media (min-width:1024px) and (max-width:1279px){
-        :root{ --paper-pad: 24px; }  /* 中桌面内边距略收窄 */
-      }
-
-
-      /* ===== Header"内层容器"与白纸强绑定 =====
-         下面列出一组常见选择器，至少会命中其中一个。
-         若你的 header 内层容器类名不同，请把它补到这组选择器里。 */
-      .header-inner, 
-      #header .inner, 
-      .top-nav .inner, 
-      .nav-header-inner,
-      .dashboard-header > div:first-child {
-        max-width: var(--paper-max) !important;
-        padding-left:  var(--paper-pad) !important;
-        padding-right: var(--paper-pad) !important;
-        margin-left: auto !important;
-        margin-right: auto !important;
-        box-sizing: content-box !important;
-
-        /* 三列：左=标题，中=导航，右=搜索；强制一行不换 */
-        display: grid !important;
-        grid-template-columns: auto 1fr auto !important;
-        align-items: center !important;
-        column-gap: 16px !important;
-        white-space: nowrap !important;
-      }
-
-      /* 中间列：允许横向滚动、不挤两侧 */
-      .header-inner > :nth-child(2),
-      #header .inner > :nth-child(2),
-      .top-nav .inner > :nth-child(2),
-      .nav-header-inner > :nth-child(2),
-      .dashboard-header > div:first-child > :nth-child(2){
-        min-width: 0 !important;
-        overflow-x: auto !important;
-        overflow-y: hidden !important;
-      }
-
-      /* 右列：搜索贴右，垂直居中 */
-      .header-inner > :last-child,
-      #header .inner > :last-child,
-      .top-nav .inner > :last-child,
-      .nav-header-inner > :last-child,
-      .dashboard-header > div:first-child > :last-child{
-        justify-self: end !important;
-        display: flex !important;
-        align-items: center !important;
-      }
-
-      /* ===== 白纸外留白（卡片与灰底之间；不影响对齐） ===== */
-      #container{
-        padding-top: 16px !important;
-        padding-bottom: 28px !important;
-        /* 左右外间距来自外层布局，保持你现在的 16px 即可 */
-      }
-
-      /* ① 让 Header 外层拥有与 #wrapper 相同的左右外边距 —— 关键修复 */
-      @media (min-width: 1280px) {
-        #top-nav { padding-left:16px !important; padding-right:16px !important; }
-      }
-      @media (min-width:1024px) and (max-width:1279px) {
-        #top-nav { padding-left:12px !important; padding-right:12px !important; }
-      }
-      /* ≤1024 你自己已做了移动端特殊处理，这里不改 */
-
-      /* ② Header 内层容器：继续与白纸版心强绑定（保底选择器，防 class 变化） */
-      #top-nav > div,
-      #top-nav .px-5 {
-        max-width: var(--paper-max) !important;
-        padding-left: var(--paper-pad) !important;
-        padding-right: var(--paper-pad) !important;
-        margin-left:auto !important;
-        margin-right:auto !important;
-        box-sizing: content-box !important;
-
-        display: grid !important;
-        grid-template-columns: auto 1fr auto !important; /* 左 标题 | 中 导航 | 右 搜索 */
-        align-items: center !important;
-        column-gap: 16px !important;
-        white-space: nowrap !important;
-      }
-
-      /* ③ 中间列才允许横向滚动（不是 first-child；改成第二列更稳） */
-      #top-nav > div > :nth-child(2),
-      #top-nav .px-5 > :nth-child(2){
-        min-width: 0 !important;
-        overflow-x: auto !important;
-        overflow-y: hidden !important;
-        scrollbar-width: none !important;
-        -ms-overflow-style: none !important;
-      }
-      #top-nav > div > :nth-child(2)::-webkit-scrollbar,
-      #top-nav .px-5 > :nth-child(2)::-webkit-scrollbar{ display:none !important; }
-
-      /* ④ 右列（搜索）贴右；左列（标题）自然贴左 —— 与白纸完全同线 */
-      #top-nav > div > :last-child,
-      #top-nav .px-5 > :last-child{
-        justify-self: end !important;
-        display:flex !important;
-        align-items:center !important;
-      }
-
-      /* ===== 修正版心对齐问题 ===== */
-      /* ① 强制覆盖 #container-inner 的内联样式和类名 */
-      #container-inner {
-        max-width: var(--paper-max) !important;
-        padding-left: var(--paper-pad) !important;
-        padding-right: var(--paper-pad) !important;
-        margin-left: auto !important;
-        margin-right: auto !important;
-        box-sizing: content-box !important;
-      }
-      
-      /* 覆盖Tailwind的px-6类 */
-      #container-inner.px-6,
-      #container-inner.lg\\:px-6 {
-        padding-left: var(--paper-pad) !important;
-        padding-right: var(--paper-pad) !important;
-      }
-
-      /* ② Header 外层与 #wrapper 保持一致的左右外边距 */
-      #top-nav {
-        padding-left: 16px !important;
-        padding-right: 16px !important;
-      }
-
-      /* ③ Header 真正的内层容器 - 覆盖Tailwind类名 */
-      #top-nav > div > div.px-5,
-      #top-nav > div > div.max-w-screen-4xl {
-        max-width: var(--paper-max) !important;
-        padding-left: var(--paper-pad) !important;
-        padding-right: var(--paper-pad) !important;
-        margin-left: auto !important;
-        margin-right: auto !important;
-        box-sizing: content-box !important;
-      }
-
-      /* ===== 强力修正版心对齐问题 ===== */
-      /* 直接覆盖Header内层容器的所有样式 */
-      #top-nav > div > div {
-        max-width: var(--paper-max) !important;
-        padding-left: var(--paper-pad) !important;
-        padding-right: var(--paper-pad) !important;
-        margin-left: auto !important;
-        margin-right: auto !important;
-        box-sizing: content-box !important;
-      }
-
-      /* 使用属性选择器作为备选方案 */
-      div[class*="px-5"][class*="max-w-screen-4xl"] {
-        max-width: var(--paper-max) !important;
-        padding-left: var(--paper-pad) !important;
-        padding-right: var(--paper-pad) !important;
-        margin-left: auto !important;
-        margin-right: auto !important;
-        box-sizing: content-box !important;
-      }
-
-      /* 最终保险：使用更具体的选择器 */
-      #top-nav > div > div.px-5.max-w-screen-4xl.w-full.flex.gap-x-3.justify-between.items-center {
-        max-width: var(--paper-max) !important;
-        padding-left: var(--paper-pad) !important;
-        padding-right: var(--paper-pad) !important;
-        margin-left: auto !important;
-        margin-right: auto !important;
-        box-sizing: content-box !important;
-      }
-
-      /* 超强力覆盖：直接覆盖Tailwind的max-w-screen-4xl类 */
-      .max-w-screen-4xl {
-        max-width: var(--paper-max) !important;
-      }
-      
-      /* 针对Header内层容器的超强力覆盖 */
-      #top-nav .max-w-screen-4xl {
-        max-width: var(--paper-max) !important;
-        padding-left: var(--paper-pad) !important;
-        padding-right: var(--paper-pad) !important;
-        margin-left: auto !important;
-        margin-right: auto !important;
-        box-sizing: content-box !important;
-      }
-
-      /* 关键修正：确保Header内层容器的内边距与内容区域完全一致 */
-      #top-nav > div > div.px-5 {
-        padding-left: var(--paper-pad) !important;
-        padding-right: var(--paper-pad) !important;
       }
     `}</style>
   )
