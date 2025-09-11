@@ -68,6 +68,13 @@ const Style = () => {
         margin: 0 auto !important;
       }
 
+      /* 响应式内边距调整 */
+      @media (min-width: 1024px) and (max-width: 1279px) {
+        :root {
+          --paper-gutter: 24px;
+        }
+      }
+
       /* 确保正文H1与Header左列对齐 */
       #container-inner h1 {
         margin-left: 0 !important;
@@ -107,7 +114,7 @@ const Style = () => {
         box-shadow: none !important;
       }
 
-      /* Header内容区域对齐 - 与container-inner使用相同的设计令牌 */
+      /* Header内层容器 - 与白纸内层容器使用相同的设计令牌 */
       #top-nav .px-5 {
         max-width: var(--paper-max) !important;
         margin: 0 auto !important;
@@ -122,18 +129,19 @@ const Style = () => {
 
       /* Header中间导航按钮组 - 防止换行，允许横向滚动 */
       #top-nav .px-5 > div:first-child {
-        overflow: hidden !important;
-      }
-
-      #top-nav .px-5 .hidden.md\\:flex {
+        min-width: 0 !important;
         overflow-x: auto !important;
         white-space: nowrap !important;
         scrollbar-width: none !important;
         -ms-overflow-style: none !important;
       }
 
-      #top-nav .px-5 .hidden.md\\:flex::-webkit-scrollbar {
+      #top-nav .px-5 > div:first-child::-webkit-scrollbar {
         display: none !important;
+      }
+
+      #top-nav .px-5 .hidden.md\\:flex {
+        white-space: nowrap !important;
       }
       
       .dark #top-nav {
