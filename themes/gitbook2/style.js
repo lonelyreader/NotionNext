@@ -612,6 +612,52 @@ const Style = () => {
         padding-bottom: 28px !important;
         /* 左右外间距来自外层布局，保持你现在的 16px 即可 */
       }
+
+      /* ① 让 Header 外层拥有与 #wrapper 相同的左右外边距 —— 关键修复 */
+      @media (min-width: 1280px) {
+        #top-nav { padding-left:16px !important; padding-right:16px !important; }
+      }
+      @media (min-width:1024px) and (max-width:1279px) {
+        #top-nav { padding-left:12px !important; padding-right:12px !important; }
+      }
+      /* ≤1024 你自己已做了移动端特殊处理，这里不改 */
+
+      /* ② Header 内层容器：继续与白纸版心强绑定（保底选择器，防 class 变化） */
+      #top-nav > div,
+      #top-nav .px-5 {
+        max-width: var(--paper-max) !important;
+        padding-left:  var(--paper-gutter, var(--paper-pad, 32px)) !important;
+        padding-right: var(--paper-gutter, var(--paper-pad, 32px)) !important;
+        margin-left:auto !important;
+        margin-right:auto !important;
+        box-sizing: content-box !important;
+
+        display: grid !important;
+        grid-template-columns: auto 1fr auto !important; /* 左 标题 | 中 导航 | 右 搜索 */
+        align-items: center !important;
+        column-gap: 16px !important;
+        white-space: nowrap !important;
+      }
+
+      /* ③ 中间列才允许横向滚动（不是 first-child；改成第二列更稳） */
+      #top-nav > div > :nth-child(2),
+      #top-nav .px-5 > :nth-child(2){
+        min-width: 0 !important;
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        scrollbar-width: none !important;
+        -ms-overflow-style: none !important;
+      }
+      #top-nav > div > :nth-child(2)::-webkit-scrollbar,
+      #top-nav .px-5 > :nth-child(2)::-webkit-scrollbar{ display:none !important; }
+
+      /* ④ 右列（搜索）贴右；左列（标题）自然贴左 —— 与白纸完全同线 */
+      #top-nav > div > :last-child,
+      #top-nav .px-5 > :last-child{
+        justify-self: end !important;
+        display:flex !important;
+        align-items:center !important;
+      }
     `}</style>
   )
 }
