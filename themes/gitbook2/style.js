@@ -698,6 +698,27 @@ const Style = () => {
         margin-right: auto !important;
         box-sizing: content-box !important;
       }
+
+      /* 超强力覆盖：直接覆盖Tailwind的max-w-screen-4xl类 */
+      .max-w-screen-4xl {
+        max-width: var(--paper-max) !important;
+      }
+      
+      /* 针对Header内层容器的超强力覆盖 */
+      #top-nav .max-w-screen-4xl {
+        max-width: var(--paper-max) !important;
+        padding-left: var(--paper-pad) !important;
+        padding-right: var(--paper-pad) !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        box-sizing: content-box !important;
+      }
+
+      /* 关键修正：确保Header内层容器的内边距与内容区域完全一致 */
+      #top-nav > div > div.px-5 {
+        padding-left: var(--paper-pad) !important;
+        padding-right: var(--paper-pad) !important;
+      }
     `}</style>
   )
 }
